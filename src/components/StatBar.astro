@@ -1,0 +1,15 @@
+---
+/**
+ * Крупные табличные числа на волосяных линейках — главный визуальный жест сайта.
+ * Значения приходят готовыми из агрегаций, никаких вычислений в шаблоне.
+ */
+const { stats = [] } = Astro.props;
+---
+<div class="statbar">
+  {stats.map((s) => (
+    <div class={`stat${s.accent ? ' stat--accent' : ''}`}>
+      <span class="stat__value">{s.value}</span>
+      <span class="stat__label caps">{s.label}</span>
+    </div>
+  ))}
+</div>

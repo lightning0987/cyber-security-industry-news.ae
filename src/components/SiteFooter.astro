@@ -1,0 +1,49 @@
+---
+import { FOOTER_COLUMNS, DATA_ATTRIBUTION } from '../lib/nav.mjs';
+import { snapshotMeta } from '../lib/incidents.mjs';
+import { formatDate, BRAND } from '../lib/seo.mjs';
+
+const asOf = formatDate(snapshotMeta.fetchedAt);
+---
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-cols">
+      {FOOTER_COLUMNS.map((col) => (
+        <div class="footer-col">
+          {col.heading ? (
+            <h2><a href={col.heading.href}>{col.heading.label}</a></h2>
+          ) : (
+            <h2 class="visually-hidden">Site information</h2>
+          )}
+          <ul>
+            {col.links.map((link) => (
+              <li><a href={link.href}>{link.label}</a></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+
+    <div class="footer-legal">
+      <p>
+        <strong>{BRAND} is an independent threat-data research project.</strong>
+        It is not affiliated with, endorsed by, or acting on behalf of any vendor,
+        regulator, or government body of the United Arab Emirates.
+      </p>
+      <p>
+        Figures on this site aggregate claims published by ransomware groups on their
+        own leak sites. A claim is an assertion made by an attacker, not a confirmed
+        fact, and this site never names or otherwise identifies an affected
+        organisation. Data is provided for informational purposes only.
+      </p>
+      <p>
+        Data as of <time class="mono" datetime={snapshotMeta.fetchedAt}>{asOf}</time>.
+        Sources: {DATA_ATTRIBUTION.map((s, i) => (
+          <>
+            <a href={s.href} rel="noopener">{s.label}</a>{i < DATA_ATTRIBUTION.length - 1 ? ', ' : '.'}
+          </>
+        ))}
+      </p>
+    </div>
+  </div>
+</footer>

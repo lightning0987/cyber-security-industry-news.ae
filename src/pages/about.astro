@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { attributedIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription, BRAND, AUTHOR, formatDate } from '../lib/seo.mjs';
+
+const title = buildTitle('About Marsad Cyber: Independent UAE Threat Data');
+const description = buildDescription(
+  `Marsad Cyber tracks ransomware activity against UAE organisations, currently ${attributedIncidents.length} attributed claims. What the project is, who runs it and how it is funded.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'About', href: ROUTES.about() }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs}>
+  <div class="prose">
+    <h1>About Marsad Cyber</h1>
+
+    <p class="lede">
+      {BRAND} is an independent threat-data research project tracking ransomware activity against
+      organisations in the United Arab Emirates. It currently tracks{' '}
+      <span class="num">{attributedIncidents.length}</span> attributed claims, updated daily from
+      public leak-site monitoring.
+    </p>
+
+    <h2>The name</h2>
+    <p>
+      Marsad is the Arabic word for observatory. The name describes the work directly: this site
+      is an observation post, not an advisory service and not a news desk.
+    </p>
+
+    <h2>What the project does</h2>
+    <p>
+      Public reporting on cyber incidents in the Gulf is fragmented. Regional figures are usually
+      quoted without a source, a date or a method, and rarely distinguish an attacker's claim from
+      a confirmed breach. This project publishes a narrow set of figures with all three attached:
+      where the data came from, when it was collected, and how it was filtered.
+    </p>
+    <p>
+      Every number on this site traces to a dated snapshot held in version control. No figure is
+      written by hand and none is estimated.
+    </p>
+
+    <h2>What it deliberately does not do</h2>
+    <p>
+      This site never identifies an organisation affected by ransomware. It does not republish
+      leaked material, host leak-site addresses, or describe the contents of a breach. The
+      reasoning, both legal and practical, is set out in full in the{' '}
+      <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+    </p>
+    <p>
+      It also does not offer certification against any regulatory framework, and it holds no
+      accreditation from any UAE authority.
+    </p>
+
+    <h2>Who writes it</h2>
+    <p>
+      Data pages are generated directly from source snapshots without manual editing. Written
+      analysis is published under {AUTHOR}.
+    </p>
+
+    <h2>Current data</h2>
+    <p>
+      The active snapshot was collected on{' '}
+      <time class="mono" datetime={snapshotMeta.fetchedAt}>{formatDate(snapshotMeta.fetchedAt)}</time>
+      from <a href={ROUTES.dataSources()}>{snapshotMeta.source}</a> and contains{' '}
+      <span class="num">{snapshotMeta.recordCount}</span> records. See the{' '}
+      <a href={ROUTES.methodology()}>methodology</a> for how those records become published
+      figures.
+    </p>
+  </div>
+</BaseLayout>

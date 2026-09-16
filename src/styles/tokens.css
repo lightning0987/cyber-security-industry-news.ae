@@ -1,0 +1,101 @@
+/*
+ * Дизайн-токены Marsad Cyber.
+ *
+ * Светлая монохромная база плюс один акцент. Референс — lines.com: почти
+ * монохром, ноль внешних шрифтовых запросов, читаемость за рабочим монитором.
+ * Тёмная «хакерская» тема сознательно отвергнута: покупателю услуг она читается
+ * несерьёзно, а нам нужен тон независимого исследовательского ресурса.
+ */
+
+:root {
+  /* ─── Поверхности ─────────────────────────────────────────────── */
+  --paper: #ffffff;
+  --paper-sunken: #f7f7f5;      /* Чуть тёплый, чтобы не отдавать стерильностью */
+  --paper-inverse: #111111;
+
+  /* ─── Текст ───────────────────────────────────────────────────── */
+  --ink: #111111;
+  --ink-muted: #5b5b58;
+  --ink-faint: #8a8a85;
+  --ink-inverse: #f7f7f5;
+
+  /* ─── Линейки. Волосяные, вместо теней ────────────────────────── */
+  --rule: #e2e2dd;
+  --rule-strong: #c4c4bd;
+  --rule-ink: #111111;
+
+  /* ─── Акцент. Только данные и активные состояния ──────────────── */
+  --accent: #a8341c;             /* Окисленный красный: авторитетный, не тревожный */
+  --accent-soft: #f4ebe8;
+  --accent-ink: #7d2614;
+
+  /* ─── Семантика критичности. ВСЕГДА с текстовой меткой рядом ──── */
+  /* Цвет в одиночку не переживает извлечения в текст, поэтому он
+     сопровождает метку, а не заменяет её. */
+  --sev-critical: #8f1d0c;
+  --sev-high: #b5541f;
+  --sev-medium: #8a7420;
+  --sev-low: #4a6b4f;
+
+  /* ─── Типографика ─────────────────────────────────────────────── */
+  --font-text: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
+
+  --size-micro: 0.6875rem;   /* 11px — надписи над числами */
+  --size-small: 0.8125rem;   /* 13px — подписи, метаданные */
+  --size-base: 1.0625rem;    /* 17px — основной текст */
+  --size-lead: 1.1875rem;    /* 19px — вводный абзац */
+  --size-h3: 1.25rem;
+  --size-h2: 1.5rem;
+  --size-h1: 2.125rem;
+  --size-display: 3rem;      /* Крупные числа в статбаре */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-body: 1.6;
+
+  --track-tight: -0.02em;
+  --track-display: -0.03em;
+  --track-caps: 0.08em;
+
+  /* ─── Ритм отступов. Осознанная шкала, а не случайные шаги ────── */
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+  --s9: 6rem;
+
+  /* ─── Раскладка ───────────────────────────────────────────────── */
+  --measure: 68ch;           /* Колонка текста не шире ~72 символов */
+  --page-max: 1180px;
+  --gutter: 1rem;
+
+  /* ─── Движение. Только transform и opacity ────────────────────── */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --gutter: 2rem;
+    --size-h1: 2.75rem;
+    --size-display: 3.75rem;
+  }
+}
+
+/* Уважаем системную настройку. Анимации — украшение, а не смысл. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBar from '../../components/StatBar.astro';
+import BreakdownTable from '../../components/BreakdownTable.astro';
+import SiblingRail from '../../components/SiblingRail.astro';
+import DataProvenance from '../../components/DataProvenance.astro';
+import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import { bySector, byPeriod, groupsWithPages, inGroup, activitySpan, byGroup } from '../../lib/aggregate.mjs';
+import { ROUTES } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong } from '../../lib/seo.mjs';
+
+export function getStaticPaths() {
+  return groupsWithPages(attributedIncidents).map((g) => ({
+    params: { group: g.slug },
+    props: { slug: g.slug, label: g.label, raw: g.raw, count: g.count },
+  }));
+}
+
+const { slug, label, count } = Astro.props;
+const all = attributedIncidents;
+const subset = inGroup(all, slug);
+const span = activitySpan(subset);
+
+const sectorRows = bySector(all).map((s) => ({
+  slug: s.slug, label: s.label, count: subset.filter((i) => i.sector === s.slug).length,
+})).sort((a, b) => b.count - a.count);
+
+const periodRows = byPeriod(all).map((p) => ({
+  slug: p.slug, label: p.label,
+  count: subset.filter((i) => i.year >= p.from && i.year <= p.to).length,
+}));
+
+const topSector = sectorRows.find((s) => s.count > 0);
+const share = all.length === 0 ? 0 : Math.round((count / all.length) * 1000) / 10;
+const family = subset[0]?.group_family ?? null;
+const siblings = family
+  ? groupsWithPages(all).filter((g) => g.slug !== slug && inGroup(all, g.slug)[0]?.group_family === family)
+  : [];
+const neighbours = byGroup(all).filter((g) => g.slug !== slug).slice(0, 8);
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
+const title = buildTitle(`${label} in the UAE: ${count} Victims and Target Sectors`);
+const description = buildDescription(
+  `${label} has claimed ${count} UAE organisations since ${span.first?.slice(0, 4) ?? '2020'}, concentrated in ${topSector?.label ?? 'multiple sectors'}. Sector breakdown and activity timeline.`,
+);
+
+const schemas = [
+  datasetSchema({
+    site: Astro.site?.href ?? 'http://localhost:4321/',
+    url: ROUTES.group(slug),
+    name: `${label} ransomware activity against UAE organisations`,
+    description,
+    fetchedAt: snapshotMeta.fetchedAt,
+    from: span.first ?? '2020-01-01',
+    to: span.last ?? snapshotMeta.fetchedAt.slice(0, 10),
+  }),
+];
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
+  { label, href: ROUTES.group(slug) },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+  <h1>{label} Ransomware Activity in the UAE</h1>
+
+  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    {label} has claimed <strong class="num">{count}</strong> organisations in the United Arab
+    Emirates, which is <strong class="num">{share}%</strong> of all attributed UAE claims.
+    {topSector && <> Its activity concentrates in {topSector.label}, accounting for <strong class="num">{topSector.count}</strong> of those claims.</>}
+    {span.first && <> The first {label} claim against a UAE organisation was recorded on <time datetime={span.first}>{formatDayLong(span.first)}</time>, the most recent on <time datetime={span.last}>{formatDayLong(span.last)}</time>.</>}
+  </p>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: count, label: 'Claimed UAE organisations', accent: true },
+      { value: `${share}%`, label: 'Of all UAE claims' },
+      { value: sectorRows.filter((s) => s.count > 0).length, label: 'Sectors targeted' },
+      { value: periodRows.filter((p) => p.count > 0).length, label: 'Periods active' },
+    ]} />
+    <DataProvenance note={`This page counts ${label} claims only.`} />
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>Which UAE sectors {label} targets</h2></div>
+    <BreakdownTable
+      caption={`${label} claims against UAE organisations by sector`}
+      rows={sectorRows.filter((s) => s.count > 0)}
+      total={count}
+      hrefFor={(s) => ROUTES.sector(s)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>When {label} claimed UAE organisations</h2></div>
+    <BreakdownTable
+      caption={`${label} claims against UAE organisations by period`}
+      rows={periodRows}
+      total={count}
+      hrefFor={(s) => ROUTES.period(s)}
+    />
+  </section>
+
+  {siblings.length > 0 && (
+    <section class="section">
+      <div class="section__head"><h2>Related {family} variants</h2></div>
+      <div class="callout callout--plain" style="max-width:var(--measure)">
+        <p>
+          {label} shares a lineage with {siblings.map((s, i) => (<><a href={ROUTES.group(s.slug)}>{s.label}</a>{i < siblings.length - 1 ? ', ' : ''}</>))}.
+          Each version is counted separately here because merging them would be an editorial claim
+          about actor identity rather than a fact recorded in the source data.
+        </p>
+      </div>
+    </section>
+  )}
+
+  <SiblingRail
+    title="Other active groups"
+    items={neighbours.filter((g) => groupsWithPages(all).some((p) => p.slug === g.slug))}
+    currentSlug={slug}
+    hrefFor={(s) => ROUTES.group(s)}
+  />
+
+  <SiblingRail
+    title="Browse by sector"
+    items={bySector(all)}
+    currentSlug={null}
+    hrefFor={(s) => ROUTES.sector(s)}
+  />
+</BaseLayout>

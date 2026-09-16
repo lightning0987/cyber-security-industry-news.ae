@@ -1,0 +1,136 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BreakdownTable from '../components/BreakdownTable.astro';
+import { allIncidents, attributedIncidents, unverifiedIncidents, unclassifiedIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
+import { MIN_INCIDENTS_FOR_PAGE } from '../lib/taxonomy/groups.mjs';
+
+const a = snapshotMeta.attribution;
+const asOf = formatDate(snapshotMeta.fetchedAt);
+const rejectPct = Math.round((unverifiedIncidents.length / allIncidents.length) * 1000) / 10;
+
+const title = buildTitle('Methodology: How Marsad Cyber Counts UAE Ransomware Attacks');
+const description = buildDescription(
+  `How ${allIncidents.length} raw leak-site records become ${attributedIncidents.length} attributed UAE figures: attribution rules, ${rejectPct}% rejection rate, and what this site refuses to publish.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Methodology', href: ROUTES.methodology() }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs}>
+  <div class="prose">
+    <h1>Methodology</h1>
+
+    <p class="lede">
+      Every figure on this site derives from a single dated snapshot of public leak-site
+      monitoring. This page states exactly how <span class="num">{allIncidents.length}</span> raw
+      records become the <span class="num">{attributedIncidents.length}</span> attributed claims
+      reported elsewhere on the site, and where that process can be wrong.
+    </p>
+
+    <h2>Where the data comes from</h2>
+    <p>
+      The ransomware dataset is collected from <a href="https://www.ransomware.live/" rel="noopener">ransomware.live</a>,
+      which monitors the public leak sites operated by ransomware groups. A record is created when
+      a group publicly claims an organisation. The snapshot behind this page was taken on{' '}
+      <time class="mono" datetime={snapshotMeta.fetchedAt}>{asOf}</time> and contains{' '}
+      <span class="num">{snapshotMeta.recordCount}</span> records.
+    </p>
+    <p>
+      A leak-site claim is an assertion made by an attacker. It is not a confirmed breach, it is
+      not verified by the affected organisation, and it is not verified by this site. Counts on
+      this site measure claims, not confirmed incidents, and that distinction is deliberate.
+    </p>
+
+    <h2>Why the headline figure is not {allIncidents.length}</h2>
+    <p>
+      The upstream feed tags each record with a country. That tag is not reliable. The snapshot
+      behind this page includes records tagged for the United Arab Emirates whose subject
+      organisation is demonstrably based elsewhere. Publishing the raw count as "attacks on the
+      UAE" would overstate the figure and would not survive scrutiny.
+    </p>
+    <p>
+      Each record is therefore classified into one of three attribution levels, using fields that
+      are discarded immediately afterwards:
+    </p>
+
+    <BreakdownTable
+      caption="Attribution levels applied to raw records"
+      showShare={true}
+      rows={[
+        { slug: 'confirmed', label: 'Confirmed — organisation domain in the .ae zone', count: a.confirmed ?? 0 },
+        { slug: 'probable', label: 'Probable — explicit UAE reference in the record text', count: a.probable ?? 0 },
+        { slug: 'unverified', label: 'Unverified — neither signal present', count: a.unverified ?? 0 },
+      ]}
+    />
+
+    <p>
+      Only <strong>confirmed</strong> and <strong>probable</strong> records reach the headline
+      figures, the page titles and the structured data. The{' '}
+      <span class="num">{unverifiedIncidents.length}</span> unverified records, which are{' '}
+      <span class="num">{rejectPct}%</span> of the feed, are excluded from every count on this
+      site. They are not deleted, and they are reported here so the rejection rate is visible.
+    </p>
+    <p>
+      This test is deliberately conservative in one direction and permissive in the other. A UAE
+      organisation using a <code>.com</code> domain with no UAE reference in the record text will
+      be classified unverified and dropped, so the figures on this site understate rather than
+      overstate UAE ransomware activity.
+    </p>
+
+    <h2>Which date is used</h2>
+    <p>
+      Records carry two timestamps. This site uses <code>discovered</code>, the date the claim was
+      observed on the leak site, and truncates it to the day. The date a claim was observed is not
+      the date the intrusion occurred, which is typically earlier and is not published by the
+      attacker. Period counts therefore describe when claims surfaced, not when compromises
+      happened.
+    </p>
+
+    <h2>How sectors are assigned</h2>
+    <p>
+      Sector labels come from the upstream feed and are mapped to fixed slugs through an explicit
+      table. An unrecognised label never creates a page: it fails the build so a person can
+      classify it. Records the upstream feed left unclassified keep no sector at all. There are{' '}
+      <span class="num">{unclassifiedIncidents.length}</span> such attributed records, and they
+      appear in totals but in no sector breakdown, which is why sector rows sum to slightly less
+      than the headline figure.
+    </p>
+
+    <h2>Which groups get their own page</h2>
+    <p>
+      A ransomware group earns a dedicated page once it has claimed{' '}
+      <span class="num">{MIN_INCIDENTS_FOR_PAGE}</span> or more attributed UAE organisations.
+      Groups seen once are listed on the{' '}
+      <a href={ROUTES.groupsHub()}>groups hub</a> without a page, because a single data point
+      cannot describe a pattern.
+    </p>
+    <p>
+      Versioned operations such as LockBit 2.0 and LockBit 3.0 are counted separately. Merging
+      them would be an editorial claim about actor identity rather than something recorded in the
+      source data.
+    </p>
+
+    <h2>What this site does not publish</h2>
+    <p>
+      Affected organisations are never identified. Names, domains, leak-site URLs, leak contents,
+      data volumes and employee names are removed before the data is stored, not merely omitted at
+      display time, and an automated check fails the build if any of them appear in the published
+      pages. The reasoning is set out in the <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+    </p>
+
+    <h2>Known limitations</h2>
+    <ul>
+      <li>Counts measure attacker claims, not verified breaches.</li>
+      <li>Groups that do not operate a leak site are invisible to this method entirely.</li>
+      <li>Organisations that pay before publication never appear in the data.</li>
+      <li>Attribution is inferred from record text, so both false positives and false negatives are possible.</li>
+      <li>The current year is always partial and will rise as it completes.</li>
+      <li>No emirate-level breakdown exists, because the source data carries no emirate field.</li>
+    </ul>
+
+    <p>
+      Corrections are welcome. If a figure on this site is wrong, the snapshot it came from is in
+      version control and the calculation is reproducible.
+    </p>
+  </div>
+</BaseLayout>

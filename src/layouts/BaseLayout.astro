@@ -1,0 +1,34 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import Breadcrumbs from '../components/Breadcrumbs.astro';
+import { breadcrumbSchema, organizationSchema } from '../lib/seo.mjs';
+import '../styles/global.css';
+
+const { title, description, crumbs = [], schemas = [], noindex = false } = Astro.props;
+
+const site = Astro.site?.href ?? 'http://localhost:4321/';
+const allSchemas = [
+  organizationSchema(site),
+  ...(crumbs.length > 1 ? [breadcrumbSchema(site, crumbs)] : []),
+  ...schemas,
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} schemas={allSchemas} noindex={noindex} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <SiteHeader />
+    <main id="main">
+      <div class="container">
+        <Breadcrumbs crumbs={crumbs} />
+        <slot />
+      </div>
+    </main>
+    <SiteFooter />
+  </body>
+</html>

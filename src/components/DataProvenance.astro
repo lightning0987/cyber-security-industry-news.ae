@@ -1,0 +1,19 @@
+---
+/**
+ * «Data as of» на каждой странице с данными: сигнал свежести и одновременно
+ * юридическая аккуратность. Дата берётся из снапшота, никогда не хардкодится.
+ */
+import { snapshotMeta } from '../lib/incidents.mjs';
+import { formatDate } from '../lib/seo.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+
+const { note } = Astro.props;
+const asOf = formatDate(snapshotMeta.fetchedAt);
+---
+<p class="provenance">
+  Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time>,
+  drawn from <span class="num">{snapshotMeta.recordCount}</span> leak-site claims
+  collected by {snapshotMeta.source}.{' '}
+  {note}{note ? ' ' : ''}
+  <a href={ROUTES.methodology()}>How this data is collected and filtered</a>.
+</p>

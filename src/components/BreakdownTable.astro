@@ -1,0 +1,72 @@
+---
+/**
+ * Таблица разбивки. Имя сущности всегда в первой колонке — так требует раздел
+ * 6.1 ТЗ, и так таблица переживает извлечение из страницы.
+ *
+ * ИТОГ. Когда показана только часть строк (топ-N), суммировать видимые строки и
+ * подписывать сумму словом Total нельзя: получится число, противоречащее
+ * заголовку страницы. Поэтому итог берётся из prop `total`, а усечение
+ * подписывается явно.
+ *
+ * ПОЛОСКА ДОЛИ живёт в собственной колонке с дорожкой, а не поверх числа.
+ * Значение при этом всегда читается текстом: график — дубль, а не носитель.
+ */
+const {
+  caption, rows, hrefFor, unit = 'Incidents', total = null, totalLabel = 'Total', showShare = true,
+} = Astro.props;
+
+const shown = rows.reduce((n, r) => n + r.count, 0);
+const denominator = total ?? shown;
+const max = Math.max(1, ...rows.map((r) => r.count));
+const pct = (n) => (denominator === 0 ? 0 : Math.round((n / denominator) * 1000) / 10);
+const truncated = total !== null && shown !== total;
+---
+<div class="table-wrap">
+  <table>
+    <caption class="visually-hidden">{caption}</caption>
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        {showShare && <th scope="col" class="track-col"><span class="visually-hidden">Relative volume</span></th>}
+        <th scope="col" class="num">{unit}</th>
+        {showShare && <th scope="col" class="num">Share</th>}
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map((row) => (
+        <tr>
+          <th scope="row" class="row-name">
+            {hrefFor?.(row.slug) ? <a href={hrefFor(row.slug)}>{row.label}</a> : row.label}
+          </th>
+          {showShare && (
+            <td class="track-col">
+              <span class="track" aria-hidden="true">
+                {row.count > 0 && (
+                  <span class="track__fill" style={`width:${Math.round((row.count / max) * 100)}%`}></span>
+                )}
+              </span>
+            </td>
+          )}
+          <td class="num">{row.count}</td>
+          {showShare && <td class="num">{pct(row.count)}%</td>}
+        </tr>
+      ))}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="row" class="row-name row-name--total">
+          {truncated ? `${totalLabel} (all rows)` : totalLabel}
+        </th>
+        {showShare && <td class="track-col"></td>}
+        <td class="num" style="font-weight:650">{denominator}</td>
+        {showShare && <td class="num">100%</td>}
+      </tr>
+    </tfoot>
+  </table>
+</div>
+{truncated && (
+  <p class="provenance" style="border-top:0;padding-top:var(--s2)">
+    Showing the top <span class="num">{rows.length}</span> of{' '}
+    <span class="num">{denominator}</span> total.
+  </p>
+)}

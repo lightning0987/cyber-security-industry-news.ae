@@ -1,0 +1,181 @@
+---
+/**
+ * Один роут на секторы и периоды.
+ *
+ * Astro не допускает два соседних [param]-роута в одной директории, а URL
+ * зафиксированы ТЗ. Поэтому getStaticPaths отдаёт оба набора с дискриминатором
+ * kind, а check-data.mjs следит, чтобы слаг сектора никогда не выглядел как год.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBar from '../../components/StatBar.astro';
+import BreakdownTable from '../../components/BreakdownTable.astro';
+import SiblingRail from '../../components/SiblingRail.astro';
+import DataProvenance from '../../components/DataProvenance.astro';
+import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import {
+  bySector, byPeriod, byGroup, groupsWithPages, inSector, inPeriod, top, activitySpan,
+} from '../../lib/aggregate.mjs';
+import { ROUTES, PERIODS } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong } from '../../lib/seo.mjs';
+
+export function getStaticPaths() {
+  const inc = attributedIncidents;
+  const sectorPaths = bySector(inc).map((s) => ({
+    params: { segment: s.slug },
+    props: { kind: 'sector', slug: s.slug, label: s.label, count: s.count },
+  }));
+  const periodPaths = byPeriod(inc).map((p) => ({
+    params: { segment: p.slug },
+    props: { kind: 'period', slug: p.slug, label: p.label, count: p.count, from: p.from, to: p.to, archive: p.archive },
+  }));
+  return [...sectorPaths, ...periodPaths];
+}
+
+const { kind, slug, label, count } = Astro.props;
+const all = attributedIncidents;
+
+const subset = kind === 'sector'
+  ? inSector(all, slug)
+  : inPeriod(all, { from: Astro.props.from, to: Astro.props.to });
+
+const groups = byGroup(subset);
+const pagedGroups = groupsWithPages(all);
+const sectorsAll = bySector(all);
+const periodsAll = byPeriod(all);
+const span = activitySpan(subset);
+const share = all.length === 0 ? 0 : Math.round((count / all.length) * 1000) / 10;
+const topGroup = groups[0];
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
+/* Секторная страница ещё и показывает, как сектор распределён по периодам,
+   а страница периода — как период распределён по секторам. Это и есть та
+   уникальная выборка, ради которой страница существует. */
+const crossRows = kind === 'sector'
+  ? periodsAll.map((p) => ({
+      slug: p.slug,
+      label: p.label,
+      count: subset.filter((i) => i.year >= p.from && i.year <= p.to).length,
+    }))
+  : sectorsAll.map((s) => ({
+      slug: s.slug,
+      label: s.label,
+      count: subset.filter((i) => i.sector === s.slug).length,
+    }));
+
+const title = kind === 'sector'
+  ? buildTitle(`Ransomware Attacks on UAE ${label}: ${count} Cases`)
+  : buildTitle(`UAE Ransomware Attacks in ${label}: ${count} Incidents`);
+
+const description = kind === 'sector'
+  ? buildDescription(`${count} ransomware attacks on UAE ${label.toLowerCase()} organisations recorded since 2020, ${share}% of all attributed UAE claims. Which groups target the sector and how incidents break down by period.`)
+  : buildDescription(`${count} ransomware attacks on UAE organisations recorded in ${label}, ${share}% of all attributed claims since 2020. Sector and group breakdown from leak-site monitoring.`);
+
+const h1 = kind === 'sector'
+  ? `Ransomware Attacks on ${label} in the UAE`
+  : `UAE Ransomware Attacks in ${label}`;
+
+const schemas = [
+  datasetSchema({
+    site: Astro.site?.href ?? 'http://localhost:4321/',
+    url: kind === 'sector' ? ROUTES.sector(slug) : ROUTES.period(slug),
+    name: h1,
+    description,
+    fetchedAt: snapshotMeta.fetchedAt,
+    from: kind === 'period' ? `${Astro.props.from}-01-01` : '2020-01-01',
+    to: kind === 'period' ? `${Astro.props.to}-12-31` : snapshotMeta.fetchedAt.slice(0, 10),
+  }),
+];
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'UAE Ransomware Tracker', href: ROUTES.tracker() },
+  { label, href: kind === 'sector' ? ROUTES.sector(slug) : ROUTES.period(slug) },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+  <h1>{h1}</h1>
+
+  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    {kind === 'sector' ? (
+      <>
+        Ransomware groups have claimed <strong class="num">{count}</strong> {label.toLowerCase()}
+        organisations in the United Arab Emirates since 2020, which is{' '}
+        <strong class="num"> {share}%</strong> of all attributed UAE claims.
+        {topGroup && <> {topGroup.label} accounts for <strong class="num">{topGroup.count}</strong> of them.</>}
+        {span.first && <> The earliest claim in this sector was recorded on <time datetime={span.first}>{formatDayLong(span.first)}</time> and the most recent on <time datetime={span.last}>{formatDayLong(span.last)}</time>.</>}
+      </>
+    ) : (
+      <>
+        Ransomware groups claimed <strong class="num">{count}</strong> organisations in the
+        United Arab Emirates during {label}, which is <strong class="num">{share}%</strong> of all
+        attributed UAE claims since 2020.
+        {topGroup && <> {topGroup.label} was the most active group in this period with <strong class="num">{topGroup.count}</strong> claimed organisations.</>}
+        {' '}Figures reflect leak-site monitoring as of {asOf}.
+      </>
+    )}
+  </p>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: count, label: 'Claimed organisations', accent: true },
+      { value: `${share}%`, label: 'Of all UAE claims' },
+      { value: groups.length, label: 'Groups involved' },
+      { value: kind === 'sector' ? periodsAll.filter((p) => crossRows.find((r) => r.slug === p.slug)?.count > 0).length : crossRows.filter((r) => r.count > 0).length, label: kind === 'sector' ? 'Periods active' : 'Sectors hit' },
+    ]} />
+    <DataProvenance />
+  </div>
+
+  {count === 0 && (
+    <div class="callout callout--plain section" style="max-width:var(--measure)">
+      <p class="callout__title">No attributed claims in this {kind} yet.</p>
+      <p>
+        No ransomware group has claimed an organisation in this {kind} that carries a verifiable
+        link to the United Arab Emirates. This page exists so the breakdown stays complete and
+        will populate if that changes.
+      </p>
+    </div>
+  )}
+
+  {groups.length > 0 && (
+    <section class="section">
+      <div class="section__head">
+        <h2>Which groups claim {kind === 'sector' ? `UAE ${label.toLowerCase()} organisations` : `UAE organisations in ${label}`}</h2>
+        <a class="section__more" href={ROUTES.groupsHub()}>All groups</a>
+      </div>
+      <BreakdownTable
+        caption={`Ransomware groups active against ${label}`}
+        rows={top(groups, 12)}
+        total={count}
+        hrefFor={(s) => (pagedGroups.some((g) => g.slug === s) ? ROUTES.group(s) : undefined)}
+      />
+    </section>
+  )}
+
+  {count > 0 && (
+    <section class="section">
+      <div class="section__head">
+        <h2>{kind === 'sector' ? `How ${label} claims spread across periods` : `Which sectors were hit in ${label}`}</h2>
+      </div>
+      <BreakdownTable
+        caption={kind === 'sector' ? `${label} claims by period` : `${label} claims by sector`}
+        rows={crossRows}
+        total={count}
+        hrefFor={(s) => (kind === 'sector' ? ROUTES.period(s) : ROUTES.sector(s))}
+      />
+    </section>
+  )}
+
+  <SiblingRail
+    title="Other sectors"
+    items={sectorsAll}
+    currentSlug={kind === 'sector' ? slug : null}
+    hrefFor={(s) => ROUTES.sector(s)}
+  />
+
+  <SiblingRail
+    title="Other periods"
+    items={periodsAll.map((p) => ({ slug: p.slug, label: p.label, count: p.count }))}
+    currentSlug={kind === 'period' ? slug : null}
+    hrefFor={(s) => ROUTES.period(s)}
+  />
+</BaseLayout>

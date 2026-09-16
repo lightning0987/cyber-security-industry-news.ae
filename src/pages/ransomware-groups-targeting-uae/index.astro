@@ -1,0 +1,100 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBar from '../../components/StatBar.astro';
+import BreakdownTable from '../../components/BreakdownTable.astro';
+import SiblingRail from '../../components/SiblingRail.astro';
+import DataProvenance from '../../components/DataProvenance.astro';
+import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import { byGroup, groupsWithPages, groupsWithoutPages, bySector } from '../../lib/aggregate.mjs';
+import { MIN_INCIDENTS_FOR_PAGE } from '../../lib/taxonomy/groups.mjs';
+import { ROUTES } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription, datasetSchema } from '../../lib/seo.mjs';
+
+const inc = attributedIncidents;
+const groups = byGroup(inc);
+const paged = groupsWithPages(inc);
+const single = groupsWithoutPages(inc);
+const sectors = bySector(inc);
+const topGroup = groups[0];
+
+const title = buildTitle(`Ransomware Groups Targeting UAE: ${groups.length} Active Groups`);
+const description = buildDescription(
+  `${groups.length} ransomware groups have claimed UAE organisations since 2020, led by ${topGroup.label} with ${topGroup.count}. Activity by group, sector focus and period.`,
+);
+
+const schemas = [
+  datasetSchema({
+    site: Astro.site?.href ?? 'http://localhost:4321/',
+    url: ROUTES.groupsHub(),
+    name: 'Ransomware Groups Targeting UAE Organisations',
+    description,
+    fetchedAt: snapshotMeta.fetchedAt,
+    from: '2020-01-01',
+    to: snapshotMeta.fetchedAt.slice(0, 10),
+  }),
+];
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+  <h1>Ransomware Groups Targeting the UAE</h1>
+
+  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    <strong class="num">{groups.length}</strong> distinct ransomware groups have claimed at least
+    one organisation in the United Arab Emirates since 2020. {topGroup.label} leads with{' '}
+    <strong class="num">{topGroup.count}</strong> claimed organisations, and{' '}
+    <strong class="num">{paged.length}</strong> groups have claimed two or more. The remaining{' '}
+    <strong class="num">{single.length}</strong> groups appear once each and are listed below
+    without a dedicated page.
+  </p>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: groups.length, label: 'Groups observed', accent: true },
+      { value: paged.length, label: 'With repeat claims' },
+      { value: topGroup.count, label: `Peak group (${topGroup.label})` },
+      { value: inc.length, label: 'Attributed claims' },
+    ]} />
+    <DataProvenance />
+  </div>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Ransomware groups with repeat UAE activity</h2>
+    </div>
+    <p style="max-width:var(--measure);margin-bottom:var(--s4)">
+      A group earns its own page once it has claimed {MIN_INCIDENTS_FOR_PAGE} or more UAE
+      organisations. A single claim is not enough to describe a pattern, and a page built on one
+      data point would say less than this table row does.
+    </p>
+    <BreakdownTable
+      caption="Ransomware groups with two or more claimed UAE organisations"
+      rows={paged}
+      total={inc.length}
+      hrefFor={(slug) => ROUTES.group(slug)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Groups with a single claimed UAE organisation</h2>
+    </div>
+    <p style="max-width:var(--measure);margin-bottom:var(--s4)">
+      These <span class="num">{single.length}</span> groups have each claimed exactly one
+      organisation in the United Arab Emirates.
+    </p>
+    <p class="muted" style="max-width:var(--measure)">
+      {single.map((g, i) => (<>{g.label}{i < single.length - 1 ? ', ' : '.'}</>))}
+    </p>
+  </section>
+
+  <SiblingRail
+    title="Browse by sector"
+    items={sectors}
+    currentSlug={null}
+    hrefFor={(slug) => ROUTES.sector(slug)}
+  />
+</BaseLayout>

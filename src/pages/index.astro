@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import StatBar from '../components/StatBar.astro';
+import BreakdownTable from '../components/BreakdownTable.astro';
+import DataProvenance from '../components/DataProvenance.astro';
+import { attributedIncidents, allIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import { bySector, byPeriod, byGroup, groupsWithPages, top } from '../lib/aggregate.mjs';
+import { ROUTES, PERIODS } from '../lib/routes.mjs';
+import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
+
+const inc = attributedIncidents;
+const sectors = bySector(inc);
+const periods = byPeriod(inc);
+const groups = byGroup(inc);
+const paged = groupsWithPages(inc);
+const thisYear = inc.filter((i) => i.year === 2026).length;
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
+const title = buildTitle(`UAE Ransomware Data: ${inc.length} Attacks Tracked Since 2020`);
+const description = buildDescription(
+  `${inc.length} ransomware attacks on UAE organisations tracked since 2020, ${thisYear} in 2026. Sector, group and period breakdowns updated daily from leak-site monitoring.`,
+);
+---
+<BaseLayout title={title} description={description} crumbs={[]}>
+  <h1>UAE Cyber Threat Intelligence</h1>
+
+  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    Marsad Cyber tracks ransomware activity against organisations in the United Arab Emirates.
+    Ransomware groups have claimed <strong class="num">{inc.length}</strong> UAE organisations
+    since 2020, <strong class="num">{thisYear}</strong> of them in 2026, across{' '}
+    <strong class="num">{sectors.filter((s) => s.count > 0).length}</strong> sectors and{' '}
+    <strong class="num">{groups.length}</strong> distinct groups. Affected organisations are
+    never named on this site.
+  </p>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: inc.length, label: 'Attributed claims', accent: true },
+      { value: thisYear, label: 'Claimed in 2026' },
+      { value: groups.length, label: 'Active groups' },
+      { value: sectors.filter((s) => s.count > 0).length, label: 'Sectors hit' },
+    ]} />
+    <DataProvenance />
+  </div>
+
+  <section class="section">
+    <div class="section__head">
+      <h2><a href={ROUTES.tracker()} style="text-decoration:none">Ransomware Tracker</a></h2>
+      <a class="section__more" href={ROUTES.tracker()}>View all sectors</a>
+    </div>
+    <BreakdownTable
+      caption="Attributed ransomware claims against UAE organisations by sector"
+      rows={top(sectors, 8)}
+      total={inc.length}
+      hrefFor={(slug) => ROUTES.sector(slug)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2><a href={ROUTES.groupsHub()} style="text-decoration:none">Ransomware Groups</a></h2>
+      <a class="section__more" href={ROUTES.groupsHub()}>View all groups</a>
+    </div>
+    <BreakdownTable
+      caption="Most active ransomware groups against UAE organisations"
+      rows={top(groups, 8)}
+      total={inc.length}
+      hrefFor={(slug) => (paged.some((g) => g.slug === slug) ? ROUTES.group(slug) : undefined)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Activity by period</h2>
+      <a class="section__more" href={ROUTES.tracker()}>Full timeline</a>
+    </div>
+    <div class="card-grid">
+      {periods.map((p) => (
+        <article class="card">
+          <span class="card__count">{p.count}</span>
+          <h3 class="card__title"><a href={ROUTES.period(p.slug)}>{p.label}</a></h3>
+          <p class="card__meta">
+            {p.archive ? 'Combined archive period' : 'Claimed UAE organisations'}
+          </p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>How this data is built</h2></div>
+    <div class="callout" style="max-width:var(--measure)">
+      <p>
+        The upstream feed returned <span class="num">{allIncidents.length}</span> records tagged
+        for the United Arab Emirates. Only <span class="num">{inc.length}</span> of them carry a
+        verifiable UAE link, and only those reach the figures above.{' '}
+        <a href={ROUTES.methodology()}>Read the method</a> or see{' '}
+        <a href={ROUTES.dataSources()}>where the data comes from</a>. The rules governing what this
+        site will and will not publish are set out in the{' '}
+        <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

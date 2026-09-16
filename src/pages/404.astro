@@ -1,0 +1,21 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription } from '../lib/seo.mjs';
+---
+<BaseLayout
+  title={buildTitle('Page Not Found: Marsad Cyber UAE Threat Data')}
+  description={buildDescription('This page does not exist on Marsad Cyber. Return to the UAE ransomware tracker or the full sitemap.')}
+  crumbs={[]}
+  noindex={true}
+>
+  <div class="prose">
+    <h1>Page not found</h1>
+    <p class="lede">That page does not exist on this site.</p>
+    <p>
+      Try the <a href={ROUTES.tracker()}>UAE ransomware tracker</a>, the{' '}
+      <a href={ROUTES.groupsHub()}>list of ransomware groups</a>, or the full{' '}
+      <a href={ROUTES.sitemap()}>sitemap</a>.
+    </p>
+  </div>
+</BaseLayout>

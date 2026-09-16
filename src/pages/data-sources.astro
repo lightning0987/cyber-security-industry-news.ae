@@ -1,0 +1,102 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { snapshotMeta } from '../lib/incidents.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
+import entityMap from '../data/entity-map.json' with { type: 'json' };
+
+const title = buildTitle('Data Sources: Where Marsad Cyber Figures Come From');
+const description = buildDescription(
+  `Every dataset behind Marsad Cyber, its endpoint, refresh cadence and known limits. Current snapshot holds ${snapshotMeta.recordCount} records.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Data Sources', href: ROUTES.dataSources() }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs}>
+  <div class="prose">
+    <h1>Data Sources</h1>
+    <p class="lede">
+      Marsad Cyber publishes no figure it cannot trace to a named, dated source. This page lists
+      every dataset in use, where it comes from and what it cannot tell you.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>Active datasets</h2></div>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">Datasets currently in use</caption>
+        <thead>
+          <tr><th scope="col">Source</th><th scope="col">Provides</th><th scope="col">Refresh</th><th scope="col" class="num">Records</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row" class="row-name">
+              <a href="https://www.ransomware.live/" rel="noopener">ransomware.live</a>
+            </th>
+            <td>Ransomware leak-site claims, by country and sector</td>
+            <td>Daily</td>
+            <td class="num">{snapshotMeta.recordCount}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="provenance">
+      Current snapshot taken{' '}
+      <time class="mono" datetime={snapshotMeta.fetchedAt}>{formatDate(snapshotMeta.fetchedAt)}</time>
+      from <code>{snapshotMeta.endpoint}</code>.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Reference sources</h2>
+      <p>
+        These are not consumed programmatically, but are the authorities this site cites when it
+        describes the UAE regulatory environment.
+      </p>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">Regulatory reference sources</caption>
+        <thead><tr><th scope="col">Body</th><th scope="col">Scope</th><th scope="col">Role</th></tr></thead>
+        <tbody>
+          {entityMap.regulators.map((r) => (
+            <tr>
+              <th scope="row" class="row-name">
+                {r.url ? <a href={r.url} rel="noopener">{r.name}</a> : r.name}
+              </th>
+              <td>{r.scope}</td>
+              <td>{r.full_name}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose">
+      <h2>Sources evaluated and not used</h2>
+      <p>
+        Listed for transparency, because an absent dataset shapes what this site can say as much
+        as a present one does.
+      </p>
+      <ul>
+        <li>
+          <strong>Shadowserver Foundation</strong> — would provide exposed-service counts for UAE
+          networks. Its dashboard API requires an access request that this project has not
+          obtained, so no attack-surface figures are published.
+        </li>
+        <li>
+          <strong>aeCERT</strong> — the UAE national Computer Emergency Response Team, which operates
+          within the Telecommunications and Digital Government Regulatory Authority. Its public news archive
+          has not been updated since 2018, so it is cited as an authority but not consumed as a feed.
+        </li>
+      </ul>
+      <p>
+        Figures derived from any source are only as good as that source. Limitations are set out
+        in the <a href={ROUTES.methodology()}>methodology</a>.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

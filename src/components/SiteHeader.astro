@@ -1,0 +1,24 @@
+---
+import { HEADER_NAV, CHIP_RAIL } from '../lib/nav.mjs';
+import { BRAND } from '../lib/seo.mjs';
+
+const path = Astro.url.pathname;
+const isCurrent = (href) => path === href;
+---
+<header class="site-header" role="banner">
+  <div class="container site-header__bar">
+    <a class="site-logo" href="/">Marsad<span class="site-logo__mark">.</span>Cyber</a>
+    <nav class="site-nav" role="navigation" aria-label="Main navigation">
+      {HEADER_NAV.map((item) => (
+        <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
+      ))}
+    </nav>
+  </div>
+  <div class="container">
+    <nav class="chip-rail" aria-label="Sectors">
+      {CHIP_RAIL.map((chip) => (
+        <a class="chip" href={chip.href} aria-current={isCurrent(chip.href) ? 'page' : undefined}>{chip.label}</a>
+      ))}
+    </nav>
+  </div>
+</header>

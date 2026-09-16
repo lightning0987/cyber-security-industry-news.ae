@@ -1,0 +1,21 @@
+---
+/**
+ * Полный ряд сиблингов. Именно он механически выполняет требование
+ * «минимум три входящих ссылки на страницу»: каждая страница сектора получает
+ * ссылку с каждой другой страницы сектора, плюс с хаба, плюс с главной.
+ * Ручная простановка ссылок для этого не нужна.
+ */
+const { title, items, currentSlug, hrefFor } = Astro.props;
+---
+<nav class="section" aria-label={title}>
+  <div class="section__head"><h2>{title}</h2></div>
+  <div class="chip-rail" style="border-bottom:0">
+    {items.map((item) => (
+      <a
+        class="chip"
+        href={hrefFor(item.slug)}
+        aria-current={item.slug === currentSlug ? 'page' : undefined}
+      >{item.label} <span class="num">{item.count}</span></a>
+    ))}
+  </div>
+</nav>

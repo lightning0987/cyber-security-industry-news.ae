@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription, BRAND } from '../lib/seo.mjs';
+
+const title = buildTitle('Editorial Policy: What Marsad Cyber Will Not Publish');
+const description = buildDescription(
+  'Marsad Cyber never names an affected organisation. The legal basis, the three publication levels, and the automated checks that enforce them on every build.',
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Editorial Policy', href: ROUTES.editorialPolicy() }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs}>
+  <div class="prose">
+    <h1>Editorial Policy</h1>
+
+    <p class="lede">
+      {BRAND} publishes aggregate ransomware data about the United Arab Emirates and never
+      identifies an affected organisation. This page states that rule, the reasoning behind it,
+      and the mechanism that enforces it.
+    </p>
+
+    <h2>The rule</h2>
+    <div class="callout">
+      <p class="callout__title">Aggregate is the default and only mode.</p>
+      <p>
+        Published: sector, ransomware group, date and counts. Never published: the name of an
+        affected organisation, its domain, the contents or volume of leaked data, screenshots of
+        leak sites, <code>.onion</code> addresses, or the names of employees.
+      </p>
+    </div>
+
+    <h2>Why</h2>
+    <p>
+      UAE Federal Decree-Law No. 34 of 2021 on Combatting Rumours and Cybercrimes treats the
+      disclosure, leaking, publication and republication of unlawfully obtained electronic
+      personal data as an offence under Article 6. Articles 52 and 54 address the dissemination of
+      false information capable of harming the economy or the public interest. Data published on
+      ransomware leak sites is, by definition, unverified: it is an attacker's assertion, not an
+      established fact.
+    </p>
+    <p>
+      The law is not the only reason. This site is read by the security leadership of
+      organisations in the United Arab Emirates. A resource that publicly names local victims
+      reads as a threat to that reader rather than as expertise, and it would compromise the
+      independence this project depends on.
+    </p>
+    <p>
+      There is also no analytical cost. Aggregate figures answer the questions people actually
+      ask, such as which sectors are targeted and which groups are active. A page about a single
+      named organisation answers none of them.
+    </p>
+
+    <h2>The one exception</h2>
+    <p>
+      An organisation may be named only where the incident has already been reported by a
+      licensed UAE news outlet, and only with attribution to that outlet as the source. In that
+      case the report is the source, not the leak site. No such naming appears on this site at
+      present.
+    </p>
+
+    <h2>How the rule is enforced</h2>
+    <p>
+      The rule is not a matter of editorial care. Identifying fields are removed when data is
+      collected, before anything is stored, so they do not exist in the files that build these
+      pages. A separate automated check scans every built page against fingerprints of the removed
+      values and fails the build on any match, as it does on any <code>.onion</code> address.
+      A build that would identify an organisation cannot be published.
+    </p>
+
+    <h2>Independence and scope</h2>
+    <p>
+      {BRAND} is an independent threat-data research project. It is not affiliated with, endorsed
+      by, or acting on behalf of any vendor, regulator, or government body of the United Arab
+      Emirates, and it holds no accreditation from any of them.
+    </p>
+    <p>
+      Where this site describes regulatory frameworks such as the Dubai Information Security
+      Regulation or the UAE Information Assurance Standard, it describes what those documents
+      require. It does not offer certification against them and does not claim to assess
+      compliance with them.
+    </p>
+
+    <h2>Corrections</h2>
+    <p>
+      Every figure traces to a dated snapshot held in version control, and the calculation behind
+      it is reproducible. Where a figure is wrong, it is corrected and the snapshot history shows
+      what changed. See the <a href={ROUTES.methodology()}>methodology</a> for how figures are
+      derived and what their known limitations are.
+    </p>
+  </div>
+</BaseLayout>

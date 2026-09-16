@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { attributedIncidents } from '../lib/incidents.mjs';
+import { bySector, byPeriod, groupsWithPages } from '../lib/aggregate.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription } from '../lib/seo.mjs';
+
+const inc = attributedIncidents;
+const sectors = bySector(inc);
+const periods = byPeriod(inc);
+const groups = groupsWithPages(inc);
+const totalPages = 1 + 1 + sectors.length + periods.length + 1 + groups.length + 5;
+
+const title = buildTitle(`Sitemap: All ${totalPages} Marsad Cyber Pages`);
+const description = buildDescription(
+  `Every page on Marsad Cyber in one list: ${sectors.length} sector pages, ${periods.length} period pages, ${groups.length} ransomware group profiles and site information.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href: ROUTES.sitemap() }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs}>
+  <div class="prose"><h1>Sitemap</h1>
+    <p class="lede">Every page on this site, grouped by section.</p>
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>Ransomware tracker by sector</h2></div>
+    <ul class="stack" style="columns:2;column-gap:var(--s6)">
+      <li><a href={ROUTES.tracker()}>UAE Ransomware Tracker</a></li>
+      {sectors.map((s) => <li><a href={ROUTES.sector(s.slug)}>{s.label}</a> <span class="num muted">{s.count}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Ransomware tracker by period</h2></div>
+    <ul class="stack">
+      {periods.map((p) => <li><a href={ROUTES.period(p.slug)}>{p.label}</a> <span class="num muted">{p.count}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Ransomware groups</h2></div>
+    <ul class="stack" style="columns:2;column-gap:var(--s6)">
+      <li><a href={ROUTES.groupsHub()}>All groups targeting the UAE</a></li>
+      {groups.map((g) => <li><a href={ROUTES.group(g.slug)}>{g.label}</a> <span class="num muted">{g.count}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>About this project</h2></div>
+    <ul class="stack">
+      <li><a href={ROUTES.home()}>Home</a></li>
+      <li><a href={ROUTES.about()}>About Marsad Cyber</a></li>
+      <li><a href={ROUTES.methodology()}>Methodology</a></li>
+      <li><a href={ROUTES.dataSources()}>Data Sources</a></li>
+      <li><a href={ROUTES.editorialPolicy()}>Editorial Policy</a></li>
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,155 @@
+{
+  "note": "Ручная часть карты сущностей. Программная часть (секторы, группы, периоды) добавляется на сборке в src/pages/entity-map.json.ts. Формулировки по DESC и NESA строго описательные: мы объясняем регламенты, но нигде не заявляем аккредитацию.",
+  "emirates": [
+    {
+      "name": "Dubai",
+      "type": "Emirate"
+    },
+    {
+      "name": "Abu Dhabi",
+      "type": "Emirate"
+    },
+    {
+      "name": "Sharjah",
+      "type": "Emirate"
+    },
+    {
+      "name": "Ajman",
+      "type": "Emirate"
+    },
+    {
+      "name": "Fujairah",
+      "type": "Emirate"
+    },
+    {
+      "name": "Ras Al Khaimah",
+      "type": "Emirate"
+    },
+    {
+      "name": "Umm Al Quwain",
+      "type": "Emirate"
+    }
+  ],
+  "free_zones": [
+    {
+      "name": "DIFC",
+      "full_name": "Dubai International Financial Centre",
+      "emirate": "Dubai",
+      "regulator": "DFSA"
+    },
+    {
+      "name": "ADGM",
+      "full_name": "Abu Dhabi Global Market",
+      "emirate": "Abu Dhabi",
+      "regulator": "FSRA"
+    },
+    {
+      "name": "DMCC",
+      "full_name": "Dubai Multi Commodities Centre",
+      "emirate": "Dubai",
+      "regulator": null
+    },
+    {
+      "name": "JAFZA",
+      "full_name": "Jebel Ali Free Zone",
+      "emirate": "Dubai",
+      "regulator": null
+    }
+  ],
+  "regulators": [
+    {
+      "name": "TDRA",
+      "full_name": "Telecommunications and Digital Government Regulatory Authority",
+      "scope": "Federal",
+      "url": null,
+      "note": "Федеральный регулятор телекоммуникаций и цифрового правительства. Раздел aeCERT входит в его состав. Прямая ссылка на домен не ставится: он присутствует в наборе данных, и правило «ни одного домена жертвы в выдаче» действует без исключений."
+    },
+    {
+      "name": "aeCERT",
+      "full_name": "UAE Computer Emergency Response Team",
+      "scope": "Federal",
+      "url": null,
+      "note": "Национальная группа реагирования на компьютерные инциденты, работает в составе TDRA. Публичный архив новостей не обновлялся с 2018 года, поэтому как поток данных не используется. Прямая ссылка на домен не ставится: он присутствует в наборе данных, и правило «ни одного домена жертвы в выдаче» действует без исключений."
+    },
+    {
+      "name": "DESC",
+      "full_name": "Dubai Electronic Security Center",
+      "scope": "Dubai",
+      "url": "https://www.desc.gov.ae/",
+      "note": "Орган Дубая по кибербезопасности. Выпускает регламент ISR."
+    },
+    {
+      "name": "UAE Cyber Security Council",
+      "full_name": "UAE Cyber Security Council",
+      "scope": "Federal",
+      "url": "https://csc.gov.ae/en/",
+      "note": "Федеральный совет по кибербезопасности, учреждён в ноябре 2020 года."
+    },
+    {
+      "name": "SIA",
+      "full_name": "Signals Intelligence Agency",
+      "scope": "Federal",
+      "url": null,
+      "note": "Федеральный орган, в составе которого работает бывшее NESA. Выпускает UAE Information Assurance Standard."
+    }
+  ],
+  "frameworks": [
+    {
+      "name": "DESC ISR v3",
+      "full_name": "Dubai Information Security Regulation, version 3",
+      "issuer": "DESC",
+      "year": 2023,
+      "control_domains": 13,
+      "applies_to": "Госструктуры Дубая, полугосударственные организации, облачные провайдеры правительства Дубая и ключевые поставщики, работающие с государственными данными",
+      "note": "Методологически выровнен с ISO 27001 и NIST CSF. Это факт о самом регламенте, а не предложение сертификации."
+    },
+    {
+      "name": "UAE IAS v2",
+      "full_name": "UAE Information Assurance Standard, version 2",
+      "issuer": "SIA",
+      "year": 2025,
+      "controls_total": 188,
+      "controls_management": 60,
+      "controls_technical": 128,
+      "controls_priority_one": 39,
+      "applies_to": "Операторы критической национальной инфраструктуры и госорганы во всех эмиратах"
+    },
+    {
+      "name": "UAE PDPL",
+      "full_name": "UAE Personal Data Protection Law",
+      "issuer": "Federal",
+      "scope": "Персональные данные, федеральный уровень"
+    },
+    {
+      "name": "DFSA TRM",
+      "full_name": "DFSA Technology and Risk Management",
+      "issuer": "DFSA",
+      "scope": "Компании, зарегистрированные в DIFC"
+    }
+  ],
+  "legal": [
+    {
+      "name": "UAE Federal Decree-Law No. 34 of 2021",
+      "topic": "Противодействие слухам и киберпреступлениям",
+      "url": "https://uaelegislation.gov.ae/",
+      "note": "Статья 6 включает в состав нарушения раскрытие и републикацию незаконно полученных электронных персональных данных. Основание редакционной политики этого сайта."
+    }
+  ],
+  "data_sources": [
+    {
+      "name": "ransomware.live",
+      "url": "https://www.ransomware.live/",
+      "role": "Мониторинг leak-сайтов вымогателей"
+    },
+    {
+      "name": "CISA KEV",
+      "url": "https://www.cisa.gov/known-exploited-vulnerabilities-catalog",
+      "role": "Каталог эксплуатируемых уязвимостей"
+    },
+    {
+      "name": "FIRST.org EPSS",
+      "url": "https://www.first.org/epss/",
+      "role": "Вероятность эксплуатации уязвимости"
+    }
+  ]
+}

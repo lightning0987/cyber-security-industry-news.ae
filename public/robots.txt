@@ -1,0 +1,5 @@
+# Marsad Cyber — independent threat-data research project
+User-agent: *
+Allow: /
+
+Sitemap: https://cyber-security-industry-news.ae/sitemap-index.xml

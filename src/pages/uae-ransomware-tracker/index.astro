@@ -1,0 +1,149 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBar from '../../components/StatBar.astro';
+import BreakdownTable from '../../components/BreakdownTable.astro';
+import SiblingRail from '../../components/SiblingRail.astro';
+import DataProvenance from '../../components/DataProvenance.astro';
+import { allIncidents, attributedIncidents, unverifiedIncidents, unclassifiedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import { bySector, byPeriod, byGroup, groupsWithPages, top } from '../../lib/aggregate.mjs';
+import { ROUTES, PERIODS } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate } from '../../lib/seo.mjs';
+
+const inc = attributedIncidents;
+const sectors = bySector(inc);
+const periods = byPeriod(inc);
+const groups = byGroup(inc);
+const pagedGroups = groupsWithPages(inc);
+
+const total = inc.length;
+const currentYear = 2026;
+const thisYear = inc.filter((i) => i.year === currentYear).length;
+const topSector = sectors[0];
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
+const title = buildTitle(`UAE Ransomware Tracker ${currentYear}: ${total} Confirmed Attacks`);
+const description = buildDescription(
+  `${total} ransomware attacks on UAE organisations confirmed since 2020, ${thisYear} of them in ${currentYear}. Tracked by sector, group and period, updated daily from leak-site monitoring.`,
+);
+
+const schemas = [
+  datasetSchema({
+    site: Astro.site?.href ?? 'http://localhost:4321/',
+    url: ROUTES.tracker(),
+    name: 'UAE Ransomware Incident Tracker',
+    description: 'Aggregated counts of ransomware leak-site claims against organisations in the United Arab Emirates, broken down by sector, ransomware group and period. No affected organisation is identified.',
+    fetchedAt: snapshotMeta.fetchedAt,
+    from: '2020-01-01',
+    to: snapshotMeta.fetchedAt.slice(0, 10),
+  }),
+];
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'UAE Ransomware Tracker', href: ROUTES.tracker() },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+  <h1>UAE Ransomware Attack Tracker</h1>
+
+  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    Ransomware groups have claimed <strong class="num">{total}</strong> organisations in the
+    United Arab Emirates since 2020, of which <strong class="num">{thisYear}</strong> were claimed
+    in {currentYear}. {topSector.label} is the most targeted sector with{' '}
+    <strong class="num">{topSector.count}</strong> claimed organisations, and{' '}
+    <strong class="num">{pagedGroups.length}</strong> distinct groups have claimed two or more
+    UAE organisations. Figures are drawn from leak-site monitoring as of {asOf} and exclude
+    claims that carry no verifiable link to the UAE.
+  </p>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: total, label: 'Attributed claims', accent: true },
+      { value: thisYear, label: `Claimed in ${currentYear}` },
+      { value: groups.length, label: 'Active groups' },
+      { value: sectors.filter((s) => s.count > 0).length, label: 'Sectors hit' },
+    ]} />
+    <DataProvenance note={`Of those, ${unverifiedIncidents.length} carried no verifiable UAE link and are excluded from the headline count.`} />
+  </div>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Which sectors UAE ransomware groups target</h2>
+    </div>
+    <p style="max-width:var(--measure);margin-bottom:var(--s4)">
+      Professional Services absorbs the largest share of claimed UAE organisations at{' '}
+      <span class="num">{topSector.count}</span> of <span class="num">{total}</span>. The table
+      below counts every attributed claim by the sector label assigned by the upstream feed.
+      {unclassifiedIncidents.length > 0 && (
+        <> A further <span class="num">{unclassifiedIncidents.length}</span> attributed claims
+        carry no sector label from the upstream feed and appear in the total but in no sector row.</>
+      )}
+    </p>
+    <BreakdownTable
+      caption="Attributed ransomware claims against UAE organisations by sector"
+      rows={sectors}
+      total={total}
+      hrefFor={(slug) => ROUTES.sector(slug)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>How UAE ransomware activity changed by period</h2>
+    </div>
+    <p style="max-width:var(--measure);margin-bottom:var(--s4)">
+      Claimed UAE organisations rose from <span class="num">{periods[0].count}</span> across
+      2020 to 2022 combined to <span class="num">{periods.at(-2).count}</span> in 2025.
+      Counts for {currentYear} cover a partial year and will rise as the year completes.
+    </p>
+    <BreakdownTable
+      caption="Attributed ransomware claims against UAE organisations by period"
+      rows={periods.map((p) => ({ slug: p.slug, label: p.label, count: p.count }))}
+      total={total}
+      hrefFor={(slug) => ROUTES.period(slug)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Which ransomware groups claim UAE organisations</h2>
+      <a class="section__more" href={ROUTES.groupsHub()}>All groups</a>
+    </div>
+    <BreakdownTable
+      caption="Most active ransomware groups against UAE organisations"
+      rows={top(groups, 15)}
+      total={total}
+      hrefFor={(slug) => (pagedGroups.some((g) => g.slug === slug) ? ROUTES.group(slug) : undefined)}
+    />
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>How UAE attribution is decided</h2></div>
+    <div class="callout" style="max-width:var(--measure)">
+      <p class="callout__title">Not every claim tagged "AE" involves a UAE organisation.</p>
+      <p>
+        The upstream feed returned <span class="num">{allIncidents.length}</span> records for the
+        United Arab Emirates. Of those, <span class="num">{snapshotMeta.attribution.confirmed}</span>
+        resolve to a domain in the <code>.ae</code> zone and{' '}
+        <span class="num">{snapshotMeta.attribution.probable}</span> carry an explicit UAE reference
+        in the record text. The remaining <span class="num">{snapshotMeta.attribution.unverified}</span>
+        carry neither signal and are excluded from every headline figure on this site.{' '}
+        <a href={ROUTES.methodology()}>Read the full method</a>.
+      </p>
+    </div>
+  </section>
+
+  <SiblingRail
+    title="Browse by sector"
+    items={sectors}
+    currentSlug={null}
+    hrefFor={(slug) => ROUTES.sector(slug)}
+  />
+
+  <SiblingRail
+    title="Browse by period"
+    items={periods.map((p) => ({ slug: p.slug, label: p.label, count: p.count }))}
+    currentSlug={null}
+    hrefFor={(slug) => ROUTES.period(slug)}
+  />
+</BaseLayout>
