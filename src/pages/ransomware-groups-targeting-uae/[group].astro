@@ -11,7 +11,7 @@ import { relatedTo, moreOfKind, mostActive } from '../../lib/related.mjs';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { bySector, byPeriod, groupsWithPages, inGroup, activitySpan, byGroup } from '../../lib/aggregate.mjs';
 import { ROUTES } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong } from '../../lib/seo.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, AUTHOR } from '../../lib/seo.mjs';
 
 export function getStaticPaths() {
   return groupsWithPages(attributedIncidents).map((g) => ({
@@ -81,6 +81,7 @@ const active = mostActive(5);
     <a href={ROUTES.groupsHub()}>Groups targeting the UAE</a>
     <span class="byline__sep">/</span>
     <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
     </div>
     <p class="lede">
     {label} has claimed <strong class="num">{count}</strong> organisations in the United Arab

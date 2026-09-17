@@ -1,10 +1,18 @@
 ---
 /**
- * Блок рециркуляции по ТЗ 14.2. Числовой маркер играет роль визуального якоря:
- * у референса на этом месте миниатюра, но изображений у нас нет, а выдумывать
- * их нельзя. Число при этом несёт смысл, чего миниатюра не делает.
+ * Блок рециркуляции по ТЗ 14.2.
+ *
+ * Якорь строки выбирается один на весь блок, а не на строку. Когда у части
+ * элементов фотография есть, а у части нет, список выглядит сломанным, и это
+ * ровно то, что было на «Most targeted sectors»: секторы несли снимки, группы
+ * нет. Фотографии групп у нас не существует и придумывать её нельзя, поэтому
+ * правило простое: миниатюры показываются, только если они есть у всех.
+ *
+ * Голое число читателю ничего не говорит, поэтому под ним всегда стоит
+ * единица измерения.
  */
 const { title, items, more } = Astro.props;
+const withThumbs = items.length > 0 && items.every((i) => i.thumb);
 ---
 {items.length > 0 && (
   <section class="recirc">
@@ -15,9 +23,14 @@ const { title, items, more } = Astro.props;
       {items.map((item) => (
         <li>
           <a href={item.href}>
-            {item.thumb
-              ? <img class="recirc-thumb" src={item.thumb} alt={item.thumbAlt ?? ''}  width="88" height="50" loading="lazy" decoding="async" />
-              : <span class="recirc-item__fig">{item.figure}</span>}
+            {withThumbs
+              ? <img class="recirc-thumb" src={item.thumb} alt={item.thumbAlt ?? ''} width="88" height="50" loading="lazy" decoding="async" />
+              : (
+                <span class="recirc-item__fig">
+                  <span class="recirc-item__num">{item.figure}</span>
+                  {item.figureLabel && <span class="recirc-item__unit">{item.figureLabel}</span>}
+                </span>
+              )}
             <span>
               <span class="recirc-item__title">{item.title}</span>
               <span class="recirc-item__meta">

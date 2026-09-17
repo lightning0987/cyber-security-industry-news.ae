@@ -10,23 +10,27 @@ const asOf = formatDate(snapshotMeta.fetchedAt);
     <div class="footer-cols">
       {FOOTER_COLUMNS.map((col) => (
         <div class="footer-col">
-          {col.heading ? (
-            <h2><a href={col.heading.href}>{col.heading.label}</a></h2>
-          ) : (
-            <h2 class="visually-hidden">Site information</h2>
-          )}
-          <ul>
-            {col.links.map((link) => (
-              <li><a href={link.href}>{link.label}</a></li>
-            ))}
-          </ul>
+          {col.map((block) => (
+            <div class="footer-block">
+              <h2>
+                {block.heading.href
+                  ? <a href={block.heading.href}>{block.heading.label}</a>
+                  : block.heading.label}
+              </h2>
+              <ul>
+                {block.links.map((link) => (
+                  <li><a href={link.href}>{link.label}</a></li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
       ))}
     </div>
 
     <div class="footer-legal">
       <p>
-        <strong>{BRAND} is an independent threat-data research project.</strong>
+        <strong>{BRAND} is an independent threat-data research project.</strong>{' '}
         It is not affiliated with, endorsed by, or acting on behalf of any vendor,
         regulator, or government body of the United Arab Emirates.
       </p>

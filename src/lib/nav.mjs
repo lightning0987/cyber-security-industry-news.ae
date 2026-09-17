@@ -31,52 +31,69 @@ export const HEADER_NAV = [
 export const CHIP_RAIL = sectors.map((s) => ({ label: s.label, href: ROUTES.sector(s.slug) }));
 
 /**
- * Колонки подвала. Заголовок колонки — сам по себе ссылка.
- * Счётчик ссылок проверяется гардом: 35–45.
+ * Колонки подвала.
+ *
+ * Ровно пять колонок в одном ряду, а не автоподбор. При auto-fit шестая и
+ * седьмая колонки переносились на второй ряд и вставали под колонками разной
+ * высоты — подвал выглядел рассыпавшимся. Колонка может нести два блока, это
+ * дешевле, чем ломать ряд.
+ *
+ * Счётчик ссылок держится в вилке 35–45 по ТЗ 14.7.
  */
 export const FOOTER_COLUMNS = [
-  {
-    heading: { label: 'About', href: ROUTES.about() },
-    links: [
-      { label: 'Methodology', href: ROUTES.methodology() },
-      { label: 'Data Sources', href: ROUTES.dataSources() },
-      { label: 'Editorial Policy', href: ROUTES.editorialPolicy() },
-    ],
-  },
-  {
-    heading: { label: 'Ransomware Tracker', href: ROUTES.tracker() },
-    links: sectors.map((s) => ({ label: s.label, href: ROUTES.sector(s.slug) })),
-  },
-  {
-    heading: { label: 'By Period', href: ROUTES.tracker() },
-    links: PERIODS.map((p) => ({ label: p.label, href: ROUTES.period(p.slug) })),
-  },
-  {
-    heading: { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
-    links: groups.slice(0, 7).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
-  },
-  {
-    heading: { label: 'News', href: ROUTES.news() },
-    links: NEWS_CATEGORIES.map((c) => ({ label: c.label, href: ROUTES.category(c.slug) })),
-  },
-  {
-    heading: { label: 'Guides', href: ROUTES.guides() },
-    links: GUIDES.map((g) => ({ label: g.standard, href: ROUTES.guide(g.slug) })),
-  },
-  {
-    heading: null,
-    links: [
-      { label: 'Sitemap', href: ROUTES.sitemap() },
-      { label: 'Image credits', href: '/credits/' },
-      { label: 'Dataset (JSON)', href: '/data/incidents.json' },
-      { label: 'Dataset (CSV)', href: '/data/incidents.csv' },
-    ],
-  },
+  [
+    {
+      heading: { label: 'About', href: ROUTES.about() },
+      links: [
+        { label: 'Methodology', href: ROUTES.methodology() },
+        { label: 'Data Sources', href: ROUTES.dataSources() },
+        { label: 'Editorial Policy', href: ROUTES.editorialPolicy() },
+        { label: 'Contact', href: ROUTES.contact() },
+      ],
+    },
+  ],
+  [
+    {
+      heading: { label: 'Ransomware Tracker', href: ROUTES.tracker() },
+      links: sectors.map((s) => ({ label: s.label, href: ROUTES.sector(s.slug) })),
+    },
+  ],
+  [
+    {
+      heading: { label: 'By Period', href: ROUTES.tracker() },
+      links: PERIODS.map((p) => ({ label: p.label, href: ROUTES.period(p.slug) })),
+    },
+    {
+      heading: { label: 'Guides', href: ROUTES.guides() },
+      links: GUIDES.map((g) => ({ label: g.standard, href: ROUTES.guide(g.slug) })),
+    },
+  ],
+  [
+    {
+      heading: { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
+      links: groups.slice(0, 6).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
+    },
+  ],
+  [
+    {
+      heading: { label: 'News', href: ROUTES.news() },
+      links: NEWS_CATEGORIES.map((c) => ({ label: c.label, href: ROUTES.category(c.slug) })),
+    },
+    {
+      heading: { label: 'Data and site', href: null },
+      links: [
+        { label: 'Sitemap', href: ROUTES.sitemap() },
+        { label: 'Image credits', href: ROUTES.credits() },
+        { label: 'Dataset (JSON)', href: '/data/incidents.json' },
+        { label: 'Dataset (CSV)', href: '/data/incidents.csv' },
+      ],
+    },
+  ],
 ];
 
 /** Сколько всего ссылок в подвале — для самопроверки и для гарда. */
 export const FOOTER_LINK_COUNT = FOOTER_COLUMNS.reduce(
-  (n, c) => n + c.links.length + (c.heading ? 1 : 0),
+  (n, col) => n + col.reduce((m, b) => m + b.links.length + (b.heading?.href ? 1 : 0), 0),
   0,
 );
 

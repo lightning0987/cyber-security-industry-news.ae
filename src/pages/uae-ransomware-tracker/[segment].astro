@@ -21,7 +21,7 @@ import {
   bySector, byPeriod, byGroup, groupsWithPages, inSector, inPeriod, top, activitySpan,
 } from '../../lib/aggregate.mjs';
 import { ROUTES, PERIODS } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong } from '../../lib/seo.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, AUTHOR } from '../../lib/seo.mjs';
 
 export function getStaticPaths() {
   const inc = attributedIncidents;
@@ -112,6 +112,7 @@ const active = mostActive(5);
     <a href={ROUTES.tracker()}>UAE Ransomware Tracker</a>
     <span class="byline__sep">/</span>
     <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
     </div>
     <p class="lede">
     {kind === 'sector' ? (

@@ -49,6 +49,7 @@ export function newsCard(entry) {
     href: `/${entry.id}/`,
     title: entry.data.h1,
     figure: entry.data.published.slice(8, 10),
+    figureLabel: MONTHS[Number(entry.data.published.slice(5, 7)) - 1].slice(0, 3),
     meta: `${CATEGORIES[entry.data.category].label} · ${entry.data.published}`,
     category: entry.data.category,
     published: entry.data.published,

@@ -1,70 +1,153 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { attributedIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import Hero from '../components/Hero.astro';
+import StatBar from '../components/StatBar.astro';
+import { attributedIncidents, allIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import { bySector, byGroup, groupsWithPages } from '../lib/aggregate.mjs';
 import { ROUTES } from '../lib/routes.mjs';
 import { buildTitle, buildDescription, BRAND, AUTHOR, formatDate } from '../lib/seo.mjs';
 
+const inc = attributedIncidents;
+const sectors = bySector(inc).filter((s) => s.count > 0);
+const groups = byGroup(inc);
+const paged = groupsWithPages(inc);
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
 const title = buildTitle('About Marsad Cyber: Independent UAE Threat Data');
 const description = buildDescription(
-  `Marsad Cyber tracks ransomware activity against UAE organisations, currently ${attributedIncidents.length} attributed claims. What the project is, who runs it and how it is funded.`,
+  `Marsad Cyber tracks ransomware activity against UAE organisations, currently ${inc.length} attributed claims. What the project is, who runs it and how it is funded.`,
 );
 const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'About', href: ROUTES.about() }];
 ---
-<BaseLayout title={title} description={description} crumbs={crumbs}>
-  <div class="prose">
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'page', slug: 'about' }}>
+  <div class="page-head">
     <h1>About Marsad Cyber</h1>
-
+    <div class="byline">
+      <span class="byline__tag">About</span>
+      <span class="byline__sep">/</span>
+      <span>Independent research project</span>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+    </div>
     <p class="lede">
       {BRAND} is an independent threat-data research project tracking ransomware activity against
       organisations in the United Arab Emirates. It currently tracks{' '}
-      <span class="num">{attributedIncidents.length}</span> attributed claims, updated daily from
-      public leak-site monitoring.
-    </p>
-
-    <h2>The name</h2>
-    <p>
-      Marsad is the Arabic word for observatory. The name describes the work directly: this site
-      is an observation post, not an advisory service and not a news desk.
-    </p>
-
-    <h2>What the project does</h2>
-    <p>
-      Public reporting on cyber incidents in the Gulf is fragmented. Regional figures are usually
-      quoted without a source, a date or a method, and rarely distinguish an attacker's claim from
-      a confirmed breach. This project publishes a narrow set of figures with all three attached:
-      where the data came from, when it was collected, and how it was filtered.
-    </p>
-    <p>
-      Every number on this site traces to a dated snapshot held in version control. No figure is
-      written by hand and none is estimated.
-    </p>
-
-    <h2>What it deliberately does not do</h2>
-    <p>
-      This site never identifies an organisation affected by ransomware. It does not republish
-      leaked material, host leak-site addresses, or describe the contents of a breach. The
-      reasoning, both legal and practical, is set out in full in the{' '}
-      <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
-    </p>
-    <p>
-      It also does not offer certification against any regulatory framework, and it holds no
-      accreditation from any UAE authority.
-    </p>
-
-    <h2>Who writes it</h2>
-    <p>
-      Data pages are generated directly from source snapshots without manual editing. Written
-      analysis is published under {AUTHOR}.
-    </p>
-
-    <h2>Current data</h2>
-    <p>
-      The active snapshot was collected on{' '}
-      <time class="mono" datetime={snapshotMeta.fetchedAt}>{formatDate(snapshotMeta.fetchedAt)}</time>
-      from <a href={ROUTES.dataSources()}>{snapshotMeta.source}</a> and contains{' '}
-      <span class="num">{snapshotMeta.recordCount}</span> records. See the{' '}
-      <a href={ROUTES.methodology()}>methodology</a> for how those records become published
-      figures.
+      <span class="num">{inc.length}</span> attributed claims, updated daily from public
+      leak-site monitoring.
     </p>
   </div>
+
+  <div class="section" style="padding-bottom:var(--s3)">
+    <Hero
+      slug="fibre-network"
+      caption="Marsad is the Arabic word for observatory. The project watches one narrow signal and publishes what it sees."
+    />
+  </div>
+
+  <div class="section">
+    <StatBar stats={[
+      { value: inc.length, label: 'Attributed claims', accent: true },
+      { value: sectors.length, label: 'Sectors covered' },
+      { value: groups.length, label: 'Groups recorded' },
+      { value: paged.length, label: 'Group profiles' },
+    ]} />
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>What the project does</h2></div>
+    <div class="prose">
+      <p>
+        Public reporting on cyber incidents in the Gulf is fragmented. Regional figures are usually
+        quoted without a source, a date or a method, and rarely distinguish an attacker's claim from
+        a confirmed breach. This project publishes a narrow set of figures with all three attached:
+        where the data came from, when it was collected, and how it was filtered.
+      </p>
+      <p>
+        Every number on this site traces to a dated snapshot held in version control. No figure is
+        written by hand and none is estimated. The snapshot that drives the current pages was
+        collected on{' '}
+        <time class="mono" datetime={snapshotMeta.fetchedAt}>{formatDate(snapshotMeta.fetchedAt)}</time>{' '}
+        from <a href={ROUTES.dataSources()}>{snapshotMeta.source}</a> and holds{' '}
+        <span class="num">{snapshotMeta.recordCount}</span> records, of which{' '}
+        <span class="num">{inc.length}</span> carry a verifiable UAE link.
+      </p>
+    </div>
+
+    <div class="pillars" style="margin-top:var(--s5)">
+      <div class="pillar">
+        <span class="pillar__num">01</span>
+        <h3>Observe</h3>
+        <p>
+          Leak-site claims published by ransomware groups are collected daily and screened for a
+          verifiable link to the United Arab Emirates.
+        </p>
+      </div>
+      <div class="pillar">
+        <span class="pillar__num">02</span>
+        <h3>Filter in the open</h3>
+        <p>
+          Of <span class="num">{allIncidents.length}</span> records the upstream feed tagged for the
+          UAE, <span class="num">{inc.length}</span> survive the filter. The rule is published, not
+          summarised.
+        </p>
+      </div>
+      <div class="pillar">
+        <span class="pillar__num">03</span>
+        <h3>Publish aggregates only</h3>
+        <p>
+          Figures are released by sector, group and period. No affected organisation is identified,
+          in any form, anywhere on this site.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>The name</h2></div>
+    <div class="prose">
+      <p>
+        Marsad is the Arabic word for observatory. The name describes the work directly: this site
+        is an observation post, not an advisory service and not a news desk.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>What it deliberately does not do</h2></div>
+    <div class="prose">
+      <p>
+        This site never identifies an organisation affected by ransomware. It does not republish
+        leaked material, host leak-site addresses, or describe the contents of a breach. The
+        reasoning, both legal and practical, is set out in full in the{' '}
+        <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+      </p>
+      <p>
+        It also does not offer certification against any regulatory framework, and it holds no
+        accreditation from any UAE authority.
+      </p>
+      <div class="callout">
+        <p class="callout__title">One rule above the rest</p>
+        <p>
+          No affected organisation may be identifiable in anything this site publishes. The check
+          runs inside the build: if a page could identify a victim, that page is never produced.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Who writes it</h2></div>
+    <div class="prose">
+      <p>
+        Data pages are assembled from source snapshots, then read and checked by hand before
+        publication. Written analysis is published under {AUTHOR}. Corrections and data questions
+        are welcome and are answered at the <a href={ROUTES.contact()}>contact page</a>.
+      </p>
+      <p>
+        See the <a href={ROUTES.methodology()}>methodology</a> for how records become published
+        figures, or read the <a href={ROUTES.tracker()}>ransomware tracker</a> itself.
+      </p>
+    </div>
+  </section>
 </BaseLayout>

@@ -41,7 +41,7 @@ export const GET: APIRoute = async ({ site }) => {
     add(`/news/${y}/${m}/`, dataDate, '0.4');
   }
 
-  for (const p of ['/about/', '/methodology/', '/data-sources/', '/editorial-policy/', '/credits/', '/sitemap/']) {
+  for (const p of ['/about/', '/methodology/', '/data-sources/', '/editorial-policy/', '/credits/', '/sitemap/', '/contact/']) {
     add(p, dataDate, '0.5');
   }
 

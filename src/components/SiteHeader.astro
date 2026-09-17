@@ -1,6 +1,5 @@
 ---
 import { HEADER_NAV, CHIP_RAIL } from '../lib/nav.mjs';
-import { BRAND } from '../lib/seo.mjs';
 
 const path = Astro.url.pathname;
 const isCurrent = (href) => path === href;
@@ -8,6 +7,19 @@ const isCurrent = (href) => path === href;
 <header class="site-header" role="banner">
   <div class="container site-header__bar">
     <a class="site-logo" href="/">Marsad<span class="site-logo__mark">.</span>Cyber</a>
+
+    {/*
+      Гамбургер на чистом CSS: скрытый чекбокс плюс метка. Единственный скрипт
+      на сайте — сортировка таблиц, и навигация не имеет права от него зависеть.
+      Ссылки при этом остаются в разметке всегда, свёрнутое меню их не удаляет.
+      От 48rem меню развёрнуто постоянно, а кнопка скрыта.
+    */}
+    <input class="nav-switch" id="nav-switch" type="checkbox" aria-label="Show main menu" />
+    <label class="nav-burger" for="nav-switch">
+      <span class="nav-burger__bars" aria-hidden="true"></span>
+      <span class="nav-burger__text">Menu</span>
+    </label>
+
     <nav class="site-nav" role="navigation" aria-label="Main navigation">
       {HEADER_NAV.map((item) => (
         <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>{item.label}</a>
@@ -17,7 +29,9 @@ const isCurrent = (href) => path === href;
 </header>
 
 {/* Лента секторов вынесена из тёмной шапки: на чёрном фоне чипы нечитаемы,
-    а у референса это отдельная светлая полоса под навигацией. */}
+    а у референса это отдельная светлая полоса под навигацией. На широком
+    экране она переносится на вторую строку вместо горизонтальной прокрутки:
+    мышью такую прокрутку не сделать, и половина секторов оставалась скрытой. */}
 <div class="chip-band">
   <div class="container chip-rail-wrap">
     <nav class="chip-rail" aria-label="Sectors">

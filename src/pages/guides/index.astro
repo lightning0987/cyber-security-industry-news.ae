@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecircList from '../../components/RecircList.astro';
 import { ROUTES } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription } from '../../lib/seo.mjs';
+import { buildTitle, buildDescription, AUTHOR } from '../../lib/seo.mjs';
 import { latestActivity } from '../../lib/related.mjs';
 import { photo } from '../../lib/images.mjs';
 
@@ -22,6 +22,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Guides', href:
     <span class="byline__tag">Guides</span>
     <span class="byline__sep">/</span>
     <span>{guides.length} frameworks</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
     </div>
     <p class="lede" style="max-width:var(--measure)">
     These guides explain what each UAE security and data protection framework requires, who

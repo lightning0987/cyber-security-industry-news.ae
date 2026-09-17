@@ -222,6 +222,21 @@ accreditation.
 - **Run `npm run check:mobile` against a running preview.** Grid tracks declared `1fr` carry an
   implicit `min-width: auto`, so one wide table stretches the whole page into horizontal scroll.
   Use `minmax(0, 1fr)`. This defect shipped once and is invisible at desktop width.
+- **Navigation never depends on the sort script.** The mobile menu is a hidden checkbox plus a
+  label; the links stay in the markup whether it is open or not. The sector rail wraps onto a
+  second line from 48rem rather than scrolling, because a mouse cannot scroll it and half the
+  sectors stayed unreachable.
+- **A recirculation block picks one anchor for all its rows.** Thumbnails appear only when every
+  item has one, otherwise every row gets the number tile. A block where sectors carried photos and
+  groups did not read as broken. A bare number also always carries its unit.
+- **Nothing sits flush against a divider.** Stat cells, table cells and sidebar figures carry left
+  padding; content touching the rule to its left reads as clipped.
+- Footer is five fixed columns, not `auto-fit`. A sixth column wrapped onto a second row and landed
+  under columns of unequal height, which made the whole footer look collapsed.
+- A callout is there to stop the eye: body size or larger, generous padding, never the first block
+  of a page. The editorial summary above it is a standfirst and must not be styled as a callout.
+- Nested cards are a bug. `.prose` inside `.section` or `.page-context` is already on white and
+  drops its own border.
 - Layout is two-column: content plus a sticky sidebar (`Sidebar.astro`) on every page.
   The sidebar is a linking surface, not decoration: it carries roughly 30 internal links.
 - Headings are uppercase with tight tracking, matching the reference. Prose is not.

@@ -3,7 +3,7 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecircList from '../../components/RecircList.astro';
 import { ROUTES } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription } from '../../lib/seo.mjs';
+import { buildTitle, buildDescription, AUTHOR } from '../../lib/seo.mjs';
 import { CATEGORIES, MONTHS, sortNews, newsCard } from '../../lib/news.mjs';
 import { mostActive } from '../../lib/related.mjs';
 
@@ -27,6 +27,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: '
     <span>{all.length} reports</span>
     <span class="byline__sep">/</span>
     <span>{used.length} categories</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
     </div>
     <p class="lede" style="max-width:var(--measure)">
     Every report on this site is written from the same dated snapshot that drives the tracker.

@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ROUTES } from '../lib/routes.mjs';
-import { buildTitle, buildDescription } from '../lib/seo.mjs';
+import { buildTitle, buildDescription, AUTHOR } from '../lib/seo.mjs';
 import { ALL_PHOTOS } from '../lib/images.mjs';
 
 const title = buildTitle(`Image Credits: ${ALL_PHOTOS.length} Photographs Used`);
@@ -17,6 +17,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Credits', href
       <span class="byline__tag">Credits</span>
       <span class="byline__sep">/</span>
       <span>{ALL_PHOTOS.length} photographs</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
     </div>
     <p class="lede">
       Every photograph used on this site is listed below with its photographer and source.

@@ -15,6 +15,13 @@ export const name = 'glued-words';
 const MAX_WORD = 34;
 
 /** Написания, где заглавная внутри слова легитимна. */
+/**
+ * Адрес — не проза. Склейка, которую ловит этот гард, рождается из переноса
+ * строки в шаблоне и не может породить ни '@', ни '://'. Почтовый адрес длиннее
+ * порога по своей природе, и укорачивать его ради гарда было бы абсурдом.
+ */
+const ADDRESS = /@|:\/\//;
+
 const ALLOWED = /^(MedusaLocker|RansomHub|DragonForce|LockBit|FunkSec|KillSec|NightSpire|BQTLock|DarkVault|FLocker|BrainCipher|RansomHouse|aeCERT|eCommerce|iOS|macOS|JavaScript|GitHub|YouTube)$/;
 
 function textOf(root) {
@@ -42,6 +49,7 @@ export function run({ pages }) {
   for (const { path, doc } of pages) {
     if (!doc.body) continue;
     for (const word of textOf(doc.body).split(/\s+/)) {
+      if (ADDRESS.test(word)) continue;
       const w = word.replace(/^[^\p{L}]+|[^\p{L}]+$/gu, '');
       if (!w) continue;
 
@@ -50,8 +58,10 @@ export function run({ pages }) {
         failures.push(`${path}: аномально длинное слово, похоже на склейку — "${w.slice(0, 50)}"`);
         continue;
       }
-      // строчная, сразу заглавная: "servicesOrganisations"
-      if (/\p{Ll}\p{Lu}/u.test(w) && !ALLOWED.test(w) && !seen.has(w)) {
+      // строчная, сразу заглавная: "servicesOrganisations".
+      // Точка склейку не оправдывает: "project.It" — тот же дефект, просто
+      // после конца предложения. Он дожил до подвала на всех страницах.
+      if ((/\p{Ll}\p{Lu}/u.test(w) || /\p{Ll}\.\p{Lu}/u.test(w)) && !ALLOWED.test(w) && !seen.has(w)) {
         seen.add(w);
         failures.push(`${path}: заглавная внутри слова, похоже на склейку — "${w}"`);
       }

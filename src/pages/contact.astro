@@ -1,0 +1,118 @@
+---
+/**
+ * Контакты.
+ *
+ * Страница существует не ради вежливости. Сайт публикует цифры и просит
+ * читателя их проверять, а проверять нечем, если поправку некуда отправить.
+ * Второе назначение — канал возражения: сайт не называет пострадавших, но
+ * организация вправе обратиться, и адрес для этого обязан быть виден.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { attributedIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription, BRAND, AUTHOR, formatDate } from '../lib/seo.mjs';
+
+const EMAIL = 'contact@cyber-security-industry-news.ae';
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
+const title = buildTitle('Contact Marsad Cyber: Corrections and Data Questions');
+const description = buildDescription(
+  `How to reach Marsad Cyber about any of the ${attributedIncidents.length} figures it publishes. Corrections, method questions, removal requests and what this project will not accept.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Contact', href: ROUTES.contact() }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'page', slug: 'contact' }}>
+  <div class="page-head">
+    <h1>Contact</h1>
+    <div class="byline">
+      <span class="byline__tag">Contact</span>
+      <span class="byline__sep">/</span>
+      <span>Corrections and questions</span>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+    </div>
+    <p class="lede">
+      {BRAND} publishes <span class="num">{attributedIncidents.length}</span> attributed claims and
+      asks readers to check every one of them. That request only means something if there is
+      somewhere to send a correction.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>Write to us</h2></div>
+    <p style="max-width:var(--measure)">
+      One address covers everything below. There is no form on this site and no tracking script,
+      which is the same reason the pages carry no third-party requests at all.
+    </p>
+    <p style="margin-top:var(--s4)">
+      <a class="mono" href={`mailto:${EMAIL}`} style="font-size:var(--size-lead)">{EMAIL}</a>
+    </p>
+
+    <ul class="contact-list" style="margin-top:var(--s5)">
+      <li>
+        <span class="contact-what">Corrections</span>
+        <span class="contact-detail">
+          A figure that does not match the underlying data. Quote the page and the number. Every
+          published figure traces to a dated snapshot, so a correction can be checked against the
+          source rather than argued about. Corrections are made openly and the page states that it
+          changed.
+        </span>
+      </li>
+      <li>
+        <span class="contact-what">Method questions</span>
+        <span class="contact-detail">
+          How a record was classified, why a claim counts as attributed to the United Arab
+          Emirates, or why a figure moved between snapshots. The rules are set out in the{' '}
+          <a href={ROUTES.methodology()}>methodology</a>, and anything they fail to answer is worth
+          an email.
+        </span>
+      </li>
+      <li>
+        <span class="contact-what">Removal and objection</span>
+        <span class="contact-detail">
+          This site never names an affected organisation and never publishes leaked material. If
+          you believe a page identifies your organisation anyway, write and say which page. Such a
+          message is treated as urgent and the page comes down while it is checked.
+        </span>
+      </li>
+      <li>
+        <span class="contact-what">Press and research</span>
+        <span class="contact-detail">
+          Figures may be cited with a link to the page they appear on. The full dataset behind the
+          tracker is published as <a href="/data/incidents.json">JSON</a> and{' '}
+          <a href="/data/incidents.csv">CSV</a>, so a citation can be verified without asking.
+        </span>
+      </li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>What this project will not accept</h2></div>
+    <div class="callout">
+      <p class="callout__title">Do not send leaked material</p>
+      <p>
+        Do not send stolen data, victim names, breach samples or leak-site addresses. Material of
+        that kind is deleted unread. Republishing unlawfully obtained data is an offence under UAE
+        Federal Decree-Law No. 34 of 2021, and the rule holds regardless of who sends it or why.
+      </p>
+    </div>
+    <p style="max-width:var(--measure);margin-top:var(--s5)">
+      This project also does not sell services. It does not perform security assessments, does not
+      certify organisations against any framework, and holds no accreditation from any UAE
+      authority. The full set of rules governing what it publishes is in the{' '}
+      <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Who receives the message</h2></div>
+    <p style="max-width:var(--measure)">
+      {AUTHOR} reads the address. {BRAND} is an independent research project and is not affiliated
+      with, endorsed by, or acting on behalf of any vendor, regulator or government body of the
+      United Arab Emirates. More about the project is on the{' '}
+      <a href={ROUTES.about()}>about page</a>, and the sources behind the numbers are listed under{' '}
+      <a href={ROUTES.dataSources()}>data sources</a>.
+    </p>
+  </section>
+</BaseLayout>

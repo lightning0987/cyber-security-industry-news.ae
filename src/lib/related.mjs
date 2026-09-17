@@ -25,17 +25,17 @@ const PAGED = groupsWithPages(inc);
 const pagedSet = new Set(PAGED.map((g) => g.slug));
 
 const sectorCard = (s) => ({
-  href: ROUTES.sector(s.slug), title: s.label, figure: s.count,
+  href: ROUTES.sector(s.slug), title: s.label, figure: s.count, figureLabel: 'claims',
   meta: 'Sector', kind: 'sector', slug: s.slug,
   thumb: sectorPhoto(s.slug)?.thumb ?? null,
   thumbAlt: sectorPhoto(s.slug)?.alt ?? null,
 });
 const periodCard = (p) => ({
-  href: ROUTES.period(p.slug), title: p.label, figure: p.count,
+  href: ROUTES.period(p.slug), title: p.label, figure: p.count, figureLabel: 'claims',
   meta: 'Period', kind: 'period', slug: p.slug,
 });
 const groupCard = (g) => ({
-  href: ROUTES.group(g.slug), title: g.label, figure: g.count,
+  href: ROUTES.group(g.slug), title: g.label, figure: g.count, figureLabel: 'claims',
   meta: 'Ransomware group', kind: 'group', slug: g.slug,
 });
 

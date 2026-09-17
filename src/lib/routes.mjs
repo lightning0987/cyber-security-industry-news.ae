@@ -21,6 +21,8 @@ export const ROUTES = {
   editorialPolicy: () => '/editorial-policy/',
   dataSources: () => '/data-sources/',
   sitemap: () => '/sitemap/',
+  contact: () => '/contact/',
+  credits: () => '/credits/',
 };
 
 /**

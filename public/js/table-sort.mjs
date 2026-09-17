@@ -23,6 +23,9 @@ function makeSortable(table) {
 
   [...head.cells].forEach((th, index) => {
     if (!th.textContent.trim()) return;
+    // Колонка без текстовых значений сортироваться не может: в ячейке
+    // полоска доли, а не число. Значок сортировки над ней — чистый шум.
+    if (!(body.rows[0]?.children[index]?.textContent ?? '').trim()) return;
     th.setAttribute('role', 'columnheader');
     th.tabIndex = 0;
     th.setAttribute('aria-sort', 'none');

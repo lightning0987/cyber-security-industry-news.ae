@@ -8,7 +8,7 @@ import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { byGroup, groupsWithPages, groupsWithoutPages, bySector } from '../../lib/aggregate.mjs';
 import { MIN_INCIDENTS_FOR_PAGE } from '../../lib/taxonomy/groups.mjs';
 import { ROUTES } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription, datasetSchema } from '../../lib/seo.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, AUTHOR } from '../../lib/seo.mjs';
 
 const inc = attributedIncidents;
 const groups = byGroup(inc);
@@ -42,6 +42,14 @@ const crumbs = [
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={{ kind: 'hub', slug: 'groups' }}>
   <div class="page-head">
     <h1>Ransomware Groups Targeting the UAE</h1>
+    <div class="byline">
+      <span class="byline__tag">Groups</span>
+      <span class="byline__sep">/</span>
+      <span>{groups.length} groups recorded</span>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{formatDate(snapshotMeta.fetchedAt)}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+    </div>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
     <strong class="num">{groups.length}</strong> distinct ransomware groups have claimed at least

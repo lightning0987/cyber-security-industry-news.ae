@@ -8,7 +8,7 @@ import TimelineChart from '../../components/TimelineChart.astro';
 import { allIncidents, attributedIncidents, unverifiedIncidents, unclassifiedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { bySector, byPeriod, byGroup, groupsWithPages, top } from '../../lib/aggregate.mjs';
 import { ROUTES, PERIODS } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription, datasetSchema, formatDate } from '../../lib/seo.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, AUTHOR } from '../../lib/seo.mjs';
 
 const inc = attributedIncidents;
 const sectors = bySector(inc);
@@ -47,6 +47,14 @@ const crumbs = [
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={{ kind: 'hub', slug: 'tracker' }}>
   <div class="page-head">
     <h1>UAE Ransomware Attack Tracker</h1>
+    <div class="byline">
+      <span class="byline__tag">Tracker</span>
+      <span class="byline__sep">/</span>
+      <span>{total} attributed claims</span>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+    </div>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
     Ransomware groups have claimed <strong class="num">{total}</strong> organisations in the

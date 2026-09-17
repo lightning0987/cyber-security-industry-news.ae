@@ -6,7 +6,7 @@ import DataProvenance from '../components/DataProvenance.astro';
 import { attributedIncidents, allIncidents, snapshotMeta } from '../lib/incidents.mjs';
 import { bySector, byPeriod, byGroup, groupsWithPages, top } from '../lib/aggregate.mjs';
 import { ROUTES, PERIODS } from '../lib/routes.mjs';
-import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
+import { buildTitle, buildDescription, formatDate, AUTHOR } from '../lib/seo.mjs';
 import RecircList from '../components/RecircList.astro';
 import { latestActivity } from '../lib/related.mjs';
 import { GUIDES } from '../lib/guides.mjs';
@@ -43,6 +43,7 @@ const description = buildDescription(
       <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
       <span class="byline__sep">/</span>
       <span>{snapshotMeta.recordCount} records screened</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
     </div>
     <p class="lede">
     Marsad Cyber tracks ransomware activity against organisations in the United Arab Emirates.
@@ -120,6 +121,7 @@ const description = buildDescription(
       href: ROUTES.guide(g.slug),
       title: g.standard,
       figure: String(i + 1).padStart(2, '0'),
+      figureLabel: 'guide',
       meta: 'Guide',
       thumb: guideThumbs[g.slug]?.thumb ?? null,
       thumbAlt: guideThumbs[g.slug]?.alt ?? null,
@@ -130,17 +132,59 @@ const description = buildDescription(
   <RecircList title="Latest activity" items={latest} />
 
   <section class="section">
-    <div class="section__head"><h2>How this data is built</h2></div>
+    <div class="section__head">
+      <h2><a href={ROUTES.about()} style="text-decoration:none">About Marsad Cyber</a></h2>
+      <a class="section__more" href={ROUTES.about()}>About the project</a>
+    </div>
+    <p class="lede" style="max-width:var(--measure)">
+      Marsad is the Arabic word for observatory, and that is what this is: an observation post
+      on ransomware activity against organisations in the United Arab Emirates.
+    </p>
+    <p style="max-width:var(--measure);margin-top:var(--s4)">
+      Regional figures on cyber incidents are usually quoted without a source, a date or a
+      method, and rarely separate an attacker's claim from a confirmed breach. This project
+      publishes a narrow set of numbers with all three attached, and publishes the filtering
+      rules alongside them so that any figure here can be argued with.
+    </p>
+
+    <div class="pillars" style="margin-top:var(--s5)">
+      <div class="pillar">
+        <span class="pillar__num">01</span>
+        <h3>Every figure traces to a snapshot</h3>
+        <p>
+          Numbers come from dated snapshots held in version control. Nothing on this site is
+          estimated, rounded for effect or written by hand.
+        </p>
+      </div>
+      <div class="pillar">
+        <span class="pillar__num">02</span>
+        <h3>The filter is published</h3>
+        <p>
+          The upstream feed returned <span class="num">{allIncidents.length}</span> records tagged
+          for the UAE. Only <span class="num">{inc.length}</span> carry a verifiable UAE link, and
+          only those reach the figures above.
+        </p>
+      </div>
+      <div class="pillar">
+        <span class="pillar__num">03</span>
+        <h3>No affected organisation is named</h3>
+        <p>
+          This site never identifies a victim, republishes leaked material or hosts a leak-site
+          address. That rule is enforced in the build, not in the style guide.
+        </p>
+      </div>
+    </div>
+
     <div class="callout" style="max-width:var(--measure)">
+      <p class="callout__title">Where to look next</p>
       <p>
-        The upstream feed returned <span class="num">{allIncidents.length}</span> records tagged
-        for the United Arab Emirates. Only <span class="num">{inc.length}</span> of them carry a
-        verifiable UAE link, and only those reach the figures above.{' '}
-        <a href={ROUTES.methodology()}>Read the method</a> or see{' '}
-        <a href={ROUTES.dataSources()}>where the data comes from</a>. The rules governing what this
-        site will and will not publish are set out in the{' '}
-        <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+        <a href={ROUTES.methodology()}>How the data is collected and filtered</a>,{' '}
+        <a href={ROUTES.dataSources()}>where it comes from</a>, and the{' '}
+        <a href={ROUTES.editorialPolicy()}>rules governing what this site will and will not
+        publish</a>. Questions and corrections go through the{' '}
+        <a href={ROUTES.contact()}>contact page</a>.
       </p>
     </div>
   </section>
+
 </BaseLayout>
