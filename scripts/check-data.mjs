@@ -217,6 +217,27 @@ function checkBriefsCarryNoVictimData() {
   }
 }
 
+/**
+ * Слаг материала не имеет права совпасть со статическим сегментом раздела.
+ *
+ * Материалы живут на /news/<slug>/, а рубрики и архивы — на /news/category/...
+ * и /news/archive/.... Слаг "category" или "archive" столкнулся бы с ними
+ * и увёл бы целую ветку раздела. Astro такое не ловит: оба маршрута соберутся,
+ * а победит тот, что записался последним.
+ */
+const RESERVED_NEWS_SLUGS = new Set(['category', 'archive', 'index']);
+
+function checkNewsSlugsDoNotCollide() {
+  const dir = resolve(process.cwd(), 'src/content/news');
+  if (!existsSync(dir)) return;
+  for (const file of readdirSync(dir).filter((f) => f.endsWith('.md'))) {
+    const slug = file.replace(/\.md$/, '');
+    if (RESERVED_NEWS_SLUGS.has(slug)) {
+      fail(`src/content/news/${file}: слаг "${slug}" занят служебным сегментом раздела /news/.`);
+    }
+  }
+}
+
 const snap = checkSnapshot();
 if (snap) {
   checkFingerprints(snap);
@@ -227,6 +248,7 @@ checkForbiddenTerms();
 checkGuidesRegistry();
 checkPrivateIsolation();
 checkBriefsCarryNoVictimData();
+checkNewsSlugsDoNotCollide();
 
 console.log('check:data');
 for (const n of notes) console.log(`  · ${n}`);

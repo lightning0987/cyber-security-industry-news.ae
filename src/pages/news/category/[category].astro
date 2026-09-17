@@ -1,11 +1,11 @@
 ---
 import { getCollection } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import RecircList from '../../components/RecircList.astro';
-import { ROUTES } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription, AUTHOR } from '../../lib/seo.mjs';
-import { CATEGORIES, MONTHS, sortNews, newsCard } from '../../lib/news.mjs';
-import { mostActive } from '../../lib/related.mjs';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RecircList from '../../../components/RecircList.astro';
+import { ROUTES } from '../../../lib/routes.mjs';
+import { buildTitle, buildDescription, AUTHOR } from '../../../lib/seo.mjs';
+import { CATEGORIES, MONTHS, sortNews, newsCard } from '../../../lib/news.mjs';
+import { mostActive } from '../../../lib/related.mjs';
 
 export async function getStaticPaths() {
   const all = await getCollection('news');
@@ -24,8 +24,8 @@ const title = buildTitle(`UAE ${cat.label} News and Data: ${entries.length} Repo
 const description = buildDescription(`${cat.blurb} ${entries.length} reports published.`);
 const crumbs = [
   { label: 'Home', href: ROUTES.home() },
-  { label: 'News', href: '/news/' },
-  { label: cat.label, href: `/category/${category}/` },
+  { label: 'News', href: ROUTES.news() },
+  { label: cat.label, href: ROUTES.category(category) },
 ];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: category }}>
@@ -45,7 +45,7 @@ const crumbs = [
 
   <nav class="chip-rail" aria-label="Categories" style="border-bottom:0;margin-bottom:var(--s4)">
     {used.map((c) => (
-      <a class="chip" href={`/category/${c}/`} aria-current={c === category ? 'page' : undefined}>
+      <a class="chip" href={ROUTES.category(c)} aria-current={c === category ? 'page' : undefined}>
         {CATEGORIES[c].label}
       </a>
     ))}
@@ -57,7 +57,7 @@ const crumbs = [
     <ul class="stack" style="margin-top:var(--s3)">
       {[...new Set(entries.map((e) => e.data.published.slice(0, 7)))].sort().reverse().map((m) => {
         const [y, mo] = m.split('-');
-        return <li><a href={`/news/${y}/${mo}/`}>{MONTHS[Number(mo) - 1]} {y}</a></li>;
+        return <li><a href={ROUTES.archive(y, mo)}>{MONTHS[Number(mo) - 1]} {y}</a></li>;
       })}
     </ul>
   </section>

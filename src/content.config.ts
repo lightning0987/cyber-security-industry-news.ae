@@ -48,7 +48,7 @@ const guides = defineCollection({
  * Новостные материалы (T1 и T2).
  *
  * URL плоские: /<slug>/. Рубрика и дата живут во frontmatter и формируют
- * /category/<...>/ и /news/<year>/<month>/ программно.
+ * /news/category/<...>/ и /news/archive/<year>/<month>/ программно.
  */
 const news = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/news' }),

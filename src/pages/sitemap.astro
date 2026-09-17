@@ -55,7 +55,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href
     <ul class="stack">
       <li><a href={ROUTES.news()}>All reports</a></li>
       {NEWS_CATEGORIES.map((c) => <li><a href={ROUTES.category(c.slug)}>{c.label}</a></li>)}
-      {news.map((n) => <li><a href={`/${n.id}/`}>{n.data.h1}</a></li>)}
+      {news.map((n) => <li><a href={ROUTES.article(n.id)}>{n.data.h1}</a></li>)}
     </ul>
   </section>
 

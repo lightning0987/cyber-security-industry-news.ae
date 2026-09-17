@@ -200,8 +200,20 @@ Regenerate briefs in the same commit as the snapshot. `fetch-data.yml` does this
 
 ## 5a. News (T1 and T2)
 
-Articles live in `src/content/news/*.md` at flat URLs `/<id>/`. Category and date live in
-frontmatter and drive `/category/<c>/` and `/news/<year>/<month>/` programmatically.
+Articles live in `src/content/news/*.md` and publish at `/news/<slug>/`. Category and date live in
+frontmatter and drive `/news/category/<c>/` and `/news/archive/<year>/<month>/` programmatically.
+
+**Every page sits under its section. Nothing editorial lives at the root.** Articles were flat
+`/<slug>/` at first, which put them in the same namespace as `/about/` and `/contact/`: the section
+could not be segmented in analytics or in search reports, and the hierarchy was invisible to a
+crawler. Only the site's own service pages belong at the root.
+
+**The category is not in the path.** An article's category can be reassigned; its URL may not
+change after publication. The section prefix already gives the segmentation, so putting the
+category in the path would buy nothing and cost a redirect every time an editor changes their mind.
+
+`category` and `archive` are reserved article slugs and `check-data` fails on them. Astro would
+build both routes without complaining and the last one written would win.
 
 Categories are created only where articles exist. `src/lib/news-registry.mjs` duplicates the
 active categories so `nav.mjs` can stay synchronous.

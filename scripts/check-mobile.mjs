@@ -21,7 +21,27 @@ const puppeteer = require('/Users/vladimir/.npm-global/lib/node_modules/puppetee
 const BASE = process.argv[2] ?? 'http://localhost:4321';
 const WIDTHS = [360, 390, 768];
 
-/** По одной странице каждого типа: полный обход тут избыточен. */
+/**
+ * По одной странице каждого типа: полный обход тут избыточен.
+ *
+ * Типы перечислены явно, и НЕНАЙДЕННЫЙ ТИП — ЭТО ОШИБКА. Раньше промах шаблона
+ * молча выпадал через filter(Boolean): после переноса материалов на /news/
+ * проверка стала обходить восемь страниц вместо девяти и никому об этом не
+ * сказала. Проверка, которая тихо уменьшает охват, хуже отсутствующей.
+ */
+const PAGE_TYPES = [
+  ['главная', /^\/$/],
+  ['хаб трекера', /^\/uae-ransomware-tracker\/$/],
+  ['сектор или период', /^\/uae-ransomware-tracker\/[a-z0-9]/],
+  ['профиль группы', /^\/ransomware-groups-targeting-uae\/[a-z0-9]/],
+  ['гайд', /^\/guides\/[a-z]/],
+  ['хаб новостей', /^\/news\/$/],
+  ['материал', /^\/news\/(?!category\/|archive\/)[a-z0-9-]+\/$/],
+  ['рубрика', /^\/news\/category\/[a-z]/],
+  ['архив месяца', /^\/news\/archive\/\d{4}\/\d{2}\/$/],
+  ['методология', /^\/methodology\/$/],
+];
+
 function samplePaths() {
   const dist = 'dist';
   const found = [];
@@ -29,22 +49,25 @@ function samplePaths() {
     for (const e of readdirSync(dir)) {
       const full = join(dir, e);
       if (statSync(full).isDirectory()) walk(full);
-      else if (e === 'index.html') found.push(`/${relative(dist, dir)}/`.replace(/^\/\.\//, '/'));
+      // Корень даёт пустой relative и превратился бы в "//"
+      else if (e === 'index.html') found.push(`/${relative(dist, dir)}/`.replace(/\/+/g, '/'));
     }
   };
   walk(dist);
-  const pick = (re) => found.find((p) => re.test(p));
-  return [...new Set([
-    '/',
-    pick(/^\/uae-ransomware-tracker\/$/),
-    pick(/^\/uae-ransomware-tracker\/[a-z]/),
-    pick(/^\/ransomware-groups-targeting-uae\/[a-z]/),
-    pick(/^\/guides\/[a-z]/),
-    pick(/^\/news\/$/),
-    pick(/^\/category\/[a-z]/),
-    found.find((p) => /^\/[a-z0-9-]+\/$/.test(p) && !/(guides|news|category|about|methodology|sitemap|data-sources|editorial-policy|uae-ransomware-tracker|ransomware-groups)/.test(p)),
-    '/methodology/',
-  ].filter(Boolean))];
+
+  const paths = [];
+  const missing = [];
+  for (const [name, re] of PAGE_TYPES) {
+    const hit = found.find((p) => re.test(p));
+    if (hit) paths.push(hit);
+    else missing.push(name);
+  }
+  if (missing.length > 0) {
+    console.error(`✖ Типов страниц не найдено в dist/: ${missing.join(', ')}.`);
+    console.error('  Либо структура URL изменилась, либо страницы не собрались. Список типов в PAGE_TYPES.');
+    process.exit(1);
+  }
+  return [...new Set(paths)];
 }
 
 const browser = await puppeteer.launch({ headless: 'new' });

@@ -15,7 +15,7 @@ const title = buildTitle(`UAE Cyber Threat News: ${all.length} Reports Published
 const description = buildDescription(
   `${all.length} reports on ransomware activity, sector shifts and regulation affecting organisations in the United Arab Emirates, drawn from leak-site monitoring.`,
 );
-const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: '/news/' }];
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: ROUTES.news() }];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: 'hub' }}>
   <div class="page-head">
@@ -38,7 +38,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: '
 
   <nav class="chip-rail" aria-label="Categories" style="border-bottom:0;margin-bottom:var(--s4)">
     {used.map((c) => (
-      <a class="chip" href={`/category/${c}/`}>{CATEGORIES[c].label}</a>
+      <a class="chip" href={ROUTES.category(c)}>{CATEGORIES[c].label}</a>
     ))}
   </nav>
 
@@ -49,7 +49,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: '
     <ul class="stack" style="margin-top:var(--s3)">
       {months.map((m) => {
         const [y, mo] = m.split('-');
-        return <li><a href={`/news/${y}/${mo}/`}>{MONTHS[Number(mo) - 1]} {y}</a></li>;
+        return <li><a href={ROUTES.archive(y, mo)}>{MONTHS[Number(mo) - 1]} {y}</a></li>;
       })}
     </ul>
   </section>

@@ -1,18 +1,23 @@
 ---
 /**
- * Страница материала. URL плоский: /<slug>/ по разделу 5 ТЗ.
- * Статические маршруты (/about/, /guides/ и прочие) имеют приоритет в Astro,
- * а getStaticPaths отдаёт только реальные слаги, поэтому пересечений нет.
+ * Страница материала: /news/<slug>/.
+ *
+ * Раздел обязан быть в пути. Плоский /<slug>/ ставил статью в один ряд со
+ * служебными страницами: сегментировать по разделу нельзя ни в аналитике,
+ * ни в отчётах поиска, и краулеру иерархия тоже не видна.
+ *
+ * Рубрика в путь НЕ входит. Рубрику материала можно переназначить, а URL
+ * после публикации меняться не должен.
  */
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../layouts/BaseLayout.astro';
-import RecircList from '../components/RecircList.astro';
-import Hero from '../components/Hero.astro';
-import { ROUTES } from '../lib/routes.mjs';
-import { formatDayLong, AUTHOR } from '../lib/seo.mjs';
-import { CATEGORIES, relatedNews, sortNews, newsCard } from '../lib/news.mjs';
-import { mostActive } from '../lib/related.mjs';
-import { snapshotMeta } from '../lib/incidents.mjs';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecircList from '../../components/RecircList.astro';
+import Hero from '../../components/Hero.astro';
+import { ROUTES } from '../../lib/routes.mjs';
+import { formatDayLong, AUTHOR } from '../../lib/seo.mjs';
+import { CATEGORIES, relatedNews, sortNews, newsCard } from '../../lib/news.mjs';
+import { mostActive } from '../../lib/related.mjs';
+import { snapshotMeta } from '../../lib/incidents.mjs';
 
 export async function getStaticPaths() {
   const all = await getCollection('news');
@@ -30,8 +35,9 @@ const sameCategory = sortNews(all.filter((x) => x.id !== entry.id && x.data.cate
 
 const crumbs = [
   { label: 'Home', href: ROUTES.home() },
-  { label: 'News', href: '/news/' },
-  { label: cat.label, href: `/category/${d.category}/` },
+  { label: 'News', href: ROUTES.news() },
+  { label: cat.label, href: ROUTES.category(d.category) },
+  { label: d.h1, href: ROUTES.article(entry.id) },
 ];
 
 const schemas = [{
@@ -57,11 +63,11 @@ const schemas = [{
   <div class="page-head">
     <h1>{d.h1}</h1>
     <div class="byline">
-    <a class="byline__tag" href={`/category/${d.category}/`}>{cat.label}</a>
+    <a class="byline__tag" href={ROUTES.category(d.category)}>{cat.label}</a>
     <span class="byline__sep">/</span>
     <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     <span class="byline__sep">/</span>
-    <a href={`/news/${d.published.slice(0, 4)}/${d.published.slice(5, 7)}/`}>
+    <a href={ROUTES.archive(d.published.slice(0, 4), d.published.slice(5, 7))}>
       <time datetime={d.published}>{formatDayLong(d.published)}</time>
     </a>
     <span class="byline__sep">/</span>
@@ -93,7 +99,7 @@ const schemas = [{
     </ul>
   </section>
 
-  <RecircList title="Related coverage" items={related} more={{ href: '/news/' }} />
-  <RecircList title={`More from ${cat.label}`} items={sameCategory} more={{ href: `/category/${d.category}/` }} />
+  <RecircList title="Related coverage" items={related} more={{ href: ROUTES.news() }} />
+  <RecircList title={`More from ${cat.label}`} items={sameCategory} more={{ href: ROUTES.category(d.category) }} />
   <RecircList title="Most targeted sectors" items={mostActive(5)} />
 </BaseLayout>

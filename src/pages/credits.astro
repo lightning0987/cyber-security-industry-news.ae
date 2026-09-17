@@ -8,7 +8,7 @@ const title = buildTitle(`Image Credits: ${ALL_PHOTOS.length} Photographs Used`)
 const description = buildDescription(
   `Every photograph on Marsad Cyber, its photographer and its licence. All images are served from this domain rather than a third-party host.`,
 );
-const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Credits', href: '/credits/' }];
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Credits', href: ROUTES.credits() }];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'credits', slug: 'credits' }}>
   <div class="page-head">

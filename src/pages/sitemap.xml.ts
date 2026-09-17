@@ -33,12 +33,12 @@ export const GET: APIRoute = async ({ site }) => {
   add(ROUTES.guides(), dataDate, '0.7');
 
   const news = await getCollection('news');
-  for (const n of news) add(`/${n.id}/`, n.data.published, '0.7');
+  for (const n of news) add(ROUTES.article(n.id), n.data.published, '0.7');
   add(ROUTES.news(), dataDate, '0.7');
   for (const c of NEWS_CATEGORIES) add(ROUTES.category(c.slug), dataDate, '0.6');
   for (const key of new Set(news.map((n) => n.data.published.slice(0, 7)))) {
     const [y, m] = key.split('-');
-    add(`/news/${y}/${m}/`, dataDate, '0.4');
+    add(ROUTES.archive(y, m), dataDate, '0.4');
   }
 
   for (const p of ['/about/', '/methodology/', '/data-sources/', '/editorial-policy/', '/credits/', '/sitemap/', '/contact/']) {

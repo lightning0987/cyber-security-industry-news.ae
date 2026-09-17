@@ -13,7 +13,17 @@ export const ROUTES = {
   groupsHub: () => '/ransomware-groups-targeting-uae/',
   guides: () => '/guides/',
   news: () => '/news/',
-  category: (slug) => `/category/${slug}/`,
+  /**
+   * Материалы лежат ПОД разделом, а не в корне.
+   *
+   * Плоский /<slug>/ ставит статью в один ряд с /about/ и /contact/: раздел
+   * не виден ни в отчёте по страницам, ни краулеру, и сегментировать трафик
+   * по нему нельзя. Рубрика в путь не берётся намеренно: рубрику материала
+   * можно поменять, а URL меняться при этом не должен.
+   */
+  article: (slug) => `/news/${slug}/`,
+  category: (slug) => `/news/category/${slug}/`,
+  archive: (year, month) => `/news/archive/${year}/${month}/`,
   guide: (slug) => `/guides/${slug}/`,
   group: (slug) => `/ransomware-groups-targeting-uae/${slug}/`,
   about: () => '/about/',
