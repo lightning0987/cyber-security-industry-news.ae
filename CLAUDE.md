@@ -58,6 +58,13 @@ No paid API is involved. Data refreshes itself; articles are written by hand.
   deploy does not happen, and the site keeps serving the last correct version.
 - That red run is the notification. It fires when there is something to fix, which a calendar
   reminder cannot do. Fix the sentence, push, deploy resumes.
+- `npm run events` is the other half of the loop. It diffs the current snapshot against the last
+  version in git history that differs from it, and prints what a human needs: which figures moved
+  and which file owns each one, then new claims (T1 leads), a group appearing in the UAE set for
+  the first time and sector spikes (T2 leads). A spike is computed for both snapshots and reported
+  only when it is new — a spike is a property of the data, not of the change, so measuring one
+  snapshot would put the same lead in every run until people stopped reading it. `--against-file`
+  compares against a saved snapshot, `--json` for machine use.
 - `health-check.yml` runs every six hours and only reports. The build is offline, so a dead source
   cannot break a deploy — which is exactly why it has to be watched separately, or the first sign
   would be a snapshot that has not moved in a week.

@@ -20,7 +20,8 @@
     "briefs": "node scripts/export-content-briefs.mjs",
     "lint:content": "node scripts/lint-content.mjs",
     "check:mobile": "node scripts/check-mobile.mjs",
-    "check:health": "node scripts/health-check.mjs"
+    "check:health": "node scripts/health-check.mjs",
+    "events": "node scripts/events.mjs"
   },
   "dependencies": {
     "astro": "^7.3.2",
