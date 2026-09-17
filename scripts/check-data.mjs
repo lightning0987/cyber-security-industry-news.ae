@@ -12,6 +12,7 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve } from 'node:path';
+import { getSalt, hashValue, ngrams, saltId } from './lib/fingerprint.mjs';
 
 const failures = [];
 const notes = [];
@@ -171,6 +172,51 @@ function checkPrivateIsolation() {
   } catch { /* репозиторий может быть без коммитов */ }
 }
 
+/**
+ * Брифы не должны нести имён пострадавших.
+ *
+ * До этой правки брифы лежали в гитигноре и вопрос не стоял. Теперь они
+ * коммитятся в публичный репозиторий, а значит попадают под то же правило,
+ * что и сама выдача. Генератор читает только src/lib/incidents.mjs, где
+ * запрещённых полей уже нет, но полагаться на это нельзя: проверка стоит
+ * ровно для того дня, когда генератор перепишут.
+ */
+function checkBriefsCarryNoVictimData() {
+  const dir = resolve(process.cwd(), 'briefs');
+  if (!existsSync(dir)) {
+    fail('Каталог briefs/ отсутствует. Сверять числа в редакционном тексте не с чем: npm run briefs.');
+    return;
+  }
+  const fpPath = resolve(process.cwd(), 'src/data/ransomware-live-ae.fingerprints.json');
+  if (!existsSync(fpPath)) return;
+
+  const file = JSON.parse(readFileSync(fpPath, 'utf8'));
+  let salt;
+  try {
+    salt = getSalt();
+  } catch (error) {
+    fail(`Соль недоступна, брифы проверить нечем: ${error.message}`);
+    return;
+  }
+  if (saltId(salt) !== file.salt_id) {
+    fail('salt_id отпечатков не совпадает с солью: проверка брифов не нашла бы ничего и молча прошла бы.');
+    return;
+  }
+
+  const hashes = new Set(file.fingerprints);
+  const names = readdirSync(dir).filter((f) => f.endsWith('.json'));
+  notes.push(`брифов проверено: ${names.length}, отпечатков в наборе: ${hashes.size}`);
+  for (const name of names) {
+    const text = readFileSync(resolve(dir, name), 'utf8');
+    for (const gram of ngrams(text, 12)) {
+      if (hashes.has(hashValue(gram, salt))) {
+        fail(`briefs/${name}: совпадение с отпечатком пострадавшего — "${gram.slice(0, 50)}"`);
+        break;
+      }
+    }
+  }
+}
+
 const snap = checkSnapshot();
 if (snap) {
   checkFingerprints(snap);
@@ -180,6 +226,7 @@ checkSectorSlugsNotYearLike();
 checkForbiddenTerms();
 checkGuidesRegistry();
 checkPrivateIsolation();
+checkBriefsCarryNoVictimData();
 
 console.log('check:data');
 for (const n of notes) console.log(`  · ${n}`);

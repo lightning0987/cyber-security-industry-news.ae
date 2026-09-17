@@ -1,0 +1,23 @@
+name: Source health
+
+# Сайт собирается офлайн из закоммиченного снапшота, поэтому упавший источник
+# деплой не ломает. Именно поэтому о нём нужно узнавать отдельно: иначе первым
+# признаком станет снапшот, который не менялся неделю.
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/health-check.mjs

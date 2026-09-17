@@ -1,0 +1,87 @@
+name: Refresh data
+
+# Раз в сутки. Обновление данных не требует человека: это загрузка снапшота,
+# пересборка брифов и коммит. Всё это бесплатно на любом расписании.
+#
+# Генерация текстов сюда НЕ входит и платного API не использует. Материалы
+# пишутся вручную, поэтому единственное, что может разойтись после обновления,
+# это цифры в редакционных абзацах. Их ловит lint:content, и ловит жёстко:
+# сборка падает, деплой не проходит, на сайте остаётся предыдущая корректная
+# версия. Красный прогон здесь и есть сигнал «зайди и поправь предложение».
+
+on:
+  schedule:
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Соль обязана совпадать с той, из которой посчитаны закоммиченные
+      # отпечатки. При расхождении salt_id гард утечки не нашёл бы ни одного
+      # совпадения и молча пропустил бы всё, поэтому проверка стоит до загрузки.
+      - name: Check the salt is present
+        env:
+          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
+        run: |
+          if [ -z "$VICTIM_HASH_SALT" ]; then
+            echo "::error::Секрет VICTIM_HASH_SALT не задан. Отпечатки посчитались бы другой солью."
+            exit 1
+          fi
+
+      # Лоадер сам откажется записать подозрительный снапшот: падение числа
+      # записей больше чем на 10% или исчезновение сектора либо группы
+      # останавливают запись. Обрезанный ответ выглядит как успех и молча
+      # удалил бы страницы, поэтому эта защита важнее ретраев.
+      - name: Fetch snapshot
+        env:
+          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
+        run: npm run fetch:all
+
+      # Брифы коммитятся вместе с данными. Если бы они отставали, сверка чисел
+      # подтверждала бы устаревшие цифры с той же уверенностью, что и свежие.
+      - name: Rebuild briefs
+        env:
+          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
+        run: npm run briefs
+
+      - name: Commit if the data moved
+        id: commit
+        run: |
+          git config user.name  "marsad-data-bot"
+          git config user.email "noreply@users.noreply.github.com"
+          git add src/data briefs
+          if git diff --cached --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "Данные не изменились, коммита нет."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            git commit -m "Data refresh $(date -u +%Y-%m-%d)"
+            git push
+          fi
+
+      # Проверка идёт ПОСЛЕ коммита намеренно. Данные — это факт, и они должны
+      # попасть в репозиторий. Если после обновления редакционный текст разошёлся
+      # с цифрами, падает этот шаг, падает деплой, и сайт остаётся на прошлой
+      # версии до тех пор, пока человек не поправит предложение.
+      - name: Verify the site still builds against the new data
+        env:
+          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
+        run: npm run build

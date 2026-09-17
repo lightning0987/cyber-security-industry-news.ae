@@ -48,6 +48,20 @@ publish a leak while looking green.
 `fetch:*` is never part of `build`. The build is fully offline — that is why snapshots are
 committed. A flaky upstream cannot break a deploy.
 
+## 1a. How the site stays current
+
+No paid API is involved. Data refreshes itself; articles are written by hand.
+
+- `fetch-data.yml` runs daily at 02:00 UTC: fetch, rebuild briefs, commit both, then build.
+- The build step runs **after** the commit on purpose. Data is fact and belongs in the repository.
+  If the new numbers no longer match a sentence in `src/content/pages/`, `lint:content` fails, the
+  deploy does not happen, and the site keeps serving the last correct version.
+- That red run is the notification. It fires when there is something to fix, which a calendar
+  reminder cannot do. Fix the sentence, push, deploy resumes.
+- `health-check.yml` runs every six hours and only reports. The build is offline, so a dead source
+  cannot break a deploy — which is exactly why it has to be watched separately, or the first sign
+  would be a snapshot that has not moved in a week.
+
 ---
 
 ## 2. The salt
@@ -132,8 +146,19 @@ the matching brief. Facts here come from an API with a known schema, so the corr
 is reconciliation against the source record, not a web search. An invented figure is Critical
 and blocks publication.
 
-Brief files are regenerated from data and gitignored. Regenerate after every snapshot refresh,
-because the numbers move.
+**Brief files are committed, and that is deliberate.** While they were gitignored the number check
+worked only on the author's machine: a clean CI checkout had no briefs, the check degraded from
+Critical to an optional warning, and a figure that had drifted away from the data would have
+shipped silently. A brief holds the same aggregates the snapshot already publishes, nothing from
+an affected organisation, and `check-data` proves that on every build by scanning every brief
+against the fingerprint set.
+
+Two Critical rules follow. A missing brief fails the build, because a file whose numbers cannot be
+checked is a file that was not checked. And a brief whose `data_as_of` differs from the snapshot's
+`fetched_at` fails too: a stale brief would confirm a stale figure with exactly the same confidence
+as a current one.
+
+Regenerate briefs in the same commit as the snapshot. `fetch-data.yml` does this automatically.
 
 ---
 

@@ -18,6 +18,23 @@ import { resolve } from 'node:path';
 const BRIEFS = resolve(process.cwd(), 'briefs');
 
 /**
+ * Дата снапшота, из которого собраны брифы.
+ *
+ * Брифы КОММИТЯТСЯ, и это не украшение репозитория. Пока они лежали в
+ * гитигноре, сверка чисел работала только на машине автора: в CI брифов
+ * не было, проверка вырождалась в необязательное предупреждение, и
+ * расхождение текста с данными уехало бы в прод молча. Защита выглядела
+ * бы зелёной — ровно тот отказ, против которого построен весь проект.
+ *
+ * Отсюда второе требование: бриф обязан быть собран из ТЕКУЩЕГО снапшота.
+ * Устаревший бриф подтвердил бы устаревшее число с той же уверенностью.
+ */
+const SNAPSHOT = JSON.parse(
+  readFileSync(resolve(process.cwd(), 'src/data/ransomware-live-ae.json'), 'utf8'),
+);
+const SNAPSHOT_AS_OF = SNAPSHOT.fetched_at ?? SNAPSHOT.meta?.fetched_at ?? null;
+
+/**
  * Что и по каким правилам проверяем.
  *
  * Объёмы разные: T1 по разделу 6.2 ТЗ 250–400 слов, T2 по 6.3 — 600–900,
@@ -172,8 +189,21 @@ for (const target of targets) {
 
   // ── Сверка чисел с брифом ──
   const briefPath = resolve(BRIEFS, file.replace(/\.md$/, '.json'));
+  if (briefPerFile && existsSync(briefPath)) {
+    const asOf = JSON.parse(readFileSync(briefPath, 'utf8')).site_context?.data_as_of ?? null;
+    if (asOf !== SNAPSHOT_AS_OF) {
+      add(
+        file,
+        CRITICAL,
+        `Бриф собран из снапшота ${asOf ?? 'без даты'}, а текущий снапшот от ${SNAPSHOT_AS_OF}. ` +
+        'Сверка чисел подтвердила бы устаревшие цифры. Запусти npm run briefs.',
+      );
+    }
+  }
   if (briefPerFile && !existsSync(briefPath)) {
-    add(file, MAJOR, `Бриф ${file.replace(/\.md$/, '.json')} не найден — числа не с чем сверить. Запусти npm run briefs.`);
+    // Critical, а не Major: без брифа сверять число не с чем, и пропустить
+    // такой файл — то же самое, что не проверять его вовсе.
+    add(file, CRITICAL, `Бриф ${file.replace(/\.md$/, '.json')} не найден — числа не с чем сверить. Запусти npm run briefs.`);
   } else {
     const allowed = briefPerFile
       ? numbersInBrief(JSON.parse(readFileSync(briefPath, 'utf8')))

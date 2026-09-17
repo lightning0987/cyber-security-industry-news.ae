@@ -22,7 +22,7 @@
  * Запуск: npm run fetch:ransomware [-- --force]
  */
 
-import { writeFileSync } from 'node:fs';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { fetchJson } from './lib/http.mjs';
@@ -115,6 +115,9 @@ async function main() {
 
   // Сырые данные — только в private/, который в .gitignore.
   // Нужны для ручного аудита и перерасчёта отпечатков, если сменится схема.
+  // В чистом чекауте CI каталога нет, а без него запись упала бы уже после
+  // успешной загрузки — то есть ночной прогон падал бы каждый раз.
+  mkdirSync(resolve(process.cwd(), 'private'), { recursive: true, mode: 0o700 });
   writeFileSync(
     resolve(process.cwd(), 'private', `${SNAPSHOT_NAME}.raw.json`),
     `${JSON.stringify(data, null, 2)}\n`,
