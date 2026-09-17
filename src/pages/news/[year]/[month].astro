@@ -42,7 +42,7 @@ const crumbs = [
     <a href="/news/">All news</a>
     <span class="byline__sep">/</span>
     <span>{entries.length} reports</span>
-        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     </div>
     <p class="lede" style="max-width:var(--measure)">
     Reports published in {monthName} {year}. Each cites the snapshot date it was written from,

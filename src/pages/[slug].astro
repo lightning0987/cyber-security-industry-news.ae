@@ -59,7 +59,7 @@ const schemas = [{
     <div class="byline">
     <a class="byline__tag" href={`/category/${d.category}/`}>{cat.label}</a>
     <span class="byline__sep">/</span>
-    <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+    <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     <span class="byline__sep">/</span>
     <a href={`/news/${d.published.slice(0, 4)}/${d.published.slice(5, 7)}/`}>
       <time datetime={d.published}>{formatDayLong(d.published)}</time>

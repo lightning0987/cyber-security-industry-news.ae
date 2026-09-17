@@ -13,6 +13,7 @@ import { GUIDES } from '../lib/guides.mjs';
 import { getCollection } from 'astro:content';
 import { sortNews, newsCard } from '../lib/news.mjs';
 import Hero from '../components/Hero.astro';
+import MarkObservatory from '../components/MarkObservatory.astro';
 import { photo } from '../lib/images.mjs';
 
 const inc = attributedIncidents;
@@ -43,7 +44,7 @@ const description = buildDescription(
       <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
       <span class="byline__sep">/</span>
       <span>{snapshotMeta.recordCount} records screened</span>
-        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     </div>
     <p class="lede">
     Marsad Cyber tracks ransomware activity against organisations in the United Arab Emirates.
@@ -100,7 +101,7 @@ const description = buildDescription(
       <h2>Activity by period</h2>
       <a class="section__more" href={ROUTES.tracker()}>Full timeline</a>
     </div>
-    <div class="card-grid">
+    <div class="card-grid card-grid--periods">
       {periods.map((p) => (
         <article class="card">
           <span class="card__count">{p.count}</span>
@@ -136,16 +137,21 @@ const description = buildDescription(
       <h2><a href={ROUTES.about()} style="text-decoration:none">About Marsad Cyber</a></h2>
       <a class="section__more" href={ROUTES.about()}>About the project</a>
     </div>
-    <p class="lede" style="max-width:var(--measure)">
-      Marsad is the Arabic word for observatory, and that is what this is: an observation post
-      on ransomware activity against organisations in the United Arab Emirates.
-    </p>
-    <p style="max-width:var(--measure);margin-top:var(--s4)">
-      Regional figures on cyber incidents are usually quoted without a source, a date or a
-      method, and rarely separate an attacker's claim from a confirmed breach. This project
-      publishes a narrow set of numbers with all three attached, and publishes the filtering
-      rules alongside them so that any figure here can be argued with.
-    </p>
+    <div class="about-split">
+      <div class="about-split__mark"><MarkObservatory size={132} /></div>
+      <div>
+        <p class="lede" style="max-width:var(--measure)">
+          Marsad is the Arabic word for observatory, and that is what this is: an observation post
+          on ransomware activity against organisations in the United Arab Emirates.
+        </p>
+        <p style="max-width:var(--measure);margin-top:var(--s4)">
+          Regional figures on cyber incidents are usually quoted without a source, a date or a
+          method, and rarely separate an attacker's claim from a confirmed breach. This project
+          publishes a narrow set of numbers with all three attached, and publishes the filtering
+          rules alongside them so that any figure here can be argued with.
+        </p>
+      </div>
+    </div>
 
     <div class="pillars" style="margin-top:var(--s5)">
       <div class="pillar">

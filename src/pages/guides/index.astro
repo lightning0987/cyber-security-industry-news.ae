@@ -22,7 +22,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Guides', href:
     <span class="byline__tag">Guides</span>
     <span class="byline__sep">/</span>
     <span>{guides.length} frameworks</span>
-        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+        <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     </div>
     <p class="lede" style="max-width:var(--measure)">
     These guides explain what each UAE security and data protection framework requires, who

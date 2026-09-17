@@ -53,7 +53,7 @@ const crumbs = [
       <span>{total} attributed claims</span>
       <span class="byline__sep">/</span>
       <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
-      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By {AUTHOR}</span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     </div>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">

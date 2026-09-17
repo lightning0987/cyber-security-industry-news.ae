@@ -9,13 +9,16 @@ const { title, items, currentSlug, hrefFor } = Astro.props;
 ---
 <nav class="section" aria-label={title}>
   <div class="section__head"><h2>{title}</h2></div>
-  <div class="chip-rail" style="border-bottom:0">
+  <div class="chip-rail chip-rail--wrap" style="border-bottom:0">
     {items.map((item) => (
       <a
-        class="chip"
+        class="chip chip--count"
         href={hrefFor(item.slug)}
         aria-current={item.slug === currentSlug ? 'page' : undefined}
-      >{item.label} <span class="num">{item.count}</span></a>
+      >
+        <span class="chip__label">{item.label}</span>
+        <span class="chip__count">{item.count}</span>
+      </a>
     ))}
   </div>
 </nav>

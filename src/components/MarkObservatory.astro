@@ -1,0 +1,35 @@
+---
+/**
+ * Знак проекта: наблюдательный пост.
+ *
+ * Векторный, инлайновый и монохромный — ни одного запроса, ни одного байта
+ * растра, и он масштабируется без потери. Фотография здесь была бы просто
+ * ещё одним городским видом; знак говорит, чем проект занимается.
+ *
+ * Декоративный: aria-hidden, потому что рядом стоит тот же смысл словами.
+ */
+const { size = 140 } = Astro.props;
+---
+<svg
+  class="mark"
+  width={size}
+  height={size}
+  viewBox="0 0 120 120"
+  role="presentation"
+  aria-hidden="true"
+  focusable="false"
+>
+  {/* Сектор наблюдения */}
+  <path class="mark__sweep" d="M60 60 L60 6 A54 54 0 0 1 98.2 21.8 Z" />
+
+  <circle class="mark__ring" cx="60" cy="60" r="54" />
+  <circle class="mark__ring" cx="60" cy="60" r="36" />
+  <circle class="mark__ring" cx="60" cy="60" r="18" />
+
+  <line class="mark__axis" x1="6" y1="60" x2="114" y2="60" />
+  <line class="mark__axis" x1="60" y1="6" x2="60" y2="114" />
+
+  {/* Засечка: то, что пост увидел */}
+  <circle class="mark__blip" cx="81" cy="39" r="5.5" />
+  <circle class="mark__pivot" cx="60" cy="60" r="3" />
+</svg>

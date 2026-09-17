@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { snapshotMeta } from '../lib/incidents.mjs';
 import { ROUTES } from '../lib/routes.mjs';
-import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
+import { buildTitle, buildDescription, formatDate, AUTHOR } from '../lib/seo.mjs';
 import entityMap from '../data/entity-map.json' with { type: 'json' };
 
 const title = buildTitle('Data Sources: Where Marsad Cyber Figures Come From');
@@ -11,9 +11,16 @@ const description = buildDescription(
 );
 const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Data Sources', href: ROUTES.dataSources() }];
 ---
-<BaseLayout title={title} description={description} crumbs={crumbs}>
-  <div class="prose">
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'page', slug: 'data-sources' }}>
+  <div class="page-head">
     <h1>Data Sources</h1>
+    <div class="byline">
+      <span class="byline__tag">Sources</span>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{formatDate(snapshotMeta.fetchedAt)}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
+    </div>
+
     <p class="lede">
       Marsad Cyber publishes no figure it cannot trace to a named, dated source. This page lists
       every dataset in use, where it comes from and what it cannot tell you.

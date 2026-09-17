@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { ROUTES } from '../lib/routes.mjs';
-import { buildTitle, buildDescription, BRAND } from '../lib/seo.mjs';
+import { buildTitle, buildDescription, BRAND, AUTHOR } from '../lib/seo.mjs';
 
 const title = buildTitle('Editorial Policy: What Marsad Cyber Will Not Publish');
 const description = buildDescription(
@@ -9,15 +9,25 @@ const description = buildDescription(
 );
 const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Editorial Policy', href: ROUTES.editorialPolicy() }];
 ---
-<BaseLayout title={title} description={description} crumbs={crumbs}>
-  <div class="prose">
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'page', slug: 'editorial-policy' }}>
+  <div class="page-head">
     <h1>Editorial Policy</h1>
+    <div class="byline">
+      <span class="byline__tag">Policy</span>
+      <span class="byline__sep">/</span>
+      <span>Applies to every page on this site</span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
+    </div>
+
 
     <p class="lede">
       {BRAND} publishes aggregate ransomware data about the United Arab Emirates and never
       identifies an affected organisation. This page states that rule, the reasoning behind it,
       and the mechanism that enforces it.
     </p>
+  </div>
+
+  <div class="prose">
 
     <h2>The rule</h2>
     <div class="callout">

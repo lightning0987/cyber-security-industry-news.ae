@@ -1242,3 +1242,126 @@ th[aria-sort='descending']::after { content: ' \2193'; color: var(--accent); }
    а не абзац, и она должна остаться капсовой. */
 .prose p.callout__title,
 .page-context p.callout__title { text-transform: uppercase; }
+
+/* ═══════════════════════════════════════════════════════════════════
+   ЧЕТВЁРТЫЙ ПРОХОД
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ─── Чипы ──────────────────────────────────────────────────────── */
+/*
+ * Перенос на вторую строку в шапке съедал первый экран. Возвращаем одну
+ * строку, но с настоящей полосой прокрутки: без неё лента тянулась мышью
+ * только на ощупь, а половина секторов оставалась недостижимой.
+ * Полоса прокрутки — нативная, скрипт для этого не нужен.
+ */
+/* Лента больше ничего не прячет: шесть секторов и ссылка на все тринадцать.
+   Если на узком окне они не помещаются, лента переносится, а не обрезается. */
+@media (min-width: 48rem) {
+  .chip-band .chip-rail { flex-wrap: wrap; overflow-x: visible; row-gap: var(--s2); }
+  .chip-band .chip-rail-wrap::after { display: none; }
+}
+
+.chip-rail--wrap { flex-wrap: wrap; overflow-x: visible; row-gap: var(--s2); }
+
+.chip-band .chip-rail { padding-block: var(--s3); }
+
+/* Ссылка на полный список — чип другого рода, и он это показывает */
+.chip--all {
+  border-color: var(--ink);
+  font-weight: 650;
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  font-size: var(--size-micro);
+}
+.chip--all::after { content: ' \2192'; margin-left: 0.4em; color: var(--accent); }
+.chip--all:hover { background: var(--ink); color: var(--ink-inverse); }
+.chip--all:hover::after { color: var(--ink-inverse); }
+
+/*
+ * Чип — элемент управления данными, а не тег в блоге. Прямые углы,
+ * волосяная рамка, счётчик за собственной линейкой: раньше число
+ * прилипало к названию и читалось как часть его.
+ */
+.chip,
+.chip-band .chip {
+  display: inline-flex;
+  align-items: stretch;
+  gap: 0;
+  padding: var(--s2) var(--s3);
+  border-radius: 2px;
+  border: 1px solid var(--rule-strong);
+  background: var(--paper);
+  font-size: var(--size-small);
+  font-weight: 550;
+  line-height: 1;
+}
+.chip__label { padding: var(--s2) var(--s3); }
+.chip__count {
+  display: flex;
+  align-items: center;
+  padding: var(--s2) var(--s3);
+  border-left: 1px solid var(--rule);
+  background: var(--paper-sunken);
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: var(--size-micro);
+  color: var(--ink-muted);
+}
+/* Счётчик несёт собственные поля, поэтому у такого чипа их снимает оболочка */
+.chip--count { padding: 0; }
+
+.chip:hover,
+.chip-band .chip:hover { background: var(--paper); border-color: var(--ink); color: var(--ink); }
+.chip:hover .chip__count { border-left-color: var(--rule-strong); }
+.chip[aria-current='page'],
+.chip-band .chip[aria-current='page'] { background: var(--ink); color: var(--ink-inverse); border-color: var(--ink); }
+.chip[aria-current='page'] .chip__count { background: transparent; color: var(--ink-inverse); border-left-color: #444; }
+
+/* ─── Сетка периодов ────────────────────────────────────────────── */
+/* Пять периодов в сетке auto-fit давали четыре в ряд и пустую ячейку */
+.card-grid--periods { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+@media (max-width: 47.9375rem) {
+  .card-grid--periods { grid-template-columns: 1fr; }
+}
+
+/* ─── Отбивка перед подвалом ────────────────────────────────────── */
+/* Нижний отступ main плюс верхний отступ подвала давали десять рем пустоты */
+main { padding-block: var(--s5) var(--s6); }
+.site-footer { margin-top: 0; }
+
+/* ─── Низ подвала во всю ширину ─────────────────────────────────── */
+/* Одна колонка дисклеймера оставляла две трети подвала пустыми */
+@media (min-width: 64rem) {
+  .footer-legal { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s5); }
+  .footer-legal p { max-width: none; }
+}
+
+/* ─── Первый элемент внутри карточки ────────────────────────────── */
+/* Заголовок со своим верхним полем оставлял пустую полосу под рамкой */
+.prose > :first-child,
+.guide-body > :first-child,
+.page-context .prose > :first-child { margin-top: 0; }
+
+/* ─── Знак проекта ──────────────────────────────────────────────── */
+.mark { display: block; max-width: 100%; height: auto; }
+.mark__ring { fill: none; stroke: var(--ink-faint); stroke-width: 1.5; }
+.mark__axis { stroke: var(--rule); stroke-width: 1.5; }
+.mark__sweep { fill: var(--accent); opacity: 0.14; }
+.mark__blip { fill: var(--accent); }
+.mark__pivot { fill: var(--ink); }
+
+/* Блок о проекте: знак слева, текст справа */
+.about-split { display: grid; grid-template-columns: 1fr; gap: var(--s5); align-items: start; }
+@media (min-width: 48rem) {
+  .about-split { grid-template-columns: 9rem 1fr; gap: var(--s6); }
+}
+.about-split__mark { display: flex; justify-content: center; }
+
+/* Подпись автора — ссылка, и она обязана этим выглядеть.
+   .byline a снимает подчёркивание со всей строки, здесь оно нужно. */
+.byline__by a {
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 0.18em;
+}
+.byline__by a:hover { text-decoration-color: var(--accent); }

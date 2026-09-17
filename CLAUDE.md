@@ -223,9 +223,16 @@ accreditation.
   implicit `min-width: auto`, so one wide table stretches the whole page into horizontal scroll.
   Use `minmax(0, 1fr)`. This defect shipped once and is invisible at desktop width.
 - **Navigation never depends on the sort script.** The mobile menu is a hidden checkbox plus a
-  label; the links stay in the markup whether it is open or not. The sector rail wraps onto a
-  second line from 48rem rather than scrolling, because a mouse cannot scroll it and half the
-  sectors stayed unreachable.
+  label; the links stay in the markup whether it is open or not.
+- **The sector rail is a shortcut, not an index.** Six sectors plus a link to all of them, on one
+  line. Thirteen do not fit: scrolling hides the rest behind an overlay scrollbar that reserves no
+  space and cannot be grabbed with a mouse, and wrapping eats the first screen. The full list is in
+  the footer, the sidebar and the tracker hub, all present on every page.
+- **A byline belongs on every editorial page and on none of the service pages.** `/sitemap/` and
+  `/credits/` carry no author. The author name links to `/about/` and is underlined, because a
+  link that does not look like one is not a link.
+- **A grid whose item count is fixed gets explicit columns.** Five periods in an `auto-fit` grid
+  produced four in a row and one empty cell.
 - **A recirculation block picks one anchor for all its rows.** Thumbnails appear only when every
   item has one, otherwise every row gets the number tile. A block where sectors carried photos and
   groups did not read as broken. A bare number also always carries its unit.
