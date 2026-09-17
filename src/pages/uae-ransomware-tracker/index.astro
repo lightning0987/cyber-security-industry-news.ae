@@ -43,7 +43,7 @@ const crumbs = [
   { label: 'UAE Ransomware Tracker', href: ROUTES.tracker() },
 ];
 ---
-<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={{ kind: 'hub', slug: 'tracker' }}>
   <h1>UAE Ransomware Attack Tracker</h1>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">

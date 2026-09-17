@@ -12,6 +12,9 @@ import BreakdownTable from '../../components/BreakdownTable.astro';
 import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
 import PageContext from '../../components/PageContext.astro';
+import RecircList from '../../components/RecircList.astro';
+import AlsoRead from '../../components/AlsoRead.astro';
+import { relatedTo, moreOfKind, mostActive } from '../../lib/related.mjs';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import {
   bySector, byPeriod, byGroup, groupsWithPages, inSector, inPeriod, top, activitySpan,
@@ -92,14 +95,27 @@ const crumbs = [
   { label: 'UAE Ransomware Tracker', href: ROUTES.tracker() },
   { label, href: kind === 'sector' ? ROUTES.sector(slug) : ROUTES.period(slug) },
 ];
+
+const current = { kind, slug };
+const related = relatedTo(current, 6);
+const more = moreOfKind(current, 5);
+const active = mostActive(5);
 ---
-<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={current}>
   <h1>{h1}</h1>
+
+  <div class="byline">
+    <span class="byline__tag">{kind === 'sector' ? 'Sector' : 'Period'}</span>
+    <span class="byline__sep">/</span>
+    <a href={ROUTES.tracker()}>UAE Ransomware Tracker</a>
+    <span class="byline__sep">/</span>
+    <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+  </div>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
     {kind === 'sector' ? (
       <>
-        Ransomware groups have claimed <strong class="num">{count}</strong> {label.toLowerCase()}
+        Ransomware groups have claimed <strong class="num">{count}</strong> {label.toLowerCase()}{' '}
         organisations in the United Arab Emirates since 2020, which is{' '}
         <strong class="num"> {share}%</strong> of all attributed UAE claims.
         {topGroup && <> {topGroup.label} accounts for <strong class="num">{topGroup.count}</strong> of them.</>}
@@ -152,6 +168,8 @@ const crumbs = [
     </section>
   )}
 
+  <AlsoRead item={related[0]} />
+
   {count > 0 && (
     <section class="section">
       <div class="section__head">
@@ -167,6 +185,14 @@ const crumbs = [
   )}
 
   <PageContext id={`${kind}-${slug}`} />
+
+  <RecircList title="Related pages" items={related} />
+  <RecircList
+    title={kind === 'sector' ? 'More sectors' : 'More periods'}
+    items={more}
+    more={{ href: ROUTES.tracker() }}
+  />
+  <RecircList title="Most targeted" items={active} />
 
   <SiblingRail
     title="Other sectors"

@@ -9,6 +9,7 @@ private/
 # ─── Материалы, которые не должны попасть в публичный репозиторий ──
 brief/
 design/
+images/reference-*        # скриншоты чужого сайта, рабочий материал
 brand-consensus*
 entity-analysis*
 *.tz.md

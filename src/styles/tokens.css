@@ -45,9 +45,9 @@
   --size-small: 0.8125rem;   /* 13px — подписи, метаданные */
   --size-base: 1.0625rem;    /* 17px — основной текст */
   --size-lead: 1.1875rem;    /* 19px — вводный абзац */
-  --size-h3: 1.25rem;
-  --size-h2: 1.5rem;
-  --size-h1: 2.125rem;
+  --size-h3: 1.0625rem;
+  --size-h2: 1.375rem;
+  --size-h1: 2rem;
   --size-display: 3rem;      /* Крупные числа в статбаре */
 
   --leading-tight: 1.15;
@@ -57,6 +57,7 @@
   --track-tight: -0.02em;
   --track-display: -0.03em;
   --track-caps: 0.08em;
+  --track-heading: 0.005em;   /* Капсовые заголовки требуют воздуха между букв */
 
   /* ─── Ритм отступов. Осознанная шкала, а не случайные шаги ────── */
   --s1: 0.25rem;
@@ -71,7 +72,9 @@
 
   /* ─── Раскладка ───────────────────────────────────────────────── */
   --measure: 68ch;           /* Колонка текста не шире ~72 символов */
-  --page-max: 1180px;
+  --page-max: 1220px;
+  --col-main: minmax(0, 1fr);
+  --col-side: 19rem;
   --gutter: 1rem;
 
   /* ─── Движение. Только transform и opacity ────────────────────── */
@@ -83,8 +86,9 @@
 @media (min-width: 48rem) {
   :root {
     --gutter: 2rem;
-    --size-h1: 2.75rem;
-    --size-display: 3.75rem;
+    --size-h1: 2.625rem;
+    --size-h2: 1.5rem;
+    --size-display: 3.5rem;
   }
 }
 

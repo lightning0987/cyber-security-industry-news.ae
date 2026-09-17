@@ -4,6 +4,7 @@ import { attributedIncidents } from '../lib/incidents.mjs';
 import { bySector, byPeriod, groupsWithPages } from '../lib/aggregate.mjs';
 import { ROUTES } from '../lib/routes.mjs';
 import { buildTitle, buildDescription } from '../lib/seo.mjs';
+import { GUIDES } from '../lib/guides.mjs';
 
 const inc = attributedIncidents;
 const sectors = bySector(inc);
@@ -42,6 +43,14 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href
     <ul class="stack" style="columns:2;column-gap:var(--s6)">
       <li><a href={ROUTES.groupsHub()}>All groups targeting the UAE</a></li>
       {groups.map((g) => <li><a href={ROUTES.group(g.slug)}>{g.label}</a> <span class="num muted">{g.count}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>Regulation guides</h2></div>
+    <ul class="stack">
+      <li><a href={ROUTES.guides()}>All guides</a></li>
+      {GUIDES.map((g) => <li><a href={ROUTES.guide(g.slug)}>{g.standard}</a></li>)}
     </ul>
   </section>
 

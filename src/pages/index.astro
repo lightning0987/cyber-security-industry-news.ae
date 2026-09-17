@@ -7,6 +7,9 @@ import { attributedIncidents, allIncidents, snapshotMeta } from '../lib/incident
 import { bySector, byPeriod, byGroup, groupsWithPages, top } from '../lib/aggregate.mjs';
 import { ROUTES, PERIODS } from '../lib/routes.mjs';
 import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
+import RecircList from '../components/RecircList.astro';
+import { latestActivity } from '../lib/related.mjs';
+import { GUIDES } from '../lib/guides.mjs';
 
 const inc = attributedIncidents;
 const sectors = bySector(inc);
@@ -15,13 +18,14 @@ const groups = byGroup(inc);
 const paged = groupsWithPages(inc);
 const thisYear = inc.filter((i) => i.year === 2026).length;
 const asOf = formatDate(snapshotMeta.fetchedAt);
+const latest = latestActivity(6);
 
 const title = buildTitle(`UAE Ransomware Data: ${inc.length} Attacks Tracked Since 2020`);
 const description = buildDescription(
   `${inc.length} ransomware attacks on UAE organisations tracked since 2020, ${thisYear} in 2026. Sector, group and period breakdowns updated daily from leak-site monitoring.`,
 );
 ---
-<BaseLayout title={title} description={description} crumbs={[]}>
+<BaseLayout title={title} description={description} crumbs={[]} current={{ kind: 'home', slug: 'home' }}>
   <h1>UAE Cyber Threat Intelligence</h1>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
@@ -86,6 +90,19 @@ const description = buildDescription(
       ))}
     </div>
   </section>
+
+  <RecircList
+    title="Regulation guides"
+    items={GUIDES.map((g, i) => ({
+      href: ROUTES.guide(g.slug),
+      title: g.standard,
+      figure: String(i + 1).padStart(2, '0'),
+      meta: 'Guide',
+    }))}
+    more={{ href: ROUTES.guides() }}
+  />
+
+  <RecircList title="Latest activity" items={latest} />
 
   <section class="section">
     <div class="section__head"><h2>How this data is built</h2></div>

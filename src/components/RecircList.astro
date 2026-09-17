@@ -1,0 +1,30 @@
+---
+/**
+ * Блок рециркуляции по ТЗ 14.2. Числовой маркер играет роль визуального якоря:
+ * у референса на этом месте миниатюра, но изображений у нас нет, а выдумывать
+ * их нельзя. Число при этом несёт смысл, чего миниатюра не делает.
+ */
+const { title, items, more } = Astro.props;
+---
+{items.length > 0 && (
+  <section class="recirc">
+    <h2 class="recirc__title">
+      {more ? <a href={more.href} style="text-decoration:none">{title}</a> : title}
+    </h2>
+    <ul class="recirc-list">
+      {items.map((item) => (
+        <li>
+          <a href={item.href}>
+            <span class="recirc-item__fig">{item.figure}</span>
+            <span>
+              <span class="recirc-item__title">{item.title}</span>
+              <span class="recirc-item__meta">
+                {item.meta}{item.overlap ? ` · ${item.overlap} shared claims` : ''}
+              </span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+)}

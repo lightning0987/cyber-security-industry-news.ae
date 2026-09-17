@@ -19,4 +19,21 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { pages };
+/**
+ * Опорные гайды (T3). Проза с человеческим авторством, поэтому коллекция здесь
+ * уместна по той же причине, что и для страниц данных.
+ */
+const guides = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/guides' }),
+  schema: z.object({
+    title: z.string().min(10).max(65),
+    h1: z.string().min(10),
+    description: z.string().min(80).max(158),
+    summary: z.string().min(40).max(320),
+    standard: z.string(),
+    order: z.number().int(),
+    updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+  }),
+});
+
+export const collections = { pages, guides };

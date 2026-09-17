@@ -1,0 +1,11 @@
+---
+/** Врезка внутри текста: один ближайший по сущностям материал (ТЗ 14.2). */
+const { item } = Astro.props;
+---
+{item && (
+  <aside class="also-read">
+    <span class="also-read__label">Also read</span>
+    <a href={item.href}>{item.title}</a>
+    <span class="muted" style="font-size:var(--size-small)">{item.meta} · {item.figure} claims</span>
+  </aside>
+)}

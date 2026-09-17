@@ -3,10 +3,11 @@ import BaseHead from '../components/BaseHead.astro';
 import SiteHeader from '../components/SiteHeader.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
+import Sidebar from '../components/Sidebar.astro';
 import { breadcrumbSchema, organizationSchema } from '../lib/seo.mjs';
 import '../styles/global.css';
 
-const { title, description, crumbs = [], schemas = [], noindex = false } = Astro.props;
+const { title, description, crumbs = [], schemas = [], noindex = false, current = null } = Astro.props;
 
 const site = Astro.site?.href ?? 'http://localhost:4321/';
 const allSchemas = [
@@ -26,7 +27,14 @@ const allSchemas = [
     <main id="main">
       <div class="container">
         <Breadcrumbs crumbs={crumbs} />
-        <slot />
+        {current ? (
+          <div class="layout">
+            <div><slot /></div>
+            <Sidebar current={current} />
+          </div>
+        ) : (
+          <slot />
+        )}
       </div>
     </main>
     <SiteFooter />

@@ -9,7 +9,7 @@
  * Запуск: npm run check:data
  */
 
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { execSync } from 'node:child_process';
 import { resolve } from 'node:path';
 
@@ -131,6 +131,24 @@ function checkForbiddenTerms() {
   }
 }
 
+function checkGuidesRegistry() {
+  // src/lib/guides.mjs дублирует слаги для синхронной навигации.
+  // Расхождение с файлами дало бы битые ссылки в подвале и сайдбаре.
+  const dir = resolve(process.cwd(), 'src/content/guides');
+  if (!existsSync(dir)) return;
+  const files = readdirSync(dir).filter((f) => f.endsWith('.md')).map((f) => f.replace(/\.md$/, ''));
+  const registry = readFileSync(resolve(process.cwd(), 'src/lib/guides.mjs'), 'utf8');
+  const listed = [...registry.matchAll(/slug: '([^']+)'/g)].map((m) => m[1]);
+
+  for (const f of files) {
+    if (!listed.includes(f)) fail(`Гайд ${f}.md есть в контенте, но его нет в src/lib/guides.mjs — он не попадёт в навигацию.`);
+  }
+  for (const l of listed) {
+    if (!files.includes(l)) fail(`В src/lib/guides.mjs указан ${l}, но файла src/content/guides/${l}.md нет — ссылка будет битой.`);
+  }
+  notes.push(`гайдов: ${files.length}`);
+}
+
 function checkPrivateIsolation() {
   // src/ не имеет права ничего знать о private/.
   try {
@@ -160,6 +178,7 @@ if (snap) {
 }
 checkSectorSlugsNotYearLike();
 checkForbiddenTerms();
+checkGuidesRegistry();
 checkPrivateIsolation();
 
 console.log('check:data');

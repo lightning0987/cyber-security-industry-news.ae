@@ -14,7 +14,7 @@ const isCurrent = (href) => path === href;
       ))}
     </nav>
   </div>
-  <div class="container">
+  <div class="container chip-rail-wrap">
     <nav class="chip-rail" aria-label="Sectors">
       {CHIP_RAIL.map((chip) => (
         <a class="chip" href={chip.href} aria-current={isCurrent(chip.href) ? 'page' : undefined}>{chip.label}</a>

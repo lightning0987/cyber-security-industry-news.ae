@@ -9,6 +9,7 @@
  */
 
 import { ROUTES, PERIODS } from './routes.mjs';
+import { GUIDES } from './guides.mjs';
 import { attributedIncidents } from './incidents.mjs';
 import { bySector, groupsWithPages } from './aggregate.mjs';
 
@@ -19,6 +20,7 @@ const groups = groupsWithPages(attributedIncidents);
 export const HEADER_NAV = [
   { label: 'Ransomware Tracker', href: ROUTES.tracker() },
   { label: 'Groups', href: ROUTES.groupsHub() },
+  { label: 'Guides', href: ROUTES.guides() },
   { label: 'Methodology', href: ROUTES.methodology() },
   { label: 'About', href: ROUTES.about() },
 ];
@@ -50,6 +52,10 @@ export const FOOTER_COLUMNS = [
   {
     heading: { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
     links: groups.slice(0, 12).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
+  },
+  {
+    heading: { label: 'Guides', href: ROUTES.guides() },
+    links: GUIDES.map((g) => ({ label: g.standard, href: ROUTES.guide(g.slug) })),
   },
   {
     heading: null,

@@ -1,0 +1,129 @@
+---
+/**
+ * Липкий сайдбар по ТЗ 14.10: свежие цифры, ряды сущностей, промо-слот.
+ * Это слой перелинковки, а не украшение: каждая страница раздаёт отсюда
+ * порядка двадцати внутренних ссылок, и все они настоящие <a> в статике.
+ */
+import { attributedIncidents, snapshotMeta } from '../lib/incidents.mjs';
+import { SECTORS, PERIOD_ROWS, PAGED, latestActivity } from '../lib/related.mjs';
+import { ROUTES } from '../lib/routes.mjs';
+import promo from '../config/promo.json';
+import { GUIDES } from '../lib/guides.mjs';
+
+const { current } = Astro.props;
+const thisYear = attributedIncidents.filter((i) => i.year === 2026).length;
+const latest = latestActivity(3);
+const isCurrent = (kind, slug) => current?.kind === kind && current?.slug === slug;
+---
+<aside class="sidebar">
+  <div class="side-block">
+    <h2 class="side-block__title"><span>Tracker</span><a href={ROUTES.tracker()}>All</a></h2>
+    <div class="side-figures">
+      <div class="side-figure">
+        <span class="side-figure__value">{attributedIncidents.length}</span>
+        <span class="side-figure__label">Attributed claims</span>
+      </div>
+      <div class="side-figure">
+        <span class="side-figure__value">{thisYear}</span>
+        <span class="side-figure__label">In 2026</span>
+      </div>
+      <div class="side-figure">
+        <span class="side-figure__value">{PAGED.length}</span>
+        <span class="side-figure__label">Repeat groups</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-block">
+    <h2 class="side-block__title"><span>Latest activity</span></h2>
+    <ul class="side-list">
+      {latest.map((g) => (
+        <li>
+          <a href={g.href} aria-current={isCurrent('group', g.slug) ? 'page' : undefined}>
+            <span>{g.title}</span><span class="num">{g.recency}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="side-block">
+    <h2 class="side-block__title">
+      <span>Sectors</span><a href={ROUTES.tracker()}>All {SECTORS.length}</a>
+    </h2>
+    <ul class="side-list">
+      {SECTORS.slice(0, 8).map((s) => (
+        <li>
+          <a href={ROUTES.sector(s.slug)} aria-current={isCurrent('sector', s.slug) ? 'page' : undefined}>
+            <span>{s.label}</span><span class="num">{s.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="side-block">
+    <h2 class="side-block__title">
+      <span>Groups</span><a href={ROUTES.groupsHub()}>All {PAGED.length}</a>
+    </h2>
+    <ul class="side-list">
+      {PAGED.slice(0, 8).map((g) => (
+        <li>
+          <a href={ROUTES.group(g.slug)} aria-current={isCurrent('group', g.slug) ? 'page' : undefined}>
+            <span>{g.label}</span><span class="num">{g.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="side-block">
+    <h2 class="side-block__title"><span>Periods</span></h2>
+    <ul class="side-list">
+      {PERIOD_ROWS.map((p) => (
+        <li>
+          <a href={ROUTES.period(p.slug)} aria-current={isCurrent('period', p.slug) ? 'page' : undefined}>
+            <span>{p.label}</span><span class="num">{p.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="side-block">
+    <h2 class="side-block__title"><span>Guides</span><a href={ROUTES.guides()}>All</a></h2>
+    <ul class="side-list">
+      {GUIDES.map((g) => (
+        <li>
+          <a href={ROUTES.guide(g.slug)} aria-current={isCurrent('guide', g.slug) ? 'page' : undefined}>
+            <span>{g.standard}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="side-block side-note">
+    <h2 class="side-block__title"><span>About this data</span></h2>
+    <p>
+      Figures count ransomware leak-site claims against organisations in the United Arab
+      Emirates. A claim is an assertion by an attacker, not a confirmed breach.
+    </p>
+    <p>
+      Affected organisations are never identified on this site.
+      Of <span class="num">{snapshotMeta.recordCount}</span> records returned by the upstream
+      feed, <span class="num">{attributedIncidents.length}</span> carry a verifiable UAE link
+      and only those reach the figures here.
+    </p>
+    <ul class="side-list">
+      <li><a href={ROUTES.methodology()}><span>Methodology</span></a></li>
+      <li><a href={ROUTES.dataSources()}><span>Data sources</span></a></li>
+      <li><a href={ROUTES.editorialPolicy()}><span>Editorial policy</span></a></li>
+    </ul>
+  </div>
+
+  {/* Промо-слот. При enabled:false не даёт ни байта в HTML. */}
+  {promo.slots.sidebar.enabled && (
+    <div class="side-block"><div set:html={promo.slots.sidebar.content} /></div>
+  )}
+</aside>

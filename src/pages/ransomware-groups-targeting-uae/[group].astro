@@ -5,6 +5,9 @@ import BreakdownTable from '../../components/BreakdownTable.astro';
 import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
 import PageContext from '../../components/PageContext.astro';
+import RecircList from '../../components/RecircList.astro';
+import AlsoRead from '../../components/AlsoRead.astro';
+import { relatedTo, moreOfKind, mostActive } from '../../lib/related.mjs';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { bySector, byPeriod, groupsWithPages, inGroup, activitySpan, byGroup } from '../../lib/aggregate.mjs';
 import { ROUTES } from '../../lib/routes.mjs';
@@ -62,9 +65,22 @@ const crumbs = [
   { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
   { label, href: ROUTES.group(slug) },
 ];
+
+const current = { kind: 'group', slug };
+const related = relatedTo(current, 6);
+const more = moreOfKind(current, 5);
+const active = mostActive(5);
 ---
-<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas}>
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={current}>
   <h1>{label} Ransomware Activity in the UAE</h1>
+
+  <div class="byline">
+    <span class="byline__tag">Ransomware group</span>
+    <span class="byline__sep">/</span>
+    <a href={ROUTES.groupsHub()}>Groups targeting the UAE</a>
+    <span class="byline__sep">/</span>
+    <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+  </div>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
     {label} has claimed <strong class="num">{count}</strong> organisations in the United Arab
@@ -93,6 +109,8 @@ const crumbs = [
     />
   </section>
 
+  <AlsoRead item={related[0]} />
+
   <section class="section">
     <div class="section__head"><h2>When {label} claimed UAE organisations</h2></div>
     <BreakdownTable
@@ -117,6 +135,10 @@ const crumbs = [
   )}
 
   <PageContext id={`group-${slug}`} />
+
+  <RecircList title="Related pages" items={related} />
+  <RecircList title="More groups" items={more} more={{ href: ROUTES.groupsHub() }} />
+  <RecircList title="Most targeted" items={active} />
 
   <SiblingRail
     title="Other active groups"

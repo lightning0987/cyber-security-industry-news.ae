@@ -166,6 +166,22 @@ because the numbers move.
 
 ---
 
+## 6a. Guides (T3)
+
+Long-form regulatory guides live in `src/content/guides/*.md` and render at `/guides/<id>/`.
+Frontmatter is schema-validated in `src/content.config.ts`.
+
+`src/lib/guides.mjs` duplicates the slugs so that `nav.mjs` can stay synchronous. `check-data`
+fails the build if the registry and the files disagree, because a mismatch produces dead links
+in the footer and sidebar.
+
+Guides describe what a framework requires. They never claim accreditation, never offer
+certification or compliance assessment, and never mention ADHICS or CBUAE, which are out of
+scope pending review. Every guide ends with a disclaimer block stating the project holds no
+accreditation.
+
+---
+
 ## 7. Design
 
 - Light monochrome, reference lines.com. Tokens in `src/styles/tokens.css`.
@@ -180,6 +196,15 @@ because the numbers move.
   renders as "across13". Use an explicit `{' '}`. This bug hit 30 places on the first build.
 - Invoke the `frontend-design` skill before writing frontend code, then screenshot from
   `localhost` (never `file://`) and do at least two comparison rounds.
+- **Check `images/` for reference screenshots before designing, and compare against them.**
+  Building from a written description of a reference is not the same as looking at it. The
+  first build did that and produced a layout with no sidebar and none of the reference's
+  recirculation blocks.
+- Layout is two-column: content plus a sticky sidebar (`Sidebar.astro`) on every page.
+  The sidebar is a linking surface, not decoration: it carries roughly 30 internal links.
+- Headings are uppercase with tight tracking, matching the reference. Prose is not.
+- Every entity page carries a byline row, an `AlsoRead` insert after the second section, and
+  three `RecircList` blocks (related, more of the same kind, most targeted).
 
 ---
 
@@ -242,7 +267,9 @@ Linking
 Frontend
 [ ] all data readable with JavaScript disabled
 [ ] no <a> without href, no onclick
-[ ] two screenshot rounds done from localhost
+[ ] two screenshot rounds done from localhost, compared against images/reference-*.jpg
+[ ] no glued words (guard catches Astro's newline collapse between an expression and text)
+[ ] editorial text does not restate the template lede (content-overlap guard, 30% ceiling)
 [ ] Lighthouse ≥95 Performance and SEO
 ```
 

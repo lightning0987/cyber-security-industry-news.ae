@@ -1,0 +1,78 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecircList from '../../components/RecircList.astro';
+import { ROUTES } from '../../lib/routes.mjs';
+import { formatDayLong, AUTHOR } from '../../lib/seo.mjs';
+import { mostActive, latestActivity } from '../../lib/related.mjs';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((entry) => ({ params: { slug: entry.id }, props: { entry, guides } }));
+}
+
+const { entry, guides } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+
+const others = guides
+  .filter((g) => g.id !== entry.id)
+  .sort((a, b) => a.data.order - b.data.order)
+  .map((g) => ({
+    href: `/guides/${g.id}/`, title: g.data.h1, figure: String(g.data.order).padStart(2, '0'),
+    meta: g.data.standard,
+  }));
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'Guides', href: '/guides/' },
+  { label: d.standard, href: `/guides/${entry.id}/` },
+];
+
+const schemas = [{
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: d.h1,
+  description: d.description,
+  dateModified: d.updated,
+  author: { '@type': 'Organization', name: AUTHOR },
+  publisher: { '@type': 'Organization', name: 'Marsad Cyber' },
+  isAccessibleForFree: true,
+}];
+---
+<BaseLayout
+  title={d.title}
+  description={d.description}
+  crumbs={crumbs}
+  schemas={schemas}
+  current={{ kind: 'guide', slug: entry.id }}
+>
+  <h1>{d.h1}</h1>
+
+  <div class="byline">
+    <span class="byline__tag">Guide</span>
+    <span class="byline__sep">/</span>
+    <span>{d.standard}</span>
+    <span class="byline__sep">/</span>
+    <span>By {AUTHOR}</span>
+    <span class="byline__sep">/</span>
+    <span>Updated <time datetime={d.updated}>{formatDayLong(d.updated)}</time></span>
+  </div>
+
+  <p class="lede" style="max-width:var(--measure)">{d.summary}</p>
+
+  <div class="prose guide-body"><Content /></div>
+
+  <div class="callout callout--plain" style="max-width:var(--measure);margin-top:var(--s7)">
+    <p>
+      This guide describes what the framework requires. Marsad Cyber is an independent
+      threat-data research project. It holds no accreditation from any UAE authority, does not
+      certify organisations against any standard, and does not assess compliance.
+      See the <a href={ROUTES.editorialPolicy()}>editorial policy</a>.
+    </p>
+  </div>
+
+  <RecircList title="Other guides" items={others} more={{ href: '/guides/' }} />
+  <RecircList title="Most targeted sectors" items={mostActive(5)} />
+  <RecircList title="Latest activity" items={latestActivity(3)} />
+</BaseLayout>
