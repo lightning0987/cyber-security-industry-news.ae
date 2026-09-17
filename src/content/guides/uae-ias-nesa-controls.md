@@ -6,6 +6,26 @@ summary: "The UAE Information Assurance Standard, version 2, sets 188 controls f
 standard: "UAE IAS v2"
 order: 2
 updated: "2026-09-17"
+keyFacts:
+  - label: "Issuing body"
+    value: "Signals Intelligence Agency, successor to NESA"
+  - label: "Current version"
+    value: "Version 2, published 2025"
+  - label: "Total controls"
+    value: "188, split into 60 management and 128 technical"
+  - label: "Mandatory subset"
+    value: "39 Priority One controls, no risk-based tailoring"
+  - label: "Jurisdiction"
+    value: "Federal, all seven emirates"
+faq:
+  - q: "What are the 39 Priority One controls in UAE IAS v2?"
+    a: "Priority One controls are the subset of the 188 controls that are mandatory for everything inside the scope of the standard, without the risk-based tailoring that applies elsewhere. They are the correct first work package because they are unavoidable, finite, and establish the baseline against which the remaining controls are assessed."
+  - q: "Who counts as critical national infrastructure under UAE IAS v2?"
+    a: "The category is defined by the consequence of disruption rather than by industry label. Energy, water, telecommunications, transport and parts of finance and health can all fall inside it depending on what a given operator runs. The designation belongs to the authority that makes it, so confirm it with them rather than inferring it from your sector."
+  - q: "Does UAE IAS v2 replace DESC ISR v3?"
+    a: "No. UAE IAS v2 is federal and applies across all emirates to critical national infrastructure and government entities. DESC ISR v3 is an emirate-level regulation applying in Dubai with its own 13 control domains. An organisation in Dubai can fall under both, and meeting one does not discharge the other."
+  - q: "How does penetration testing map to UAE IAS v2 controls?"
+    a: "Testing produces evidence for the technical control families specifically: network security, access control and system hardening. A scoped test generates dated findings that map to those controls, and a retest generates the record that a finding was closed. It produces no evidence for management controls such as supplier assessment or continuity exercises, which need their own artefacts."
 ---
 
 ## What UAE IAS v2 is
@@ -21,6 +41,9 @@ The Priority One designation is the single most useful thing to understand about
 Those 39 controls are mandatory for everything inside the scope of IAS v2, without the
 risk-based tailoring that applies elsewhere in the standard.
 
+> **Start here.** Of 188 controls, 39 are not negotiable. Work spent on them is never wasted by
+> a later risk decision. That is not true of the controls outside the subset.
+
 ## Who falls inside the scope
 
 IAS v2 applies to two categories.
@@ -32,10 +55,9 @@ Unlike DESC ISR v3, which is an emirate-level regulation applying in Dubai, IAS 
 An organisation in Dubai can therefore fall under both, and meeting one does not discharge the
 other.
 
-Critical national infrastructure is the harder category to self-assess. It is defined by the
-consequence of disruption rather than by industry label, which means energy, water,
-telecommunications, transport and parts of finance and health can all fall inside it depending
-on what a given operator actually runs.
+Critical national infrastructure is the harder category to self-assess. It is defined by the consequence of disruption rather
+than by industry label. Energy, water, telecommunications, transport and parts of finance and
+health can all fall inside it, depending on what a given operator runs.
 
 ### How to establish whether IAS reaches you
 
@@ -54,10 +76,14 @@ The 128 technical controls cover access control, cryptography, network security,
 acquisition and development, operations security, logging and incident handling. They are
 satisfied with configuration, telemetry and test results.
 
-Programmes usually underestimate the technical half. There are more than twice as many technical
-controls as management controls, and technical controls drift. A management control stays
+Programmes usually underestimate the technical half. Technical controls outnumber management
+controls by more than two to one, and they drift. A management control stays
 satisfied until policy changes. A technical control stops being satisfied the moment a
 configuration changes, which can happen without anyone deciding anything.
+
+> **The drift problem.** An annual assessment tells you a technical control was satisfied on one
+> day of the year. Continuous verification tells you whether it still is. The gap between those
+> two statements is where most incidents happen.
 
 ## Start with the 39 Priority One controls
 
@@ -68,9 +94,9 @@ That makes them the correct first work package for three reasons. They are unavo
 effort spent there is never wasted. They are finite, so the work has a defined end. And they
 establish the baseline against which the remaining controls are assessed.
 
-Treat the other 149 controls as the second phase, scoped by risk, and plan the technical portion
-separately from the management portion because they need different people and different
-evidence.
+Treat everything outside that subset as the second phase, scoped by risk. Plan the technical
+portion separately from the management portion, because they need different people and
+different evidence.
 
 ## What evidence assessors expect
 
@@ -81,13 +107,19 @@ stating that it should.
 For the technical controls, that means configuration exports, log samples, access review
 outputs and test results, each carrying a date and a defined scope.
 
-Penetration testing produces evidence for the technical control families specifically. A scoped
-test against network security, access control and system hardening generates dated findings that
-map to those controls, and a retest generates the record that a finding was closed. That is
+Penetration testing produces evidence for the technical control families specifically. A scoped test against network security, access
+control and system hardening generates dated findings mapped to those controls. A retest
+generates the record that a finding was closed. That is
 what testing contributes to an IAS programme, and it is the whole of what it contributes.
 
 Management controls need their own artefacts. No test result demonstrates that a supplier was
 assessed or that a continuity plan was exercised.
+
+### Why the split matters for sequencing
+
+Management controls can be written once and reviewed annually. Technical controls have to be
+verified on a cadence, because a configuration change silently withdraws them. A programme that
+treats both halves the same way will pass its first assessment and fail its second.
 
 ## Where IAS sits among the other regimes
 
@@ -103,13 +135,21 @@ Risk Management rules and the DIFC data protection regime.
 
 ## What the ransomware data adds
 
-Energy and Utilities and Transportation are the two sectors on this tracker most likely to sit
-inside critical national infrastructure. Neither carries a large count. Energy and Utilities
-holds 4 claimed organisations and Transportation holds 6.
+[Energy and Utilities](/uae-ransomware-tracker/energy-utilities/) and
+[Transportation](/uae-ransomware-tracker/transportation/) are the two sectors on this tracker
+most likely to sit inside critical national infrastructure. Neither carries a large count.
+Energy and Utilities holds 4 claimed organisations and Transportation holds 6, against a
+[site total](/uae-ransomware-tracker/) of 108.
 
 Those small numbers are the point. A sector with few claims can still carry the heaviest
 regulatory exposure per incident, because consequence rather than frequency defines critical
 national infrastructure. Reading claim counts as a proxy for risk fails precisely here.
+
+### Re-verification is part of the control
+
+Treat each technical control as having two states: implemented and verified. Implementation is a
+one-time act. Verification has a date, and that date ages. An assessment asks for the second
+state, not the first.
 
 ## Practical sequence
 
@@ -121,7 +161,9 @@ national infrastructure. Reading claim counts as a proxy for risk fails precisel
    are technical.
 4. Produce dated evidence for technical controls and retest after remediation.
 5. Re-evaluate technical controls on a schedule, because configuration drifts without a decision.
-6. Check whether DESC ISR v3 or the UAE PDPL also apply, since each is a separate obligation.
+6. Check whether [DESC ISR v3](/guides/desc-isr-compliance-dubai/) or the
+   [UAE PDPL](/guides/uae-pdpl-breach-notification/) also apply, since each is a separate
+   obligation.
 
 ## Sources
 

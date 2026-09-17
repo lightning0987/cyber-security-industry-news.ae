@@ -10,6 +10,8 @@ import { buildTitle, buildDescription, formatDate } from '../lib/seo.mjs';
 import RecircList from '../components/RecircList.astro';
 import { latestActivity } from '../lib/related.mjs';
 import { GUIDES } from '../lib/guides.mjs';
+import { getCollection } from 'astro:content';
+import { sortNews, newsCard } from '../lib/news.mjs';
 
 const inc = attributedIncidents;
 const sectors = bySector(inc);
@@ -19,6 +21,7 @@ const paged = groupsWithPages(inc);
 const thisYear = inc.filter((i) => i.year === 2026).length;
 const asOf = formatDate(snapshotMeta.fetchedAt);
 const latest = latestActivity(6);
+const news = sortNews(await getCollection('news')).slice(0, 6).map(newsCard);
 
 const title = buildTitle(`UAE Ransomware Data: ${inc.length} Attacks Tracked Since 2020`);
 const description = buildDescription(
@@ -90,6 +93,8 @@ const description = buildDescription(
       ))}
     </div>
   </section>
+
+  <RecircList title="Latest reports" items={news} more={{ href: ROUTES.news() }} />
 
   <RecircList
     title="Regulation guides"

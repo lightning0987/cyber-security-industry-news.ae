@@ -6,6 +6,26 @@ summary: "The Dubai International Financial Centre and Abu Dhabi Global Market e
 standard: "DIFC and ADGM"
 order: 4
 updated: "2026-09-17"
+keyFacts:
+  - label: "DIFC instrument"
+    value: "DIFC Data Protection Law No. 5 of 2020"
+  - label: "DIFC supervisor"
+    value: "Commissioner of Data Protection"
+  - label: "ADGM instrument"
+    value: "ADGM Data Protection Regulations 2021, in force 14 February 2021"
+  - label: "ADGM supervisor"
+    value: "Office of Data Protection"
+  - label: "Common origin"
+    value: "Both modelled on the European GDPR"
+faq:
+  - q: "Which data protection law applies to my UAE company?"
+    a: "Registration decides it. An entity registered in the Dubai International Financial Centre sits under DIFC Data Protection Law No. 5 of 2020. An entity registered in Abu Dhabi Global Market sits under the ADGM Data Protection Regulations 2021. Everything else in the United Arab Emirates sits under the federal Personal Data Protection Law. Physical location and customer location do not change the answer."
+  - q: "What is the maximum fine under the DIFC data protection regime?"
+    a: "The DIFC Commissioner of Data Protection can issue administrative fines up to one hundred thousand US dollars. The ADGM regulations carry a higher ceiling. Confirm current figures against each authority's published material, since penalty provisions are amended more often than the underlying texts."
+  - q: "Can a group consolidate compliance across DIFC, ADGM and the mainland?"
+    a: "Consolidate the security controls, not the compliance obligations. A group with entities in more than one jurisdiction answers to three supervisors under three texts, which means three notification paths and three sets of records even where the underlying infrastructure is shared. The control set converges; the filings do not."
+  - q: "Are the DIFC and ADGM regimes the same as GDPR?"
+    a: "They are modelled on it, not identical to it. Both share the GDPR lawful bases, comparable data subject rights, data protection officer requirements, breach notification without undue delay, and adequacy requirements for transfers abroad. They differ in supervisor, procedure, registration mechanics and penalty ceilings, so a GDPR programme transfers in substance but not in filings."
 ---
 
 ## Why three regimes exist at once
@@ -43,9 +63,9 @@ That shared origin produces substantive overlap. Both recognise the same lawful 
 processing: consent, contract, legal obligation, public interest, legitimate interest and vital
 interest. Both require consent to be explicit, informed, freely given and withdrawable.
 
-Both give data subjects a comparable set of rights, both require a data protection officer in
-defined circumstances, and both require that personal data transferred abroad receives an
-adequate level of protection.
+Both give data subjects a comparable set of rights. Both require a data protection officer in
+defined circumstances. Both require that personal data transferred abroad receives an adequate
+level of protection.
 
 Both also set breach notification obligations that run without undue delay, with 72 hours as the
 outer bound familiar from GDPR.
@@ -72,20 +92,34 @@ That means three notification paths and three sets of records, even where the un
 security controls are shared infrastructure. Consolidating the controls is sensible.
 Consolidating the compliance obligations is not available.
 
+> **Design accordingly.** One control set, three evidence packs. A programme built the other way
+> around produces three control sets and satisfies none of the supervisors efficiently.
+
+### What transfers from a GDPR programme
+
+An organisation that already runs a GDPR programme has most of the substance. The lawful bases,
+the records of processing, the data subject request process and the transfer assessments all
+carry across in principle.
+
+What does not carry across is the paperwork. Registration, notification routing and the
+supervisor relationship are specific to each zone, and a GDPR filing satisfies neither. Treat a
+GDPR programme as the control baseline and the zone requirements as the filing layer on top.
+
 ## How this interacts with the security regimes
 
 Data protection and information security obligations run in parallel rather than in sequence.
 
-A DIFC-authorised firm sits under the DIFC data protection regime and, if it is regulated by the
-DFSA, under DFSA Technology and Risk Management rules as well. Those are separate obligations
-with separate evidence.
+A DIFC-authorised firm sits under the DIFC data protection regime. If it is regulated by the
+DFSA, it sits under DFSA Technology and Risk Management rules as well. Those are separate
+obligations with separate evidence.
 
-A Dubai government supplier may sit under DESC ISR v3 and its 13 control domains through
-contract, while its personal data obligations run under whichever data protection regime matches
-its registration.
+A Dubai government supplier may sit under [DESC ISR v3](/guides/desc-isr-compliance-dubai/) and
+its 13 control domains through contract. Its personal data obligations run under whichever
+regime matches its registration.
 
-An operator of critical national infrastructure sits under the UAE Information Assurance Standard
-and its 188 controls regardless of where it is registered, because that standard is federal.
+An operator of critical national infrastructure sits under the
+[UAE Information Assurance Standard](/guides/uae-ias-nesa-controls/) and its 188 controls.
+That applies regardless of registration, because the standard is federal.
 
 ## What evidence each regime expects
 
@@ -103,12 +137,19 @@ under each regime.
 
 ## What the ransomware data adds
 
-Financial Services carries 11 claimed organisations on this tracker, fourth of 13 sectors. The
-sector draws 8 distinct ransomware groups, and no single operation dominates it.
+[Financial Services](/uae-ransomware-tracker/financial-services/) carries 11 claimed
+organisations on this tracker, fourth of 13 sectors. The sector draws 8 distinct ransomware
+groups, and no single operation dominates it.
 
-That matters for free zone firms specifically. A defence built around the methods of one group
-covers a small fraction of the observed activity, while the notification obligations triggered by
-any successful incident are identical regardless of which group was responsible.
+That matters for free zone firms specifically. A defence built around the methods of one group covers a
+small fraction of the observed activity. The notification obligations are identical regardless
+of which group was responsible.
+
+### Where groups usually get this wrong
+
+The common failure is designing for the largest entity and assuming the others inherit. They do
+not. A mainland entity inside a group led by a DIFC entity still answers to the federal law and
+to the UAE Data Office, on its own.
 
 ## Practical sequence
 
@@ -121,6 +162,8 @@ any successful incident are identical regardless of which group was responsible.
    regime for regulated firms.
 6. Keep dated testing evidence, since every regime judges the appropriateness of measures after
    the fact.
+7. Read the [federal PDPL guide](/guides/uae-pdpl-breach-notification/) for any group entity
+   registered outside a free zone.
 
 ## Sources
 

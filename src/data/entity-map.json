@@ -118,13 +118,40 @@
       "name": "UAE PDPL",
       "full_name": "UAE Personal Data Protection Law",
       "issuer": "Federal",
-      "scope": "Персональные данные, федеральный уровень"
+      "scope": "Персональные данные, федеральный уровень",
+      "instrument": "Federal Decree-Law No. 45 of 2021",
+      "enacted": "2021-09-26",
+      "supervisor": "UAE Data Office",
+      "breach_notification_hours_cited_by_summaries": 72,
+      "note": "Декрет-закон требует уведомления немедленно, в срок, установленный исполнительным регламентом. Цифра 72 часа встречается во вторичных обзорах по аналогии с GDPR и требует сверки с регламентом."
     },
     {
       "name": "DFSA TRM",
       "full_name": "DFSA Technology and Risk Management",
       "issuer": "DFSA",
       "scope": "Компании, зарегистрированные в DIFC"
+    },
+    {
+      "name": "DIFC DP Law",
+      "full_name": "DIFC Data Protection Law No. 5 of 2020",
+      "issuer": "DIFC",
+      "year": 2020,
+      "supervisor": "Commissioner of Data Protection",
+      "max_administrative_fine_usd": 100000,
+      "scope": "Организации, зарегистрированные в Dubai International Financial Centre"
+    },
+    {
+      "name": "ADGM DP Regulations",
+      "full_name": "ADGM Data Protection Regulations 2021",
+      "issuer": "ADGM",
+      "year": 2021,
+      "in_force": "2021-02-14",
+      "supervisor": "Office of Data Protection",
+      "privacy_principles": 7,
+      "data_subject_rights": 8,
+      "breach_notification_hours": 72,
+      "replaced": "Data Protection Regulations 2015",
+      "scope": "Организации, зарегистрированные в Abu Dhabi Global Market"
     }
   ],
   "legal": [

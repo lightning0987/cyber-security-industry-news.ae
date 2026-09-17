@@ -5,11 +5,15 @@ import { bySector, byPeriod, groupsWithPages } from '../lib/aggregate.mjs';
 import { ROUTES } from '../lib/routes.mjs';
 import { buildTitle, buildDescription } from '../lib/seo.mjs';
 import { GUIDES } from '../lib/guides.mjs';
+import { getCollection } from 'astro:content';
+import { sortNews } from '../lib/news.mjs';
+import { NEWS_CATEGORIES } from '../lib/news-registry.mjs';
 
 const inc = attributedIncidents;
 const sectors = bySector(inc);
 const periods = byPeriod(inc);
 const groups = groupsWithPages(inc);
+const news = sortNews(await getCollection('news'));
 const totalPages = 1 + 1 + sectors.length + periods.length + 1 + groups.length + 5;
 
 const title = buildTitle(`Sitemap: All ${totalPages} Marsad Cyber Pages`);
@@ -43,6 +47,15 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href
     <ul class="stack" style="columns:2;column-gap:var(--s6)">
       <li><a href={ROUTES.groupsHub()}>All groups targeting the UAE</a></li>
       {groups.map((g) => <li><a href={ROUTES.group(g.slug)}>{g.label}</a> <span class="num muted">{g.count}</span></li>)}
+    </ul>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>News</h2></div>
+    <ul class="stack">
+      <li><a href={ROUTES.news()}>All reports</a></li>
+      {NEWS_CATEGORIES.map((c) => <li><a href={ROUTES.category(c.slug)}>{c.label}</a></li>)}
+      {news.map((n) => <li><a href={`/${n.id}/`}>{n.data.h1}</a></li>)}
     </ul>
   </section>
 

@@ -10,6 +10,7 @@
 
 import { ROUTES, PERIODS } from './routes.mjs';
 import { GUIDES } from './guides.mjs';
+import { NEWS_CATEGORIES } from './news-registry.mjs';
 import { attributedIncidents } from './incidents.mjs';
 import { bySector, groupsWithPages } from './aggregate.mjs';
 
@@ -21,6 +22,7 @@ export const HEADER_NAV = [
   { label: 'Ransomware Tracker', href: ROUTES.tracker() },
   { label: 'Groups', href: ROUTES.groupsHub() },
   { label: 'Guides', href: ROUTES.guides() },
+  { label: 'News', href: ROUTES.news() },
   { label: 'Methodology', href: ROUTES.methodology() },
   { label: 'About', href: ROUTES.about() },
 ];
@@ -51,7 +53,11 @@ export const FOOTER_COLUMNS = [
   },
   {
     heading: { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
-    links: groups.slice(0, 12).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
+    links: groups.slice(0, 8).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
+  },
+  {
+    heading: { label: 'News', href: ROUTES.news() },
+    links: NEWS_CATEGORIES.map((c) => ({ label: c.label, href: ROUTES.category(c.slug) })),
   },
   {
     heading: { label: 'Guides', href: ROUTES.guides() },

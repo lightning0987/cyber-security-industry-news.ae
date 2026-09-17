@@ -6,6 +6,26 @@ summary: "Federal Decree-Law No. 45 of 2021 governs personal data across the Uni
 standard: "UAE PDPL"
 order: 3
 updated: "2026-09-17"
+keyFacts:
+  - label: "Instrument"
+    value: "Federal Decree-Law No. 45 of 2021"
+  - label: "Enacted"
+    value: "26 September 2021"
+  - label: "Supervisor"
+    value: "UAE Data Office"
+  - label: "Scope"
+    value: "Federal, excluding the DIFC and ADGM free zones"
+  - label: "Breach duty"
+    value: "Controller notifies the Office; processor notifies the controller"
+faq:
+  - q: "How long do I have to report a breach under the UAE PDPL?"
+    a: "The decree-law requires notification immediately on becoming aware, within a period specified in the Executive Regulations. Many published summaries state a flat 72 hours by analogy with the European GDPR. Confirm the operative figure against the published regulation text rather than a secondary summary. In practice an organisation that cannot assemble the required content within three days will miss any deadline in this range."
+  - q: "Does the UAE PDPL apply to companies in the DIFC or ADGM?"
+    a: "No. The Dubai International Financial Centre applies DIFC Data Protection Law No. 5 of 2020 and Abu Dhabi Global Market applies the ADGM Data Protection Regulations 2021. Each has its own supervisor. Registration determines which regime applies, not physical location and not where customers are. A group spanning a free zone and the mainland answers to both, separately."
+  - q: "What must a UAE PDPL breach notification contain?"
+    a: "The nature and form of the breach, its causes, the approximate number of records affected, the Data Protection Officer's details, the expected effects, and the measures taken to address the breach and limit its consequences. That list is effectively the specification for your incident response, because you cannot notify without being able to produce each item."
+  - q: "Who notifies the regulator, the controller or the processor?"
+    a: "The controller notifies the UAE Data Office. A processor that becomes aware of a breach must notify the controller immediately. The chain runs processor to controller to regulator, which means a processor that tells you late makes you late. Flow the timing obligation into processor contracts explicitly."
 ---
 
 ## What the UAE PDPL is
@@ -36,8 +56,8 @@ a free zone answers to both, separately.
 ## What the law requires when a breach happens
 
 The PDPL requires a controller that becomes aware of a personal data breach to notify the UAE
-Data Office where the breach poses a risk to the privacy, confidentiality or security of a data
-subject's data. Where the risk to the data subject is material, the controller must notify the
+Data Office. The duty arises where the breach poses a risk to the privacy, confidentiality or
+security of a data subject's data. Where that risk is material, the controller must notify the
 individual as well.
 
 A processor that becomes aware of a breach must notify the controller immediately. The chain
@@ -45,19 +65,23 @@ runs processor to controller to regulator, and it is the controller who carries 
 to the Data Office.
 
 The notification itself is prescriptive. It must describe the nature and form of the breach, its
-causes, the approximate number of records affected, the Data Protection Officer's details, the
-expected effects, and the measures taken to address the breach and limit its consequences.
+causes, and the approximate number of records affected. It must also give the Data Protection
+Officer's details, the expected effects, and the measures taken to limit the consequences.
 
 ### The deadline question, stated honestly
 
 The text of the decree-law requires notification immediately on becoming aware, within a period
-specified in the Executive Regulations. Many published summaries state a flat 72 hours, by
-analogy with the European General Data Protection Regulation.
+specified in the Executive Regulations. Published summaries commonly state a flat 72 hours,
+by analogy with the European General Data Protection Regulation.
 
 Treat that figure with caution. The operative deadline is whatever the Executive Regulations
 set, and the regulations were issued years after the law itself. Confirm the current number
 against the published regulation text rather than against a secondary summary, including this
 one.
+
+> **Why this matters more than it looks.** A guide that states a deadline it has not verified
+> hands you a number you will plan against. If it is wrong, the plan is wrong. The honest answer
+> is that the decree-law defers the figure and you must read the regulations.
 
 The practical consequence is the same either way. An organisation that cannot assemble the
 required notification content inside three days will miss any deadline in this range.
@@ -80,6 +104,15 @@ from it.
 6. Contract processor notification duties explicitly, because a processor that tells you late
    makes you late.
 
+### Who inside the organisation makes the call
+
+The clock starts when the controller becomes aware. That makes awareness an organisational fact
+rather than a technical one, and it needs a named owner.
+
+Decide in advance who declares that an event is a personal data breach, and who decides whether
+it poses a risk to data subjects. Without those two names, the first hours of an incident are
+spent deciding who decides.
+
 ## Where security testing fits
 
 The PDPL requires appropriate technical and organisational measures to protect personal data.
@@ -94,22 +127,30 @@ processing that a notification requires.
 
 ## What the ransomware data adds
 
-Personal data exposure is not confined to regulated sectors. On this tracker, Professional
-Services carries the most claimed organisations at 24, followed by Government and Defense and
-Technology at 13 each.
+Personal data exposure is not confined to regulated sectors. On this tracker,
+[Professional Services](/uae-ransomware-tracker/professional-services/) carries the most claimed
+organisations at 24, followed by
+[Government and Defense](/uae-ransomware-tracker/government-defense/) and
+[Technology](/uae-ransomware-tracker/technology/) at 13 each.
 
 Professional firms hold personal data belonging to their clients rather than to themselves. That
 places them in the controller or processor chain for data they did not collect, which is exactly
 the situation the PDPL's processor obligations address.
 
-Healthcare and Education carry small counts on this tracker, at 6 and 2. Both hold identity
-records for people who cannot easily choose another provider, which changes what an incident
-costs the data subject rather than the organisation.
+[Healthcare](/uae-ransomware-tracker/healthcare/) and
+[Education](/uae-ransomware-tracker/education/) carry small counts on this tracker, at 6 and 2.
+Both hold identity records for people who cannot easily choose another provider, which changes
+what an incident costs the data subject rather than the organisation.
+
+> **Small count, high consequence.** Ranking sectors by claim volume ranks them by attacker
+> opportunity, not by what an incident costs the people whose records are held. Those are
+> different questions and the data answers only the first.
 
 ## Practical sequence
 
-1. Establish whether you sit under the federal PDPL or under a free zone regime, because the
-   answer changes the regulator and the rules.
+1. Establish whether you sit under the federal PDPL or under a
+   [free zone regime](/guides/difc-adgm-data-protection-comparison/), because the answer changes
+   the regulator and the rules.
 2. Confirm the current notification deadline against the Executive Regulations text, not a
    summary.
 3. Map controller and processor roles across your systems before an incident forces the question.

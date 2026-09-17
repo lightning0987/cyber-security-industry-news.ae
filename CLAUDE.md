@@ -166,6 +166,20 @@ because the numbers move.
 
 ---
 
+## 5a. News (T1 and T2)
+
+Articles live in `src/content/news/*.md` at flat URLs `/<id>/`. Category and date live in
+frontmatter and drive `/category/<c>/` and `/news/<year>/<month>/` programmatically.
+
+Categories are created only where articles exist. `src/lib/news-registry.mjs` duplicates the
+active categories so `nav.mjs` can stay synchronous.
+
+T1 briefs run 250–400 words, T2 analyses 600–950, enforced by `lint:content`. Every figure must
+appear in some brief or in `entity-map.json`, because those two files are the whole set of facts
+the site holds.
+
+---
+
 ## 6a. Guides (T3)
 
 Long-form regulatory guides live in `src/content/guides/*.md` and render at `/guides/<id>/`.
@@ -200,6 +214,9 @@ accreditation.
   Building from a written description of a reference is not the same as looking at it. The
   first build did that and produced a layout with no sidebar and none of the reference's
   recirculation blocks.
+- **Run `npm run check:mobile` against a running preview.** Grid tracks declared `1fr` carry an
+  implicit `min-width: auto`, so one wide table stretches the whole page into horizontal scroll.
+  Use `minmax(0, 1fr)`. This defect shipped once and is invisible at desktop width.
 - Layout is two-column: content plus a sticky sidebar (`Sidebar.astro`) on every page.
   The sidebar is a linking surface, not decoration: it carries roughly 30 internal links.
 - Headings are uppercase with tight tracking, matching the reference. Prose is not.
@@ -268,6 +285,7 @@ Frontend
 [ ] all data readable with JavaScript disabled
 [ ] no <a> without href, no onclick
 [ ] two screenshot rounds done from localhost, compared against images/reference-*.jpg
+[ ] npm run check:mobile passes (no horizontal overflow at 360, 390 and 768px)
 [ ] no glued words (guard catches Astro's newline collapse between an expression and text)
 [ ] editorial text does not restate the template lede (content-overlap guard, 30% ceiling)
 [ ] Lighthouse ≥95 Performance and SEO

@@ -18,7 +18,8 @@
     "lint": "astro check && node scripts/check-data.mjs --lint-imports",
     "ci": "npm run lint && npm run build",
     "briefs": "node scripts/export-content-briefs.mjs",
-    "lint:content": "node scripts/lint-content.mjs"
+    "lint:content": "node scripts/lint-content.mjs",
+    "check:mobile": "node scripts/check-mobile.mjs"
   },
   "dependencies": {
     "astro": "^7.3.2",

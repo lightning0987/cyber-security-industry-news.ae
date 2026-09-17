@@ -9,6 +9,7 @@ import { SECTORS, PERIOD_ROWS, PAGED, latestActivity } from '../lib/related.mjs'
 import { ROUTES } from '../lib/routes.mjs';
 import promo from '../config/promo.json';
 import { GUIDES } from '../lib/guides.mjs';
+import { NEWS_CATEGORIES } from '../lib/news-registry.mjs';
 
 const { current } = Astro.props;
 const thisYear = attributedIncidents.filter((i) => i.year === 2026).length;
@@ -84,6 +85,19 @@ const isCurrent = (kind, slug) => current?.kind === kind && current?.slug === sl
         <li>
           <a href={ROUTES.period(p.slug)} aria-current={isCurrent('period', p.slug) ? 'page' : undefined}>
             <span>{p.label}</span><span class="num">{p.count}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </div>
+
+  <div class="side-block">
+    <h2 class="side-block__title"><span>News</span><a href={ROUTES.news()}>All</a></h2>
+    <ul class="side-list">
+      {NEWS_CATEGORIES.map((c) => (
+        <li>
+          <a href={ROUTES.category(c.slug)} aria-current={isCurrent('news', c.slug) ? 'page' : undefined}>
+            <span>{c.label}</span>
           </a>
         </li>
       ))}

@@ -31,6 +31,14 @@ const crumbs = [
 
 const schemas = [{
   '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: d.faq.map((f) => ({
+    '@type': 'Question',
+    name: f.q,
+    acceptedAnswer: { '@type': 'Answer', text: f.a },
+  })),
+}, {
+  '@context': 'https://schema.org',
   '@type': 'Article',
   headline: d.h1,
   description: d.description,
@@ -61,7 +69,29 @@ const schemas = [{
 
   <p class="lede" style="max-width:var(--measure)">{d.summary}</p>
 
+  <div class="keyfacts">
+    <h2 class="keyfacts__title">{d.standard} at a glance</h2>
+    <dl>
+      {d.keyFacts.map((f) => (
+        <div class="keyfacts__row">
+          <dt>{f.label}</dt>
+          <dd>{f.value}</dd>
+        </div>
+      ))}
+    </dl>
+  </div>
+
   <div class="prose guide-body"><Content /></div>
+
+  <section class="faq">
+    <h2 class="recirc__title">Frequently asked questions</h2>
+    {d.faq.map((f) => (
+      <details>
+        <summary>{f.q}</summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </section>
 
   <div class="callout callout--plain" style="max-width:var(--measure);margin-top:var(--s7)">
     <p>

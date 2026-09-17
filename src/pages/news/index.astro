@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecircList from '../../components/RecircList.astro';
+import { ROUTES } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription } from '../../lib/seo.mjs';
+import { CATEGORIES, MONTHS, sortNews, newsCard } from '../../lib/news.mjs';
+import { mostActive } from '../../lib/related.mjs';
+
+const all = sortNews(await getCollection('news'));
+const used = [...new Set(all.map((e) => e.data.category))];
+const months = [...new Set(all.map((e) => e.data.published.slice(0, 7)))].sort().reverse();
+
+const title = buildTitle(`UAE Cyber Threat News: ${all.length} Reports Published`);
+const description = buildDescription(
+  `${all.length} reports on ransomware activity, sector shifts and regulation affecting organisations in the United Arab Emirates, drawn from leak-site monitoring.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: '/news/' }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: 'hub' }}>
+  <h1>UAE Cyber Threat News</h1>
+
+  <div class="byline">
+    <span class="byline__tag">News</span>
+    <span class="byline__sep">/</span>
+    <span>{all.length} reports</span>
+    <span class="byline__sep">/</span>
+    <span>{used.length} categories</span>
+  </div>
+
+  <p class="lede" style="max-width:var(--measure)">
+    Every report on this site is written from the same dated snapshot that drives the tracker.
+    No affected organisation is named. Figures cite claims published by ransomware groups, which
+    are assertions by attackers rather than confirmed breaches.
+  </p>
+
+  <nav class="chip-rail" aria-label="Categories" style="border-bottom:0;margin-bottom:var(--s4)">
+    {used.map((c) => (
+      <a class="chip" href={`/category/${c}/`}>{CATEGORIES[c].label}</a>
+    ))}
+  </nav>
+
+  <RecircList title="All reports" items={all.map(newsCard)} />
+
+  <section class="recirc">
+    <h2 class="recirc__title">Archive by month</h2>
+    <ul class="stack" style="margin-top:var(--s3)">
+      {months.map((m) => {
+        const [y, mo] = m.split('-');
+        return <li><a href={`/news/${y}/${mo}/`}>{MONTHS[Number(mo) - 1]} {y}</a></li>;
+      })}
+    </ul>
+  </section>
+
+  <RecircList title="Most targeted sectors" items={mostActive(5)} />
+</BaseLayout>

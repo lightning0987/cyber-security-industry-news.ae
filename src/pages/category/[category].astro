@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import RecircList from '../../components/RecircList.astro';
+import { ROUTES } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription } from '../../lib/seo.mjs';
+import { CATEGORIES, MONTHS, sortNews, newsCard } from '../../lib/news.mjs';
+import { mostActive } from '../../lib/related.mjs';
+
+export async function getStaticPaths() {
+  const all = await getCollection('news');
+  // Рубрика создаётся только при наличии материалов: пустая была бы заготовкой.
+  const used = [...new Set(all.map((e) => e.data.category))];
+  return used.map((category) => ({
+    params: { category },
+    props: { category, entries: sortNews(all.filter((e) => e.data.category === category)), used },
+  }));
+}
+
+const { category, entries, used } = Astro.props;
+const cat = CATEGORIES[category];
+
+const title = buildTitle(`UAE ${cat.label} News and Data: ${entries.length} Reports`);
+const description = buildDescription(`${cat.blurb} ${entries.length} reports published.`);
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'News', href: '/news/' },
+  { label: cat.label, href: `/category/${category}/` },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: category }}>
+  <h1>UAE {cat.label}</h1>
+
+  <div class="byline">
+    <span class="byline__tag">Category</span>
+    <span class="byline__sep">/</span>
+    <a href="/news/">All news</a>
+    <span class="byline__sep">/</span>
+    <span>{entries.length} reports</span>
+  </div>
+
+  <p class="lede" style="max-width:var(--measure)">{cat.blurb}</p>
+
+  <nav class="chip-rail" aria-label="Categories" style="border-bottom:0;margin-bottom:var(--s4)">
+    {used.map((c) => (
+      <a class="chip" href={`/category/${c}/`} aria-current={c === category ? 'page' : undefined}>
+        {CATEGORIES[c].label}
+      </a>
+    ))}
+  </nav>
+
+  <RecircList title={`${cat.label} reports`} items={entries.map(newsCard)} />
+  <section class="recirc">
+    <h2 class="recirc__title">Archive by month</h2>
+    <ul class="stack" style="margin-top:var(--s3)">
+      {[...new Set(entries.map((e) => e.data.published.slice(0, 7)))].sort().reverse().map((m) => {
+        const [y, mo] = m.split('-');
+        return <li><a href={`/news/${y}/${mo}/`}>{MONTHS[Number(mo) - 1]} {y}</a></li>;
+      })}
+    </ul>
+  </section>
+
+  <RecircList title="Most targeted sectors" items={mostActive(5)} />
+</BaseLayout>

@@ -1,0 +1,53 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import RecircList from '../../../components/RecircList.astro';
+import { ROUTES } from '../../../lib/routes.mjs';
+import { buildTitle, buildDescription } from '../../../lib/seo.mjs';
+import { MONTHS, sortNews, newsCard } from '../../../lib/news.mjs';
+import { mostActive } from '../../../lib/related.mjs';
+
+export async function getStaticPaths() {
+  const all = await getCollection('news');
+  const keys = [...new Set(all.map((e) => e.data.published.slice(0, 7)))];
+  return keys.map((k) => {
+    const [year, month] = k.split('-');
+    return {
+      params: { year, month },
+      props: { year, month, entries: sortNews(all.filter((e) => e.data.published.startsWith(k))) },
+    };
+  });
+}
+
+const { year, month, entries } = Astro.props;
+const monthName = MONTHS[Number(month) - 1];
+
+const title = buildTitle(`UAE Cyber News ${monthName} ${year}: ${entries.length} Reports`);
+const description = buildDescription(
+  `${entries.length} reports on UAE ransomware activity and regulation published in ${monthName} ${year}, drawn from dated leak-site monitoring snapshots.`,
+);
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'News', href: '/news/' },
+  { label: `${monthName} ${year}`, href: `/news/${year}/${month}/` },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: `${year}-${month}` }}>
+  <h1>UAE Cyber News: {monthName} {year}</h1>
+
+  <div class="byline">
+    <span class="byline__tag">Archive</span>
+    <span class="byline__sep">/</span>
+    <a href="/news/">All news</a>
+    <span class="byline__sep">/</span>
+    <span>{entries.length} reports</span>
+  </div>
+
+  <p class="lede" style="max-width:var(--measure)">
+    Reports published in {monthName} {year}. Each cites the snapshot date it was written from,
+    because figures move as the underlying data is refreshed.
+  </p>
+
+  <RecircList title={`Published in ${monthName} ${year}`} items={entries.map(newsCard)} />
+  <RecircList title="Most targeted sectors" items={mostActive(5)} />
+</BaseLayout>

@@ -15,8 +15,27 @@
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const CONTENT = resolve(process.cwd(), 'src/content/pages');
 const BRIEFS = resolve(process.cwd(), 'briefs');
+
+/**
+ * Что и по каким правилам проверяем.
+ *
+ * Объёмы разные: T1 по разделу 6.2 ТЗ 250–400 слов, T2 по 6.3 — 600–900,
+ * T3 по части 2 — от 1200. Стилевые правила общие для всех.
+ *
+ * Сверка чисел устроена по-разному. У страниц данных есть бриф, и число
+ * сверяется с ним один к одному. У новостей и гайдов брифа нет, поэтому
+ * допустимым считается любое число, встречающееся хоть в одном брифе или в
+ * карте сущностей: это весь набор фактов, которым сайт вообще располагает.
+ */
+const SETS = [
+  { dir: 'src/content/pages', words: [250, 400], h2: 3, briefPerFile: true, maxSentence: 20, claimWording: true },
+  { dir: 'src/content/news', words: null, h2: null, briefPerFile: false, maxSentence: 22, claimWording: true },
+  // Гайды описывают регуляторные тексты. Юридические формулировки длиннее, а
+  // «personal data breach» — это термин закона, а не заявление вымогателя,
+  // поэтому проверка формулировки заявлений сюда не применяется.
+  { dir: 'src/content/guides', words: [1000, 2600], h2: null, briefPerFile: false, maxSentence: 26, claimWording: false },
+];
 
 const CRITICAL = 'Critical';
 const MAJOR = 'Major';
@@ -48,22 +67,50 @@ function numbersInBrief(brief) {
 const problems = [];
 const add = (file, severity, message) => problems.push({ file, severity, message });
 
-if (!existsSync(CONTENT)) {
-  console.log('lint:content — каталог src/content/pages/ пуст, проверять нечего');
-  process.exit(0);
+/** Все числа из всех брифов и карты сущностей: общий запас фактов сайта. */
+function globalNumbers() {
+  const out = new Set();
+  const collect = (text) => {
+    for (const m of text.matchAll(/\d+(?:\.\d+)?/g)) out.add(m[0].replace(/^0+(?=\d)/, ''));
+  };
+  if (existsSync(BRIEFS)) {
+    for (const f of readdirSync(BRIEFS).filter((x) => x.endsWith('.json'))) {
+      collect(readFileSync(resolve(BRIEFS, f), 'utf8'));
+    }
+  }
+  const em = resolve(process.cwd(), 'src/data/entity-map.json');
+  if (existsSync(em)) collect(readFileSync(em, 'utf8'));
+  return out;
 }
 
-const files = readdirSync(CONTENT).filter((f) => f.endsWith('.md'));
-if (files.length === 0) {
+const GLOBAL_NUMBERS = globalNumbers();
+
+const targets = [];
+for (const set of SETS) {
+  const dir = resolve(process.cwd(), set.dir);
+  if (!existsSync(dir)) continue;
+  for (const f of readdirSync(dir).filter((x) => x.endsWith('.md'))) targets.push({ ...set, file: f, dir });
+}
+
+if (targets.length === 0) {
   console.log('lint:content — материалов пока нет');
   process.exit(0);
 }
 
-for (const file of files) {
-  const raw = readFileSync(resolve(CONTENT, file), 'utf8');
+for (const target of targets) {
+  const { file, dir, briefPerFile } = target;
+  const raw = readFileSync(resolve(dir, file), 'utf8');
   const fm = raw.match(/^---\n([\s\S]*?)\n---\n/);
   const body = fm ? raw.slice(fm[0].length) : raw;
-  const prose = body.replace(/^#{1,6} .*$/gm, '').replace(/^\s*\d+\.\s/gm, '');
+  // Синтаксис markdown не должен попадать в подсчёт слов и предложений:
+  // [текст](/ссылка) это одно слово для читателя и три для наивного split.
+  const prose = body
+    .replace(/^#{1,6} .*$/gm, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/^\s*[-*]\s/gm, '')
+    .replace(/^\s*\d+\.\s/gm, '')
+    .replace(/^>\s?/gm, '')
+    .replace(/\*\*([^*]+)\*\*/g, '$1');
 
   // ── Символы тире ──
   if (/[—–]/.test(raw)) add(file, CRITICAL, 'Длинное или короткое тире. Точка и новое предложение, скобки или двоеточие.');
@@ -74,27 +121,40 @@ for (const file of files) {
   // ── Заголовки ──
   if (/^# /m.test(body)) add(file, CRITICAL, 'H1 в теле: он уже есть на странице.');
   const h2 = (body.match(/^## /gm) ?? []).length;
-  if (h2 !== 3) add(file, MAJOR, `Секций H2: ${h2}, ожидается 3.`);
+  if (target.h2 !== null && h2 !== target.h2) add(file, MAJOR, `Секций H2: ${h2}, ожидается ${target.h2}.`);
+  if (target.h2 === null && h2 < 3) add(file, MAJOR, `Секций H2: ${h2}, нужно минимум 3.`);
 
   // ── Объём ──
+  const tier = (fm?.[1] ?? '').match(/^tier: "(T\d)"/m)?.[1] ?? null;
+  const range = target.words ?? (tier === 'T1' ? [250, 400] : [600, 950]);
   const words = prose.split(/\s+/).filter(Boolean).length;
-  if (words < 250 || words > 400) add(file, MAJOR, `Слов: ${words}, требуется 250–400.`);
+  if (words < range[0] || words > range[1]) {
+    add(file, MAJOR, `Слов: ${words}, требуется ${range[0]}–${range[1]}${tier ? ` (${tier})` : ''}.`);
+  }
 
   // ── Абзацы ──
-  for (const para of body.split(/\n\s*\n/)) {
+  const bodyBeforeSources = body.split(/^## Sources\s*$/m)[0];
+  for (const para of bodyBeforeSources.split(/\n\s*\n/)) {
     const p = para.trim();
-    if (!p || p.startsWith('#') || /^\d+\./.test(p) || p.startsWith('---')) continue;
+    if (!p || p.startsWith('#') || /^\d+\./.test(p) || p.startsWith('-') || p.startsWith('---')) continue;
 
     const opening = p.toLowerCase();
     for (const bad of FORBIDDEN_OPENINGS) {
       if (opening.startsWith(bad)) add(file, CRITICAL, `Запрещённое начало абзаца: "${bad}".`);
     }
 
-    const sentences = p.split(/(?<=[.!?])\s+/).filter(Boolean);
+    const clean = p
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/^\s*[-*]\s/gm, '')
+      .replace(/^>\s?/gm, '')
+      .replace(/\*\*([^*]+)\*\*/g, '$1');
+    const sentences = clean.split(/(?<=[.!?])\s+/).filter(Boolean);
     if (sentences.length > 4) add(file, MAJOR, `Абзац из ${sentences.length} предложений, максимум 4.`);
     for (const s of sentences) {
       const n = s.split(/\s+/).filter(Boolean).length;
-      if (n > 20) add(file, MAJOR, `Предложение из ${n} слов: "${s.slice(0, 60)}…"`);
+      if (n > target.maxSentence) {
+        add(file, MAJOR, `Предложение из ${n} слов: "${s.slice(0, 60)}…"`);
+      }
     }
   }
 
@@ -106,16 +166,18 @@ for (const file of files) {
   for (const w of FILLER) {
     if (lower.includes(w)) add(file, CRITICAL, `Стоп-слово проекта: "${w}".`);
   }
-  if (CLAIM_SAFE.test(prose)) {
+  if (target.claimWording && CLAIM_SAFE.test(prose)) {
     add(file, CRITICAL, 'Заявление вымогателя подано как подтверждённый факт. Нужно "claimed", не "breached".');
   }
 
   // ── Сверка чисел с брифом ──
   const briefPath = resolve(BRIEFS, file.replace(/\.md$/, '.json'));
-  if (!existsSync(briefPath)) {
+  if (briefPerFile && !existsSync(briefPath)) {
     add(file, MAJOR, `Бриф ${file.replace(/\.md$/, '.json')} не найден — числа не с чем сверить. Запусти npm run briefs.`);
   } else {
-    const allowed = numbersInBrief(JSON.parse(readFileSync(briefPath, 'utf8')));
+    const allowed = briefPerFile
+      ? numbersInBrief(JSON.parse(readFileSync(briefPath, 'utf8')))
+      : GLOBAL_NUMBERS;
     const seen = new Set();
     for (const m of prose.matchAll(/\d+(?:\.\d+)?/g)) {
       const n = m[0].replace(/^0+(?=\d)/, '');
@@ -130,7 +192,7 @@ for (const file of files) {
 const crit = problems.filter((p) => p.severity === CRITICAL);
 const major = problems.filter((p) => p.severity === MAJOR);
 
-console.log(`lint:content — ${files.length} файл(ов)`);
+console.log(`lint:content — ${targets.length} файл(ов)`);
 if (problems.length === 0) {
   console.log('  ✓ замечаний нет');
   process.exit(0);

@@ -1,0 +1,94 @@
+---
+/**
+ * Страница материала. URL плоский: /<slug>/ по разделу 5 ТЗ.
+ * Статические маршруты (/about/, /guides/ и прочие) имеют приоритет в Astro,
+ * а getStaticPaths отдаёт только реальные слаги, поэтому пересечений нет.
+ */
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import RecircList from '../components/RecircList.astro';
+import { ROUTES } from '../lib/routes.mjs';
+import { formatDayLong, AUTHOR } from '../lib/seo.mjs';
+import { CATEGORIES, relatedNews, sortNews, newsCard } from '../lib/news.mjs';
+import { mostActive } from '../lib/related.mjs';
+import { snapshotMeta } from '../lib/incidents.mjs';
+
+export async function getStaticPaths() {
+  const all = await getCollection('news');
+  return all.map((entry) => ({ params: { slug: entry.id }, props: { entry, all } }));
+}
+
+const { entry, all } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const cat = CATEGORIES[d.category];
+
+const related = relatedNews(entry, all, 5);
+const sameCategory = sortNews(all.filter((x) => x.id !== entry.id && x.data.category === d.category))
+  .slice(0, 4).map(newsCard);
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'News', href: '/news/' },
+  { label: cat.label, href: `/category/${d.category}/` },
+];
+
+const schemas = [{
+  '@context': 'https://schema.org',
+  '@type': 'NewsArticle',
+  headline: d.h1,
+  description: d.description,
+  datePublished: d.published,
+  dateModified: d.published,
+  articleSection: cat.label,
+  author: { '@type': 'Organization', name: AUTHOR },
+  publisher: { '@type': 'Organization', name: 'Marsad Cyber' },
+  isAccessibleForFree: true,
+}];
+---
+<BaseLayout
+  title={d.title}
+  description={d.description}
+  crumbs={crumbs}
+  schemas={schemas}
+  current={{ kind: 'news', slug: entry.id }}
+>
+  <h1>{d.h1}</h1>
+
+  <div class="byline">
+    <a class="byline__tag" href={`/category/${d.category}/`}>{cat.label}</a>
+    <span class="byline__sep">/</span>
+    <span>By {AUTHOR}</span>
+    <span class="byline__sep">/</span>
+    <a href={`/news/${d.published.slice(0, 4)}/${d.published.slice(5, 7)}/`}>
+      <time datetime={d.published}>{formatDayLong(d.published)}</time>
+    </a>
+    <span class="byline__sep">/</span>
+    <span>{d.tier === 'T1' ? 'Brief' : 'Analysis'}</span>
+  </div>
+
+  <p class="lede" style="max-width:var(--measure)">{d.dek}</p>
+
+  <div class="prose guide-body"><Content /></div>
+
+  <section class="sources">
+    <h2 class="recirc__title">Sources</h2>
+    <ul>
+      {d.sources.map((s) => (
+        <li>
+          {s.href.startsWith('http')
+            ? <a href={s.href} rel="noopener">{s.label}</a>
+            : <a href={s.href}>{s.label}</a>}
+        </li>
+      ))}
+      <li>
+        Snapshot taken <time datetime={snapshotMeta.fetchedAt}>{formatDayLong(snapshotMeta.fetchedAt.slice(0, 10))}</time>,
+        <a href={ROUTES.methodology()}> method and limitations</a>.
+      </li>
+    </ul>
+  </section>
+
+  <RecircList title="Related coverage" items={related} more={{ href: '/news/' }} />
+  <RecircList title={`More from ${cat.label}`} items={sameCategory} more={{ href: `/category/${d.category}/` }} />
+  <RecircList title="Most targeted sectors" items={mostActive(5)} />
+</BaseLayout>

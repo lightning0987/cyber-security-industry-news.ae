@@ -394,7 +394,12 @@ th:first-child, td:first-child { padding-left: var(--s2); }
 
 .layout {
   display: grid;
-  grid-template-columns: 1fr;
+  /*
+   * minmax(0, 1fr), а не 1fr. У трека 1fr неявный min-width: auto, поэтому
+   * широкая таблица растягивает колонку и вся страница уезжает в горизонтальный
+   * скролл. На 390px это ломало заголовок, текст и таблицы разом.
+   */
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--s7);
   align-items: start;
 }
@@ -644,4 +649,113 @@ h1 + .byline { margin-top: var(--s4); }
   padding: var(--s3) var(--s4);
   margin-top: var(--s4);
   font-size: var(--size-small);
+}
+
+/* ═══ Врезка ключевых фактов в начале гайда ═══════════════════════ */
+.keyfacts {
+  border-top: 2px solid var(--rule-ink);
+  border-bottom: 1px solid var(--rule);
+  margin: var(--s6) 0;
+  padding-bottom: var(--s2);
+  max-width: var(--measure);
+}
+.keyfacts__title {
+  font-size: var(--size-micro);
+  letter-spacing: var(--track-caps);
+  text-transform: uppercase;
+  font-weight: 700;
+  padding-top: var(--s3);
+  margin-bottom: var(--s3);
+}
+.keyfacts dl { margin: 0; }
+.keyfacts__row {
+  display: grid;
+  grid-template-columns: 11rem 1fr;
+  gap: var(--s4);
+  padding: var(--s2) 0;
+  border-top: 1px solid var(--rule);
+  font-size: var(--size-small);
+}
+.keyfacts__row:first-child { border-top: 0; }
+.keyfacts dt {
+  font-size: var(--size-micro);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  font-weight: 650;
+}
+.keyfacts dd { margin: 0; }
+@media (max-width: 40rem) {
+  .keyfacts__row { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* ═══ FAQ. Аккордеон на <details>, без единой строки JS ═══════════ */
+.faq { margin-top: var(--s7); max-width: var(--measure); }
+.faq details { border-bottom: 1px solid var(--rule); }
+.faq summary {
+  cursor: pointer;
+  padding: var(--s3) var(--s5) var(--s3) 0;
+  font-weight: 650;
+  font-size: var(--size-small);
+  text-transform: uppercase;
+  letter-spacing: var(--track-heading);
+  list-style: none;
+  position: relative;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: '+';
+  position: absolute;
+  right: 0; top: var(--s3);
+  font-family: var(--font-mono);
+  font-size: 1.125rem;
+  color: var(--accent);
+  line-height: 1;
+}
+.faq details[open] summary::after { content: '\2212'; }
+.faq summary:hover { color: var(--accent); }
+.faq details p {
+  padding: 0 var(--s5) var(--s4) 0;
+  font-size: var(--size-small);
+  line-height: var(--leading-body);
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* Врезка в теле гайда: цитата первоисточника или предупреждение */
+.guide-body blockquote p { margin: 0; }
+.guide-body blockquote strong { color: var(--ink); }
+
+/* ═══ Источники под материалом ════════════════════════════════════ */
+.sources { margin-top: var(--s7); max-width: var(--measure); }
+.sources ul { list-style: none; padding: 0; margin-top: var(--s3); }
+.sources li {
+  padding: var(--s2) 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: var(--size-small);
+  color: var(--ink-muted);
+}
+.sources a { color: var(--ink); }
+
+/* ═══ Мобильные уточнения ═════════════════════════════════════════ */
+@media (max-width: 47.9375rem) {
+  /* Заголовки капсом на узком экране режут длинные слова */
+  h1 { font-size: 1.625rem; hyphens: auto; overflow-wrap: break-word; }
+  h2 { font-size: 1.1875rem; }
+
+  /* Подпись переносится, а не обрезается */
+  .byline { gap: var(--s2); font-size: 0.625rem; }
+  .byline__sep { display: none; }
+
+  /* Статбар в две колонки вместо ряда */
+  .statbar { grid-template-columns: repeat(2, 1fr); }
+  .stat { border-right: 0; border-bottom: 1px solid var(--rule); }
+  .stat__value { font-size: 2.25rem; }
+
+  /* Дорожка доли на узком экране съедает место у чисел */
+  .track-col { display: none; }
+
+  /* Блоки рециркуляции: число уже, заголовок шире */
+  .recirc-list a { grid-template-columns: 2.25rem 1fr; gap: var(--s3); }
+  .recirc-item__fig { font-size: 1.125rem; }
 }
