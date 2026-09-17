@@ -73,6 +73,15 @@ export function run({ pages }) {
       }
     }
 
+    // Единственный допустимый скрипт — сортировка таблиц, и он не участвует
+    // в навигации и не несёт данных. Всё остальное запрещено.
+    for (const sc of doc.querySelectorAll('script[src]')) {
+      const src = sc.getAttribute('src') ?? '';
+      if (src !== '/js/table-sort.mjs') {
+        failures.push(`${path}: посторонний скрипт ${src}`);
+      }
+    }
+
     // Навигация через JS: краулер таких ссылок не видит.
     for (const el of doc.querySelectorAll('[onclick]')) {
       failures.push(`${path}: обработчик onclick на <${el.tagName.toLowerCase()}> — навигация обязана быть в href`);

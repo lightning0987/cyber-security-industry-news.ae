@@ -15,6 +15,7 @@
 import { attributedIncidents } from './incidents.mjs';
 import { bySector, byPeriod, byGroup, groupsWithPages, inSector, inPeriod, inGroup } from './aggregate.mjs';
 import { ROUTES, PERIODS } from './routes.mjs';
+import { sectorPhoto } from './images.mjs';
 
 const inc = attributedIncidents;
 const SECTORS = bySector(inc);
@@ -26,6 +27,8 @@ const pagedSet = new Set(PAGED.map((g) => g.slug));
 const sectorCard = (s) => ({
   href: ROUTES.sector(s.slug), title: s.label, figure: s.count,
   meta: 'Sector', kind: 'sector', slug: s.slug,
+  thumb: sectorPhoto(s.slug)?.thumb ?? null,
+  thumbAlt: sectorPhoto(s.slug)?.alt ?? null,
 });
 const periodCard = (p) => ({
   href: ROUTES.period(p.slug), title: p.label, figure: p.count,

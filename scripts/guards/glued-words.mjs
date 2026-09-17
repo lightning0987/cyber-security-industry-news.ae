@@ -23,6 +23,10 @@ function textOf(root) {
     for (const child of node.childNodes ?? []) {
       const tag = child.tagName?.toLowerCase?.();
       if (tag === 'script' || tag === 'style' || tag === 'code') continue;
+      // Блоки атрибуции содержат имена людей, а не прозу: LoboStudio и LaRussa
+      // пишутся именно так, и проверять их на склейку бессмысленно.
+      const cls = (child.className ?? '').toString();
+      if (cls.includes('hero__credit') || cls.includes('credits-')) continue;
       if (child.nodeType === 3) out.push(child.textContent ?? '');
       else walk(child);
     }

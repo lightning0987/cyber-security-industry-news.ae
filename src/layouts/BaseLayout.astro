@@ -38,5 +38,8 @@ const allSchemas = [
       </div>
     </main>
     <SiteFooter />
+    {/* Прогрессивное улучшение: без него таблицы читаются полностью,
+        потому что все значения уже в HTML. Ничего не подгружает. */}
+    <script type="module" src="/js/table-sort.mjs"></script>
   </body>
 </html>

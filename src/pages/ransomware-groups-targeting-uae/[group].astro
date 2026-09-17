@@ -72,22 +72,23 @@ const more = moreOfKind(current, 5);
 const active = mostActive(5);
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={current}>
-  <h1>{label} Ransomware Activity in the UAE</h1>
+  <div class="page-head">
+    <h1>{label} Ransomware Activity in the UAE</h1>
 
-  <div class="byline">
+    <div class="byline">
     <span class="byline__tag">Ransomware group</span>
     <span class="byline__sep">/</span>
     <a href={ROUTES.groupsHub()}>Groups targeting the UAE</a>
     <span class="byline__sep">/</span>
     <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
-  </div>
-
-  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    </div>
+    <p class="lede">
     {label} has claimed <strong class="num">{count}</strong> organisations in the United Arab
     Emirates, which is <strong class="num">{share}%</strong> of all attributed UAE claims.
     {topSector && <> Its activity concentrates in {topSector.label}, accounting for <strong class="num">{topSector.count}</strong> of those claims.</>}
     {span.first && <> The first {label} claim against a UAE organisation was recorded on <time datetime={span.first}>{formatDayLong(span.first)}</time>, the most recent on <time datetime={span.last}>{formatDayLong(span.last)}</time>.</>}
-  </p>
+    </p>
+  </div>
 
   <div class="section reveal">
     <StatBar stats={[

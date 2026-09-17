@@ -1,0 +1,33 @@
+---
+/**
+ * Заглавное изображение материала.
+ *
+ * Размеры проставлены явно: без них браузер не знает высоту до загрузки и
+ * страница прыгает, что бьёт по CLS. Первый экран грузится жадно, всё
+ * остальное на странице — лениво.
+ */
+import { photo } from '../lib/images.mjs';
+
+const { slug, eager = true, caption = null } = Astro.props;
+const p = photo(slug);
+---
+{p && (
+  <figure class="hero">
+    <img
+      src={p.hero}
+      alt={p.alt}
+      width="1200"
+      height="675"
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      decoding="async"
+    />
+    <figcaption>
+      {caption ?? p.alt}
+      <span class="hero__credit">
+        Photo: {p.credit.author ? <a href={p.credit.author_url} rel="noopener">{p.credit.author}</a> : 'Unsplash'}
+        {' '}via <a href={p.credit.source_url} rel="noopener">Unsplash</a>
+      </span>
+    </figcaption>
+  </figure>
+)}

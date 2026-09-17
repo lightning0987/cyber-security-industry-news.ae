@@ -29,17 +29,18 @@ const crumbs = [
 ];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: category }}>
-  <h1>UAE {cat.label}</h1>
+  <div class="page-head">
+    <h1>UAE {cat.label}</h1>
 
-  <div class="byline">
+    <div class="byline">
     <span class="byline__tag">Category</span>
     <span class="byline__sep">/</span>
     <a href="/news/">All news</a>
     <span class="byline__sep">/</span>
     <span>{entries.length} reports</span>
+    </div>
+    <p class="lede">{cat.blurb}</p>
   </div>
-
-  <p class="lede" style="max-width:var(--measure)">{cat.blurb}</p>
 
   <nav class="chip-rail" aria-label="Categories" style="border-bottom:0;margin-bottom:var(--s4)">
     {used.map((c) => (

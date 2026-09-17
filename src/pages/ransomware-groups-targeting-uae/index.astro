@@ -40,7 +40,8 @@ const crumbs = [
 ];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={{ kind: 'hub', slug: 'groups' }}>
-  <h1>Ransomware Groups Targeting the UAE</h1>
+  <div class="page-head">
+    <h1>Ransomware Groups Targeting the UAE</h1>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
     <strong class="num">{groups.length}</strong> distinct ransomware groups have claimed at least
@@ -49,7 +50,8 @@ const crumbs = [
     <strong class="num">{paged.length}</strong> groups have claimed two or more. The remaining{' '}
     <strong class="num">{single.length}</strong> groups appear once each and are listed below
     without a dedicated page.
-  </p>
+    </p>
+  </div>
 
   <div class="section reveal">
     <StatBar stats={[

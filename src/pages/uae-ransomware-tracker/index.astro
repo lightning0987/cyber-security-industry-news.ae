@@ -4,6 +4,7 @@ import StatBar from '../../components/StatBar.astro';
 import BreakdownTable from '../../components/BreakdownTable.astro';
 import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
+import TimelineChart from '../../components/TimelineChart.astro';
 import { allIncidents, attributedIncidents, unverifiedIncidents, unclassifiedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { bySector, byPeriod, byGroup, groupsWithPages, top } from '../../lib/aggregate.mjs';
 import { ROUTES, PERIODS } from '../../lib/routes.mjs';
@@ -44,7 +45,8 @@ const crumbs = [
 ];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={{ kind: 'hub', slug: 'tracker' }}>
-  <h1>UAE Ransomware Attack Tracker</h1>
+  <div class="page-head">
+    <h1>UAE Ransomware Attack Tracker</h1>
 
   <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
     Ransomware groups have claimed <strong class="num">{total}</strong> organisations in the
@@ -54,7 +56,8 @@ const crumbs = [
     <strong class="num">{pagedGroups.length}</strong> distinct groups have claimed two or more
     UAE organisations. Figures are drawn from leak-site monitoring as of {asOf} and exclude
     claims that carry no verifiable link to the UAE.
-  </p>
+    </p>
+  </div>
 
   <div class="section reveal">
     <StatBar stats={[
@@ -96,6 +99,11 @@ const crumbs = [
       2020 to 2022 combined to <span class="num">{periods.at(-2).count}</span> in 2025.
       Counts for {currentYear} cover a partial year and will rise as the year completes.
     </p>
+    <TimelineChart
+      rows={periods.map((p) => ({ label: p.label.replace('–', '-'), count: p.count }))}
+      caption="Attributed ransomware claims against UAE organisations by period"
+    />
+
     <BreakdownTable
       caption="Attributed ransomware claims against UAE organisations by period"
       rows={periods.map((p) => ({ slug: p.slug, label: p.label, count: p.count }))}

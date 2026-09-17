@@ -5,6 +5,7 @@ description: "DIFC and ADGM each run a data protection regime separate from the 
 summary: "The Dubai International Financial Centre and Abu Dhabi Global Market each operate a data protection regime of their own, separate from the federal UAE PDPL. Both are modelled on the European General Data Protection Regulation, but they have different supervisors, different texts and different penalties."
 standard: "DIFC and ADGM"
 order: 4
+image: "financial-district"
 updated: "2026-09-17"
 keyFacts:
   - label: "DIFC instrument"

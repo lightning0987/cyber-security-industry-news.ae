@@ -14,6 +14,11 @@ const isCurrent = (href) => path === href;
       ))}
     </nav>
   </div>
+</header>
+
+{/* Лента секторов вынесена из тёмной шапки: на чёрном фоне чипы нечитаемы,
+    а у референса это отдельная светлая полоса под навигацией. */}
+<div class="chip-band">
   <div class="container chip-rail-wrap">
     <nav class="chip-rail" aria-label="Sectors">
       {CHIP_RAIL.map((chip) => (
@@ -21,4 +26,4 @@ const isCurrent = (href) => path === href;
       ))}
     </nav>
   </div>
-</header>
+</div>

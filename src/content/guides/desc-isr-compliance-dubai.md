@@ -5,6 +5,7 @@ description: "DESC ISR v3 sets 13 control domains for Dubai government entities 
 summary: "The Dubai Electronic Security Center issues the Information Security Regulation, now at version 3. It binds Dubai government entities, semi-government organisations, cloud providers serving Dubai government, and suppliers handling government data."
 standard: "DESC ISR v3"
 order: 1
+image: "dubai-skyline"
 updated: "2026-09-17"
 keyFacts:
   - label: "Issuing body"

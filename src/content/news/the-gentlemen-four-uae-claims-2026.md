@@ -5,6 +5,7 @@ description: "The Gentlemen has claimed 4 UAE organisations since February 2026,
 dek: "The Gentlemen reached ninth place among 46 ransomware groups tracked against UAE targets without a single claim before February 2026. Half its claims fall in Transportation, an unusual concentration on a tracker where most groups spread thinly."
 category: "ransomware"
 tier: "T1"
+image: "container-port"
 published: "2026-09-17"
 entities:
   sectors: ["transportation", "professional-services", "retail-ecommerce"]

@@ -5,6 +5,7 @@ import RecircList from '../../components/RecircList.astro';
 import { ROUTES } from '../../lib/routes.mjs';
 import { buildTitle, buildDescription } from '../../lib/seo.mjs';
 import { latestActivity } from '../../lib/related.mjs';
+import { photo } from '../../lib/images.mjs';
 
 const guides = (await getCollection('guides')).sort((a, b) => a.data.order - b.data.order);
 const title = buildTitle(`UAE Security Regulation Guides: ${guides.length} Frameworks Explained`);
@@ -14,20 +15,21 @@ const description = buildDescription(
 const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Guides', href: '/guides/' }];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'guides', slug: 'hub' }}>
-  <h1>UAE Security Regulation Guides</h1>
+  <div class="page-head">
+    <h1>UAE Security Regulation Guides</h1>
 
-  <div class="byline">
+    <div class="byline">
     <span class="byline__tag">Guides</span>
     <span class="byline__sep">/</span>
     <span>{guides.length} frameworks</span>
-  </div>
-
-  <p class="lede" style="max-width:var(--measure)">
+    </div>
+    <p class="lede" style="max-width:var(--measure)">
     These guides explain what each UAE security and data protection framework requires, who
     falls inside its scope, and what evidence an assessor expects to see. They describe
     obligations. Marsad Cyber holds no accreditation from any UAE authority and does not
     offer certification or compliance assessment.
-  </p>
+    </p>
+  </div>
 
   <section class="recirc">
     <h2 class="recirc__title">All guides</h2>
@@ -35,7 +37,9 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Guides', href:
       {guides.map((g, i) => (
         <li>
           <a href={`/guides/${g.id}/`}>
-            <span class="recirc-item__fig">{String(i + 1).padStart(2, '0')}</span>
+            {photo(g.data.image)
+              ? <img class="recirc-thumb" src={photo(g.data.image).thumb} alt={photo(g.data.image).alt} width="88" height="50" loading="lazy" decoding="async" />
+              : <span class="recirc-item__fig">{String(i + 1).padStart(2, '0')}</span>}
             <span>
               <span class="recirc-item__title">{g.data.h1}</span>
               <span class="recirc-item__meta">{g.data.standard} · updated {g.data.updated}</span>

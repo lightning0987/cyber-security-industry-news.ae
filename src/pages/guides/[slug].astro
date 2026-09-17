@@ -2,9 +2,11 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import RecircList from '../../components/RecircList.astro';
+import Hero from '../../components/Hero.astro';
 import { ROUTES } from '../../lib/routes.mjs';
 import { formatDayLong, AUTHOR } from '../../lib/seo.mjs';
 import { mostActive, latestActivity } from '../../lib/related.mjs';
+import { photo } from '../../lib/images.mjs';
 
 export async function getStaticPaths() {
   const guides = await getCollection('guides');
@@ -21,6 +23,7 @@ const others = guides
   .map((g) => ({
     href: `/guides/${g.id}/`, title: g.data.h1, figure: String(g.data.order).padStart(2, '0'),
     meta: g.data.standard,
+    thumb: photo(g.data.image)?.thumb ?? null, thumbAlt: photo(g.data.image)?.alt ?? null,
   }));
 
 const crumbs = [
@@ -55,19 +58,23 @@ const schemas = [{
   schemas={schemas}
   current={{ kind: 'guide', slug: entry.id }}
 >
-  <h1>{d.h1}</h1>
-
-  <div class="byline">
+  <div class="page-head">
+    <h1>{d.h1}</h1>
+    <div class="byline">
     <span class="byline__tag">Guide</span>
     <span class="byline__sep">/</span>
     <span>{d.standard}</span>
     <span class="byline__sep">/</span>
     <span>By {AUTHOR}</span>
     <span class="byline__sep">/</span>
-    <span>Updated <time datetime={d.updated}>{formatDayLong(d.updated)}</time></span>
+      <span>Updated <time datetime={d.updated}>{formatDayLong(d.updated)}</time></span>
+    </div>
+    <p class="lede">{d.summary}</p>
   </div>
 
-  <p class="lede" style="max-width:var(--measure)">{d.summary}</p>
+  <div class="section" style="padding-bottom:var(--s3)">
+    <Hero slug={d.image} />
+  </div>
 
   <div class="keyfacts">
     <h2 class="keyfacts__title">{d.standard} at a glance</h2>

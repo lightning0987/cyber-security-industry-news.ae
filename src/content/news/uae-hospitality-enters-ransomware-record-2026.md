@@ -5,6 +5,7 @@ description: "Hospitality recorded no ransomware claims in the UAE across 2020 t
 dek: "Hospitality carried an empty record on this tracker for six years. Three claims arrived inside four months of 2026, each from a different ransomware group, which makes the arrival harder to read as one campaign."
 category: "threat-intel"
 tier: "T2"
+image: "hotel-lobby"
 published: "2026-09-17"
 entities:
   sectors: ["hospitality", "retail-ecommerce"]

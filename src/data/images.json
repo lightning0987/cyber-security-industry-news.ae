@@ -1,0 +1,148 @@
+{
+ "note": "Фотографии под Unsplash License: коммерческое использование разрешено без разрешения и без атрибуции. Авторы указываются на /credits/ по решению проекта, а не по требованию лицензии.",
+ "photos": [
+  {
+   "slug": "dubai-skyline",
+   "alt": "The Burj Khalifa rising above the illuminated skyline of Downtown Dubai at night",
+   "hero": "/images/photos/dubai-skyline-hero.jpg",
+   "thumb": "/images/photos/dubai-skyline-thumb.jpg",
+   "credit": {
+    "author": "ZQ Lee",
+    "author_url": "https://unsplash.com/@zqlee",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1559717201-fbb671ff56b7",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "abu-dhabi",
+   "alt": "The Abu Dhabi city skyline seen across the water in daylight",
+   "hero": "/images/photos/abu-dhabi-hero.jpg",
+   "thumb": "/images/photos/abu-dhabi-thumb.jpg",
+   "credit": {
+    "author": "Imtiyaz Ali",
+    "author_url": "https://unsplash.com/@imtiiiyaazz",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1613835579153-9bfe32e50da6",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "financial-district",
+   "alt": "Modern high-rise towers of a financial district against a hazy sky",
+   "hero": "/images/photos/financial-district-hero.jpg",
+   "thumb": "/images/photos/financial-district-thumb.jpg",
+   "credit": {
+    "author": "Vlad Ion",
+    "author_url": "https://unsplash.com/@vladion21",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1759494206301-24a67e3a8812",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "data-centre",
+   "alt": "Rows of server racks in a data centre with patch cables running between them",
+   "hero": "/images/photos/data-centre-hero.jpg",
+   "thumb": "/images/photos/data-centre-thumb.jpg",
+   "credit": {
+    "author": "Taylor Vick",
+    "author_url": "https://unsplash.com/@tvick",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1558494949-ef010cbdcc31",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "fibre-network",
+   "alt": "A bundle of fibre optic strands carrying blue light in a dark room",
+   "hero": "/images/photos/fibre-network-hero.jpg",
+   "thumb": "/images/photos/fibre-network-thumb.jpg",
+   "credit": {
+    "author": "Denny Müller",
+    "author_url": "https://unsplash.com/@redaquamedia",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1604869515882-4d10fa4b0492",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "container-port",
+   "alt": "A container ship loaded alongside a quay under floodlights at night",
+   "hero": "/images/photos/container-port-hero.jpg",
+   "thumb": "/images/photos/container-port-thumb.jpg",
+   "credit": {
+    "author": "LoboStudio Hamburg",
+    "author_url": "https://unsplash.com/@lobostudiohamburg",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1661756977826-c66970f2a2cb",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "factory",
+   "alt": "Robotic arms on an automated manufacturing line inside a factory",
+   "hero": "/images/photos/factory-hero.jpg",
+   "thumb": "/images/photos/factory-thumb.jpg",
+   "credit": {
+    "author": "Simon Kadula",
+    "author_url": "https://unsplash.com/@simonkadula",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1647427060118-4911c9821b82",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "hotel-lobby",
+   "alt": "The lounge area of a modern hotel with tables and low lighting",
+   "hero": "/images/photos/hotel-lobby-hero.jpg",
+   "thumb": "/images/photos/hotel-lobby-thumb.jpg",
+   "credit": {
+    "author": "Marek Okon",
+    "author_url": "https://unsplash.com/@marekokon",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1702814160779-4a88cfb330c7",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "hospital",
+   "alt": "An empty hospital corridor with seating along one wall",
+   "hero": "/images/photos/hospital-hero.jpg",
+   "thumb": "/images/photos/hospital-thumb.jpg",
+   "credit": {
+    "author": "Tasha Kostyuk",
+    "author_url": "https://unsplash.com/@tashakostyuk",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1777269749032-d8d458ae594d",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "government",
+   "alt": "The curved facade of a modern institutional building seen from below",
+   "hero": "/images/photos/government-hero.jpg",
+   "thumb": "/images/photos/government-thumb.jpg",
+   "credit": {
+    "author": "Peter Ivey-Hansen",
+    "author_url": "https://unsplash.com/@peteriveyphotography",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1554793000-245d3a3c2a51",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  },
+  {
+   "slug": "substation",
+   "alt": "An electrical substation with transmission pylons and overhead lines",
+   "hero": "/images/photos/substation-hero.jpg",
+   "thumb": "/images/photos/substation-thumb.jpg",
+   "credit": {
+    "author": "Sam LaRussa",
+    "author_url": "https://unsplash.com/@samlarussaphoto",
+    "source": "Unsplash",
+    "source_url": "https://unsplash.com/photos/photo-1646516447226-e2eb0e6e3f36",
+    "licence": "Unsplash License — free for commercial use, no permission needed"
+   }
+  }
+ ]
+}

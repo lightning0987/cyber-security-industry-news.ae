@@ -1,0 +1,46 @@
+---
+/**
+ * График динамики, inline-SVG (ТЗ 15.5).
+ *
+ * Значения подписаны текстом прямо в разметке, а не только закодированы
+ * геометрией: извлекатель, читающий HTML, должен получить числа, а не картинку.
+ * Ниже по странице те же числа повторяются таблицей — график здесь дубль.
+ */
+const { rows, caption, unit = 'claims' } = Astro.props;
+
+const W = 720, H = 240, PAD_L = 8, PAD_R = 8, PAD_T = 28, PAD_B = 42;
+const max = Math.max(1, ...rows.map((r) => r.count));
+const innerW = W - PAD_L - PAD_R;
+const innerH = H - PAD_T - PAD_B;
+const bandW = innerW / rows.length;
+const barW = Math.min(88, bandW * 0.58);
+
+const bars = rows.map((r, i) => {
+  const h = (r.count / max) * innerH;
+  return {
+    ...r,
+    x: PAD_L + bandW * i + (bandW - barW) / 2,
+    y: PAD_T + innerH - h,
+    h,
+    cx: PAD_L + bandW * i + bandW / 2,
+  };
+});
+---
+<figure class="chart">
+  <svg viewBox={`0 0 ${W} ${H}`} role="img" aria-label={caption} preserveAspectRatio="xMidYMid meet">
+    <title>{caption}</title>
+    <line x1={PAD_L} y1={PAD_T + innerH} x2={W - PAD_R} y2={PAD_T + innerH} class="chart__axis" />
+    {bars.map((b) => (
+      <g>
+        <rect x={b.x} y={b.y} width={barW} height={Math.max(b.h, b.count > 0 ? 2 : 0)} class="chart__bar" />
+        <text x={b.cx} y={b.y - 8} class="chart__value" text-anchor="middle">{b.count}</text>
+        <text x={b.cx} y={PAD_T + innerH + 22} class="chart__label" text-anchor="middle">{b.label}</text>
+      </g>
+    ))}
+  </svg>
+  <figcaption>
+    {caption}. Values in order: {bars.map((b, i) => (
+      <>{b.label} {b.count} {unit}{i < bars.length - 1 ? ', ' : '.'}</>
+    ))}
+  </figcaption>
+</figure>

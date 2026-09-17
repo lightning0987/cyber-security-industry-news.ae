@@ -15,7 +15,9 @@ const { title, items, more } = Astro.props;
       {items.map((item) => (
         <li>
           <a href={item.href}>
-            <span class="recirc-item__fig">{item.figure}</span>
+            {item.thumb
+              ? <img class="recirc-thumb" src={item.thumb} alt={item.thumbAlt ?? ''}  width="88" height="50" loading="lazy" decoding="async" />
+              : <span class="recirc-item__fig">{item.figure}</span>}
             <span>
               <span class="recirc-item__title">{item.title}</span>
               <span class="recirc-item__meta">

@@ -5,6 +5,7 @@ description: "DESC ISR v3, UAE IAS v2 and the UAE PDPL overlap in subject matter
 dek: "An organisation in Dubai can sit inside an emirate regulation, a federal standard and a federal data protection law at once. The three overlap in what they cover and share nothing in what they accept as evidence."
 category: "regulation"
 tier: "T2"
+image: "financial-district"
 published: "2026-09-17"
 entities:
   sectors: ["government-defense", "financial-services", "energy-utilities"]

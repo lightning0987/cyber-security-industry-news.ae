@@ -57,6 +57,9 @@ const ALLOWED_EXTERNAL_HOSTS = new Set([
   'uaelegislation.gov.ae',
   'creativecommons.org',
   'schema.org',
+  // Источник фотографий. Ссылки ведут на страницу автора и на карточку снимка:
+  // лицензия атрибуции не требует, но прослеживаемость источника — принцип сайта.
+  'unsplash.com', 'www.unsplash.com',
 ]);
 
 export const name = 'no-victim-data';

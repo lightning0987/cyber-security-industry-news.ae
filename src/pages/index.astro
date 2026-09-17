@@ -12,6 +12,8 @@ import { latestActivity } from '../lib/related.mjs';
 import { GUIDES } from '../lib/guides.mjs';
 import { getCollection } from 'astro:content';
 import { sortNews, newsCard } from '../lib/news.mjs';
+import Hero from '../components/Hero.astro';
+import { photo } from '../lib/images.mjs';
 
 const inc = attributedIncidents;
 const sectors = bySector(inc);
@@ -22,6 +24,10 @@ const thisYear = inc.filter((i) => i.year === 2026).length;
 const asOf = formatDate(snapshotMeta.fetchedAt);
 const latest = latestActivity(6);
 const news = sortNews(await getCollection('news')).slice(0, 6).map(newsCard);
+const guideEntries = await getCollection('guides');
+const guideThumbs = Object.fromEntries(
+  guideEntries.map((g) => [g.id, photo(g.data.image)]),
+);
 
 const title = buildTitle(`UAE Ransomware Data: ${inc.length} Attacks Tracked Since 2020`);
 const description = buildDescription(
@@ -29,16 +35,28 @@ const description = buildDescription(
 );
 ---
 <BaseLayout title={title} description={description} crumbs={[]} current={{ kind: 'home', slug: 'home' }}>
-  <h1>UAE Cyber Threat Intelligence</h1>
-
-  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+  <div class="page-head">
+    <h1>UAE Cyber Threat Intelligence</h1>
+    <div class="byline">
+      <span class="byline__tag">Tracker</span>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+      <span class="byline__sep">/</span>
+      <span>{snapshotMeta.recordCount} records screened</span>
+    </div>
+    <p class="lede">
     Marsad Cyber tracks ransomware activity against organisations in the United Arab Emirates.
     Ransomware groups have claimed <strong class="num">{inc.length}</strong> UAE organisations
     since 2020, <strong class="num">{thisYear}</strong> of them in 2026, across{' '}
     <strong class="num">{sectors.filter((s) => s.count > 0).length}</strong> sectors and{' '}
     <strong class="num">{groups.length}</strong> distinct groups. Affected organisations are
     never named on this site.
-  </p>
+    </p>
+  </div>
+
+  <div class="section" style="padding-bottom:var(--s3)">
+    <Hero slug="dubai-skyline" caption="Downtown Dubai. Marsad Cyber tracks ransomware claims against organisations across all seven emirates." />
+  </div>
 
   <div class="section reveal">
     <StatBar stats={[
@@ -103,6 +121,8 @@ const description = buildDescription(
       title: g.standard,
       figure: String(i + 1).padStart(2, '0'),
       meta: 'Guide',
+      thumb: guideThumbs[g.slug]?.thumb ?? null,
+      thumbAlt: guideThumbs[g.slug]?.alt ?? null,
     }))}
     more={{ href: ROUTES.guides() }}
   />

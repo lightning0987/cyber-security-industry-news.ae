@@ -204,6 +204,11 @@ accreditation.
   dates inside prose — use `formatDayLong()` there.
 - Hairline rules, never shadows. One accent colour, reserved for data emphasis.
 - Every value must be readable as text. A chart is a duplicate of a number, never its carrier.
+  `TimelineChart.astro` writes each value as an SVG `<text>` node and repeats the series in its
+  caption, so a reader parsing HTML gets numbers rather than geometry.
+- `public/js/table-sort.mjs` is the **only** script on the site, and `dist-hygiene` fails on any
+  other. It is progressive enhancement: every value is already in the HTML, and the script only
+  reorders existing rows.
 - No three consecutive paragraphs without a visual break: callout, table, or stat bar.
 - Graphics only, never emoji.
 - **Astro collapses a newline between text and a tag into nothing.** `across\n<strong>13</strong>`
@@ -222,6 +227,24 @@ accreditation.
 - Headings are uppercase with tight tracking, matching the reference. Prose is not.
 - Every entity page carries a byline row, an `AlsoRead` insert after the second section, and
   three `RecircList` blocks (related, more of the same kind, most targeted).
+
+---
+
+## 7a. Images
+
+Photographs live in `public/images/photos` and are served from this domain. Nothing loads from
+a third-party host, photographs included, which is what keeps the site at zero external
+requests.
+
+`src/data/images.json` is the registry: slug, alt text, hero and thumbnail paths, photographer
+and source. Only the standard Unsplash Licence is acceptable. **Never use a `plus.unsplash.com`
+URL** — that is Unsplash+, a paid tier, and it is not free for commercial use.
+
+Every image carries explicit `width` and `height` to avoid layout shift, `alt` text that
+describes the subject, and `loading="lazy"` unless it is the hero. Heroes stay under 250 KB.
+
+Photographs illustrate and carry no data. Every figure lives in the text and the tables, so
+nothing is lost when images fail to load. `/credits/` lists every photographer.
 
 ---
 

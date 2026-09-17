@@ -5,6 +5,7 @@ description: "APT73 published both of its UAE claims on 27 April 2026, one in Go
 dek: "APT73 is the only group on this tracker whose entire UAE record falls on one date. Both claims landed on 27 April 2026, and both sectors it touched sit inside the heaviest regulatory scope in the country."
 category: "ransomware"
 tier: "T1"
+image: "government"
 published: "2026-09-17"
 entities:
   sectors: ["government-defense", "energy-utilities"]

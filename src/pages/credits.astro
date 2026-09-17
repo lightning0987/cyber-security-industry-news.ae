@@ -1,0 +1,79 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { ROUTES } from '../lib/routes.mjs';
+import { buildTitle, buildDescription } from '../lib/seo.mjs';
+import { ALL_PHOTOS } from '../lib/images.mjs';
+
+const title = buildTitle(`Image Credits: ${ALL_PHOTOS.length} Photographs Used`);
+const description = buildDescription(
+  `Every photograph on Marsad Cyber, its photographer and its licence. All images are served from this domain rather than a third-party host.`,
+);
+const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Credits', href: '/credits/' }];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'credits', slug: 'credits' }}>
+  <div class="page-head">
+    <h1>Image Credits</h1>
+    <div class="byline">
+      <span class="byline__tag">Credits</span>
+      <span class="byline__sep">/</span>
+      <span>{ALL_PHOTOS.length} photographs</span>
+    </div>
+    <p class="lede">
+      Every photograph used on this site is listed below with its photographer and source.
+      The Unsplash Licence permits commercial use without permission and without attribution.
+      Crediting is a choice rather than an obligation, and it belongs on a site that asks readers
+      to check where its figures come from.
+    </p>
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>Photographs</h2></div>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">Photographs used on this site</caption>
+        <thead>
+          <tr>
+            <th scope="col">Image</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Photographer</th>
+            <th scope="col">Source</th>
+          </tr>
+        </thead>
+        <tbody class="credits-list">
+          {ALL_PHOTOS.map((p) => (
+            <tr>
+              <td style="width:6rem">
+                <img src={p.thumb} alt="" width="80" height="45" loading="lazy" decoding="async"
+                     style="width:5rem;height:2.8rem;object-fit:cover;display:block" />
+              </td>
+              <th scope="row" class="row-name">{p.alt}</th>
+              <td>
+                {p.credit.author_url
+                  ? <a href={p.credit.author_url} rel="noopener">{p.credit.author}</a>
+                  : (p.credit.author ?? 'Unattributed')}
+              </td>
+              <td><a href={p.credit.source_url} rel="noopener">Unsplash</a></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="prose" style="border:0;padding:0">
+      <h2>How images are served</h2>
+      <p>
+        Every image is stored on this domain and served from it. Nothing on this site loads from a
+        third-party host, including fonts, scripts and photographs, which is why the site makes no
+        external requests at all.
+      </p>
+      <p>
+        Photographs illustrate. They carry no data. Every figure on this site lives in the text and
+        in the tables, so nothing is lost when images fail to load or are turned off. See the
+        <a href={ROUTES.methodology()}>methodology</a> for where the figures come from and the
+        <a href={ROUTES.dataSources()}>data sources</a> page for the feeds behind them.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

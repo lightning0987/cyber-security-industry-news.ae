@@ -18,21 +18,22 @@ const description = buildDescription(
 const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'News', href: '/news/' }];
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} current={{ kind: 'news', slug: 'hub' }}>
-  <h1>UAE Cyber Threat News</h1>
+  <div class="page-head">
+    <h1>UAE Cyber Threat News</h1>
 
-  <div class="byline">
+    <div class="byline">
     <span class="byline__tag">News</span>
     <span class="byline__sep">/</span>
     <span>{all.length} reports</span>
     <span class="byline__sep">/</span>
     <span>{used.length} categories</span>
-  </div>
-
-  <p class="lede" style="max-width:var(--measure)">
+    </div>
+    <p class="lede" style="max-width:var(--measure)">
     Every report on this site is written from the same dated snapshot that drives the tracker.
     No affected organisation is named. Figures cite claims published by ransomware groups, which
     are assertions by attackers rather than confirmed breaches.
-  </p>
+    </p>
+  </div>
 
   <nav class="chip-rail" aria-label="Categories" style="border-bottom:0;margin-bottom:var(--s4)">
     {used.map((c) => (

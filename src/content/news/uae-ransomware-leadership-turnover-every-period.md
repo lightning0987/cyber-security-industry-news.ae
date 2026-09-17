@@ -5,6 +5,7 @@ description: "LockBit 3.0 led 2023, Stormous led 2024, Everest led 2025 and Drag
 dek: "Four periods, four different leading groups, and none of them led twice. The pattern makes actor-specific defence a poor investment in the United Arab Emirates, because the actor changes faster than a security programme does."
 category: "threat-intel"
 tier: "T2"
+image: "fibre-network"
 published: "2026-09-16"
 entities:
   sectors: ["professional-services", "government-defense"]

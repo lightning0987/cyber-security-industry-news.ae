@@ -5,6 +5,7 @@ description: "The UAE Personal Data Protection Law requires controllers to notif
 summary: "Federal Decree-Law No. 45 of 2021 governs personal data across the United Arab Emirates and requires controllers to notify the UAE Data Office of a breach that risks the rights of data subjects. The precise deadline sits in the Executive Regulations, and that is the detail most summaries get wrong."
 standard: "UAE PDPL"
 order: 3
+image: "abu-dhabi"
 updated: "2026-09-17"
 keyFacts:
   - label: "Instrument"

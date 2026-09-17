@@ -11,6 +11,7 @@ import StatBar from '../../components/StatBar.astro';
 import BreakdownTable from '../../components/BreakdownTable.astro';
 import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
+import TimelineChart from '../../components/TimelineChart.astro';
 import PageContext from '../../components/PageContext.astro';
 import RecircList from '../../components/RecircList.astro';
 import AlsoRead from '../../components/AlsoRead.astro';
@@ -102,17 +103,17 @@ const more = moreOfKind(current, 5);
 const active = mostActive(5);
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={current}>
-  <h1>{h1}</h1>
+  <div class="page-head">
+    <h1>{h1}</h1>
 
-  <div class="byline">
+    <div class="byline">
     <span class="byline__tag">{kind === 'sector' ? 'Sector' : 'Period'}</span>
     <span class="byline__sep">/</span>
     <a href={ROUTES.tracker()}>UAE Ransomware Tracker</a>
     <span class="byline__sep">/</span>
     <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
-  </div>
-
-  <p class="lede reveal" style="margin-top:var(--s4);max-width:var(--measure)">
+    </div>
+    <p class="lede">
     {kind === 'sector' ? (
       <>
         Ransomware groups have claimed <strong class="num">{count}</strong> {label.toLowerCase()}{' '}
@@ -130,7 +131,8 @@ const active = mostActive(5);
         {' '}Figures reflect leak-site monitoring as of {asOf}.
       </>
     )}
-  </p>
+    </p>
+  </div>
 
   <div class="section reveal">
     <StatBar stats={[
@@ -175,6 +177,13 @@ const active = mostActive(5);
       <div class="section__head">
         <h2>{kind === 'sector' ? `How ${label} claims spread across periods` : `Which sectors were hit in ${label}`}</h2>
       </div>
+      {kind === 'sector' && (
+        <TimelineChart
+          rows={crossRows.map((r) => ({ label: r.label.replace('–', '-'), count: r.count }))}
+          caption={`${label} claims by period`}
+        />
+      )}
+
       <BreakdownTable
         caption={kind === 'sector' ? `${label} claims by period` : `${label} claims by sector`}
         rows={crossRows}

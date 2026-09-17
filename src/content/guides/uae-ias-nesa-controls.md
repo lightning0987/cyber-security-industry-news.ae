@@ -5,6 +5,7 @@ description: "UAE IAS v2 sets 188 controls, 60 management and 128 technical, wit
 summary: "The UAE Information Assurance Standard, version 2, sets 188 controls for critical national infrastructure operators and government entities across all emirates. It is issued federally and it names 39 Priority One controls that are mandatory for everything inside its scope."
 standard: "UAE IAS v2"
 order: 2
+image: "substation"
 updated: "2026-09-17"
 keyFacts:
   - label: "Issuing body"

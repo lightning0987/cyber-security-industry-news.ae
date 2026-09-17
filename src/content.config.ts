@@ -34,6 +34,7 @@ const guides = defineCollection({
     order: z.number().int(),
     updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
     /** Ключевые факты рамки. Рендерятся врезкой в начале гайда. */
+    image: z.string(),
     keyFacts: z.array(z.object({ label: z.string(), value: z.string() })).min(2).max(5),
     /**
      * FAQ. Каждый вопрос называет сущность, каждый ответ начинается с прямого
@@ -65,6 +66,7 @@ const news = defineCollection({
       groups: z.array(z.string()).default([]),
       periods: z.array(z.string()).default([]),
     }),
+    image: z.string(),
     sources: z.array(z.object({ label: z.string(), href: z.string() })).min(1),
   }),
 });

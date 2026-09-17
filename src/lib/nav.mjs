@@ -53,7 +53,7 @@ export const FOOTER_COLUMNS = [
   },
   {
     heading: { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
-    links: groups.slice(0, 8).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
+    links: groups.slice(0, 7).map((g) => ({ label: g.label, href: ROUTES.group(g.slug) })),
   },
   {
     heading: { label: 'News', href: ROUTES.news() },
@@ -67,6 +67,7 @@ export const FOOTER_COLUMNS = [
     heading: null,
     links: [
       { label: 'Sitemap', href: ROUTES.sitemap() },
+      { label: 'Image credits', href: '/credits/' },
       { label: 'Dataset (JSON)', href: '/data/incidents.json' },
       { label: 'Dataset (CSV)', href: '/data/incidents.csv' },
     ],

@@ -39,8 +39,13 @@ export function sortNews(entries) {
 }
 
 /** Карточка материала для блоков рециркуляции. */
+import { photo } from './images.mjs';
+
 export function newsCard(entry) {
+  const p = photo(entry.data.image);
   return {
+    thumb: p?.thumb ?? null,
+    thumbAlt: p?.alt ?? null,
     href: `/${entry.id}/`,
     title: entry.data.h1,
     figure: entry.data.published.slice(8, 10),

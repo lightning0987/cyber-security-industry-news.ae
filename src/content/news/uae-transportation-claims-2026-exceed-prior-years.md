@@ -5,6 +5,7 @@ description: "Transportation recorded 1 claim in each of 2023, 2024 and 2025. Th
 dek: "Transportation is one of the few UAE sectors where an unfinished year already carries more claims than any complete one before it. Half the sector's record now falls inside 2026."
 category: "ransomware"
 tier: "T1"
+image: "container-port"
 published: "2026-09-16"
 entities:
   sectors: ["transportation"]

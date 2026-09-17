@@ -7,6 +7,7 @@
 import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import RecircList from '../components/RecircList.astro';
+import Hero from '../components/Hero.astro';
 import { ROUTES } from '../lib/routes.mjs';
 import { formatDayLong, AUTHOR } from '../lib/seo.mjs';
 import { CATEGORIES, relatedNews, sortNews, newsCard } from '../lib/news.mjs';
@@ -53,9 +54,9 @@ const schemas = [{
   schemas={schemas}
   current={{ kind: 'news', slug: entry.id }}
 >
-  <h1>{d.h1}</h1>
-
-  <div class="byline">
+  <div class="page-head">
+    <h1>{d.h1}</h1>
+    <div class="byline">
     <a class="byline__tag" href={`/category/${d.category}/`}>{cat.label}</a>
     <span class="byline__sep">/</span>
     <span>By {AUTHOR}</span>
@@ -64,10 +65,14 @@ const schemas = [{
       <time datetime={d.published}>{formatDayLong(d.published)}</time>
     </a>
     <span class="byline__sep">/</span>
-    <span>{d.tier === 'T1' ? 'Brief' : 'Analysis'}</span>
+      <span>{d.tier === 'T1' ? 'Brief' : 'Analysis'}</span>
+    </div>
+    <p class="lede">{d.dek}</p>
   </div>
 
-  <p class="lede" style="max-width:var(--measure)">{d.dek}</p>
+  <div class="section" style="padding-bottom:var(--s3)">
+    <Hero slug={d.image} />
+  </div>
 
   <div class="prose guide-body"><Content /></div>
 
