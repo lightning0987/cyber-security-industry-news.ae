@@ -20,9 +20,10 @@ import * as noVictimData from './guards/no-victim-data.mjs';
 import * as uniqueMeta from './guards/unique-meta.mjs';
 import * as linkGraph from './guards/link-graph.mjs';
 import * as distHygiene from './guards/dist-hygiene.mjs';
+import * as contentOverlap from './guards/content-overlap.mjs';
 
 const DIST = resolve(process.cwd(), 'dist');
-const GUARDS = [noVictimData, uniqueMeta, linkGraph, distHygiene];
+const GUARDS = [noVictimData, uniqueMeta, linkGraph, distHygiene, contentOverlap];
 
 function walk(dir, out = []) {
   for (const entry of readdirSync(dir)) {

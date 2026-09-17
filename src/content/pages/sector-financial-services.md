@@ -4,11 +4,9 @@ summary: "UAE Financial Services carries 11 claimed organisations, fourth of 13 
 
 ## Financial Services ranks fourth among UAE sectors by ransomware claims
 
-Financial Services organisations account for 11 claimed organisations in the United Arab
-Emirates. That is 10.2% of all attributed UAE claims, placing the sector fourth of 13. The
-figure sits above the average of 8.3 claims per active sector. Eight distinct ransomware groups
-have claimed a UAE Financial Services organisation, according to leak-site monitoring as of
-16 September 2026.
+Financial Services ranks fourth of 13 UAE sectors, above the average of 8.3 claims per active
+sector. Eight distinct groups appear here. No single operation dominates, which shapes what a
+defence in this sector has to cover.
 
 ## Claims against UAE Financial Services are spread thin across many groups
 
@@ -33,3 +31,7 @@ of coverage matters more in this sector than depth against any single actor.
    encryption has happened.
 5. Review which groups have claimed organisations in your sector, then assess whether their
    published methods apply to your estate.
+6. Note that the sector recorded no claims at all in 2024, which shows how uneven a single
+   year's figure can be.
+7. Read the 2022 to 2026 span as evidence of sustained interest rather than a single campaign
+   against UAE finance.

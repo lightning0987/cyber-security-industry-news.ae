@@ -99,6 +99,18 @@ for (const s of sectors) {
 }
 
 /* ─── Периоды ────────────────────────────────────────────────────── */
+/* Полный ряд периодов с лидером каждого. Страница периода без него не может
+   сказать главного: лидирующие группы меняются от периода к периоду. */
+const PERIOD_SERIES = periods.map((p) => {
+  const subset = inPeriod(inc, p);
+  const lead = byGroup(subset)[0] ?? null;
+  return {
+    period: p.label,
+    claims: p.count,
+    leading_group: lead ? { name: lead.label, claims: lead.count } : null,
+  };
+});
+
 periods.forEach((p, i) => {
   const subset = inPeriod(inc, p);
   const prev = i > 0 ? periods[i - 1] : null;
@@ -127,6 +139,7 @@ periods.forEach((p, i) => {
       claims: subset.filter((x) => x.sector === s.slug).length,
     })).filter((x) => x.claims > 0),
     top_groups: top(byGroup(subset), 8).map((g) => ({ name: g.label, claims: g.count })),
+    all_periods_for_comparison: PERIOD_SERIES,
     what_the_page_already_says:
       'A lede with the headline count, a stat bar, a table of groups active in the period, and a table of claims by sector. Do not repeat these.',
   });
@@ -142,6 +155,13 @@ for (const g of paged) {
     .filter((x) => x.claims > 0)
     .sort((a, b) => b.claims - a.claims);
   const family = subset[0]?.group_family ?? null;
+  // Родственные варианты: страница рендерит блок про них, значит бриф обязан
+  // отдавать их имена, иначе текст сошлётся на число, которого в брифе нет.
+  const siblings = family
+    ? paged
+        .filter((x) => x.slug !== g.slug && inGroup(inc, x.slug)[0]?.group_family === family)
+        .map((x) => ({ name: x.label, claims: x.count }))
+    : [];
 
   write(`group-${g.slug}`, {
     page_type: 'group',
@@ -158,6 +178,7 @@ for (const g of paged) {
       most_recent_claim: span.last,
       sectors_targeted: sectorRows.length,
       family: family,
+      family_siblings: siblings,
       family_note: family
         ? `Versioned variants of ${family} are counted separately on this site. Merging them would be an editorial claim about actor identity, not a fact in the source data.`
         : null,
