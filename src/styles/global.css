@@ -375,3 +375,13 @@ th:first-child, td:first-child { padding-left: var(--s2); }
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: none; }
 }
+
+/* ═══ Редакционный блок под данными ═══════════════════════════════ */
+.page-context {
+  border-top: 2px solid var(--rule-ink);
+  padding-top: var(--s5);
+}
+.page-context .prose > h2:first-of-type { margin-top: var(--s4); }
+.page-context ol { padding-left: 1.2em; }
+.page-context ol > li { margin-top: var(--s3); }
+.page-context ol > li::marker { font-family: var(--font-mono); color: var(--accent); font-weight: 600; }

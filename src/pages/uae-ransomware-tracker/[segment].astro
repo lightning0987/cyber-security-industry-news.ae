@@ -11,6 +11,7 @@ import StatBar from '../../components/StatBar.astro';
 import BreakdownTable from '../../components/BreakdownTable.astro';
 import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
+import PageContext from '../../components/PageContext.astro';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import {
   bySector, byPeriod, byGroup, groupsWithPages, inSector, inPeriod, top, activitySpan,
@@ -164,6 +165,8 @@ const crumbs = [
       />
     </section>
   )}
+
+  <PageContext id={`${kind}-${slug}`} />
 
   <SiblingRail
     title="Other sectors"

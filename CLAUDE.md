@@ -108,6 +108,35 @@ the auditability this project needs.
 
 ---
 
+## 4a. Editorial text on data pages
+
+Data pages carry ~240 words of template prose. Additional editorial context lives in
+`src/content/pages/<brief-name>.md` and renders below the tables. A page without a matching
+file simply renders without the block, so this fills in incrementally.
+
+First iteration is written by hand, not through the API:
+
+```bash
+npm run briefs          # writes one JSON per page into briefs/ (gitignored)
+# paste prompts/content-brief.md into a chat, then one brief after it
+# save the reply to src/content/pages/<same name>.md
+npm run lint:content    # deterministic checks; Critical blocks the build
+```
+
+`lint:content` runs inside `npm run build`. It enforces the prompt's rules mechanically: no
+em or en dashes, no banned paragraph openings, no vague quantifiers, no filler, 250–400 words,
+three H2s, sentences ≤20 words, and claims worded as claims.
+
+**The check that matters most is the number check.** Every numeral in the text must appear in
+the matching brief. Facts here come from an API with a known schema, so the correct verification
+is reconciliation against the source record, not a web search. An invented figure is Critical
+and blocks publication.
+
+Brief files are regenerated from data and gitignored. Regenerate after every snapshot refresh,
+because the numbers move.
+
+---
+
 ## 5. Meta rules
 
 - Title: primary key phrase inside the first 60 characters, 45–65 total, number early.

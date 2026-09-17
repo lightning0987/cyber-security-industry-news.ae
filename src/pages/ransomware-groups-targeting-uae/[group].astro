@@ -4,6 +4,7 @@ import StatBar from '../../components/StatBar.astro';
 import BreakdownTable from '../../components/BreakdownTable.astro';
 import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
+import PageContext from '../../components/PageContext.astro';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { bySector, byPeriod, groupsWithPages, inGroup, activitySpan, byGroup } from '../../lib/aggregate.mjs';
 import { ROUTES } from '../../lib/routes.mjs';
@@ -114,6 +115,8 @@ const crumbs = [
       </div>
     </section>
   )}
+
+  <PageContext id={`group-${slug}`} />
 
   <SiblingRail
     title="Other active groups"

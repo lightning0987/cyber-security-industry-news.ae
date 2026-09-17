@@ -55,7 +55,8 @@ export const FOOTER_COLUMNS = [
     heading: null,
     links: [
       { label: 'Sitemap', href: ROUTES.sitemap() },
-      { label: 'Entity map (JSON)', href: '/entity-map.json' },
+      { label: 'Dataset (JSON)', href: '/data/incidents.json' },
+      { label: 'Dataset (CSV)', href: '/data/incidents.csv' },
     ],
   },
 ];

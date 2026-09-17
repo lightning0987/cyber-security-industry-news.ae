@@ -1,0 +1,19 @@
+---
+/**
+ * Блок редакционного контекста под таблицами данных.
+ * Рендерится только если для страницы есть файл в src/content/pages/.
+ */
+import { getEntry, render } from 'astro:content';
+
+const { id } = Astro.props;
+const entry = await getEntry('pages', id);
+const rendered = entry ? await render(entry) : null;
+---
+{rendered && (
+  <section class="section page-context">
+    <div class="prose">
+      {entry.data.summary && <p class="lede">{entry.data.summary}</p>}
+      <rendered.Content />
+    </div>
+  </section>
+)}

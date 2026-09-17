@@ -14,9 +14,11 @@
     "check:data": "node scripts/check-data.mjs",
     "build:astro": "astro build",
     "verify": "node scripts/verify.mjs",
-    "build": "npm run check:data && npm run build:astro && npm run verify",
+    "build": "npm run check:data && npm run lint:content && npm run build:astro && npm run verify",
     "lint": "astro check && node scripts/check-data.mjs --lint-imports",
-    "ci": "npm run lint && npm run build"
+    "ci": "npm run lint && npm run build",
+    "briefs": "node scripts/export-content-briefs.mjs",
+    "lint:content": "node scripts/lint-content.mjs"
   },
   "dependencies": {
     "astro": "^7.3.2",
