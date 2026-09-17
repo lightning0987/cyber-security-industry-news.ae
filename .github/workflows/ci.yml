@@ -1,0 +1,32 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # Сборка полностью офлайн: снапшоты закоммичены, лоадеры здесь не запускаются.
+      # Соль нужна гарду утечки: без неё он не смог бы сверить отпечатки и
+      # молча пропустил бы любую утечку, поэтому она обязательна, а не опциональна.
+      - name: Build and verify
+        env:
+          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
+        run: |
+          if [ -z "$VICTIM_HASH_SALT" ]; then
+            echo "::error::Секрет VICTIM_HASH_SALT не задан. Гард утечки имён жертв без соли не работает."
+            exit 1
+          fi
+          npm run build
