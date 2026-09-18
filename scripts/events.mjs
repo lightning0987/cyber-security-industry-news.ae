@@ -53,6 +53,7 @@ function previousSnapshot(current) {
   }
   const shas = git(`git log --format=%H -- ${SNAPSHOT_PATH}`).trim().split('\n').filter(Boolean);
   const currentJson = JSON.stringify(current.records);
+  let sawEarlier = false;
   for (const sha of shas) {
     let data;
     try {
@@ -60,9 +61,12 @@ function previousSnapshot(current) {
     } catch {
       continue;
     }
+    sawEarlier = true;
     if (JSON.stringify(data.records) !== currentJson) return { ref: sha.slice(0, 7), data };
   }
-  return null;
+  // Снапшот мог обновиться, не изменив ни одной записи: у файла меняется
+  // fetched_at при каждом прогоне. Это разные ситуации, и путать их нельзя.
+  return { unchanged: sawEarlier };
 }
 
 const countBy = (records, key) => {
@@ -99,8 +103,12 @@ function recent(records, sector, days, asOf) {
 const current = JSON.parse(readFileSync(resolve(process.cwd(), SNAPSHOT_PATH), 'utf8'));
 const prev = previousSnapshot(current);
 
-if (!prev) {
-  console.log('events: предыдущего снапшота в истории нет, сравнивать не с чем.');
+if (!prev || prev.unchanged !== undefined) {
+  console.log(
+    prev?.unchanged
+      ? `events: снапшот обновлялся, но ни одна запись не изменилась (${current.record_count} записей).\n  Публиковать нечего, править нечего.`
+      : 'events: предыдущего снапшота в истории нет, сравнивать не с чем.',
+  );
   process.exit(0);
 }
 
