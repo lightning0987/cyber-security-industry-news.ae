@@ -10,10 +10,10 @@ Manufacturing ranks sixth of 13 UAE sectors, just below the average of 8.3 claim
 
 Manufacturing shows one claim per group across 8 distinct operations. No ransomware group has
 claimed a second UAE manufacturing organisation in this dataset. Blacknevas, Cicada3301,
-DragonForce and INC Ransom each appear once, as do the remaining four.
+[DragonForce](/ransomware-groups-targeting-uae/dragonforce/) and INC Ransom each appear once, as do the remaining four.
 
-Manufacturing claims cluster late in the record. The sector saw 1 claim in 2023 and 1 in 2024,
-then 4 in 2025. The partial year 2026 stands at 2. Half the sector's total falls in 2025 alone.
+Manufacturing claims cluster late in the record. The sector saw 1 claim in [2023](/uae-ransomware-tracker/2023/) and 1 in 2024,
+then 4 in [2025](/uae-ransomware-tracker/2025/). The partial year 2026 stands at 2. Half the sector's total falls in 2025 alone.
 
 ## What this means for UAE organisations
 

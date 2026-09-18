@@ -11,17 +11,17 @@ defence in this sector has to cover.
 ## Claims against UAE Financial Services are spread thin across many groups
 
 The first Financial Services claim in this dataset was recorded on 27 January 2022. The most
-recent was recorded on 11 May 2026. Eight groups share 11 claims between them, so no single
+recent was recorded on 11 May [2026](/uae-ransomware-tracker/2026/). Eight groups share 11 claims between them, so no single
 operation dominates the sector. That pattern points to opportunistic targeting rather than one
 sustained campaign against UAE finance.
 
-Financial Services differs from Professional Services in exactly this respect. A defence tuned
+Financial Services differs from [Professional Services](/uae-ransomware-tracker/professional-services/) in exactly this respect. A defence tuned
 to the methods of one group will cover only a fraction of the observed activity here. Breadth
 of coverage matters more in this sector than depth against any single actor.
 
 ## What this means for UAE organisations
 
-1. Establish whether your firm is authorised in the DIFC, because DFSA Technology and Risk
+1. Establish whether your firm is authorised in the DIFC, because DFSA [Technology](/uae-ransomware-tracker/technology/) and Risk
    Management rules apply to firms that are.
 2. Map your breach notification duties under the UAE Personal Data Protection Law, which
    applies federally to organisations processing personal data in the UAE.

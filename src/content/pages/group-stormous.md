@@ -9,14 +9,14 @@ Stormous ranks second of 46 groups on this tracker and appears across 5 distinct
 ## Stormous recorded nothing in 2025, then returned in 2026
 
 Leak-site monitoring recorded the first Stormous claim against a UAE organisation on 25 April
-2022. The most recent was recorded on 11 May 2026. The group claimed 1 organisation in the 2020 to 2022
-period, then 2 in 2023 and 5 in 2024. It claimed none in 2025, then 2 in 2026.
+2022. The most recent was recorded on 11 May [2026](/uae-ransomware-tracker/2026/). The group claimed 1 organisation in the 2020 to 2022
+period, then 2 in [2023](/uae-ransomware-tracker/2023/) and 5 in 2024. It claimed none in 2025, then 2 in 2026.
 
 That gap is unusual among the groups on this tracker. Most operations here either stop entirely
 or run continuously. A dormant year followed by a return carries a lesson. An
 absence in the latest period does not mean a group has left.
 
-Government and Defense and Financial Services each account for 3 claims. Retail and E-Commerce
+[Government and Defense](/uae-ransomware-tracker/government-defense/) and Financial Services each account for 3 claims. Retail and E-Commerce
 follows with 2, and the remaining 2 fall in other sectors.
 
 ## What this means for UAE organisations

@@ -8,11 +8,11 @@ Government and Defense ranks second of 13 UAE sectors, above the average of 8.3 
 
 ## Government and Defense claims peaked in 2024 and have fallen since
 
-The sector recorded 1 claim across 2020 to 2022 and 1 in 2023. Claims then rose to 6 in 2024
-and 4 in 2025, before falling to 1 in 2026. Everest and Stormous lead the sector with 3 claimed
+The sector recorded 1 claim across 2020 to 2022 and 1 in [2023](/uae-ransomware-tracker/2023/). Claims then rose to 6 in 2024
+and 4 in 2025, before falling to 1 in 2026. Everest and [Stormous](/ransomware-groups-targeting-uae/stormous/) lead the sector with 3 claimed
 organisations each, and FunkSec follows with 2.
 
-That shape is unusual on this site. Most UAE sectors rose into 2025 or 2026, while Government
+That shape is unusual on this site. Most UAE sectors rose into [2025](/uae-ransomware-tracker/2025/) or 2026, while Government
 and Defense moved the other way after 2024. The 2026 figure covers a partial year and may still
 rise before the year closes.
 

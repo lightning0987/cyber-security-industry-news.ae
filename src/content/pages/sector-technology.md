@@ -13,8 +13,8 @@ in this dataset has claimed a second UAE technology organisation. That is the fl
 distribution of any UAE sector on this site. It argues against the idea of a specialist actor
 working the sector.
 
-Technology claims concentrated in the middle of the record. The sector saw 2 claims in 2023 and
-5 in 2024. It then saw 4 in 2025, and the partial year 2026 stands at 2.
+Technology claims concentrated in the middle of the record. The sector saw 2 claims in [2023](/uae-ransomware-tracker/2023/) and
+5 in [2024](/uae-ransomware-tracker/2024/). It then saw 4 in 2025, and the partial year 2026 stands at 2.
 
 The 2024 peak coincided with the largest single rise in UAE claims overall. Technology
 therefore rose and fell with the wider UAE pattern rather than against it.

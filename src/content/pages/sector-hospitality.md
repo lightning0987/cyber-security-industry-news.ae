@@ -8,11 +8,11 @@ Hospitality ranks eleventh of 13 UAE sectors, well below the average of 8.3 clai
 
 ## All Hospitality claims on record fall in 2026
 
-Hospitality recorded no claims across 2020 to 2025. Leak-site monitoring recorded the first
-claim on 4 May 2026 and the most recent on 5 August 2026. Every claim in the sector therefore
+Hospitality recorded no claims across 2020 to [2025](/uae-ransomware-tracker/2025/). Leak-site monitoring recorded the first
+claim on 4 May [2026](/uae-ransomware-tracker/2026/) and the most recent on 5 August 2026. Every claim in the sector therefore
 falls within a single partial year.
 
-DragonForce, Everest and Lamashtu each account for one claimed organisation. A sector that
+[DragonForce](/ransomware-groups-targeting-uae/dragonforce/), Everest and Lamashtu each account for one claimed organisation. A sector that
 moves from zero to 3 claims inside one year deserves attention regardless of its rank. The
 figure will not be complete until 2026 closes.
 

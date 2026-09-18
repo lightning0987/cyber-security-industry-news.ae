@@ -13,7 +13,7 @@ plan for a steady baseline rather than a passing wave.
 ## Nineteen groups share 24 Professional Services claims
 
 Professional Services draws 19 distinct ransomware groups, the widest spread of any UAE sector.
-LockBit 3.0 leads with 4 claimed organisations and RansomHub follows with 3. Every other group
+[LockBit 3.0](/ransomware-groups-targeting-uae/lockbit3/) leads with 4 claimed organisations and RansomHub follows with 3. Every other group
 appears once or twice. No operation has established a durable hold on the sector.
 
 Professional Services is also the only UAE sector with claims in every period on record. It

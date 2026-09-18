@@ -4,19 +4,19 @@ summary: "Coinbase Cartel claimed 5 UAE organisations inside two months of late 
 
 ## Coinbase Cartel has claimed 6 UAE organisations
 
-Coinbase Cartel ranks fourth of 46 groups on this tracker and appears across 4 distinct sectors. It had no UAE record before November 2025. Reaching the top five of an all-time table took the group a single quarter.
+Coinbase Cartel ranks fourth of 46 groups on this tracker and appears across 4 distinct sectors. It had no UAE record before November [2025](/uae-ransomware-tracker/2025/). Reaching the top five of an all-time table took the group a single quarter.
 
 ## Five of the six claims fall inside late 2025
 
 Leak-site monitoring recorded the first Coinbase Cartel claim against a UAE organisation on 4
 November 2025. The group claimed 5 organisations before the end of that year. The most recent
-claim was recorded on 30 March 2026.
+claim was recorded on 30 March [2026](/uae-ransomware-tracker/2026/).
 
 Five claims inside two months is the most compressed burst on this tracker. Coinbase Cartel had
 no UAE record before November 2025. A group can therefore reach the top five of an all-time
 table within a single quarter.
 
-Financial Services and Retail and E-Commerce each account for 2 claims. Professional Services
+Financial Services and Retail and E-Commerce each account for 2 claims. [Professional Services](/uae-ransomware-tracker/professional-services/)
 follows with 1, and the remaining claim falls in another sector.
 
 ## What this means for UAE organisations

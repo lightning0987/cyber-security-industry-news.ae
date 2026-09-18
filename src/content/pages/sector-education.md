@@ -8,8 +8,8 @@ Education ranks thirteenth of 13 UAE sectors, the lowest count on this tracker. 
 
 ## Both Education claims fall within four months
 
-Leak-site monitoring recorded the first Education claim on 11 October 2025 and the second on 27
-January 2026. The sector shows 1 claim in 2025 and 1 in the partial year 2026. BQTLock and
+Leak-site monitoring recorded the first Education claim on 11 October [2025](/uae-ransomware-tracker/2025/) and the second on 27
+January [2026](/uae-ransomware-tracker/2026/). The sector shows 1 claim in 2025 and 1 in the partial year 2026. BQTLock and
 NightSpire account for one claimed organisation each.
 
 Two data points describe no pattern. This page exists so the sector breakdown stays complete

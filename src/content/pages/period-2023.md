@@ -8,11 +8,11 @@ Claims rose 71.4% in 2023 against the 7 recorded across 2020 to 2022 combined. W
 
 ## One group accounted for almost half of 2023
 
-LockBit 3.0 claimed 5 UAE organisations in 2023, the highest single-group total in any period
-on this tracker. Stormous followed with 2, while Alphv and Cloak each account for 1. That
+[LockBit 3.0](/ransomware-groups-targeting-uae/lockbit3/) claimed 5 UAE organisations in 2023, the highest single-group total in any period
+on this tracker. [Stormous](/ransomware-groups-targeting-uae/stormous/) followed with 2, while Alphv and Cloak each account for 1. That
 concentration makes 2023 unlike the periods either side of it.
 
-Professional Services carried 4 claims in 2023 and Technology 2. Financial Services also
+[Professional Services](/uae-ransomware-tracker/professional-services/) carried 4 claims in 2023 and Technology 2. Financial Services also
 recorded 2, with Government and Defense and Retail and E-Commerce at 1 each. Technology appears
 in the record for the first time in this period.
 

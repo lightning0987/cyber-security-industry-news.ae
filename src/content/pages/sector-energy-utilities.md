@@ -8,8 +8,8 @@ Energy and Utilities ranks ninth of 13 UAE sectors, well below the average of 8.
 
 ## Energy and Utilities claims are rising from a low base
 
-The sector recorded no claims before 2024. It then saw 1 claim in 2024 and 1 in 2025, and the
-partial year 2026 already stands at 2. Leak-site monitoring recorded the first claim on 23
+The sector recorded no claims before [2024](/uae-ransomware-tracker/2024/). It then saw 1 claim in 2024 and 1 in 2025, and the
+partial year [2026](/uae-ransomware-tracker/2026/) already stands at 2. Leak-site monitoring recorded the first claim on 23
 November 2024 and the most recent on 27 April 2026.
 
 APT73, Handala, Lynx and RA World each account for one claimed organisation. The small total

@@ -13,9 +13,9 @@ claimed organisations that the source classified as falling outside its named se
 the source left unclassified altogether are handled differently and appear in no sector row at
 all.
 
-Leak-site monitoring recorded the first claim in this category on 9 February 2024. The most
-recent was recorded on 1 July 2026. INC Ransom, LockBit 3.0, MedusaLocker and Warlock each account for one
-claimed organisation. The sector shows 1 claim in 2024, 1 in 2025 and 2 in the partial year
+Leak-site monitoring recorded the first claim in this category on 9 February [2024](/uae-ransomware-tracker/2024/). The most
+recent was recorded on 1 July 2026. INC Ransom, [LockBit 3.0](/ransomware-groups-targeting-uae/lockbit3/), MedusaLocker and Warlock each account for one
+claimed organisation. The sector shows 1 claim in 2024, 1 in [2025](/uae-ransomware-tracker/2025/) and 2 in the partial year
 2026.
 
 ## What this means for UAE organisations

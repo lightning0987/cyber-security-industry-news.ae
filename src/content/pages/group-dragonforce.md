@@ -9,8 +9,8 @@ DragonForce ranks fifth of 46 groups on this tracker and appears across 5 distin
 ## Four of the five DragonForce claims fall in 2026
 
 Leak-site monitoring recorded the first DragonForce claim against a UAE organisation on 21
-November 2025. The most recent was recorded on 12 June 2026. The group claimed 1 organisation
-in 2025 and 4 in 2026.
+November [2025](/uae-ransomware-tracker/2025/). The most recent was recorded on 12 June 2026. The group claimed 1 organisation
+in 2025 and 4 in [2026](/uae-ransomware-tracker/2026/).
 
 DragonForce is one of the two leading groups of the partial year 2026. It had no UAE record
 before late 2025. Its activity is concentrated in the period that is still open, so this count
@@ -26,7 +26,7 @@ breakdowns.
    in June 2026.
 2. Avoid narrowing your defence by sector here, since the group has claimed one organisation in
    each of 5 different sectors.
-3. Compare this profile against LockBit 3.0, which leads the all-time table with 10 claims yet
+3. Compare this profile against [LockBit 3.0](/ransomware-groups-targeting-uae/lockbit3/), which leads the all-time table with 10 claims yet
    stopped in February 2024.
 4. Record your breach notification path under the UAE Personal Data Protection Law before you
    need it.

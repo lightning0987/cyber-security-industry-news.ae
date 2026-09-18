@@ -4,12 +4,12 @@ summary: "UAE Healthcare recorded 6 claimed organisations, all of them between F
 
 ## Healthcare ranks seventh among UAE sectors with 6 claimed organisations
 
-Healthcare ranks seventh of 13 UAE sectors, below the average of 8.3 claims per active sector. Six distinct groups appear here, one claim each. The sector has recorded nothing in 2026, which makes the shape of its record more interesting than its size.
+Healthcare ranks seventh of 13 UAE sectors, below the average of 8.3 claims per active sector. Six distinct groups appear here, one claim each. The sector has recorded nothing in [2026](/uae-ransomware-tracker/2026/), which makes the shape of its record more interesting than its size.
 
 ## Healthcare claims stop after June 2025
 
-The sector recorded no claims across 2020 to 2023. Healthcare then saw 4 claims in 2024 and 2
-in 2025. The partial year 2026 stands at zero so far.
+The sector recorded no claims across 2020 to [2023](/uae-ransomware-tracker/2023/). Healthcare then saw 4 claims in 2024 and 2
+in [2025](/uae-ransomware-tracker/2025/). The partial year 2026 stands at zero so far.
 
 That window is narrow. The first Healthcare claim was recorded on 12 February 2024 and the most
 recent on 9 June 2025. A gap in leak-site claims is not evidence that targeting

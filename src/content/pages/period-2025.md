@@ -4,13 +4,13 @@ summary: "2025 is the highest year on this tracker with 35 claimed UAE organisat
 
 ## 2025 is the highest year on record with 35 claimed UAE organisations
 
-Claims rose 29.6% in 2025 against the 27 recorded in 2024. That makes it the highest year on
+Claims rose 29.6% in 2025 against the 27 recorded in [2024](/uae-ransomware-tracker/2024/). That makes it the highest year on
 record, at 32.4% of the whole dataset. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
 
 ## The groups leading 2025 were new to the UAE
 
-Everest claimed 6 UAE organisations in 2025 and Coinbase Cartel claimed 5. Neither group
-recorded a UAE claim in any earlier period. Medusa follows with 3 and BQTLock with 2.
+Everest claimed 6 UAE organisations in 2025 and [Coinbase Cartel](/ransomware-groups-targeting-uae/coinbasecartel/) claimed 5. Neither group
+recorded a UAE claim in any earlier period. [Medusa](/ransomware-groups-targeting-uae/medusa/) follows with 3 and BQTLock with 2.
 
 Sector distribution flattened in 2025. Professional Services carried 5 claims, Government and
 Defense 4, and Technology, Financial Services and Retail and E-Commerce 4 each. That is the

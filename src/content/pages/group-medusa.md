@@ -8,9 +8,9 @@ Medusa ranks sixth of 46 groups on this tracker and appears across 5 distinct se
 
 ## Medusa spread evenly and then stopped
 
-Leak-site monitoring recorded the first Medusa claim against a UAE organisation on 19 May 2023.
-The most recent was recorded on 21 November 2025. The group claimed 1 organisation in 2023, 1
-in 2024 and 3 in 2025.
+Leak-site monitoring recorded the first Medusa claim against a UAE organisation on 19 May [2023](/uae-ransomware-tracker/2023/).
+The most recent was recorded on 21 November [2025](/uae-ransomware-tracker/2025/). The group claimed 1 organisation in 2023, 1
+in [2024](/uae-ransomware-tracker/2024/) and 3 in 2025.
 
 Medusa has recorded no UAE claim in 2026. Its activity spanned more than two years without ever
 concentrating on one sector. Professional Services, Financial Services and Manufacturing each

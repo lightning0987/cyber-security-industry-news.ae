@@ -8,11 +8,11 @@ Retail and E-Commerce ranks fifth of 13 UAE sectors, above the average of 8.3 cl
 
 ## Retail claims were flat until 2025, then rose sharply
 
-Retail and E-Commerce recorded 1 claim across 2020 to 2022, 1 in 2023 and 1 in 2024. The figure
-then jumped to 4 in 2025 and stands at 3 for the partial year 2026. Seven of the 10 claims on
+Retail and E-Commerce recorded 1 claim across 2020 to 2022, 1 in [2023](/uae-ransomware-tracker/2023/) and 1 in 2024. The figure
+then jumped to 4 in [2025](/uae-ransomware-tracker/2025/) and stands at 3 for the partial year 2026. Seven of the 10 claims on
 record therefore fall in the last two periods.
 
-Coinbase Cartel, Everest and Stormous each account for 2 claimed organisations here. Seven
+[Coinbase Cartel](/ransomware-groups-targeting-uae/coinbasecartel/), Everest and Stormous each account for 2 claimed organisations here. Seven
 distinct groups appear in the sector in total. Those three therefore represent a tighter
 concentration than most UAE sectors show. That makes their published methods worth studying directly rather
 than in the abstract.

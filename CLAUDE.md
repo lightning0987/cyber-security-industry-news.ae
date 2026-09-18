@@ -193,6 +193,11 @@ Regenerate briefs in the same commit as the snapshot. `fetch-data.yml` does this
 - Footer carries 35–45 links in five columns, built from `src/lib/nav.mjs` so it can only
   point at pages that exist.
 - Anchors are descriptive and carry the entity. Never "read more", "click here", "learn more".
+- **Editorial text carries its own links.** Sibling rails, the sidebar and the footer are navigation
+  and satisfy the inbound-link count mechanically, but they produce no anchor that sits inside a
+  sentence. Every file in `src/content/pages/` carries two to three contextual links whose anchor is
+  the entity name itself, placed on its first mention in a paragraph. Headings and lines that
+  already contain a link are left alone.
 - 2–7 outbound dofollow links to primary sources per content page. Allowed hosts are listed in
   `no-victim-data.mjs`; anything else fails the build.
 

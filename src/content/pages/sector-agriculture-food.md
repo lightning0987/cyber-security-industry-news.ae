@@ -9,8 +9,8 @@ Agriculture and Food Production ranks twelfth of 13 UAE sectors, far below the a
 ## Both claims fall inside 2025
 
 Leak-site monitoring recorded the first Agriculture and Food Production claim on 24 January
-2025. The second followed on 23 October 2025. The sector shows no claims in any other period.
-Medusa and Tengu account for one claimed organisation each.
+[2025](/uae-ransomware-tracker/2025/). The second followed on 23 October 2025. The sector shows no claims in any other period.
+[Medusa](/ransomware-groups-targeting-uae/medusa/) and Tengu account for one claimed organisation each.
 
 Two claims in one year describe no trend. This page exists so the sector breakdown stays
 complete and so the figure can be tracked as it moves. Food production also sits closer to
@@ -32,5 +32,5 @@ national supply resilience than its claim count suggests.
    what is lost.
 7. Check remote access held by equipment vendors, and time limit it rather than leaving it
    standing.
-8. Read this page alongside Manufacturing, since the two sectors share both equipment types and
+8. Read this page alongside [Manufacturing](/uae-ransomware-tracker/manufacturing/), since the two sectors share both equipment types and
    recovery constraints.

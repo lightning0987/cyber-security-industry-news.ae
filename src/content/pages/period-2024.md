@@ -4,15 +4,15 @@ summary: "UAE ransomware claims more than doubled in 2024 to 27 organisations, t
 
 ## UAE ransomware claims more than doubled in 2024
 
-Claims rose 125% in 2024 against the 12 recorded in 2023. That is the largest single increase on this tracker, and the point at which UAE ransomware activity changed scale. Unlike 2023, no single operation dominated the year.
+Claims rose 125% in 2024 against the 12 recorded in [2023](/uae-ransomware-tracker/2023/). That is the largest single increase on this tracker, and the point at which UAE ransomware activity changed scale. Unlike 2023, no single operation dominated the year.
 
 ## Three groups drove the 2024 rise
 
-Stormous claimed 5 UAE organisations in 2024, LockBit 3.0 claimed 4 and RansomHub claimed 4.
+Stormous claimed 5 UAE organisations in 2024, [LockBit 3.0](/ransomware-groups-targeting-uae/lockbit3/) claimed 4 and RansomHub claimed 4.
 Arcus Media follows with 2. No single operation dominated the year in the way LockBit 3.0
 dominated 2023.
 
-Professional Services carried 7 claims, Government and Defense 6 and Technology 5. Government
+Professional Services carried 7 claims, [Government and Defense](/uae-ransomware-tracker/government-defense/) 6 and Technology 5. Government
 and Defense reached its highest figure of any period in 2024. Retail and E-Commerce and
 Manufacturing recorded 1 claim each.
 
