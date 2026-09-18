@@ -53,6 +53,13 @@ const BY_SECTOR = {
   'other': ['uae-pdpl'],
 };
 
+/** Рамка → секторы, которые чаще всего попадают в её периметр. Обратный индекс BY_SECTOR. */
+export function sectorsForFramework(key) {
+  return Object.entries(BY_SECTOR)
+    .filter(([, keys]) => keys.includes(key))
+    .map(([slug]) => slug);
+}
+
 export function frameworksForSector(slug) {
   return (BY_SECTOR[slug] ?? ['uae-pdpl']).map((k) => FRAMEWORKS[k]);
 }

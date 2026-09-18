@@ -20,7 +20,7 @@ import {
   bySector, byPeriod, byGroup, groupsWithPages, groupsWithoutPages, inSector, inPeriod, inGroup, activitySpan, top,
 } from '../src/lib/aggregate.mjs';
 import { PERIODS, ROUTES } from '../src/lib/routes.mjs';
-import { frameworksForSector, EXCLUDED_NOTE } from '../src/lib/frameworks.mjs';
+import { frameworksForSector, sectorsForFramework, FRAMEWORKS, EXCLUDED_NOTE } from '../src/lib/frameworks.mjs';
 import { MIN_INCIDENTS_FOR_PAGE } from '../src/lib/taxonomy/groups.mjs';
 
 const OUT = resolve(process.cwd(), 'briefs');
@@ -40,6 +40,29 @@ const pct = (n, d = TOTAL) => (d === 0 ? 0 : Math.round((n / d) * 1000) / 10);
 const nonZeroSectors = sectors.filter((s) => s.count > 0);
 const avgSector = Math.round((TOTAL / nonZeroSectors.length) * 10) / 10;
 
+/**
+ * Сколько эмиратских заявлений приходится на секторы, которые обычно попадают
+ * в периметр каждой регуляторной рамки.
+ *
+ * Сектор — это ПРОКСИ, а не определение периметра: попадает организация под
+ * стандарт или нет, решает назначающий орган, а не отраслевая метка. Но без
+ * этой оценки читателю нечем соотнести регуляторную обязанность с реальным
+ * объёмом угрозы, и такого соотнесения нет больше нигде.
+ */
+const REGULATORY_SCOPE = Object.entries(FRAMEWORKS).map(([key, f]) => {
+  const slugs = sectorsForFramework(key);
+  const rows = sectors.filter((s) => slugs.includes(s.slug) && s.count > 0);
+  const claims = rows.reduce((n, s) => n + s.count, 0);
+  return {
+    framework: f.name,
+    sectors_usually_in_scope: rows.length,
+    claims_in_those_sectors: claims,
+    share_of_all_attributed_claims_pct: pct(claims),
+    by_sector: rows.map((s) => ({ sector: s.label, claims: s.count })),
+    caveat: 'Sector is a proxy. Scope is decided by the designating authority, not by industry label.',
+  };
+});
+
 /** Общий для всех брифов контекст: чтобы текст не противоречил остальному сайту. */
 const SITE_CONTEXT = {
   brand: 'Marsad Cyber',
@@ -54,6 +77,7 @@ const SITE_CONTEXT = {
     sectors_with_activity: nonZeroSectors.length,
     average_claims_per_active_sector: avgSector,
   },
+  regulatory_scope: REGULATORY_SCOPE,
   hard_rules: [
     'NEVER name, describe or hint at an affected organisation. Sector, group and date only.',
     'NEVER mention .onion addresses, leak contents, data volumes or employee names.',

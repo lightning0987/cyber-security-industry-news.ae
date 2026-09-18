@@ -51,7 +51,10 @@ const SETS = [
   // Гайды описывают регуляторные тексты. Юридические формулировки длиннее, а
   // «personal data breach» — это термин закона, а не заявление вымогателя,
   // поэтому проверка формулировки заявлений сюда не применяется.
-  { dir: 'src/content/guides', words: [1000, 2600], h2: null, briefPerFile: false, maxSentence: 26, claimWording: false },
+  // Нижняя граница 1200 — из части 2 ТЗ. Я поставил здесь 1000, и все четыре
+  // гайда встали на 1043–1076, то есть ниже требования, а линтер молчал.
+  // Ослабленный порог не просто пропускает нарушение, он его прячет.
+  { dir: 'src/content/guides', words: [1200, 2500], h2: null, briefPerFile: false, maxSentence: 26, claimWording: false },
 ];
 
 const CRITICAL = 'Critical';

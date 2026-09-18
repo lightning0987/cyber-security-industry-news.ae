@@ -152,6 +152,29 @@ Treat each technical control as having two states: implemented and verified. Imp
 one-time act. Verification has a date, and that date ages. An assessment asks for the second
 state, not the first.
 
+### How much of the UAE record sits inside IAS territory
+
+Three sectors on this tracker correspond to the critical national infrastructure categories that
+IAS most often reaches. Those three hold 23 of the 108 attributed UAE claims, which is 21.3% of
+the published record.
+
+| Sector usually in IAS scope | Claimed UAE organisations |
+| --- | --- |
+| Government and Defense | 13 |
+| Transportation | 6 |
+| Energy and Utilities | 4 |
+
+That share is smaller than the share sitting in DESC ISR territory, and the contrast is the useful
+part. IAS covers a narrower set of organisations under a heavier standard. An organisation inside
+it carries 188 controls against a claim record that is thinner than the national average.
+
+Do not read the smaller number as a smaller risk. Consequence, not frequency, is what put these
+sectors inside the standard. A single successful intrusion against a water utility or an airport
+operator has a national effect that 24 claims against professional services firms do not.
+
+The designating authority decides scope, so treat the table as an indication of where IAS
+obligations cluster rather than as a scoping test.
+
 ## Practical sequence
 
 1. Confirm your designation with the authority that made it, rather than inferring it from your

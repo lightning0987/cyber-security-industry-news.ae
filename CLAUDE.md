@@ -233,6 +233,17 @@ Frontmatter is schema-validated in `src/content.config.ts`.
 fails the build if the registry and the files disagree, because a mismatch produces dead links
 in the footer and sidebar.
 
+Guides run 1200 to 2500 words, per part 2 of the specification. The linter's lower bound was set
+to 1000 once and all four guides settled at 1043 to 1076, below the requirement, with nothing
+reporting it. A loosened threshold does not merely permit the violation, it conceals it.
+
+Every guide carries a section quantifying how much of the UAE claim record sits in sectors that
+usually fall inside that framework's scope. Those figures come from `site_context.regulatory_scope`
+in the briefs, computed from `frameworks.mjs` and the snapshot, so they are checked like any other
+number. Each such section states that sector is a proxy and that scope is decided by the
+designating authority, because the mapping is an indication and presenting it as a scoping test
+would be false.
+
 Guides describe what a framework requires. They never claim accreditation, never offer
 certification or compliance assessment, and never mention ADHICS or CBUAE, which are out of
 scope pending review. Every guide ends with a disclaimer block stating the project holds no

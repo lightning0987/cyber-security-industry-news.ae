@@ -150,6 +150,29 @@ not automatically cover the whole estate.
 Establishing the boundary early keeps the programme proportionate. It also makes the evidence
 easier to produce, because a narrower scope means fewer artefacts.
 
+### How much of the UAE record sits inside ISR territory
+
+Five sectors on this tracker map most closely onto the ISR scope. Those five hold 60 of the 108
+attributed UAE claims, which is 55.6% of the published record.
+
+| Sector usually in ISR scope | Claimed UAE organisations |
+| --- | --- |
+| Professional Services | 24 |
+| Government and Defense | 13 |
+| Technology | 13 |
+| Transportation | 6 |
+| Energy and Utilities | 4 |
+
+Read that share as an order of magnitude, not as a scoping test. Sector is a proxy. Whether ISR
+reaches a given organisation is decided by the designating authority and by contract terms, never
+by an industry label. A Professional Services firm with no Dubai government contract sits outside
+the regulation while remaining inside that row.
+
+The figure is still worth having. It says that the majority of the UAE claim record falls in
+sectors where ISR obligations are common, so an ISR programme and a ransomware readiness
+programme are largely the same work. Treating them as two budgets duplicates effort that the
+control domains already cover once.
+
 ## Practical sequence
 
 1. Establish whether ISR reaches you directly or through a contract, and get that answer from

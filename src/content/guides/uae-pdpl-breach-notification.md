@@ -147,6 +147,30 @@ what an incident costs the data subject rather than the organisation.
 > opportunity, not by what an incident costs the people whose records are held. Those are
 > different questions and the data answers only the first.
 
+### How much of the UAE record falls under a notification duty
+
+The PDPL follows personal data rather than industry, so its reach across this tracker is close to
+total. Claims in sectors that process personal data as a matter of course account for 106 of the
+108 attributed UAE claims, or 98.1% of the published record.
+
+| Most claimed sector | Claimed UAE organisations |
+| --- | --- |
+| Professional Services | 24 |
+| Government and Defense | 13 |
+| Technology | 13 |
+| Financial Services | 11 |
+| Retail and E-Commerce | 10 |
+
+Eight further sectors carry the remainder. The practical reading is that a ransomware claim
+against a UAE organisation almost always raises a personal data question at the same time.
+
+That matters for sequencing. A notification assessment cannot start after the technical response
+finishes, because the assessment needs facts that only the early hours of the response produce.
+Which categories of data sat on the affected systems is a question for hour one, not for week two.
+
+The 98.1% figure counts sectors, not individual organisations, and an organisation holding no
+personal data would sit outside the duty while remaining inside its sector row.
+
 ## Practical sequence
 
 1. Establish whether you sit under the federal PDPL or under a

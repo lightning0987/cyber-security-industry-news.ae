@@ -152,6 +152,30 @@ The common failure is designing for the largest entity and assuming the others i
 not. A mainland entity inside a group led by a DIFC entity still answers to the federal law and
 to the UAE Data Office, on its own.
 
+### How much of the UAE record sits in free zone territory
+
+Financial Services is the sector most associated with both free zones, and it holds 11 of the 108
+attributed UAE claims on this tracker, or 10.2% of the published record.
+
+That figure understates free zone exposure rather than measuring it. A DIFC or ADGM registration
+is a legal address, not an industry, and this tracker records sector rather than jurisdiction.
+Firms registered in either zone appear in the Professional Services and Technology rows as well,
+and nothing in the source data separates them.
+
+| What the tracker can show | What it cannot show |
+| --- | --- |
+| Sector of the claimed organisation | Free zone of registration |
+| Date the claim was published | Which regime governs the data |
+| Group making the claim | Whether a controller or a processor was affected |
+
+The consequence for a firm inside either zone is that the national figures are the wrong
+benchmark. Obligations follow the registration, and the 11 claims in Financial Services neither
+confirm nor rule out that a claimed organisation sat inside a zone.
+
+Establish which regime governs your processing before an incident forces the question. The answer
+determines who receives the notification and on what clock, and it is not derivable from any
+figure on this site.
+
 ## Practical sequence
 
 1. List every group entity and record which jurisdiction each is registered in, because the

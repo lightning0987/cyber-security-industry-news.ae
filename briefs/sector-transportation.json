@@ -16,6 +16,132 @@
       "sectors_with_activity": 13,
       "average_claims_per_active_sector": 8.3
     },
+    "regulatory_scope": [
+      {
+        "framework": "DESC ISR v3",
+        "sectors_usually_in_scope": 5,
+        "claims_in_those_sectors": 60,
+        "share_of_all_attributed_claims_pct": 55.6,
+        "by_sector": [
+          {
+            "sector": "Professional Services",
+            "claims": 24
+          },
+          {
+            "sector": "Government and Defense",
+            "claims": 13
+          },
+          {
+            "sector": "Technology",
+            "claims": 13
+          },
+          {
+            "sector": "Transportation",
+            "claims": 6
+          },
+          {
+            "sector": "Energy and Utilities",
+            "claims": 4
+          }
+        ],
+        "caveat": "Sector is a proxy. Scope is decided by the designating authority, not by industry label."
+      },
+      {
+        "framework": "UAE IAS v2",
+        "sectors_usually_in_scope": 3,
+        "claims_in_those_sectors": 23,
+        "share_of_all_attributed_claims_pct": 21.3,
+        "by_sector": [
+          {
+            "sector": "Government and Defense",
+            "claims": 13
+          },
+          {
+            "sector": "Transportation",
+            "claims": 6
+          },
+          {
+            "sector": "Energy and Utilities",
+            "claims": 4
+          }
+        ],
+        "caveat": "Sector is a proxy. Scope is decided by the designating authority, not by industry label."
+      },
+      {
+        "framework": "UAE PDPL",
+        "sectors_usually_in_scope": 13,
+        "claims_in_those_sectors": 106,
+        "share_of_all_attributed_claims_pct": 98.1,
+        "by_sector": [
+          {
+            "sector": "Professional Services",
+            "claims": 24
+          },
+          {
+            "sector": "Government and Defense",
+            "claims": 13
+          },
+          {
+            "sector": "Technology",
+            "claims": 13
+          },
+          {
+            "sector": "Financial Services",
+            "claims": 11
+          },
+          {
+            "sector": "Retail and E-Commerce",
+            "claims": 10
+          },
+          {
+            "sector": "Manufacturing",
+            "claims": 8
+          },
+          {
+            "sector": "Healthcare",
+            "claims": 6
+          },
+          {
+            "sector": "Transportation",
+            "claims": 6
+          },
+          {
+            "sector": "Energy and Utilities",
+            "claims": 4
+          },
+          {
+            "sector": "Other",
+            "claims": 4
+          },
+          {
+            "sector": "Hospitality",
+            "claims": 3
+          },
+          {
+            "sector": "Agriculture and Food Production",
+            "claims": 2
+          },
+          {
+            "sector": "Education",
+            "claims": 2
+          }
+        ],
+        "caveat": "Sector is a proxy. Scope is decided by the designating authority, not by industry label."
+      },
+      {
+        "framework": "DFSA TRM",
+        "sectors_usually_in_scope": 1,
+        "claims_in_those_sectors": 11,
+        "share_of_all_attributed_claims_pct": 10.2,
+        "by_sector": [
+          {
+            "sector": "Financial Services",
+            "claims": 11
+          }
+        ],
+        "caveat": "Sector is a proxy. Scope is decided by the designating authority, not by industry label."
+      }
+    ],
     "hard_rules": [
       "NEVER name, describe or hint at an affected organisation. Sector, group and date only.",
       "NEVER mention .onion addresses, leak contents, data volumes or employee names.",
