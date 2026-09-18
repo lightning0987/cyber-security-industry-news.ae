@@ -25,6 +25,7 @@ export const GET: APIRoute = async ({ site }) => {
   add(ROUTES.home(), dataDate, '1.0');
   add(ROUTES.tracker(), dataDate, '0.9');
   add(ROUTES.groupsHub(), dataDate, '0.9');
+  add(ROUTES.shortRecord(), dataDate, '0.6');
   for (const s of bySector(inc)) add(ROUTES.sector(s.slug), dataDate, '0.8');
   for (const p of byPeriod(inc)) add(ROUTES.period(p.slug), dataDate, '0.7');
   for (const g of groupsWithPages(inc)) add(ROUTES.group(g.slug), dataDate, '0.7');

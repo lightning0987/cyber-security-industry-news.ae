@@ -14,6 +14,8 @@ const inc = attributedIncidents;
 const groups = byGroup(inc);
 const paged = groupsWithPages(inc);
 const single = groupsWithoutPages(inc);
+const tailClaims = single.reduce((n, g) => n + g.count, 0);
+const onceOnly = single.filter((g) => g.count === 1);
 const sectors = bySector(inc);
 const topGroup = groups[0];
 
@@ -55,9 +57,12 @@ const crumbs = [
     <strong class="num">{groups.length}</strong> distinct ransomware groups have claimed at least
     one organisation in the United Arab Emirates since 2020. {topGroup.label} leads with{' '}
     <strong class="num">{topGroup.count}</strong> claimed organisations, and{' '}
-    <strong class="num">{paged.length}</strong> groups have claimed two or more. The remaining{' '}
-    <strong class="num">{single.length}</strong> groups appear once each and are listed below
-    without a dedicated page.
+    <strong class="num">{paged.length}</strong> groups have claimed{' '}
+    <strong class="num">{MIN_INCIDENTS_FOR_PAGE}</strong> or more. The remaining{' '}
+    <strong class="num">{single.length}</strong> hold{' '}
+    <strong class="num">{tailClaims}</strong> claims between them, which is more than the seven
+    sustained groups hold, and they are covered on{' '}
+    <a href={ROUTES.shortRecord()}>the short record page</a>.
     </p>
   </div>
 
@@ -77,8 +82,9 @@ const crumbs = [
     </div>
     <p style="max-width:var(--measure);margin-bottom:var(--s4)">
       A group earns its own page once it has claimed {MIN_INCIDENTS_FOR_PAGE} or more UAE
-      organisations. A single claim is not enough to describe a pattern, and a page built on one
-      data point would say less than this table row does.
+      organisations. Below that the record describes an episode rather than a pattern, and a page
+      built on two dates would say less than its own table row.{' '}
+      <a href={ROUTES.shortRecord()}>Groups under the threshold share one page</a>.
     </p>
     <BreakdownTable
       caption="Ransomware groups with two or more claimed UAE organisations"
@@ -90,11 +96,14 @@ const crumbs = [
 
   <section class="section">
     <div class="section__head">
-      <h2>Groups with a single claimed UAE organisation</h2>
+      <h2>Groups below the page threshold</h2>
     </div>
     <p style="max-width:var(--measure);margin-bottom:var(--s4)">
-      These <span class="num">{single.length}</span> groups have each claimed exactly one
-      organisation in the United Arab Emirates.
+      These <span class="num">{single.length}</span> groups have claimed fewer than{' '}
+      <span class="num">{MIN_INCIDENTS_FOR_PAGE}</span> UAE organisations each, and{' '}
+      <span class="num">{onceOnly.length}</span> of them appear exactly once. Dates, sectors and
+      counts for the repeat ones are tabulated on{' '}
+      <a href={ROUTES.shortRecord()}>the short record page</a>.
     </p>
     <p class="muted" style="max-width:var(--measure)">
       {single.map((g, i) => (<>{g.label}{i < single.length - 1 ? ', ' : '.'}</>))}

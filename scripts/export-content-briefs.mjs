@@ -12,17 +12,21 @@
  * Запуск: npm run briefs
  */
 
-import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
+import { mkdirSync, rmSync, writeFileSync, existsSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { attributedIncidents, snapshotMeta, unverifiedIncidents } from '../src/lib/incidents.mjs';
 import {
-  bySector, byPeriod, byGroup, groupsWithPages, inSector, inPeriod, inGroup, activitySpan, top,
+  bySector, byPeriod, byGroup, groupsWithPages, groupsWithoutPages, inSector, inPeriod, inGroup, activitySpan, top,
 } from '../src/lib/aggregate.mjs';
 import { PERIODS, ROUTES } from '../src/lib/routes.mjs';
 import { frameworksForSector, EXCLUDED_NOTE } from '../src/lib/frameworks.mjs';
+import { MIN_INCIDENTS_FOR_PAGE } from '../src/lib/taxonomy/groups.mjs';
 
 const OUT = resolve(process.cwd(), 'briefs');
+// Каталог пересобирается с нуля. Брифы коммитятся, поэтому бриф удалённой
+// страницы остался бы в репозитории навсегда и пережил бы саму страницу.
+rmSync(OUT, { recursive: true, force: true });
 mkdirSync(OUT, { recursive: true });
 
 const inc = attributedIncidents;
@@ -196,7 +200,53 @@ for (const g of paged) {
   });
 }
 
-const n = sectors.length + periods.length + paged.length;
+/* ─── Длинный хвост групп ────────────────────────────────────────── */
+/*
+ * Собственный бриф у страницы, которая заменила пятнадцать почти одинаковых.
+ * Её содержание — не перечисление групп, а соотношение: хвост держит больше
+ * заявлений, чем все группы с устойчивым следом вместе взятые.
+ */
+{
+  const tail = groupsWithoutPages(inc);
+  const tailClaims = tail.reduce((n, g) => n + g.count, 0);
+  const pagedClaims = paged.reduce((n, g) => n + g.count, 0);
+  const repeat = tail.filter((g) => g.count > 1);
+
+  write('groups-short-record', {
+    page_type: 'groups-short-record',
+    url: ROUTES.shortRecord(),
+    entity: 'Ransomware groups with a short UAE record',
+    existing_h1: 'Ransomware Groups With a Short UAE Record',
+    site_context: SITE_CONTEXT,
+    facts: {
+      threshold_for_own_page: MIN_INCIDENTS_FOR_PAGE,
+      groups_total: groups.length,
+      groups_below_threshold: tail.length,
+      groups_with_own_page: paged.length,
+      claims_held_by_tail: tailClaims,
+      claims_held_by_paged: pagedClaims,
+      tail_share_of_all_claims_pct: Math.round((tailClaims / inc.length) * 1000) / 10,
+      groups_seen_exactly_once: tail.filter((g) => g.count === 1).length,
+      groups_with_two_to_four_claims: repeat.length,
+      attributed_claims_total: inc.length,
+    },
+    by_group: repeat.map((g) => {
+      const records = inGroup(inc, g.slug);
+      const dates = records.map((r) => r.discovered).filter(Boolean).sort();
+      return {
+        group: g.label,
+        claims: g.count,
+        sectors: new Set(records.map((r) => r.sector).filter(Boolean)).size,
+        first_claim: dates[0],
+        most_recent_claim: dates.at(-1),
+      };
+    }),
+    what_the_page_already_says:
+      'A lede comparing tail claims against sustained groups, a stat bar, and a table of groups with two to four claims. Do not repeat these.',
+  });
+}
+
+const n = sectors.length + periods.length + paged.length + 1;
 console.log(`✓ ${n} брифов записано в briefs/`);
-console.log(`  секторы ${sectors.length}, периоды ${periods.length}, группы ${paged.length}`);
+console.log(`  секторы ${sectors.length}, периоды ${periods.length}, группы ${paged.length}, длинный хвост 1`);
 console.log('  Отдавай по одному брифу вместе с prompts/content-brief.md');

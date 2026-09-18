@@ -37,12 +37,7 @@
     "most_recent_claim": "2024-02-16",
     "sectors_targeted": 7,
     "family": "lockbit",
-    "family_siblings": [
-      {
-        "name": "LockBit 2.0",
-        "claims": 2
-      }
-    ],
+    "family_siblings": [],
     "family_note": "Versioned variants of lockbit are counted separately on this site. Merging them would be an editorial claim about actor identity, not a fact in the source data."
   },
   "by_sector": [

@@ -12,8 +12,8 @@ entities:
   groups: ["apt73"]
   periods: ["2026"]
 sources:
-  - label: "APT73 group profile"
-    href: "/ransomware-groups-targeting-uae/apt73/"
+  - label: "Ransomware groups with a short UAE record"
+    href: "/ransomware-groups-targeting-uae/short-record/"
   - label: "UAE ransomware tracker, snapshot of 16 September 2026"
     href: "/uae-ransomware-tracker/"
   - label: "ransomware.live, leak-site monitoring"

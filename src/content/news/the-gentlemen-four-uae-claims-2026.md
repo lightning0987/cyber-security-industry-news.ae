@@ -14,8 +14,8 @@ entities:
 sources:
   - label: "UAE ransomware tracker, snapshot of 16 September 2026"
     href: "/uae-ransomware-tracker/"
-  - label: "The Gentlemen group profile"
-    href: "/ransomware-groups-targeting-uae/thegentlemen/"
+  - label: "Ransomware groups with a short UAE record"
+    href: "/ransomware-groups-targeting-uae/short-record/"
   - label: "ransomware.live, leak-site monitoring"
     href: "https://www.ransomware.live/"
 ---

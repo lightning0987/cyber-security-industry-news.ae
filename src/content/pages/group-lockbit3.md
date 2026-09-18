@@ -28,10 +28,9 @@ account for 1 each, with the remainder spread across four further sectors.
    present activity.
 3. Note that LockBit 3.0 reached 7 sectors, so its targeting showed no sector preference worth
    defending against specifically.
-4. Compare this profile against DragonForce and The Gentlemen, whose activity sits entirely in
-   2026.
-5. Keep versioned variants distinct, because LockBit 2.0 is counted separately on this site and
-   its record ends in 2022.
+4. Compare this profile against DragonForce, whose activity sits entirely in 2026.
+5. Keep versioned variants distinct, because the earlier LockBit operation is counted separately
+   here and its UAE record closed in 2022.
 6. Avoid building controls around a named operation, given how completely the leading names have
    turned over since 2024.
 7. Use the sector pages instead when deciding where to spend, since sectors persist while groups

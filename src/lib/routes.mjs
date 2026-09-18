@@ -26,6 +26,8 @@ export const ROUTES = {
   archive: (year, month) => `/news/archive/${year}/${month}/`,
   guide: (slug) => `/guides/${slug}/`,
   group: (slug) => `/ransomware-groups-targeting-uae/${slug}/`,
+  /** Длинный хвост: группы, не набравшие порога на собственную страницу. */
+  shortRecord: () => '/ransomware-groups-targeting-uae/short-record/',
   about: () => '/about/',
   methodology: () => '/methodology/',
   editorialPolicy: () => '/editorial-policy/',

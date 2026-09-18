@@ -1,0 +1,182 @@
+---
+/**
+ * Длинный хвост групп одной страницей.
+ *
+ * Заменяет пятнадцать почти одинаковых страниц, стоявших на двух-четырёх
+ * заявлениях каждая. Смысл здесь не в том, чтобы сохранить посадочную
+ * поверхность, а в том, что у хвоста есть собственное содержание: групп с
+ * коротким следом больше, и заявлений они несут больше, чем все названные
+ * группы вместе. На отдельных страницах этот факт был не виден.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBar from '../../components/StatBar.astro';
+import BreakdownTable from '../../components/BreakdownTable.astro';
+import PageContext from '../../components/PageContext.astro';
+import RecircList from '../../components/RecircList.astro';
+import SiblingRail from '../../components/SiblingRail.astro';
+import DataProvenance from '../../components/DataProvenance.astro';
+import AlsoRead from '../../components/AlsoRead.astro';
+import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import { byGroup, groupsWithPages, groupsWithoutPages, bySector, inGroup } from '../../lib/aggregate.mjs';
+import { MIN_INCIDENTS_FOR_PAGE } from '../../lib/taxonomy/groups.mjs';
+import { ROUTES } from '../../lib/routes.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, AUTHOR } from '../../lib/seo.mjs';
+import { mostActive, latestActivity } from '../../lib/related.mjs';
+
+const inc = attributedIncidents;
+const groups = byGroup(inc);
+const paged = groupsWithPages(inc);
+const tail = groupsWithoutPages(inc);
+const sectors = bySector(inc);
+
+const tailClaims = tail.reduce((n, g) => n + g.count, 0);
+const pagedClaims = paged.reduce((n, g) => n + g.count, 0);
+const onceOnly = tail.filter((g) => g.count === 1);
+const tailShare = Math.round((tailClaims / inc.length) * 1000) / 10;
+
+/** Строка таблицы: сколько заявлений, в скольких секторах, когда впервые и последний раз. */
+const rows = tail
+  .filter((g) => g.count > 1)
+  .map((g) => {
+    const records = inGroup(inc, g.slug);
+    const dates = records.map((r) => r.discovered).filter(Boolean).sort();
+    return {
+      slug: g.slug,
+      label: g.label,
+      count: g.count,
+      sectors: new Set(records.map((r) => r.sector).filter(Boolean)).size,
+      first: dates[0],
+      last: dates.at(-1),
+    };
+  });
+
+const asOf = formatDate(snapshotMeta.fetchedAt);
+const title = buildTitle(`UAE Ransomware Long Tail: ${tail.length} Groups Under ${MIN_INCIDENTS_FOR_PAGE} Claims`);
+const description = buildDescription(
+  `${tail.length} of ${groups.length} ransomware groups have claimed fewer than ${MIN_INCIDENTS_FOR_PAGE} UAE organisations, yet they account for ${tailClaims} of ${inc.length} attributed claims.`,
+);
+
+const schemas = [
+  datasetSchema({
+    site: Astro.site?.href ?? 'http://localhost:4321/',
+    url: ROUTES.shortRecord(),
+    name: 'UAE Ransomware Groups With a Short Record',
+    description,
+    fetchedAt: snapshotMeta.fetchedAt,
+    from: '2020-01-01',
+    to: snapshotMeta.fetchedAt.slice(0, 10),
+  }),
+];
+
+const crumbs = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'Ransomware Groups', href: ROUTES.groupsHub() },
+  { label: 'Short record', href: ROUTES.shortRecord() },
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={{ kind: 'hub', slug: 'groups' }}>
+  <div class="page-head">
+    <h1>Ransomware Groups With a Short UAE Record</h1>
+    <div class="byline">
+      <span class="byline__tag">Groups</span>
+      <span class="byline__sep">/</span>
+      <a href={ROUTES.groupsHub()}>Groups targeting the UAE</a>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
+    </div>
+    <p class="lede">
+      <strong class="num">{tail.length}</strong> of the <strong class="num">{groups.length}</strong>{' '}
+      ransomware groups on this tracker have claimed fewer than{' '}
+      <strong class="num">{MIN_INCIDENTS_FOR_PAGE}</strong> organisations in the United Arab
+      Emirates. Together they account for <strong class="num">{tailClaims}</strong> of{' '}
+      <strong class="num">{inc.length}</strong> attributed claims, which is more than the{' '}
+      <strong class="num">{pagedClaims}</strong> held by the{' '}
+      <strong class="num">{paged.length}</strong> groups with a sustained record.
+    </p>
+  </div>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: tail.length, label: 'Groups under the threshold', accent: true },
+      { value: tailClaims, label: 'Claims they hold' },
+      { value: `${tailShare}%`, label: 'Share of all claims' },
+      { value: onceOnly.length, label: 'Seen exactly once' },
+    ]} />
+    <DataProvenance />
+  </div>
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Why these groups share one page</h2>
+    </div>
+    <p style="max-width:var(--measure)">
+      A group earns its own page on this site once it has claimed{' '}
+      <span class="num">{MIN_INCIDENTS_FOR_PAGE}</span> or more UAE organisations. Below that
+      threshold the record cannot carry a profile. Two dates and one sector describe an episode,
+      not a pattern, and a page built on them would restate the table row above it in longer
+      sentences.
+    </p>
+    <div class="callout" style="max-width:var(--measure)">
+      <p class="callout__title">The tail is the finding</p>
+      <p>
+        These groups are not a footnote to the tracker. They hold{' '}
+        <span class="num">{tailShare}%</span> of every attributed UAE claim. A UAE organisation is
+        more likely to be claimed by a group it has never heard of than by one of the{' '}
+        <span class="num">{paged.length}</span> named on this site.
+      </p>
+    </div>
+  </section>
+
+  <AlsoRead item={mostActive(1)[0]} />
+
+  <section class="section">
+    <div class="section__head">
+      <h2>Groups with two to {MIN_INCIDENTS_FOR_PAGE - 1} claimed UAE organisations</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">
+          Ransomware groups with between two and {MIN_INCIDENTS_FOR_PAGE - 1} claimed UAE organisations
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Group</th>
+            <th scope="col" class="num">Claims</th>
+            <th scope="col" class="num">Sectors</th>
+            <th scope="col">First claim</th>
+            <th scope="col">Most recent</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <th scope="row" class="row-name">{r.label}</th>
+              <td class="num">{r.count}</td>
+              <td class="num">{r.sectors}</td>
+              <td><time datetime={r.first}>{formatDayLong(r.first)}</time></td>
+              <td><time datetime={r.last}>{formatDayLong(r.last)}</time></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="provenance">
+      <span class="num">{rows.length}</span> groups with repeat claims below the threshold.
+      A further <span class="num">{onceOnly.length}</span> groups appear exactly once and are
+      listed on the <a href={ROUTES.groupsHub()}>groups hub</a>.
+    </p>
+  </section>
+
+  <PageContext id="groups-short-record" />
+
+  <RecircList title="Groups with a sustained record" items={mostActive(5)} more={{ href: ROUTES.groupsHub() }} />
+  <RecircList title="Latest activity" items={latestActivity(3)} />
+
+  <SiblingRail
+    title="Browse by sector"
+    items={sectors}
+    currentSlug={null}
+    hrefFor={(slug) => ROUTES.sector(slug)}
+  />
+</BaseLayout>

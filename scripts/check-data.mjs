@@ -227,6 +227,17 @@ function checkBriefsCarryNoVictimData() {
  */
 const RESERVED_NEWS_SLUGS = new Set(['category', 'archive', 'index']);
 
+/** Слаг группы не имеет права совпасть со статической страницей раздела. */
+const RESERVED_GROUP_SLUGS = new Set(['short-record', 'index']);
+
+function checkGroupSlugsDoNotCollide(snap) {
+  for (const slug of new Set(snap.records.map((r) => r.group_slug))) {
+    if (RESERVED_GROUP_SLUGS.has(slug)) {
+      fail(`Группа со слагом "${slug}" столкнулась бы со статической страницей раздела.`);
+    }
+  }
+}
+
 function checkNewsSlugsDoNotCollide() {
   const dir = resolve(process.cwd(), 'src/content/news');
   if (!existsSync(dir)) return;
@@ -242,6 +253,7 @@ const snap = checkSnapshot();
 if (snap) {
   checkFingerprints(snap);
   checkGroupSlugCollisions(snap);
+  checkGroupSlugsDoNotCollide(snap);
 }
 checkSectorSlugsNotYearLike();
 checkForbiddenTerms();

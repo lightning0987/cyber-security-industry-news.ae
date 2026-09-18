@@ -14,11 +14,36 @@ const sectors = bySector(inc);
 const periods = byPeriod(inc);
 const groups = groupsWithPages(inc);
 const news = sortNews(await getCollection('news'));
-const totalPages = 1 + 1 + sectors.length + periods.length + 1 + groups.length + 5;
+const archives = [...new Set(news.map((n) => n.data.published.slice(0, 7)))].sort().reverse();
+
+/**
+ * Служебные страницы перечислены поимённо, а не числом.
+ *
+ * Здесь стояла ручная формула, и она разошлась с сайтом: страница обещала 33
+ * страницы, когда их было 52. Число в заголовке — такой же факт, как цифры в
+ * трекере, и выводиться должно из тех же списков, по которым строится разметка.
+ */
+const SERVICE = [
+  { label: 'Home', href: ROUTES.home() },
+  { label: 'About Marsad Cyber', href: ROUTES.about() },
+  { label: 'Methodology', href: ROUTES.methodology() },
+  { label: 'Data Sources', href: ROUTES.dataSources() },
+  { label: 'Editorial Policy', href: ROUTES.editorialPolicy() },
+  { label: 'Contact', href: ROUTES.contact() },
+  { label: 'Image Credits', href: ROUTES.credits() },
+  { label: 'Sitemap', href: ROUTES.sitemap() },
+];
+
+const totalPages =
+  1 + sectors.length + periods.length          // хаб трекера, секторы, периоды
+  + 2 + groups.length                          // хаб групп, короткий след, профили
+  + 1 + NEWS_CATEGORIES.length + news.length + archives.length
+  + 1 + GUIDES.length
+  + SERVICE.length;
 
 const title = buildTitle(`Sitemap: All ${totalPages} Marsad Cyber Pages`);
 const description = buildDescription(
-  `Every page on Marsad Cyber in one list: ${sectors.length} sector pages, ${periods.length} period pages, ${groups.length} ransomware group profiles and site information.`,
+  `Every page on Marsad Cyber in one list: ${sectors.length} sector pages, ${periods.length} period pages, ${groups.length} ransomware group profiles, ${news.length} reports and site information.`,
 );
 const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href: ROUTES.sitemap() }];
 ---
@@ -46,6 +71,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href
     <div class="section__head"><h2>Ransomware groups</h2></div>
     <ul class="stack" style="columns:2;column-gap:var(--s6)">
       <li><a href={ROUTES.groupsHub()}>All groups targeting the UAE</a></li>
+      <li><a href={ROUTES.shortRecord()}>Groups with a short UAE record</a></li>
       {groups.map((g) => <li><a href={ROUTES.group(g.slug)}>{g.label}</a> <span class="num muted">{g.count}</span></li>)}
     </ul>
   </section>
@@ -56,6 +82,10 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href
       <li><a href={ROUTES.news()}>All reports</a></li>
       {NEWS_CATEGORIES.map((c) => <li><a href={ROUTES.category(c.slug)}>{c.label}</a></li>)}
       {news.map((n) => <li><a href={ROUTES.article(n.id)}>{n.data.h1}</a></li>)}
+      {archives.map((key) => {
+        const [y, m] = key.split('-');
+        return <li><a href={ROUTES.archive(y, m)}>Archive: {y}-{m}</a></li>;
+      })}
     </ul>
   </section>
 
@@ -70,13 +100,7 @@ const crumbs = [{ label: 'Home', href: ROUTES.home() }, { label: 'Sitemap', href
   <section class="section">
     <div class="section__head"><h2>About this project</h2></div>
     <ul class="stack">
-      <li><a href={ROUTES.home()}>Home</a></li>
-      <li><a href={ROUTES.about()}>About Marsad Cyber</a></li>
-      <li><a href={ROUTES.methodology()}>Methodology</a></li>
-      <li><a href={ROUTES.dataSources()}>Data Sources</a></li>
-      <li><a href={ROUTES.editorialPolicy()}>Editorial Policy</a></li>
-      <li><a href={ROUTES.contact()}>Contact</a></li>
-      <li><a href="/credits/">Image Credits</a></li>
+      {SERVICE.map((x) => <li><a href={x.href}>{x.label}</a></li>)}
     </ul>
   </section>
 </BaseLayout>
