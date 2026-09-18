@@ -72,6 +72,10 @@ const SITE_CONTEXT = {
     raw_records_from_upstream: snapshotMeta.recordCount,
     attributed_claims_used_in_all_figures: TOTAL,
     rejected_as_unverified: unverifiedIncidents.length,
+    // Разбивка атрибуции: подтверждено доменом .ae против упоминания ОАЭ
+    // в тексте записи. Без неё нельзя написать о самом методе отбора.
+    confirmed_by_ae_domain: snapshotMeta.attribution.confirmed,
+    probable_by_text_mention: snapshotMeta.attribution.probable,
     rejection_rate_pct: pct(unverifiedIncidents.length, snapshotMeta.recordCount),
     distinct_groups: groups.length,
     sectors_with_activity: nonZeroSectors.length,

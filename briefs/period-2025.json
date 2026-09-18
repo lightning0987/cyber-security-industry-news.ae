@@ -11,6 +11,8 @@
       "raw_records_from_upstream": 182,
       "attributed_claims_used_in_all_figures": 108,
       "rejected_as_unverified": 74,
+      "confirmed_by_ae_domain": 65,
+      "probable_by_text_mention": 43,
       "rejection_rate_pct": 40.7,
       "distinct_groups": 46,
       "sectors_with_activity": 13,

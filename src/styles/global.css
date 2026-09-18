@@ -1365,3 +1365,14 @@ main { padding-block: var(--s5) var(--s6); }
   text-underline-offset: 0.18em;
 }
 .byline__by a:hover { text-decoration-color: var(--accent); }
+
+/* Таблицы из markdown не обёрнуты в .table-wrap, поэтому прокрутку им даёт
+   сама таблица. До появления таблиц в гайдах этого случая не существовало,
+   и на 360px страница уезжала в горизонтальный скролл целиком. */
+.guide-body table,
+.prose > table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}

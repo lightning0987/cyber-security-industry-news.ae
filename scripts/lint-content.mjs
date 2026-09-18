@@ -157,6 +157,10 @@ for (const target of targets) {
   for (const para of bodyBeforeSources.split(/\n\s*\n/)) {
     const p = para.trim();
     if (!p || p.startsWith('#') || /^\d+\./.test(p) || p.startsWith('-') || p.startsWith('---')) continue;
+    // Таблица — содержание, но не проза: в подсчёт слов она входит, в проверку
+    // длины предложения нет. Иначе «| Sector | Claims |» читается как абзац на
+    // 46 слов, и за этими ложными срабатываниями настоящие уже не видно.
+    if (p.startsWith('|')) continue;
 
     const opening = p.toLowerCase();
     for (const bad of FORBIDDEN_OPENINGS) {

@@ -165,13 +165,18 @@ attributed UAE claims, which is 55.6% of the published record.
 
 Read that share as an order of magnitude, not as a scoping test. Sector is a proxy. Whether ISR
 reaches a given organisation is decided by the designating authority and by contract terms, never
-by an industry label. A Professional Services firm with no Dubai government contract sits outside
-the regulation while remaining inside that row.
+by an industry label.
 
-The figure is still worth having. It says that the majority of the UAE claim record falls in
-sectors where ISR obligations are common, so an ISR programme and a ransomware readiness
-programme are largely the same work. Treating them as two budgets duplicates effort that the
-control domains already cover once.
+A Professional Services firm with no Dubai government contract sits outside the regulation while
+remaining inside that row.
+
+The figure is still worth having. Most of the UAE claim record falls in sectors where ISR
+obligations are common. An ISR programme and a ransomware readiness programme are therefore
+largely the same work.
+
+Treating them as two budgets duplicates effort that the control domains already cover once. The
+overlap is worth mapping before either programme starts, because the evidence one produces usually
+answers the other.
 
 ## Practical sequence
 
