@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-09-29T07:52:49.649Z",
-  "record_count": 182,
+  "fetched_at": "2026-09-30T07:58:21.659Z",
+  "record_count": 183,
   "schema_version": 1,
   "attribution": {
-    "unverified": 74,
+    "unverified": 75,
     "confirmed": 65,
     "probable": 43
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "cf584d27feed2be5",
+      "victim_hash": "36738a2c95af8cab",
+      "group": "m3rx",
+      "group_slug": "m3rx",
+      "group_family": null,
+      "sector": "retail-ecommerce",
+      "sector_label": "Retail and E-Commerce",
+      "discovered": "2026-09-29",
+      "published": "2026-09-29",
+      "year": 2026,
+      "month": "2026-09",
+      "ae_confidence": "unverified"
+    },
     {
       "id": "1870bfad57cf0f2e",
       "victim_hash": "faf1b5c827bd77a4",
