@@ -1,7 +1,7 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-09-30T07:58:21.659Z",
+  "fetched_at": "2026-10-01T08:18:45.368Z",
   "record_count": 183,
   "schema_version": 1,
   "attribution": {
@@ -89,20 +89,6 @@
       "group_family": null,
       "sector": "other",
       "sector_label": "Other",
-      "discovered": "2026-08-24",
-      "published": "2026-08-24",
-      "year": 2026,
-      "month": "2026-08",
-      "ae_confidence": "unverified"
-    },
-    {
-      "id": "0ca4f3c6e7bada88",
-      "victim_hash": "62da55fbe6b897f7",
-      "group": "qilin",
-      "group_slug": "qilin",
-      "group_family": null,
-      "sector": "professional-services",
-      "sector_label": "Professional Services",
       "discovered": "2026-08-24",
       "published": "2026-08-24",
       "year": 2026,
@@ -220,6 +206,20 @@
       "year": 2026,
       "month": "2026-08",
       "ae_confidence": "probable"
+    },
+    {
+      "id": "0ca4f3c6e7bada88",
+      "victim_hash": "62da55fbe6b897f7",
+      "group": "qilin",
+      "group_slug": "qilin",
+      "group_family": null,
+      "sector": "professional-services",
+      "sector_label": "Professional Services",
+      "discovered": "2026-08-24",
+      "published": "2026-07-15",
+      "year": 2026,
+      "month": "2026-08",
+      "ae_confidence": "unverified"
     },
     {
       "id": "f0896c92ed0a941b",
