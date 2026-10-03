@@ -1,16 +1,44 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-02T07:56:10.190Z",
-  "record_count": 183,
+  "fetched_at": "2026-10-03T07:34:55.906Z",
+  "record_count": 186,
   "schema_version": 1,
   "attribution": {
-    "unverified": 75,
+    "unverified": 78,
     "confirmed": 65,
     "probable": 43
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "39575bf8b7d122e9",
+      "victim_hash": "197b288be1ec1218",
+      "group": "spirals",
+      "group_slug": "spirals",
+      "group_family": null,
+      "sector": "transportation",
+      "sector_label": "Transportation",
+      "discovered": "2026-10-03",
+      "published": "2026-10-03",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "unverified"
+    },
+    {
+      "id": "8b125b2563bbf8b1",
+      "victim_hash": "f46d91c394ca6f88",
+      "group": "auditteam",
+      "group_slug": "auditteam",
+      "group_family": null,
+      "sector": "technology",
+      "sector_label": "Technology",
+      "discovered": "2026-10-02",
+      "published": "2026-10-02",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "unverified"
+    },
     {
       "id": "cf584d27feed2be5",
       "victim_hash": "36738a2c95af8cab",
@@ -2278,6 +2306,20 @@
       "year": 2024,
       "month": "2024-01",
       "ae_confidence": "probable"
+    },
+    {
+      "id": "881a2c723658604b",
+      "victim_hash": "197b288be1ec1218",
+      "group": "dragonforce",
+      "group_slug": "dragonforce",
+      "group_family": null,
+      "sector": "transportation",
+      "sector_label": "Transportation",
+      "discovered": "2023-12-13",
+      "published": "2023-12-13",
+      "year": 2023,
+      "month": "2023-12",
+      "ae_confidence": "unverified"
     },
     {
       "id": "467db06b88622a12",

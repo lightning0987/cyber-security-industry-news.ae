@@ -6,14 +6,14 @@
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
-    "data_as_of": "2026-10-02T07:56:10.190Z",
+    "data_as_of": "2026-10-03T07:34:55.906Z",
     "totals": {
-      "raw_records_from_upstream": 183,
+      "raw_records_from_upstream": 186,
       "attributed_claims_used_in_all_figures": 108,
-      "rejected_as_unverified": 75,
+      "rejected_as_unverified": 78,
       "confirmed_by_ae_domain": 65,
       "probable_by_text_mention": 43,
-      "rejection_rate_pct": 41,
+      "rejection_rate_pct": 41.9,
       "distinct_groups": 46,
       "sectors_with_activity": 13,
       "average_claims_per_active_sector": 8.3
