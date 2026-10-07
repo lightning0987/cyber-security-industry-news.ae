@@ -6,24 +6,24 @@
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
-    "data_as_of": "2026-10-06T08:33:18.806Z",
+    "data_as_of": "2026-10-07T08:08:59.126Z",
     "totals": {
-      "raw_records_from_upstream": 186,
-      "attributed_claims_used_in_all_figures": 108,
+      "raw_records_from_upstream": 187,
+      "attributed_claims_used_in_all_figures": 109,
       "rejected_as_unverified": 78,
       "confirmed_by_ae_domain": 65,
-      "probable_by_text_mention": 43,
-      "rejection_rate_pct": 41.9,
+      "probable_by_text_mention": 44,
+      "rejection_rate_pct": 41.7,
       "distinct_groups": 46,
       "sectors_with_activity": 13,
-      "average_claims_per_active_sector": 8.3
+      "average_claims_per_active_sector": 8.4
     },
     "regulatory_scope": [
       {
         "framework": "DESC ISR v3",
         "sectors_usually_in_scope": 5,
-        "claims_in_those_sectors": 60,
-        "share_of_all_attributed_claims_pct": 55.6,
+        "claims_in_those_sectors": 61,
+        "share_of_all_attributed_claims_pct": 56,
         "by_sector": [
           {
             "sector": "Professional Services",
@@ -39,7 +39,7 @@
           },
           {
             "sector": "Transportation",
-            "claims": 6
+            "claims": 7
           },
           {
             "sector": "Energy and Utilities",
@@ -51,8 +51,8 @@
       {
         "framework": "UAE IAS v2",
         "sectors_usually_in_scope": 3,
-        "claims_in_those_sectors": 23,
-        "share_of_all_attributed_claims_pct": 21.3,
+        "claims_in_those_sectors": 24,
+        "share_of_all_attributed_claims_pct": 22,
         "by_sector": [
           {
             "sector": "Government and Defense",
@@ -60,7 +60,7 @@
           },
           {
             "sector": "Transportation",
-            "claims": 6
+            "claims": 7
           },
           {
             "sector": "Energy and Utilities",
@@ -72,8 +72,8 @@
       {
         "framework": "UAE PDPL",
         "sectors_usually_in_scope": 13,
-        "claims_in_those_sectors": 106,
-        "share_of_all_attributed_claims_pct": 98.1,
+        "claims_in_those_sectors": 107,
+        "share_of_all_attributed_claims_pct": 98.2,
         "by_sector": [
           {
             "sector": "Professional Services",
@@ -100,11 +100,11 @@
             "claims": 8
           },
           {
-            "sector": "Healthcare",
-            "claims": 6
+            "sector": "Transportation",
+            "claims": 7
           },
           {
-            "sector": "Transportation",
+            "sector": "Healthcare",
             "claims": 6
           },
           {
@@ -134,7 +134,7 @@
         "framework": "DFSA TRM",
         "sectors_usually_in_scope": 1,
         "claims_in_those_sectors": 11,
-        "share_of_all_attributed_claims_pct": 10.2,
+        "share_of_all_attributed_claims_pct": 10.1,
         "by_sector": [
           {
             "sector": "Financial Services",
@@ -157,7 +157,7 @@
     "claims_in_this_sector": 4,
     "share_of_all_uae_claims_pct": 3.7,
     "rank_among_sectors": "10 of 13",
-    "versus_average_active_sector": "4 against an average of 8.3",
+    "versus_average_active_sector": "4 against an average of 8.4",
     "first_claim": "2024-02-09",
     "most_recent_claim": "2026-07-01",
     "distinct_groups_active_here": 4

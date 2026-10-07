@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-06T08:33:18.806Z",
-  "record_count": 186,
+  "fetched_at": "2026-10-07T08:08:59.126Z",
+  "record_count": 187,
   "schema_version": 1,
   "attribution": {
+    "probable": 44,
     "unverified": 78,
-    "confirmed": 65,
-    "probable": 43
+    "confirmed": 65
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "313fd2484366cd46",
+      "victim_hash": "d8072fc0af192ada",
+      "group": "everest",
+      "group_slug": "everest",
+      "group_family": null,
+      "sector": "transportation",
+      "sector_label": "Transportation",
+      "discovered": "2026-10-06",
+      "published": "2026-10-06",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "probable"
+    },
     {
       "id": "39575bf8b7d122e9",
       "victim_hash": "197b288be1ec1218",

@@ -1,11 +1,12 @@
 {
   "source": "ransomware.live",
-  "fetched_at": "2026-10-06T08:33:18.806Z",
+  "fetched_at": "2026-10-07T08:08:59.126Z",
   "salt_id": "25c92bf24962e490",
-  "count": 590,
+  "count": 592,
   "fingerprints": [
     "00cf3a3e268ec56b",
     "0189f3bf98f034e5",
+    "0278749f043ab9f7",
     "02bbc4167da2e5e3",
     "0374ccb41b9eeb49",
     "0496a864eb6fe2aa",
@@ -285,6 +286,7 @@
     "8386a9fd73a7801e",
     "83fd212ceb5b762f",
     "84709fb6ce61cc18",
+    "849951ae50ec51ed",
     "84f9e11b28070e76",
     "8556f54218d3b9e2",
     "85f1ff8fc156286b",
