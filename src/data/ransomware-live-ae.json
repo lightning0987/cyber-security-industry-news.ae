@@ -1,11 +1,11 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-07T08:08:59.126Z",
-  "record_count": 187,
+  "fetched_at": "2026-10-08T08:24:54.323Z",
+  "record_count": 188,
   "schema_version": 1,
   "attribution": {
-    "probable": 44,
+    "probable": 45,
     "unverified": 78,
     "confirmed": 65
   },
@@ -1116,6 +1116,20 @@
       "year": 2025,
       "month": "2025-10",
       "ae_confidence": "unverified"
+    },
+    {
+      "id": "263520a5c1091781",
+      "victim_hash": "5d5958d149d85322",
+      "group": "incransom",
+      "group_slug": "incransom",
+      "group_family": null,
+      "sector": "hospitality",
+      "sector_label": "Hospitality",
+      "discovered": "2026-10-07",
+      "published": "2025-10-07",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "probable"
     },
     {
       "id": "115a3b24f3ad24f3",

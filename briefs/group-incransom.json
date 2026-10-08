@@ -1,8 +1,8 @@
 {
-  "page_type": "sector",
-  "url": "/uae-ransomware-tracker/retail-ecommerce/",
-  "entity": "Retail and E-Commerce",
-  "existing_h1": "Ransomware Attacks on Retail and E-Commerce in the UAE",
+  "page_type": "group",
+  "url": "/ransomware-groups-targeting-uae/incransom/",
+  "entity": "INC Ransom",
+  "existing_h1": "INC Ransom Ransomware Activity in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -154,71 +154,62 @@
     ]
   },
   "facts": {
-    "claims_in_this_sector": 10,
-    "share_of_all_uae_claims_pct": 9.1,
-    "rank_among_sectors": "5 of 13",
-    "versus_average_active_sector": "10 against an average of 8.5",
-    "first_claim": "2022-04-25",
-    "most_recent_claim": "2026-08-05",
-    "distinct_groups_active_here": 7
-  },
-  "groups_active_here": [
-    {
-      "name": "Coinbase Cartel",
-      "claims": 2,
-      "share_of_sector_pct": 20
-    },
-    {
-      "name": "Everest",
-      "claims": 2,
-      "share_of_sector_pct": 20
-    },
-    {
-      "name": "Stormous",
-      "claims": 2,
-      "share_of_sector_pct": 20
-    },
-    {
-      "name": "Blackshrantac",
-      "claims": 1,
-      "share_of_sector_pct": 10
-    },
-    {
-      "name": "BQTLock",
-      "claims": 1,
-      "share_of_sector_pct": 10
-    },
-    {
+    "claimed_uae_organisations": 5,
+    "share_of_all_uae_claims_pct": 4.5,
+    "rank_among_groups": "6 of 46",
+    "most_active_group_for_comparison": {
       "name": "LockBit 3.0",
-      "claims": 1,
-      "share_of_sector_pct": 10
+      "claims": 10
+    },
+    "first_claim": "2025-11-20",
+    "most_recent_claim": "2026-10-07",
+    "sectors_targeted": 5,
+    "family": null,
+    "family_siblings": [],
+    "family_note": null
+  },
+  "by_sector": [
+    {
+      "sector": "Professional Services",
+      "claims": 1
     },
     {
-      "name": "The Gentlemen",
-      "claims": 1,
-      "share_of_sector_pct": 10
+      "sector": "Technology",
+      "claims": 1
+    },
+    {
+      "sector": "Manufacturing",
+      "claims": 1
+    },
+    {
+      "sector": "Hospitality",
+      "claims": 1
+    },
+    {
+      "sector": "Other",
+      "claims": 1
     }
   ],
   "by_period": [
     {
       "period": "2020–2022",
-      "claims": 1
+      "claims": 0
     },
     {
       "period": "2023",
-      "claims": 1
+      "claims": 0
     },
     {
       "period": "2024",
-      "claims": 1
+      "claims": 0
     },
     {
       "period": "2025",
-      "claims": 4
+      "claims": 1
     },
     {
       "period": "2026",
-      "claims": 3
+      "claims": 4
     }
   ],
   "regulatory_context": [
@@ -230,7 +221,16 @@
         "breach notification duties"
       ],
       "scope": "Any organisation processing personal data of individuals in the UAE"
+    },
+    {
+      "name": "DESC ISR v3",
+      "full": "Dubai Information Security Regulation, version 3 (2023)",
+      "facts": [
+        "13 control domains",
+        "methodologically aligned with ISO 27001 and NIST CSF"
+      ],
+      "scope": "Dubai government entities, semi-government organisations, cloud providers serving Dubai government, and key suppliers handling government data"
     }
   ],
-  "what_the_page_already_says": "A lede paragraph with the headline count, a stat bar, a table of groups active in this sector, and a table of claims by period. Do not repeat these. Add what they do not say."
+  "what_the_page_already_says": "A lede with the claim count and concentration sector, a stat bar, a table by sector and a table by period. Do not repeat these."
 }

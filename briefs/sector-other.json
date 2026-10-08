@@ -6,24 +6,24 @@
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
-    "data_as_of": "2026-10-07T08:08:59.126Z",
+    "data_as_of": "2026-10-08T08:24:54.323Z",
     "totals": {
-      "raw_records_from_upstream": 187,
-      "attributed_claims_used_in_all_figures": 109,
+      "raw_records_from_upstream": 188,
+      "attributed_claims_used_in_all_figures": 110,
       "rejected_as_unverified": 78,
       "confirmed_by_ae_domain": 65,
-      "probable_by_text_mention": 44,
-      "rejection_rate_pct": 41.7,
+      "probable_by_text_mention": 45,
+      "rejection_rate_pct": 41.5,
       "distinct_groups": 46,
       "sectors_with_activity": 13,
-      "average_claims_per_active_sector": 8.4
+      "average_claims_per_active_sector": 8.5
     },
     "regulatory_scope": [
       {
         "framework": "DESC ISR v3",
         "sectors_usually_in_scope": 5,
         "claims_in_those_sectors": 61,
-        "share_of_all_attributed_claims_pct": 56,
+        "share_of_all_attributed_claims_pct": 55.5,
         "by_sector": [
           {
             "sector": "Professional Services",
@@ -52,7 +52,7 @@
         "framework": "UAE IAS v2",
         "sectors_usually_in_scope": 3,
         "claims_in_those_sectors": 24,
-        "share_of_all_attributed_claims_pct": 22,
+        "share_of_all_attributed_claims_pct": 21.8,
         "by_sector": [
           {
             "sector": "Government and Defense",
@@ -72,7 +72,7 @@
       {
         "framework": "UAE PDPL",
         "sectors_usually_in_scope": 13,
-        "claims_in_those_sectors": 107,
+        "claims_in_those_sectors": 108,
         "share_of_all_attributed_claims_pct": 98.2,
         "by_sector": [
           {
@@ -112,12 +112,12 @@
             "claims": 4
           },
           {
-            "sector": "Other",
+            "sector": "Hospitality",
             "claims": 4
           },
           {
-            "sector": "Hospitality",
-            "claims": 3
+            "sector": "Other",
+            "claims": 4
           },
           {
             "sector": "Agriculture and Food Production",
@@ -134,7 +134,7 @@
         "framework": "DFSA TRM",
         "sectors_usually_in_scope": 1,
         "claims_in_those_sectors": 11,
-        "share_of_all_attributed_claims_pct": 10.1,
+        "share_of_all_attributed_claims_pct": 10,
         "by_sector": [
           {
             "sector": "Financial Services",
@@ -155,9 +155,9 @@
   },
   "facts": {
     "claims_in_this_sector": 4,
-    "share_of_all_uae_claims_pct": 3.7,
-    "rank_among_sectors": "10 of 13",
-    "versus_average_active_sector": "4 against an average of 8.4",
+    "share_of_all_uae_claims_pct": 3.6,
+    "rank_among_sectors": "11 of 13",
+    "versus_average_active_sector": "4 against an average of 8.5",
     "first_claim": "2024-02-09",
     "most_recent_claim": "2026-07-01",
     "distinct_groups_active_here": 4
