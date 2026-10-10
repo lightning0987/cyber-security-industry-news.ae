@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-09T08:29:11.164Z",
-  "record_count": 188,
+  "fetched_at": "2026-10-10T08:06:07.286Z",
+  "record_count": 189,
   "schema_version": 1,
   "attribution": {
+    "unverified": 79,
     "probable": 45,
-    "unverified": 78,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "a47f0125ba374263",
+      "victim_hash": "2bd009535316e50f",
+      "group": "nightspire",
+      "group_slug": "nightspire",
+      "group_family": null,
+      "sector": "professional-services",
+      "sector_label": "Professional Services",
+      "discovered": "2026-10-09",
+      "published": "2026-10-09",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "unverified"
+    },
     {
       "id": "313fd2484366cd46",
       "victim_hash": "d8072fc0af192ada",
