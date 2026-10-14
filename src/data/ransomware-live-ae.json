@@ -1,12 +1,12 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-13T08:56:19.341Z",
-  "record_count": 189,
+  "fetched_at": "2026-10-14T07:06:14.391Z",
+  "record_count": 190,
   "schema_version": 1,
   "attribution": {
     "unverified": 79,
-    "probable": 45,
+    "probable": 46,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
@@ -52,6 +52,20 @@
       "year": 2026,
       "month": "2026-10",
       "ae_confidence": "unverified"
+    },
+    {
+      "id": "c7b76e60314522b0",
+      "victim_hash": "6525d0ea3619e790",
+      "group": "auditteam",
+      "group_slug": "auditteam",
+      "group_family": null,
+      "sector": "financial-services",
+      "sector_label": "Financial Services",
+      "discovered": "2026-10-13",
+      "published": "2026-10-02",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "probable"
     },
     {
       "id": "8b125b2563bbf8b1",

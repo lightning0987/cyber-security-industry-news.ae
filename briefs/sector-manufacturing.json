@@ -6,15 +6,15 @@
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
-    "data_as_of": "2026-10-13T08:56:19.341Z",
+    "data_as_of": "2026-10-14T07:06:14.391Z",
     "totals": {
-      "raw_records_from_upstream": 189,
-      "attributed_claims_used_in_all_figures": 110,
+      "raw_records_from_upstream": 190,
+      "attributed_claims_used_in_all_figures": 111,
       "rejected_as_unverified": 79,
       "confirmed_by_ae_domain": 65,
-      "probable_by_text_mention": 45,
-      "rejection_rate_pct": 41.8,
-      "distinct_groups": 46,
+      "probable_by_text_mention": 46,
+      "rejection_rate_pct": 41.6,
+      "distinct_groups": 47,
       "sectors_with_activity": 13,
       "average_claims_per_active_sector": 8.5
     },
@@ -23,7 +23,7 @@
         "framework": "DESC ISR v3",
         "sectors_usually_in_scope": 5,
         "claims_in_those_sectors": 61,
-        "share_of_all_attributed_claims_pct": 55.5,
+        "share_of_all_attributed_claims_pct": 55,
         "by_sector": [
           {
             "sector": "Professional Services",
@@ -52,7 +52,7 @@
         "framework": "UAE IAS v2",
         "sectors_usually_in_scope": 3,
         "claims_in_those_sectors": 24,
-        "share_of_all_attributed_claims_pct": 21.8,
+        "share_of_all_attributed_claims_pct": 21.6,
         "by_sector": [
           {
             "sector": "Government and Defense",
@@ -72,7 +72,7 @@
       {
         "framework": "UAE PDPL",
         "sectors_usually_in_scope": 13,
-        "claims_in_those_sectors": 108,
+        "claims_in_those_sectors": 109,
         "share_of_all_attributed_claims_pct": 98.2,
         "by_sector": [
           {
@@ -89,7 +89,7 @@
           },
           {
             "sector": "Financial Services",
-            "claims": 11
+            "claims": 12
           },
           {
             "sector": "Retail and E-Commerce",
@@ -133,12 +133,12 @@
       {
         "framework": "DFSA TRM",
         "sectors_usually_in_scope": 1,
-        "claims_in_those_sectors": 11,
-        "share_of_all_attributed_claims_pct": 10,
+        "claims_in_those_sectors": 12,
+        "share_of_all_attributed_claims_pct": 10.8,
         "by_sector": [
           {
             "sector": "Financial Services",
-            "claims": 11
+            "claims": 12
           }
         ],
         "caveat": "Sector is a proxy. Scope is decided by the designating authority, not by industry label."
@@ -155,7 +155,7 @@
   },
   "facts": {
     "claims_in_this_sector": 8,
-    "share_of_all_uae_claims_pct": 7.3,
+    "share_of_all_uae_claims_pct": 7.2,
     "rank_among_sectors": "6 of 13",
     "versus_average_active_sector": "8 against an average of 8.5",
     "first_claim": "2023-10-31",
