@@ -1,12 +1,12 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-15T06:56:56.179Z",
-  "record_count": 190,
+  "fetched_at": "2026-10-16T06:44:11.329Z",
+  "record_count": 191,
   "schema_version": 1,
   "attribution": {
     "unverified": 79,
-    "probable": 46,
+    "probable": 47,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
@@ -94,6 +94,20 @@
       "year": 2026,
       "month": "2026-09",
       "ae_confidence": "unverified"
+    },
+    {
+      "id": "ca839320128f7eeb",
+      "victim_hash": "20db751446f9c2ae",
+      "group": "blacknevas",
+      "group_slug": "blacknevas",
+      "group_family": null,
+      "sector": "education",
+      "sector_label": "Education",
+      "discovered": "2026-10-15",
+      "published": "2026-09-17",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "probable"
     },
     {
       "id": "1870bfad57cf0f2e",
