@@ -2,7 +2,7 @@
 title: "The Gentlemen Claims Four UAE Organisations in 2026"
 h1: "The Gentlemen Claims Four UAE Organisations Since February"
 description: "The Gentlemen has claimed 4 UAE organisations since February 2026, half of them in Transportation, with no UAE record in any earlier period."
-dek: "The Gentlemen reached ninth place among 46 ransomware groups tracked against UAE targets without a single claim before February 2026. Half its claims fall in Transportation, an unusual concentration on a tracker where most groups spread thinly."
+dek: "The Gentlemen reached ninth place among 47 ransomware groups tracked against UAE targets without a single claim before February 2026. Half its claims fall in Transportation, an unusual concentration on a tracker where most groups spread thinly."
 category: "ransomware"
 tier: "T1"
 image: "container-port"
@@ -26,7 +26,7 @@ The Gentlemen has claimed 4 organisations in the United Arab Emirates during 202
 had no UAE record in any earlier period on this tracker. Its first claim was recorded on
 6 February 2026 and its most recent on 20 June 2026.
 
-That places The Gentlemen ninth among the 46 ransomware groups that have claimed a UAE
+That places The Gentlemen ninth among the 47 ransomware groups that have claimed a UAE
 organisation. It reached that position inside a single partial year.
 
 ## Who is affected in the UAE

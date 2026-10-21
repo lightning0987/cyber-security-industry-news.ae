@@ -1,36 +1,41 @@
 ---
-summary: "Every one of the 3 claimed UAE hospitality organisations was recorded in 2026, making this the newest sector on the tracker."
+summary: "All 4 claimed UAE hospitality organisations were recorded in 2026, and each was claimed by a different group."
 ---
 
-## Hospitality ranks eleventh among UAE sectors with 3 claimed organisations
+## Hospitality ranks tenth among UAE sectors with 4 claimed organisations
 
-Hospitality ranks eleventh of 13 UAE sectors, well below the average of 8.3 claims per active sector. Three distinct groups appear here, one claim each. What distinguishes the sector is timing rather than volume.
+Hospitality sits tenth of 13 UAE sectors and carries 3.6% of all attributed claims. The count runs
+well below the average of 8.6 claims per active sector. The sector is the newest entry on this
+tracker.
 
-## All Hospitality claims on record fall in 2026
+## Every Hospitality claim falls inside 2026
 
-Hospitality recorded no claims across 2020 to [2025](/uae-ransomware-tracker/2025/). Leak-site monitoring recorded the first
-claim on 4 May [2026](/uae-ransomware-tracker/2026/) and the most recent on 5 August 2026. Every claim in the sector therefore
-falls within a single partial year.
+Leak-site monitoring recorded the first Hospitality claim against a UAE organisation on 4 May 2026.
+The most recent was recorded on 7 October 2026. The sector shows zero claims across 2020 to
+[2025](/uae-ransomware-tracker/2025/).
 
-[DragonForce](/ransomware-groups-targeting-uae/dragonforce/), Everest and Lamashtu each account for one claimed organisation. A sector that
-moves from zero to 3 claims inside one year deserves attention regardless of its rank. The
-figure will not be complete until 2026 closes.
+Four distinct groups account for those 4 claims, which means one claim each. No group returned to
+the sector after its first appearance.
+
+That distribution argues against a targeted campaign. Four unrelated operations reaching the same
+sector within five months reads as separate opportunities rather than as coordinated interest.
 
 ## What this means for UAE organisations
 
-1. Read this sector as newly active rather than lightly targeted, because the record before
-   2026 is empty.
-2. Map your obligations under the UAE Personal Data Protection Law, which covers guest
-   identity, payment and booking records.
-3. Check that property management and point of sale systems do not share administrative
-   credentials with corporate systems.
-4. Confirm that franchise and management-contract partners are inside your access review, since
-   hospitality brands often operate through third parties.
-5. Establish how a property checks guests in without its systems, because the answer decides
-   what an outage actually costs.
-6. Review the three groups involved, given that each is a first-time entrant to the sector
-   rather than an established presence.
-7. Watch this page as 2026 completes, since three claims in a partial year set no reliable
-   baseline yet.
-8. Confirm that loyalty and reservation platforms run by third parties hold guest data under
-   terms you have actually read.
+1. Treat the sector as newly exposed rather than as historically safe, because its entire record
+   is five months old.
+2. Note that four separate groups reached it, so defending against a named actor would have
+   addressed one claim in four.
+3. Map your obligations under the UAE Personal Data Protection Law, which reaches guest records
+   and staff records alike.
+4. Review third-party booking and payment integrations, since these are the systems a hospitality
+   operator least often controls directly.
+5. Read the [2026 period page](/uae-ransomware-tracker/2026/) for the wider context, because every
+   claim here belongs to that year.
+
+A sector with 4 claims and 4 groups carries no pattern worth modelling. Watch whether any group
+returns, because a second claim by the same operation would be the first real signal.
+
+Hospitality entered the record in the same year that
+[Education](/uae-ransomware-tracker/education/) recorded its second and third claims. Both sectors
+sat at zero for the whole period before 2025.

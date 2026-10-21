@@ -4,7 +4,7 @@ summary: "LockBit 3.0 leads the UAE record with 10 claimed organisations, yet it
 
 ## LockBit 3.0 leads the UAE record with 10 claimed organisations
 
-LockBit 3.0 ranks first of 46 groups on this tracker. It reached across 7 distinct sectors, the
+LockBit 3.0 ranks first of 47 groups on this tracker. It reached across 7 distinct sectors, the
 widest sector spread of any group here. Neither figure describes current activity. The group has claimed nothing in the United Arab Emirates since February [2024](/uae-ransomware-tracker/2024/).
 
 ## LockBit 3.0 has claimed no UAE organisation since February 2024

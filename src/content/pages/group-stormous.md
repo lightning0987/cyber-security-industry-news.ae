@@ -4,7 +4,7 @@ summary: "Stormous has claimed 10 UAE organisations across five sectors, with a 
 
 ## Stormous has claimed 10 UAE organisations
 
-Stormous ranks second of 46 groups on this tracker and appears across 5 distinct sectors. The shape of its record matters more than its rank. The group recorded a full year of silence between two active periods, which few operations here do.
+Stormous ranks second of 47 groups on this tracker and appears across 5 distinct sectors. The shape of its record matters more than its rank. The group recorded a full year of silence between two active periods, which few operations here do.
 
 ## Stormous recorded nothing in 2025, then returned in 2026
 

@@ -7,7 +7,7 @@ summary: "Professional Services absorbs 24 claimed organisations from 19 separat
 Professional Services ranks first of 13 UAE sectors. It is also the only sector with claims in
 every period on record. It carried 3 claims across 2020 to 2022, then 4, then 7, then 5, then 5.
 
-The count sits nearly three times the average of 8.3 claims per active sector. Firms here should
+The count sits nearly three times the average of 8.6 claims per active sector. Firms here should
 plan for a steady baseline rather than a passing wave.
 
 ## Nineteen groups share 24 Professional Services claims

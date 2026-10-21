@@ -4,7 +4,7 @@ summary: "UAE Retail and E-Commerce holds 10 claimed organisations, with 7 of th
 
 ## Retail and E-Commerce ranks fifth among UAE sectors
 
-Retail and E-Commerce ranks fifth of 13 UAE sectors, above the average of 8.3 claims per active sector. Seven distinct groups appear here. Three of those groups account for 2 claims each, a tighter concentration than most UAE sectors show.
+Retail and E-Commerce ranks fifth of 13 UAE sectors, above the average of 8.6 claims per active sector. Seven distinct groups appear here. Three of those groups account for 2 claims each, a tighter concentration than most UAE sectors show.
 
 ## Retail claims were flat until 2025, then rose sharply
 

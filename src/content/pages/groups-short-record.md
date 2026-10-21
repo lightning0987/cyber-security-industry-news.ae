@@ -1,5 +1,5 @@
 ---
-summary: "Groups below the page threshold hold 54.6% of every attributed UAE claim, and 24 of them were recorded exactly once."
+summary: "Groups below the page threshold hold 50.9% of every attributed UAE claim, and 24 of them were recorded exactly once."
 ---
 
 ## A single claim describes an episode rather than an actor
@@ -24,7 +24,7 @@ as one campaign. The second suggests a group that returned to the country after 
 The practical consequence is that actor names are a weak basis for planning in the UAE.
 
 1. Treat the named groups as the visible part of the record, not as the whole of it.
-2. Expect an unfamiliar name, because groups below the threshold hold 54.6% of attributed claims.
+2. Expect an unfamiliar name, because groups below the threshold hold 50.9% of attributed claims.
 3. Plan around sectors and control domains, which persist while group names turn over.
 4. Read the [sector pages](/uae-ransomware-tracker/) before the group pages when deciding where to
    spend.

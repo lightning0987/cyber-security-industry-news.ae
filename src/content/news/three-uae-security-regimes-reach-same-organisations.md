@@ -71,7 +71,7 @@ UAE sector on this tracker with 13 claimed organisations.
 [Energy and Utilities](/uae-ransomware-tracker/energy-utilities/) carries 4.
 
 Those three sectors cover most of the population that sits inside more than one regime at once.
-The combined figure is small against the site total of 108. That is the point worth making.
+The combined figure is small against the site total of 112. That is the point worth making.
 Regulatory exposure is not proportional to claim volume, and a sector with few claims can carry
 the heaviest consequence per incident.
 

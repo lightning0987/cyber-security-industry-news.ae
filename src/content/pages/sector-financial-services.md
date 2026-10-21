@@ -1,37 +1,38 @@
 ---
-summary: "UAE Financial Services carries 11 claimed organisations, fourth of 13 sectors, spread across eight separate ransomware groups rather than concentrated in one."
+summary: "Financial Services holds 12 claimed UAE organisations from 9 separate groups, the widest spread of any sector on this tracker."
 ---
 
-## Financial Services ranks fourth among UAE sectors by ransomware claims
+## Financial Services ranks fourth among UAE sectors with 12 claimed organisations
 
-Financial Services ranks fourth of 13 UAE sectors, above the average of 8.3 claims per active
-sector. Eight distinct groups appear here. No single operation dominates, which shapes what a
-defence in this sector has to cover.
+Financial Services sits fourth of 13 UAE sectors and carries 10.7% of all attributed claims. The
+count runs above the average of 8.6 claims per active sector. It also holds the longest record of
+any sector here.
 
-## Claims against UAE Financial Services are spread thin across many groups
+## The Financial Services record runs longer than any other sector
 
-The first Financial Services claim in this dataset was recorded on 27 January 2022. The most
-recent was recorded on 11 May [2026](/uae-ransomware-tracker/2026/). Eight groups share 11 claims between them, so no single
-operation dominates the sector. That pattern points to opportunistic targeting rather than one
-sustained campaign against UAE finance.
+Leak-site monitoring recorded the first Financial Services claim against a UAE organisation on 27
+January 2022. The most recent was recorded on 13 October 2026. No other sector on this tracker
+opens that early.
 
-Financial Services differs from [Professional Services](/uae-ransomware-tracker/professional-services/) in exactly this respect. A defence tuned
-to the methods of one group will cover only a fraction of the observed activity here. Breadth
-of coverage matters more in this sector than depth against any single actor.
+The distribution by period is uneven. The sector shows 2 claims across
+[2020 to 2022](/uae-ransomware-tracker/2020-2022/) and 2 in
+[2023](/uae-ransomware-tracker/2023/). It recorded nothing in
+[2024](/uae-ransomware-tracker/2024/), then 4 claims in 2025 and 4 in the partial year 2026.
+
+That empty year is the detail worth holding. A sector can record nothing for twelve months. It can then
+return to its previous rate, as this sector did. A quiet year is not a trend.
 
 ## What this means for UAE organisations
 
-1. Establish whether your firm is authorised in the DIFC, because DFSA [Technology](/uae-ransomware-tracker/technology/) and Risk
-   Management rules apply to firms that are.
-2. Map your breach notification duties under the UAE Personal Data Protection Law, which
-   applies federally to organisations processing personal data in the UAE.
-3. Test the external perimeter against the initial access paths these groups use, and retain
-   the results as evidence for assessors.
-4. Rehearse recovery from offline backups, because restoration speed decides the outcome once
-   encryption has happened.
-5. Review which groups have claimed organisations in your sector, then assess whether their
-   published methods apply to your estate.
-6. Note that the sector recorded no claims at all in 2024, which shows how uneven a single
-   year's figure can be.
-7. Read the 2022 to 2026 span as evidence of sustained interest rather than a single campaign
-   against UAE finance.
+1. Nine distinct groups appear in this record, the widest spread on the tracker, so no single
+   actor describes the threat.
+2. Establish whether DFSA Technology and Risk Management rules apply, which they do for firms
+   authorised in the DIFC.
+3. Read a quiet year as a gap in the record rather than as an improvement in posture.
+4. Map obligations under the UAE Personal Data Protection Law, which reaches client records held
+   outside the free zones.
+5. Compare against [Professional Services](/uae-ransomware-tracker/professional-services/), which
+   supplies this sector and carries 24 claims.
+
+Twelve claims across nine groups and five years is thin for modelling but long enough to read as a
+record. Watch the rate rather than the total.

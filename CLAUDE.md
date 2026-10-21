@@ -65,6 +65,14 @@ No paid API is involved. Data refreshes itself; articles are written by hand.
   only when it is new — a spike is a property of the data, not of the change, so measuring one
   snapshot would put the same lead in every run until people stopped reading it. `--against-file`
   compares against a saved snapshot, `--json` for machine use.
+- **After a run of red builds, `events` on its own answers the wrong question.** It reports what
+  changed since last night, while the drift that broke the build may be weeks old. Diff against the
+  last snapshot that actually built:
+  `git show <good-sha>:src/data/ransomware-live-ae.json > /tmp/good.json && node scripts/events.mjs --against-file /tmp/good.json`.
+- **The number check proves a figure exists in the data, not that it is the right figure for that
+  sentence.** A page saying "6 claims" when the count moved to 7 passes whenever 6 appears anywhere
+  in the brief, and dates in the brief make that likely. After any refresh that moves a count, read
+  the pages for the entities `events` lists, even the ones `lint:content` lets through.
 - `health-check.yml` runs every six hours and only reports. The build is offline, so a dead source
   cannot break a deploy — which is exactly why it has to be watched separately, or the first sign
   would be a snapshot that has not moved in a week.

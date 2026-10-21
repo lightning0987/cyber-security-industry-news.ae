@@ -4,7 +4,7 @@ summary: "UAE Technology carries 13 claimed organisations from 13 different rans
 
 ## Technology ranks third among UAE sectors with 13 claimed organisations
 
-Technology ranks third of 13 UAE sectors, above the average of 8.3 claims per active sector. The more useful figure is 13 distinct groups for 13 claims. No ransomware group in this dataset has claimed a second UAE technology organisation. That is the flattest distribution of any UAE sector on this site.
+Technology ranks third of 13 UAE sectors, above the average of 8.6 claims per active sector. The more useful figure is 13 distinct groups for 13 claims. No ransomware group in this dataset has claimed a second UAE technology organisation. That is the flattest distribution of any UAE sector on this site.
 
 ## Thirteen groups account for 13 Technology claims
 

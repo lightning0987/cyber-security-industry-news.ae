@@ -48,7 +48,7 @@ The Gentlemen matches DragonForce at 4 claims in 2026. It had no UAE record befo
 that year. Two of the three most active groups of the current period did not exist on this
 tracker eight months earlier.
 
-Meanwhile LockBit 3.0 still ranks first of 46 groups by accumulated claims. It has published
+Meanwhile LockBit 3.0 still ranks first of 47 groups by accumulated claims. It has published
 nothing against a UAE organisation since 16 February 2024. An all-time ranking and a current
 threat picture are not the same list.
 

@@ -4,7 +4,7 @@ summary: "UAE Government and Defense recorded 13 claimed organisations, peaking 
 
 ## Government and Defense is the second most claimed UAE sector
 
-Government and Defense ranks second of 13 UAE sectors, above the average of 8.3 claims per active sector. Eight distinct groups appear here. The sector carries the heaviest regulatory scope in the country, which changes what an incident costs beyond downtime.
+Government and Defense ranks second of 13 UAE sectors, above the average of 8.6 claims per active sector. Eight distinct groups appear here. The sector carries the heaviest regulatory scope in the country, which changes what an incident costs beyond downtime.
 
 ## Government and Defense claims peaked in 2024 and have fallen since
 

@@ -4,7 +4,7 @@ summary: "UAE Healthcare recorded 6 claimed organisations, all of them between F
 
 ## Healthcare ranks seventh among UAE sectors with 6 claimed organisations
 
-Healthcare ranks seventh of 13 UAE sectors, below the average of 8.3 claims per active sector. Six distinct groups appear here, one claim each. The sector has recorded nothing in [2026](/uae-ransomware-tracker/2026/), which makes the shape of its record more interesting than its size.
+Healthcare ranks seventh of 13 UAE sectors, below the average of 8.6 claims per active sector. Six distinct groups appear here, one claim each. The sector has recorded nothing in [2026](/uae-ransomware-tracker/2026/), which makes the shape of its record more interesting than its size.
 
 ## Healthcare claims stop after June 2025
 

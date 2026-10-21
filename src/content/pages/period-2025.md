@@ -5,7 +5,7 @@ summary: "2025 is the highest year on this tracker with 35 claimed UAE organisat
 ## 2025 is the highest year on record with 35 claimed UAE organisations
 
 Claims rose 29.6% in 2025 against the 27 recorded in [2024](/uae-ransomware-tracker/2024/). That makes it the highest year on
-record, at 32.4% of the whole dataset. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
+record, at 31.3% of the whole dataset. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
 
 ## The groups leading 2025 were new to the UAE
 
@@ -29,7 +29,7 @@ most even spread across sectors of any period on this tracker.
    directions afterwards.
 6. Note that Everest reached 6 claims in a single year, the highest group total of any period on
    this tracker.
-7. Read 32.4% as the share of the whole record that fell in one year, which measures how
+7. Read 31.3% as the share of the whole record that fell in one year, which measures how
    concentrated recent activity has become.
 6. Apply the attribution method on the methodology page before citing 35 anywhere, since it
    counts attributed claims rather than raw records.

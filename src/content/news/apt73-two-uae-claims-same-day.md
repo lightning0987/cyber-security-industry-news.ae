@@ -39,8 +39,8 @@ that sector's record.
 
 ## How this compares
 
-APT73 ranks eleventh of 46 groups on a record of 2 claims. That ranking says more about the tail of this dataset
-than about the group. Twenty-four of the 46 groups have claimed exactly one UAE organisation.
+APT73 ranks eleventh of 47 groups on a record of 2 claims. That ranking says more about the tail of this dataset
+than about the group. Twenty-four of the 47 groups have claimed exactly one UAE organisation.
 
 A same-day pair carries less signal than two claims spread across months. It is one event, not
 a pattern.

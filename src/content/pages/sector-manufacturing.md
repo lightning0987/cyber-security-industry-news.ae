@@ -4,7 +4,7 @@ summary: "UAE Manufacturing recorded 8 claimed organisations from 8 different ra
 
 ## Manufacturing ranks sixth among UAE sectors with 8 claimed organisations
 
-Manufacturing ranks sixth of 13 UAE sectors, just below the average of 8.3 claims per active sector. Eight distinct groups appear here, one claim each. No ransomware group has claimed a second UAE manufacturing organisation in this dataset.
+Manufacturing ranks sixth of 13 UAE sectors, just below the average of 8.6 claims per active sector. Eight distinct groups appear here, one claim each. No ransomware group has claimed a second UAE manufacturing organisation in this dataset.
 
 ## Eight groups account for 8 Manufacturing claims
 

@@ -1,35 +1,39 @@
 ---
-summary: "2026 stands at 27 claimed UAE organisations so far, led by DragonForce and The Gentlemen, neither of which appeared before 2025."
+summary: "2026 stands at 31 claimed UAE organisations with the year still running, against 35 for the whole of 2025."
 ---
 
-## 2026 stands at 27 claimed UAE organisations so far
+## 2026 stands at 31 claimed UAE organisations so far
 
-The figure sits 22.9% below the 35 claims recorded in [2025](/uae-ransomware-tracker/2025/). That comparison is not like for
-like, because 2026 is a partial year. The year is more interesting for its leadership than its volume. For the third consecutive period, the leading group changed entirely.
+The partial year 2026 carries 27.7% of every attributed UAE claim on this tracker. The comparison
+that matters is with [2025](/uae-ransomware-tracker/2025/), which closed at 35. This year sits
+11.4% below that total with the year not yet complete.
 
-## The 2026 leaders are again new names
+## The 2026 record spreads across eleven sectors
 
-[DragonForce](/ransomware-groups-targeting-uae/dragonforce/) has claimed 4 UAE organisations in 2026 and The Gentlemen has claimed 4. INC Ransom
-follows with 3 and APT73 with 2. The Gentlemen recorded no UAE claims before 2026 at all.
+No sector dominates this year. [Professional Services](/uae-ransomware-tracker/professional-services/)
+leads with 5 claims, followed by Financial Services with 4, Transportation with 4 and Hospitality
+with 4.
 
-This is the third consecutive period in which the leading group changed. [LockBit 3.0](/ransomware-groups-targeting-uae/lockbit3/) led 2023
-with 5 claims, Stormous led 2024 with 5, and Everest led 2025 with 6. Neither 2026 leader
-appeared in any of those periods.
+Below those, Retail and E-Commerce carries 3, while Technology, Manufacturing, Energy and
+Utilities, Other and Education carry 2 each. Government and Defense holds 1.
 
-Professional Services again carries the most claims at 5. Financial Services and Retail and
-E-Commerce follow with 3 each. Government and Defense has fallen to 1, its lowest figure since
-2023.
+Eleven sectors inside a single partial year is the widest spread this tracker has recorded.
+Compare that against 2025, when the same breadth took twelve full months to appear.
 
 ## What this means for UAE organisations
 
-1. Do not read the 22.9% fall as a decline, because 2026 has not finished and claims arrive
-   throughout a year.
-2. Note that leading groups have changed in every period since 2023, which makes actor-specific
-   defence a poor investment.
-3. Watch Financial Services and Retail and E-Commerce, which stand at 3 claims each in a partial
-   year.
-4. Note that Government and Defense has fallen to 1 claim, having reached 6 in 2024.
-5. Compare this page against the same page after the year closes, since the snapshot date on
-   every figure here is visible above.
-6. Use sector pages rather than this one for planning, because a partial period distorts every
-   comparison it takes part in.
+1. Read the 31 as a floor rather than a total, because the year has not closed and claims arrive
+   late.
+2. Do not read the gap against 2025 as a decline until the year completes.
+3. Note that Hospitality and Education reached 4 and 2 claims this year from nothing, so new
+   sectors enter the record without warning.
+4. Plan around the spread rather than the leader, since the top sector holds 5 of 31 claims.
+5. Check the [sector breakdown](/uae-ransomware-tracker/) for where your own exposure sits, as
+   sector persists while group names turn over.
+
+A partial year invites the wrong comparison. Measure 2026 against the same point in 2025, not
+against the finished year. Otherwise the figure reads as a fall that the data does not support.
+
+The groups behind this year differ from those behind 2025. Everest led 2025 with 6 claims and
+holds 3 here. [INC Ransom](/ransomware-groups-targeting-uae/incransom/) reached 5 claims overall
+without appearing before November 2025.

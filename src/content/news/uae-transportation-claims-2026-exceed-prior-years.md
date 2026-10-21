@@ -44,7 +44,7 @@ Most UAE sectors peaked in [2025](/uae-ransomware-tracker/2025/), the highest ye
 with 35 claims overall. Transportation did not. It carried 1 claim that year and 3 in the
 partial year that followed.
 
-The site total moved the other way. Claims across all sectors stand 22.9% below 2025, though
+The site total moved the other way. Claims across all sectors stand 27.7% below 2025, though
 2026 is incomplete and that comparison is not like for like.
 
 ## What to do

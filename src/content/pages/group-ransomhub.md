@@ -4,7 +4,7 @@ summary: "RansomHub claimed 5 UAE organisations inside ten months, three of them
 
 ## RansomHub has claimed 5 UAE organisations
 
-RansomHub ranks seventh of 46 groups on this tracker and appears across 3 distinct sectors. That is a narrower range than most groups here show. Its whole UAE record fits inside a ten-month window that closed in February [2025](/uae-ransomware-tracker/2025/).
+RansomHub ranks seventh of 47 groups on this tracker and appears across 3 distinct sectors. That is a narrower range than most groups here show. Its whole UAE record fits inside a ten-month window that closed in February [2025](/uae-ransomware-tracker/2025/).
 
 ## RansomHub concentrated on Professional Services within a short window
 
