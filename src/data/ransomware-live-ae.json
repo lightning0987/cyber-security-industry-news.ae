@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-27T07:17:44.261Z",
-  "record_count": 191,
+  "fetched_at": "2026-10-28T07:54:46.395Z",
+  "record_count": 192,
   "schema_version": 1,
   "attribution": {
+    "probable": 48,
     "unverified": 79,
-    "probable": 47,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "978fc97a2f4b823c",
+      "victim_hash": "1d34eb4246bd78cb",
+      "group": "n0n",
+      "group_slug": "n0n",
+      "group_family": null,
+      "sector": null,
+      "sector_label": null,
+      "discovered": "2026-10-27",
+      "published": "2026-10-27",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "probable"
+    },
     {
       "id": "70e41031b5d4eabd",
       "victim_hash": "fbdf5b472f88e417",
