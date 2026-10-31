@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-10-30T08:03:12.082Z",
-  "record_count": 192,
+  "fetched_at": "2026-10-31T07:59:09.388Z",
+  "record_count": 193,
   "schema_version": 1,
   "attribution": {
-    "probable": 48,
+    "probable": 49,
     "unverified": 79,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "e83e2172f7379a7d",
+      "victim_hash": "a68b3d7bb6375d53",
+      "group": "n0n",
+      "group_slug": "n0n",
+      "group_family": null,
+      "sector": "professional-services",
+      "sector_label": "Professional Services",
+      "discovered": "2026-10-30",
+      "published": "2026-10-30",
+      "year": 2026,
+      "month": "2026-10",
+      "ae_confidence": "probable"
+    },
     {
       "id": "978fc97a2f4b823c",
       "victim_hash": "1d34eb4246bd78cb",
