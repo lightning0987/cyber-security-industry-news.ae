@@ -21,9 +21,12 @@
     "lint:content": "node scripts/lint-content.mjs",
     "check:mobile": "node scripts/check-mobile.mjs",
     "check:health": "node scripts/health-check.mjs",
-    "events": "node scripts/events.mjs"
+    "events": "node scripts/events.mjs",
+    "generate": "node scripts/generate-content.mjs",
+    "notify": "node scripts/notify-telegram.mjs"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^1.3.0",
     "astro": "^7.3.2",
     "linkedom": "^0.18.13"
   }

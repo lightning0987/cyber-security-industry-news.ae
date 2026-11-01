@@ -79,6 +79,38 @@ No paid API is involved. Data refreshes itself; articles are written by hand.
 
 ---
 
+## 1b. Generated text (paid, opt-in, never on main)
+
+`scripts/generate-content.mjs` writes two things and nothing else: the repair of a figure that
+drifted away from the snapshot, and a T1 brief for a new claim. It runs inside `fetch-data.yml`
+only when `events` reports something and `ANTHROPIC_API_KEY` is set, so a quiet day costs zero.
+
+**The generator never writes to `main`.** It commits to `content/auto-<date>` and opens a pull
+request. A number is checkable mechanically; whether a sentence is worth publishing is not.
+
+**`lint:content` is the gate, not the prompt.** Every file the model returns is linted
+immediately, and a file carrying a Critical problem is reverted on disk rather than committed.
+Three attempts, each fed the linter's own output. The number check predates the generator and
+does not know who wrote the file, which is the whole reason this is safe: an invented figure
+cannot reach a commit, let alone the site.
+
+Never relax that loop into a warning. A generator whose output is not verified is a generator
+that publishes whatever it happened to produce.
+
+`MAX_NEWS_PER_RUN` is 3. A spike in the data must not become a burst of API calls, and three
+briefs is already more than a day's worth of real news.
+
+`--dry-run` prints the task list and calls nothing. `--against-file` passes a baseline through
+to `events`, which is what you want after a run of red builds: the default answers "since last
+night" while the drift may be weeks old.
+
+Telegram carries the notifications, because the build being red is only useful if someone sees
+it. `scripts/notify-telegram.mjs` exits 0 on every failure path, including an unreachable
+Telegram: a broken notification channel must never turn a healthy run red. Messages carry file
+names and counts only, never anything from the data.
+
+---
+
 ## 2. The salt
 
 Fingerprints are salted. An unsalted hash of a company name is trivially brute-forced from a

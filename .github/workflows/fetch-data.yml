@@ -3,11 +3,11 @@ name: Refresh data
 # Раз в сутки. Обновление данных не требует человека: это загрузка снапшота,
 # пересборка брифов и коммит. Всё это бесплатно на любом расписании.
 #
-# Генерация текстов сюда НЕ входит и платного API не использует. Материалы
-# пишутся вручную, поэтому единственное, что может разойтись после обновления,
-# это цифры в редакционных абзацах. Их ловит lint:content, и ловит жёстко:
-# сборка падает, деплой не проходит, на сайте остаётся предыдущая корректная
-# версия. Красный прогон здесь и есть сигнал «зайди и поправь предложение».
+# Генерация текстов идёт ПОСЛЕ коммита данных, вызывается только когда в
+# данных что-то произошло, и пишет в pull request, а не в main. Человек
+# читает текст до того, как тот попадает на сайт. Уведомление приходит в
+# Telegram: почту здесь не читают, а непрочитанное уведомление это то же
+# самое, что его отсутствие.
 
 on:
   schedule:
@@ -16,6 +16,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 concurrency:
   group: refresh-data
@@ -24,6 +25,16 @@ concurrency:
 jobs:
   refresh:
     runs-on: ubuntu-latest
+
+    # Секреты объявлены на уровне job, потому что шаговое условие if: читает
+    # контекст env, а не secrets. Без этого шаг генерации пропускался бы молча.
+    env:
+      ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+      VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+      GH_TOKEN: ${{ github.token }}
+
     steps:
       - uses: actions/checkout@v4
 
@@ -38,8 +49,6 @@ jobs:
       # отпечатки. При расхождении salt_id гард утечки не нашёл бы ни одного
       # совпадения и молча пропустил бы всё, поэтому проверка стоит до загрузки.
       - name: Check the salt is present
-        env:
-          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
         run: |
           if [ -z "$VICTIM_HASH_SALT" ]; then
             echo "::error::Секрет VICTIM_HASH_SALT не задан. Отпечатки посчитались бы другой солью."
@@ -51,15 +60,11 @@ jobs:
       # останавливают запись. Обрезанный ответ выглядит как успех и молча
       # удалил бы страницы, поэтому эта защита важнее ретраев.
       - name: Fetch snapshot
-        env:
-          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
         run: npm run fetch:all
 
       # Брифы коммитятся вместе с данными. Если бы они отставали, сверка чисел
       # подтверждала бы устаревшие цифры с той же уверенностью, что и свежие.
       - name: Rebuild briefs
-        env:
-          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
         run: npm run briefs
 
       - name: Commit if the data moved
@@ -77,11 +82,65 @@ jobs:
             git push
           fi
 
+      # Платный шаг. Запускается только когда данные сдвинулись и ключ задан,
+      # поэтому в тихие дни расход ноль. Генератор сам прогоняет каждый
+      # написанный файл через lint:content и выбрасывает то, что проверку не
+      # прошло, так что в ветку попадает только текст, сверенный с данными.
+      - name: Write the text the new data needs
+        id: generate
+        if: steps.commit.outputs.changed == 'true' && env.ANTHROPIC_API_KEY != ''
+        run: |
+          DAY=$(date -u +%Y-%m-%d)
+          BRANCH="content/auto-$DAY-$(date -u +%H%M)"
+          git checkout -b "$BRANCH"
+          npm run generate
+          git add src/content
+          if git diff --cached --quiet; then
+            echo "Генератор ничего не сохранил, pull request не нужен."
+          else
+            git commit -m "Editorial text for the $DAY refresh"
+            git push --set-upstream origin "$BRANCH"
+            {
+              echo "Сгенерировано автоматически после обновления данных."
+              echo
+              cat /tmp/marsad-summary.txt
+              echo
+              echo "Каждый файл прошёл lint:content: все числа сверены с брифом,"
+              echo "собранным из снапшота. Прочитайте текст на смысл и смёржите."
+            } > /tmp/marsad-pr-body.txt
+            PR=$(gh pr create \
+              --title "Editorial text for the $DAY refresh" \
+              --body-file /tmp/marsad-pr-body.txt \
+              --base main)
+            echo "pr=$PR" >> "$GITHUB_OUTPUT"
+          fi
+          # Сборка ниже проверяет main, а не ветку с правками.
+          git checkout main
+
+      - name: Tell Telegram a pull request is waiting
+        if: steps.generate.outputs.pr != ''
+        run: |
+          {
+            echo "<b>Marsad: текст готов к проверке</b>"
+            echo
+            cat /tmp/marsad-summary.txt
+            echo
+            echo "${{ steps.generate.outputs.pr }}"
+          } | node scripts/notify-telegram.mjs
+
       # Проверка идёт ПОСЛЕ коммита намеренно. Данные — это факт, и они должны
       # попасть в репозиторий. Если после обновления редакционный текст разошёлся
       # с цифрами, падает этот шаг, падает деплой, и сайт остаётся на прошлой
-      # версии до тех пор, пока человек не поправит предложение.
+      # версии до тех пор, пока человек не поправит предложение. Починка, скорее
+      # всего, уже лежит в том самом pull request.
       - name: Verify the site still builds against the new data
-        env:
-          VICTIM_HASH_SALT: ${{ secrets.VICTIM_HASH_SALT }}
         run: npm run build
+
+      - name: Tell Telegram the build is red
+        if: failure()
+        run: |
+          {
+            echo "<b>Marsad: сборка красная</b>"
+            echo "Сайт продолжает отдавать прошлую корректную версию."
+            echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } | node scripts/notify-telegram.mjs

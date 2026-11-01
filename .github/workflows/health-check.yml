@@ -15,9 +15,26 @@ permissions:
 jobs:
   health:
     runs-on: ubuntu-latest
+
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 22
       - run: node scripts/health-check.mjs
+
+      # Прогон раз в шесть часов. Сообщение уходит только когда источник
+      # действительно недоступен: ежедневное «всё хорошо» перестают читать,
+      # и вместе с ним перестают замечать то единственное, ради чего оно есть.
+      - name: Tell Telegram the source is down
+        if: failure()
+        run: |
+          {
+            echo "<b>Marsad: источник данных не отвечает</b>"
+            echo "Сборка офлайн и не сломается, но снапшот перестанет обновляться."
+            echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          } | node scripts/notify-telegram.mjs
