@@ -6,14 +6,14 @@
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
-    "data_as_of": "2026-11-02T08:53:02.664Z",
+    "data_as_of": "2026-11-03T08:59:58.485Z",
     "totals": {
-      "raw_records_from_upstream": 193,
-      "attributed_claims_used_in_all_figures": 114,
+      "raw_records_from_upstream": 194,
+      "attributed_claims_used_in_all_figures": 115,
       "rejected_as_unverified": 79,
       "confirmed_by_ae_domain": 65,
-      "probable_by_text_mention": 49,
-      "rejection_rate_pct": 40.9,
+      "probable_by_text_mention": 50,
+      "rejection_rate_pct": 40.7,
       "distinct_groups": 48,
       "sectors_with_activity": 13,
       "average_claims_per_active_sector": 8.8
@@ -23,7 +23,7 @@
         "framework": "DESC ISR v3",
         "sectors_usually_in_scope": 5,
         "claims_in_those_sectors": 62,
-        "share_of_all_attributed_claims_pct": 54.4,
+        "share_of_all_attributed_claims_pct": 53.9,
         "by_sector": [
           {
             "sector": "Professional Services",
@@ -52,7 +52,7 @@
         "framework": "UAE IAS v2",
         "sectors_usually_in_scope": 3,
         "claims_in_those_sectors": 24,
-        "share_of_all_attributed_claims_pct": 21.1,
+        "share_of_all_attributed_claims_pct": 20.9,
         "by_sector": [
           {
             "sector": "Government and Defense",
@@ -73,7 +73,7 @@
         "framework": "UAE PDPL",
         "sectors_usually_in_scope": 13,
         "claims_in_those_sectors": 111,
-        "share_of_all_attributed_claims_pct": 97.4,
+        "share_of_all_attributed_claims_pct": 96.5,
         "by_sector": [
           {
             "sector": "Professional Services",
@@ -134,7 +134,7 @@
         "framework": "DFSA TRM",
         "sectors_usually_in_scope": 1,
         "claims_in_those_sectors": 12,
-        "share_of_all_attributed_claims_pct": 10.5,
+        "share_of_all_attributed_claims_pct": 10.4,
         "by_sector": [
           {
             "sector": "Financial Services",
@@ -158,12 +158,12 @@
     "groups_total": 48,
     "groups_below_threshold": 40,
     "groups_with_own_page": 8,
-    "claims_held_by_tail": 59,
+    "claims_held_by_tail": 60,
     "claims_held_by_paged": 55,
-    "tail_share_of_all_claims_pct": 51.8,
+    "tail_share_of_all_claims_pct": 52.2,
     "groups_seen_exactly_once": 24,
     "groups_with_two_to_four_claims": 16,
-    "attributed_claims_total": 114
+    "attributed_claims_total": 115
   },
   "by_group": [
     {
@@ -179,6 +179,13 @@
       "sectors": 2,
       "first_claim": "2024-12-24",
       "most_recent_claim": "2025-02-19"
+    },
+    {
+      "group": "N0n",
+      "claims": 3,
+      "sectors": 1,
+      "first_claim": "2026-10-27",
+      "most_recent_claim": "2026-11-03"
     },
     {
       "group": "APT73",
@@ -249,13 +256,6 @@
       "sectors": 2,
       "first_claim": "2022-11-15",
       "most_recent_claim": "2026-07-01"
-    },
-    {
-      "group": "N0n",
-      "claims": 2,
-      "sectors": 1,
-      "first_claim": "2026-10-27",
-      "most_recent_claim": "2026-10-30"
     },
     {
       "group": "NightSpire",
