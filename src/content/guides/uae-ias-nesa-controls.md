@@ -6,7 +6,7 @@ summary: "The UAE Information Assurance Standard, version 2, sets 188 controls f
 standard: "UAE IAS v2"
 order: 2
 image: "substation"
-updated: "2026-09-17"
+updated: "2026-11-04"
 keyFacts:
   - label: "Issuing body"
     value: "Signals Intelligence Agency, successor to NESA"
@@ -139,8 +139,8 @@ Risk Management rules and the DIFC data protection regime.
 [Energy and Utilities](/uae-ransomware-tracker/energy-utilities/) and
 [Transportation](/uae-ransomware-tracker/transportation/) are the two sectors on this tracker
 most likely to sit inside critical national infrastructure. Neither carries a large count.
-Energy and Utilities holds 4 claimed organisations and Transportation holds 6, against a
-[site total](/uae-ransomware-tracker/) of 112.
+Energy and Utilities holds 4 claimed organisations and Transportation holds 7, against a
+[site total](/uae-ransomware-tracker/) of 115.
 
 Those small numbers are the point. A sector with few claims can still carry the heaviest
 regulatory exposure per incident, because consequence rather than frequency defines critical
@@ -155,13 +155,13 @@ state, not the first.
 ### How much of the UAE record sits inside IAS territory
 
 Three sectors on this tracker correspond to the critical national infrastructure categories that
-IAS most often reaches. Those three hold 23 of the 112 attributed UAE claims, which is 21.4% of
+IAS most often reaches. Those three hold 24 of the 115 attributed UAE claims, which is 20.9% of
 the published record.
 
 | Sector usually in IAS scope | Claimed UAE organisations |
 | --- | --- |
 | Government and Defense | 13 |
-| Transportation | 6 |
+| Transportation | 7 |
 | Energy and Utilities | 4 |
 
 That share is smaller than the share sitting in DESC ISR territory, and the contrast is the useful
@@ -170,7 +170,7 @@ it carries 188 controls against a claim record that is thinner than the national
 
 Do not read the smaller number as a smaller risk. Consequence, not frequency, is what put these
 sectors inside the standard. A single successful intrusion against a water utility or an airport
-operator has a national effect that 24 claims against professional services firms do not.
+operator has a national effect that 25 claims against professional services firms do not.
 
 The designating authority decides scope, so treat the table as an indication of where IAS
 obligations cluster rather than as a scoping test.

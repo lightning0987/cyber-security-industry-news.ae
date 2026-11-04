@@ -6,7 +6,7 @@ summary: "The Dubai Electronic Security Center issues the Information Security R
 standard: "DESC ISR v3"
 order: 1
 image: "dubai-skyline"
-updated: "2026-09-17"
+updated: "2026-11-04"
 keyFacts:
   - label: "Issuing body"
     value: "Dubai Electronic Security Center"
@@ -133,10 +133,10 @@ federal law.
 ## What the ransomware data adds
 
 [Government and Defense](/uae-ransomware-tracker/government-defense/) is the second most
-claimed UAE sector on this tracker, with 13 claimed organisations. Its claims peaked at 6 in
+claimed UAE sector on this tracker, with 13 claimed organisations. Its claims peaked in
 [2024](/uae-ransomware-tracker/2024/) and have declined since.
 [Professional Services](/uae-ransomware-tracker/professional-services/), which supplies that
-sector, is the most claimed sector of all at 24.
+sector, is the most claimed sector of all at 25.
 
 That pairing is the practical argument for the supplier-security domain. Attackers reach government data through the
 organisations that hold it under contract. That is the route ISR v3 addresses by extending
@@ -152,15 +152,15 @@ easier to produce, because a narrower scope means fewer artefacts.
 
 ### How much of the UAE record sits inside ISR territory
 
-Five sectors on this tracker map most closely onto the ISR scope. Those five hold 60 of the 112
-attributed UAE claims, which is 54.5% of the published record.
+Five sectors on this tracker map most closely onto the ISR scope. Those five hold 62 of the 115
+attributed UAE claims, which is 53.9% of the published record, based on leak-site monitoring as of 4 November 2026.
 
 | Sector usually in ISR scope | Claimed UAE organisations |
 | --- | --- |
-| Professional Services | 24 |
+| Professional Services | 25 |
 | Government and Defense | 13 |
 | Technology | 13 |
-| Transportation | 6 |
+| Transportation | 7 |
 | Energy and Utilities | 4 |
 
 Read that share as an order of magnitude, not as a scoping test. Sector is a proxy. Whether ISR

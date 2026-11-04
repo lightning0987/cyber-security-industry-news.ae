@@ -4,8 +4,8 @@ summary: "Financial Services holds 12 claimed UAE organisations from 9 separate 
 
 ## Financial Services ranks fourth among UAE sectors with 12 claimed organisations
 
-Financial Services sits fourth of 13 UAE sectors and carries 10.7% of all attributed claims. The
-count runs above the average of 8.6 claims per active sector. It also holds the longest record of
+Financial Services sits fourth of 13 UAE sectors and carries 10.4% of all attributed claims. The
+count runs above the average of 8.8 claims per active sector. It also holds the longest record of
 any sector here.
 
 ## The Financial Services record runs longer than any other sector
@@ -32,7 +32,7 @@ return to its previous rate, as this sector did. A quiet year is not a trend.
 4. Map obligations under the UAE Personal Data Protection Law, which reaches client records held
    outside the free zones.
 5. Compare against [Professional Services](/uae-ransomware-tracker/professional-services/), which
-   supplies this sector and carries 24 claims.
+   supplies this sector and carries 25 claims.
 
 Twelve claims across nine groups and five years is thin for modelling but long enough to read as a
 record. Watch the rate rather than the total.

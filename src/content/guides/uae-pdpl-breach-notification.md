@@ -6,7 +6,7 @@ summary: "Federal Decree-Law No. 45 of 2021 governs personal data across the Uni
 standard: "UAE PDPL"
 order: 3
 image: "abu-dhabi"
-updated: "2026-09-17"
+updated: "2026-11-04"
 keyFacts:
   - label: "Instrument"
     value: "Federal Decree-Law No. 45 of 2021"
@@ -130,7 +130,7 @@ processing that a notification requires.
 
 Personal data exposure is not confined to regulated sectors. On this tracker,
 [Professional Services](/uae-ransomware-tracker/professional-services/) carries the most claimed
-organisations at 24, followed by
+organisations at 25, followed by
 [Government and Defense](/uae-ransomware-tracker/government-defense/) and
 [Technology](/uae-ransomware-tracker/technology/) at 13 each.
 
@@ -139,7 +139,7 @@ places them in the controller or processor chain for data they did not collect, 
 the situation the PDPL's processor obligations address.
 
 [Healthcare](/uae-ransomware-tracker/healthcare/) and
-[Education](/uae-ransomware-tracker/education/) carry small counts on this tracker, at 6 and 2.
+[Education](/uae-ransomware-tracker/education/) carry small counts on this tracker, at 6 and 3.
 Both hold identity records for people who cannot easily choose another provider, which changes
 what an incident costs the data subject rather than the organisation.
 
@@ -150,15 +150,15 @@ what an incident costs the data subject rather than the organisation.
 ### How much of the UAE record falls under a notification duty
 
 The PDPL follows personal data rather than industry, so its reach across this tracker is close to
-total. Sectors that process personal data as a matter of course account for 110 of the 112
-attributed UAE claims. That is 98.2% of the published record.
+total. Sectors that process personal data as a matter of course account for 111 of the 115
+attributed UAE claims. That is 96.5% of the published record.
 
 | Most claimed sector | Claimed UAE organisations |
 | --- | --- |
-| Professional Services | 24 |
+| Professional Services | 25 |
 | Government and Defense | 13 |
 | Technology | 13 |
-| Financial Services | 11 |
+| Financial Services | 12 |
 | Retail and E-Commerce | 10 |
 
 Eight further sectors carry the remainder. The practical reading is that a ransomware claim
@@ -168,7 +168,7 @@ That matters for sequencing. A notification assessment cannot start after the te
 finishes, because the assessment needs facts that only the early hours of the response produce.
 Which categories of data sat on the affected systems is a question for hour one, not for week two.
 
-The 98.2% figure counts sectors rather than individual organisations. An organisation holding no
+The 96.5% figure counts sectors rather than individual organisations. An organisation holding no
 personal data sits outside the duty while remaining inside its sector row. Read the share as a
 statement about how often the question arises, not about how often the duty is triggered.
 

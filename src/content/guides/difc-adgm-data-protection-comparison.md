@@ -6,7 +6,7 @@ summary: "The Dubai International Financial Centre and Abu Dhabi Global Market e
 standard: "DIFC and ADGM"
 order: 4
 image: "financial-district"
-updated: "2026-09-17"
+updated: "2026-11-04"
 keyFacts:
   - label: "DIFC instrument"
     value: "DIFC Data Protection Law No. 5 of 2020"
@@ -138,9 +138,9 @@ under each regime.
 
 ## What the ransomware data adds
 
-[Financial Services](/uae-ransomware-tracker/financial-services/) carries 11 claimed
-organisations on this tracker, fourth of 13 sectors. The sector draws 8 distinct ransomware
-groups, and no single operation dominates it.
+[Financial Services](/uae-ransomware-tracker/financial-services/) carries 12 claimed
+organisations on this tracker, fourth of 13 sectors. The claims come from the ransomware groups
+listed on the sector page, and the tracker does not show a single operation dominating it.
 
 That matters for free zone firms specifically. A defence built around the methods of one group covers a
 small fraction of the observed activity. The notification obligations are identical regardless
@@ -154,8 +154,8 @@ to the UAE Data Office, on its own.
 
 ### How much of the UAE record sits in free zone territory
 
-Financial Services is the sector most associated with both free zones. It holds 11 of the 112
-attributed UAE claims on this tracker, which is 10.7% of the published record.
+Financial Services is the sector most associated with both free zones. It holds 12 of the 115
+attributed UAE claims on this tracker, which is 10.4% of the published record.
 
 That figure understates free zone exposure rather than measuring it. A DIFC or ADGM registration
 is a legal address, not an industry, and this tracker records sector rather than jurisdiction.
@@ -169,7 +169,7 @@ and nothing in the source data separates them.
 | Group making the claim | Whether a controller or a processor was affected |
 
 The consequence for a firm inside either zone is that the national figures are the wrong
-benchmark. Obligations follow the registration, and the 11 claims in Financial Services neither
+benchmark. Obligations follow the registration, and the 12 claims in Financial Services neither
 confirm nor rule out that a claimed organisation sat inside a zone.
 
 Establish which regime governs your processing before an incident forces the question. The answer

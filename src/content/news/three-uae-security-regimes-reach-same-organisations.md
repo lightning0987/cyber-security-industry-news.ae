@@ -67,11 +67,11 @@ the federal PDPL. Supervisors and penalty ceilings differ.
 
 [Government and Defense](/uae-ransomware-tracker/government-defense/) is the second most claimed
 UAE sector on this tracker with 13 claimed organisations.
-[Financial Services](/uae-ransomware-tracker/financial-services/) carries 11 and
+[Financial Services](/uae-ransomware-tracker/financial-services/) carries 12 and
 [Energy and Utilities](/uae-ransomware-tracker/energy-utilities/) carries 4.
 
 Those three sectors cover most of the population that sits inside more than one regime at once.
-The combined figure is small against the site total of 112. That is the point worth making.
+The combined figure is small against the site total of 115. That is the point worth making.
 Regulatory exposure is not proportional to claim volume, and a sector with few claims can carry
 the heaviest consequence per incident.
 

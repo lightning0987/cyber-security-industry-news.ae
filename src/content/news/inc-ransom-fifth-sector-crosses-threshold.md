@@ -27,8 +27,8 @@ October 2026. It is the group's fifth UAE claim and its fifth distinct sector.
 
 ## Five claims, five sectors, no repeats
 
-INC Ransom holds 5 claimed UAE organisations and carries 4.5% of all attributed claims. It ranks
-sixth of 47 groups here.
+INC Ransom holds 5 claimed UAE organisations and carries 4.3% of all attributed claims. It ranks
+sixth of 48 groups here.
 
 Those claims sit in Professional Services, Technology, Manufacturing, Other and now Hospitality.
 The group has not returned to any sector it reached.
@@ -39,7 +39,7 @@ group's UAE record opened on 20 November 2025.
 ## The claim crossed a publishing threshold
 
 A group earns its own page on this site once it has claimed 5 or more UAE organisations. INC
-Ransom held 4 claims a month ago and sat in the long tail.
+Ransom held 4 claims before the 7 October 2026 claim and sat in the long tail.
 
 That threshold exists because a record of two or three claims describes an episode rather than a
 pattern. The [methodology page](/methodology/) states the rule and why it was raised.
@@ -49,7 +49,7 @@ pattern. The [methodology page](/methodology/) states the rule and why it was ra
 [Hospitality](/uae-ransomware-tracker/hospitality/) now holds 4 claimed UAE organisations from 4
 separate groups. Every claim in the sector belongs to a different operation.
 
-The sector recorded nothing before 4 May 2026. Its entire record is five months old, and no group
+The sector recorded nothing before 4 May 2026. Its entire record spans five months, to 7 October 2026, and no group
 has claimed a UAE hospitality organisation twice.
 
 For an operator the reading is that sector history offers no protection here. Four unrelated
