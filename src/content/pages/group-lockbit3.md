@@ -4,7 +4,7 @@ summary: "LockBit 3.0 leads the UAE record with 10 claimed organisations, yet it
 
 ## LockBit 3.0 leads the UAE record with 10 claimed organisations
 
-LockBit 3.0 ranks first of 47 groups on this tracker. It reached across 7 distinct sectors, the
+LockBit 3.0 ranks first of 48 groups on this tracker. It reached across 7 distinct sectors, the
 widest sector spread of any group here. Neither figure describes current activity. The group has claimed nothing in the United Arab Emirates since February [2024](/uae-ransomware-tracker/2024/).
 
 ## LockBit 3.0 has claimed no UAE organisation since February 2024
@@ -29,8 +29,8 @@ account for 1 each, with the remainder spread across four further sectors.
 3. Note that LockBit 3.0 reached 7 sectors, so its targeting showed no sector preference worth
    defending against specifically.
 4. Compare this profile against DragonForce, whose activity sits entirely in 2026.
-5. Keep versioned variants distinct, because the earlier LockBit operation is counted separately
-   here and its UAE record closed in 2022.
+5. Keep LockBit 3.0 distinct from any other LockBit variant, because this site counts versioned
+   variants separately and lists no sibling variants for it.
 6. Avoid building controls around a named operation, given how completely the leading names have
    turned over since 2024.
 7. Use the sector pages instead when deciding where to spend, since sectors persist while groups

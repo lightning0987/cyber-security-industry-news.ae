@@ -44,11 +44,10 @@ Leading a period is not the same as being present in the one before. Everest had
 organisation at all before May 2025, and led that year. DragonForce had no UAE record before
 November 2025, and leads 2026.
 
-The Gentlemen matches DragonForce at 4 claims in 2026. It had no UAE record before February of
-that year. Two of the three most active groups of the current period did not exist on this
-tracker eight months earlier.
+The Gentlemen and INC Ransom both match DragonForce at 4 claims in 2026, so the current lead is
+a three-way tie. One of those three groups had no UAE record before November 2025.
 
-Meanwhile LockBit 3.0 still ranks first of 47 groups by accumulated claims. It has published
+Meanwhile LockBit 3.0 still ranks first of 48 groups by accumulated claims. It has published
 nothing against a UAE organisation since 16 February 2024. An all-time ranking and a current
 threat picture are not the same list.
 
@@ -56,8 +55,8 @@ threat picture are not the same list.
 
 Sectors persist where groups do not.
 [Professional Services](/uae-ransomware-tracker/professional-services/) has carried claims in
-every period on record, and leads the whole dataset with 24 claimed organisations. It drew 3
-claims across 2020 to 2022, then 4, then 7, then 5, then 5.
+every period on record, and leads the whole dataset with 25 claimed organisations. It drew 3
+claims across 2020 to 2022, then 4, then 7, then 5, then 6.
 
 [Government and Defense](/uae-ransomware-tracker/government-defense/) is the exception that
 proves the rule. It peaked at 6 claims in 2024 and has fallen in every period since, reaching 1
@@ -114,6 +113,6 @@ and it is the main reason this site tracks sectors alongside groups rather than 
 ## Summary
 
 Four periods on this tracker have four different leading ransomware groups, and none led twice.
-Two of the three most active groups of 2026 had no UAE record eight months earlier. Sector
+One of the three groups tied at the top of 2026 had no UAE record before November 2025. Sector
 patterns move over years while attacker populations move within one. That is the argument for
 planning at the control level rather than the actor level.

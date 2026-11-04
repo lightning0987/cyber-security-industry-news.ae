@@ -1,8 +1,8 @@
 ---
-title: "UAE Transport Ransomware Claims Triple in 2026"
+title: "UAE Transport Ransomware Claims Quadruple in 2026"
 h1: "UAE Transportation Claims in 2026 Exceed Every Prior Period"
-description: "Transportation recorded 1 claim in each of 2023, 2024 and 2025. The partial year 2026 already stands at 3, half the sector's entire record."
-dek: "Transportation is one of the few UAE sectors where an unfinished year already carries more claims than any complete one before it. Half the sector's record now falls inside 2026."
+description: "Transportation recorded 1 claim in each of 2023, 2024 and 2025. The partial year 2026 already stands at 4, more than half the sector's entire record."
+dek: "Transportation is one of the few UAE sectors where an unfinished year already carries more claims than any complete one before it. More than half the sector's record now falls inside 2026."
 category: "ransomware"
 tier: "T1"
 image: "container-port"
@@ -23,28 +23,28 @@ sources:
 ## What happened
 
 [Transportation](/uae-ransomware-tracker/transportation/) claims against UAE organisations
-recorded 1 entry in 2023, 1 in 2024 and 1 in 2025. The partial year 2026 already stands at 3.
+recorded 1 entry in 2023, 1 in 2024 and 1 in 2025. The partial year 2026 already stands at 4.
 
-Half the sector's entire record of 6 claims falls inside a year that has not finished. That
+More than half the sector's entire record of 7 claims falls inside a year that has not finished. That
 makes Transportation one of the few UAE sectors where an unfinished period already exceeds every
 complete one before it.
 
 ## Who is affected in the UAE
 
-Five distinct ransomware groups have claimed a UAE transportation organisation. The Gentlemen
-accounts for 2 of the 6 claims, the only group to appear twice in this sector. Clop, Everest and
-Nova each appear once.
+Five distinct ransomware groups have claimed a UAE transportation organisation. Everest and
+The Gentlemen each account for 2 of the 7 claims, the only groups to appear twice in this sector.
+Clop, Nova and RansomHub each appear once.
 
-Transportation ranks eighth of 13 sectors on this tracker, below the average of 8.3 claims per
+Transportation ranks seventh of 13 sectors on this tracker, below the average of 8.8 claims per
 active sector. Volume is not what makes the sector notable. Direction is.
 
 ## How this compares
 
-Most UAE sectors peaked in [2025](/uae-ransomware-tracker/2025/), the highest year on record
-with 35 claims overall. Transportation did not. It carried 1 claim that year and 3 in the
+UAE claims peaked in [2025](/uae-ransomware-tracker/2025/), the highest year on record
+with 35 claims overall. Transportation did not follow that pattern. It carried 1 claim that year and 4 in the
 partial year that followed.
 
-The site total moved the other way. Claims across all sectors stand 27.7% below 2025, though
+The site total moved the other way. Claims across all sectors stand 2.9% below 2025, though
 2026 is incomplete and that comparison is not like for like.
 
 ## What to do
@@ -61,6 +61,6 @@ The site total moved the other way. Claims across all sectors stand 27.7% below 
 
 ## Summary
 
-Transportation claims in the UAE reached 3 in the partial year 2026, against 1 in each of the
-three preceding periods. The Gentlemen accounts for 2 of the 6 claims on record. Figures count
+Transportation claims in the UAE reached 4 in the partial year 2026, against 1 in each of the
+three preceding periods. Everest and The Gentlemen each account for 2 of the 7 claims on record. Figures count
 attacker claims, not confirmed breaches.

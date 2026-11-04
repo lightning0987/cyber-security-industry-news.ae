@@ -4,7 +4,7 @@ summary: "Stormous has claimed 10 UAE organisations across five sectors, with a 
 
 ## Stormous has claimed 10 UAE organisations
 
-Stormous ranks second of 47 groups on this tracker and appears across 5 distinct sectors. The shape of its record matters more than its rank. The group recorded a full year of silence between two active periods, which few operations here do.
+Stormous ranks second of 48 groups on this tracker and appears across 5 distinct sectors. The shape of its record matters more than its rank. The group recorded a full year of silence between two active periods, which few operations here do.
 
 ## Stormous recorded nothing in 2025, then returned in 2026
 
@@ -23,7 +23,7 @@ follows with 2, and the remaining 2 fall in other sectors.
 
 1. Treat a quiet year as no evidence that a group has stopped, because Stormous returned after
    claiming nothing in 2025.
-2. Note that its 5 claims in 2024 made it the leading group of that period.
+2. Note that Stormous claimed 5 organisations in 2024, its busiest period on record.
 3. Watch Government and Defense and Financial Services in particular, since each carries 3 of
    the claims on record.
 4. Establish whether DESC ISR v3 reaches you, given that Government and Defense is one of the

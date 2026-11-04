@@ -1,20 +1,20 @@
 ---
-summary: "Everest claimed 6 UAE organisations in 2025 alone, the highest single-year total of any group on this tracker, after appearing for the first time that May."
+summary: "Everest claimed 6 UAE organisations in 2025 after appearing for the first time that May, having recorded no UAE claims in any earlier period on this tracker."
 ---
 
 ## Everest has claimed 9 UAE organisations since May 2025
 
-Everest ranks third of 47 groups on this tracker and appears across 5 distinct sectors. It reached
+Everest ranks third of 48 groups on this tracker and appears across 5 distinct sectors. It reached
 that position from a standing start. The group had no UAE record at all before May 2025.
 
-## Everest went from absent to third place in under eighteen months
+## Everest went from absent to third place since its first claim in May 2025
 
 Leak-site monitoring recorded the first Everest claim against a UAE organisation on 8 May 2025. The
 group had claimed nothing in the UAE before that date. It then claimed 6 organisations during 2025
 and 3 more in [2026](/uae-ransomware-tracker/2026/).
 
-Those 6 claims in a single year are the highest annual total of any group here. LockBit 3.0 leads
-the overall table with 10 claims, so Everest sits 1 claim behind second place.
+Those 6 claims in 2025 followed zero Everest claims in every earlier period on this tracker. LockBit
+3.0 leads the overall table with 10 claims, one more than Everest's 9.
 
 [Government and Defense](/uae-ransomware-tracker/government-defense/) absorbed 3 of the 9 claims.
 Retail and E-Commerce and Transportation follow with 2 each, and Professional Services and
@@ -35,5 +35,5 @@ Hospitality carry 1 each. The most recent claim was recorded on 6 October 2026.
 7. Use the sector pages instead when deciding where to spend, since sectors persist while groups
    do not.
 
-Everest reached the top three in seventeen months. Track this page rather than a static threat
-list.
+Everest reached the top three after its first claim on 8 May 2025. Track this page rather than a
+static threat list.

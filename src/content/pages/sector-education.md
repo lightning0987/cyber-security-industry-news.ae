@@ -4,8 +4,8 @@ summary: "Education holds 3 claimed UAE organisations from 3 separate groups, wi
 
 ## Education ranks twelfth among UAE sectors with 3 claimed organisations
 
-Education sits twelfth of 13 UAE sectors and carries 2.7% of all attributed claims. The count runs
-far below the average of 8.6 claims per active sector. Three data points describe no pattern, and
+Education sits twelfth of 13 UAE sectors and carries 2.6% of all attributed claims. The count runs
+far below the average of 8.8 claims per active sector. Three data points describe no pattern, and
 this page exists so the sector breakdown stays complete.
 
 ## The Education record spans twelve months

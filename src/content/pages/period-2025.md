@@ -5,16 +5,15 @@ summary: "2025 is the highest year on this tracker with 35 claimed UAE organisat
 ## 2025 is the highest year on record with 35 claimed UAE organisations
 
 Claims rose 29.6% in 2025 against the 27 recorded in [2024](/uae-ransomware-tracker/2024/). That makes it the highest year on
-record, at 31.3% of the whole dataset. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
+record, at 30.4% of the whole dataset. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
 
 ## The groups leading 2025 were new to the UAE
 
 Everest claimed 6 UAE organisations in 2025 and [Coinbase Cartel](/ransomware-groups-targeting-uae/coinbasecartel/) claimed 5. Neither group
 recorded a UAE claim in any earlier period. [Medusa](/ransomware-groups-targeting-uae/medusa/) follows with 3 and BQTLock with 2.
 
-Sector distribution flattened in 2025. Professional Services carried 5 claims, Government and
-Defense 4, and Technology, Financial Services and Retail and E-Commerce 4 each. That is the
-most even spread across sectors of any period on this tracker.
+Sector distribution was broad in 2025. Professional Services carried 5 claims, Government and
+Defense 4, and Technology, Financial Services, Retail and E-Commerce and Manufacturing 4 each. Six sectors therefore recorded 4 or more claims.
 
 ## What this means for UAE organisations
 
@@ -23,13 +22,12 @@ most even spread across sectors of any period on this tracker.
    within a single year.
 3. Stop planning around last year's most active group, given that neither 2025 leader appeared
    in 2024 at all.
-4. Note that five separate sectors recorded 4 or more claims, so no sector could treat itself
+4. Note that six separate sectors recorded 4 or more claims, so no sector could treat itself
    as outside the pattern.
-5. Compare your sector's 2025 figure with its 2026 figure, because sectors moved in opposite
-   directions afterwards.
+5. Compare your sector's 2025 figure with its 2026 figure, because sector counts can shift from one year to the next.
 6. Note that Everest reached 6 claims in a single year, the highest group total of any period on
    this tracker.
-7. Read 31.3% as the share of the whole record that fell in one year, which measures how
+7. Read 30.4% as the share of the whole record that fell in one year, which measures how
    concentrated recent activity has become.
-6. Apply the attribution method on the methodology page before citing 35 anywhere, since it
+8. Apply the attribution method on the methodology page before citing 35 anywhere, since it
    counts attributed claims rather than raw records.

@@ -16,7 +16,7 @@ sources:
     href: "/uae-ransomware-tracker/financial-services/"
   - label: "Groups with a short UAE record"
     href: "/ransomware-groups-targeting-uae/short-record/"
-  - label: "UAE ransomware tracker, snapshot of 21 October 2026"
+  - label: "UAE ransomware tracker, snapshot of 4 November 2026"
     href: "/uae-ransomware-tracker/"
   - label: "ransomware.live, leak-site monitoring"
     href: "https://www.ransomware.live/"
@@ -27,7 +27,7 @@ on 13 October 2026. The group had no UAE record before that date.
 
 ## Financial Services now shows 12 claims from 9 groups
 
-The sector holds 12 claimed UAE organisations, which is 10.7% of all attributed claims. Those 12
+The sector holds 12 claimed UAE organisations, which is 10.4% of all attributed claims. Those 12
 claims are spread across 9 distinct groups.
 
 No other sector on this tracker shows that spread. Most sectors concentrate: one or two groups
@@ -41,10 +41,9 @@ a named operation would address one claim in nine.
 That is the practical reading. The sector is reached by 9 separate operations. The pattern points
 at its attack surface rather than at any group's interest in it.
 
-Audit Team now sits in the long tail with a single claim. It joins the 39 groups that have claimed
-fewer than 5 UAE organisations and share
-[one page](/ransomware-groups-targeting-uae/short-record/) rather than holding individual
-profiles.
+Audit Team now sits in the long tail with a single claim. It joins the other groups with a short
+UAE record, which share [one page](/ransomware-groups-targeting-uae/short-record/) rather than
+holding individual profiles.
 
 ## The sector record runs longer than any other
 

@@ -4,7 +4,7 @@ summary: "INC Ransom has claimed 5 UAE organisations across 5 different sectors,
 
 ## INC Ransom has claimed 5 UAE organisations
 
-INC Ransom ranks sixth of 47 groups on this tracker and carries 4.5% of all attributed UAE claims.
+INC Ransom ranks sixth of 48 groups on this tracker and carries 4.3% of all attributed UAE claims.
 It appears across 5 distinct sectors. The spread is the unusual part, not the count.
 
 ## Every INC Ransom claim lands in a different sector
@@ -30,7 +30,7 @@ by opportunity rather than by industry. That holds on the evidence here, which i
 5. Read the [sector pages](/uae-ransomware-tracker/) rather than this one when deciding where to
    spend, since sectors persist while group names turn over.
 
-INC Ransom crossed the threshold for its own page during 2026, having held 4 claims a month ago.
+INC Ransom crossed the threshold for its own page during 2026.
 The record is young enough that its shape may change with the next claim.
 
 Compare this profile against [Everest](/ransomware-groups-targeting-uae/everest/), which also

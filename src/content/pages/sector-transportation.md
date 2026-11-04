@@ -4,8 +4,8 @@ summary: "Transportation holds 7 claimed UAE organisations, and 4 of those 7 fal
 
 ## Transportation ranks seventh among UAE sectors with 7 claimed organisations
 
-Transportation sits seventh of 13 UAE sectors and carries 6.3% of all attributed claims. The count
-runs below the average of 8.6 claims per active sector. The shape of the record matters more here
+Transportation sits seventh of 13 UAE sectors and carries 6.1% of all attributed claims. The count
+runs below the average of 8.8 claims per active sector. The shape of the record matters more here
 than its size.
 
 ## Four of the seven Transportation claims fall in 2026
@@ -15,8 +15,8 @@ Leak-site monitoring recorded the first Transportation claim against a UAE organ
 [2024](/uae-ransomware-tracker/2024/) and 1 in [2025](/uae-ransomware-tracker/2025/).
 
 That pattern broke this year. The partial year 2026 already carries 4 claims, the most recent
-recorded on 6 October 2026. A sector that produced one claim a year for three years produced four
-in ten months.
+recorded on 6 October 2026. A sector that produced one claim a year for three years has produced four
+so far in 2026.
 
 Five distinct groups appear in the Transportation record. No single operation accounts for the
 rise, which points at opportunity rather than at a campaign against the sector.

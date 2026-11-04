@@ -4,7 +4,7 @@ summary: "UAE Energy and Utilities holds only 4 claimed organisations, but the s
 
 ## Energy and Utilities ranks ninth among UAE sectors with 4 claimed organisations
 
-Energy and Utilities ranks ninth of 13 UAE sectors, well below the average of 8.6 claims per active sector. Four distinct groups appear here, one claim each. The small total should not be read as low exposure, because this sector sits inside critical national infrastructure.
+Energy and Utilities ranks ninth of 13 UAE sectors, well below the average of 8.8 claims per active sector. Four distinct groups appear here, one claim each. The small total should not be read as low exposure, because this sector sits inside critical national infrastructure.
 
 ## Energy and Utilities claims are rising from a low base
 
@@ -31,4 +31,4 @@ count elsewhere would not.
    separation rather than asserting it.
 6. Record how a control system runs without its management layer, because that is the question
    an assessor and an incident both ask.
-7. Treat the rise from zero to 2 claims in 2026 as a signal worth watching, not yet as a trend.
+7. Treat the rise from 1 claim in 2025 to 2 in 2026 as a signal worth watching, not yet as a trend.

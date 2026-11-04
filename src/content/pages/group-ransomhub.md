@@ -1,10 +1,10 @@
 ---
-summary: "RansomHub claimed 5 UAE organisations inside ten months, three of them in Professional Services, and has recorded nothing since February 2025."
+summary: "RansomHub claimed 5 UAE organisations between 2 May 2024 and 15 February 2025, three of them in Professional Services, and has recorded nothing since."
 ---
 
 ## RansomHub has claimed 5 UAE organisations
 
-RansomHub ranks seventh of 47 groups on this tracker and appears across 3 distinct sectors. That is a narrower range than most groups here show. Its whole UAE record fits inside a ten-month window that closed in February [2025](/uae-ransomware-tracker/2025/).
+RansomHub ranks eighth of 48 groups on this tracker and appears across 3 distinct sectors. That is a narrower range than most groups here show. Its whole UAE record fits inside a window that opened on 2 May 2024 and closed in February [2025](/uae-ransomware-tracker/2025/).
 
 ## RansomHub concentrated on Professional Services within a short window
 
@@ -13,7 +13,7 @@ for 1 each. Leak-site monitoring recorded the first claim on 2 May [2024](/uae-r
 15 February 2025.
 
 The group claimed 4 organisations in 2024 and 1 in 2025. It has recorded nothing in the UAE
-during 2026. A ten-month active window makes RansomHub one of the more compressed profiles on
+during 2026. A window that short makes RansomHub one of the more compressed profiles on
 this tracker.
 
 Three of five claims in a single sector is a tighter concentration than most groups here show.
