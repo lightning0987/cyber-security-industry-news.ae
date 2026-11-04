@@ -1,6 +1,6 @@
 ---
 title: "The Gentlemen Claims Four UAE Organisations in 2026"
-h1: "The Gentlemen Claims Four UAE Organisations in 2026"
+h1: "The Gentlemen Reaches Four UAE Claims With No Earlier Record"
 description: "The Gentlemen has claimed 4 UAE organisations in 2026, half of them in Transportation, with no UAE record in any earlier period."
 dek: "The Gentlemen is level with DragonForce and INC Ransom at the top of the 2026 table, with 4 claims each and no UAE claim in any earlier period. Half its claims fall in Transportation, an unusual concentration on a tracker where most groups spread thinly."
 category: "ransomware"
