@@ -23,7 +23,9 @@
     "check:health": "node scripts/health-check.mjs",
     "events": "node scripts/events.mjs",
     "generate": "node scripts/generate-content.mjs",
-    "notify": "node scripts/notify-telegram.mjs"
+    "notify": "node scripts/notify-telegram.mjs",
+    "test:swap": "node scripts/test-figure-swap.mjs",
+    "fix:figures": "node scripts/generate-content.mjs --free-only"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.4.0",

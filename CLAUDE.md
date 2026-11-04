@@ -107,6 +107,31 @@ cannot reach a commit, let alone the site.
 Never relax that loop into a warning. A generator whose output is not verified is a generator
 that publishes whatever it happened to produce.
 
+**Numbers are swapped deterministically before anything is sent to the model.**
+`scripts/lib/figure-swap.mjs` replaces a stale figure with the current one and charges nothing
+for it. It refuses far more often than it accepts, and that is the design: `npm run test:swap`
+exists to prove the refusals fire, not the swaps. Four refusals, each closing a hole the others
+cannot see.
+
+- *Direction.* Two moving numbers in one sentence must keep their order. "3 against an average
+  of 8.6" becomes false when the sector overtakes the average, even though both figures are
+  individually correct.
+- *Relational language.* Superlatives, fractions and bounded comparisons state a claim the
+  numbers alone cannot verify. "the most active group with 12 claims" stays false at 13 if
+  someone overtook it.
+- *Spelled-out numbers.* "Twenty-four of the 47 groups" is invisible to the linter, to every
+  guard and to the swap. Swapping 47 for 48 there would leave a right total beside a wrong
+  part and nothing on the site would notice.
+- *The entity's own counter.* A page whose own count moved never goes through the swap. Its
+  old value usually appears somewhere else in the brief, so the linter does not flag it, and a
+  green file would keep asserting yesterday's figure. This was measured, not predicted:
+  the swap turned 19 groups into 20 on the Professional Services page, the file passed, stopped
+  reaching the model, and kept saying 24 claims where the data held 25.
+
+Measured on the fourteen-day catch-up, the swap handled 6 files of 40. Every safety layer above
+cost savings, and that is the right trade on a site whose only asset is that its numbers are
+correct. `npm run fix:figures` runs the pass alone, changes nothing else and calls no API.
+
 **`lint:content` is necessary and not sufficient.** It reads one file at a time, so it cannot
 see the rules that live in the post-build guards: title and description uniqueness across the
 site, an H1 identical to its Title, link integrity. A repair pass once rewrote an H1 so that it

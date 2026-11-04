@@ -14,6 +14,7 @@
  */
 
 import Anthropic from '@anthropic-ai/sdk';
+import { buildMap, swapFigures } from './lib/figure-swap.mjs';
 import { execFileSync } from 'node:child_process';
 import { existsSync, readFileSync, readdirSync, writeFileSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -26,6 +27,12 @@ const MAX_NEWS_PER_RUN = 3;
 
 const root = process.cwd();
 const dryRun = process.argv.includes('--dry-run');
+
+/**
+ * Только бесплатная починка, без обращения к модели. Нужен человеку, который
+ * хочет посмотреть, что замена сделает, прежде чем платить за остальное.
+ */
+const freeOnly = process.argv.includes('--free-only');
 
 /**
  * База сравнения передаётся в events как есть. Нужна, когда чинишь текст
@@ -183,6 +190,205 @@ if (dryRun) {
   process.exit(0);
 }
 
+// ─── Бесплатная починка ──────────────────────────────────────────────
+
+/** Сколько версий брифа назад заглядывать. */
+const HISTORY_DEPTH = 40;
+
+/**
+ * Карта по всей истории брифа, а не по одному шагу назад.
+ *
+ * Сборка могла стоять красной неделю, и тогда текст написан против брифа
+ * недельной давности, а не вчерашнего. Карта, построенная по последнему
+ * шагу, не содержала бы нужной пары, и бесплатная починка молча не нашла бы
+ * ничего — самый неприятный вид отказа, потому что он выглядит как «нечего
+ * чинить».
+ *
+ * Каждая историческая версия сравнивается с текущей напрямую. Цепочки
+ * переходов не строятся: промежуточное значение могло принадлежать другому
+ * полю, и композиция протащила бы эту ошибку дальше.
+ */
+function historyMap(name) {
+  const file = `briefs/${name}.json`;
+  let shas = [];
+  try {
+    shas = execFileSync('git', ['log', `-${HISTORY_DEPTH}`, '--format=%H', '--', file], {
+      cwd: root,
+      encoding: 'utf8',
+    })
+      .trim()
+      .split('\n')
+      .filter(Boolean);
+  } catch {
+    return new Map();
+  }
+
+  const now = JSON.parse(read(file));
+  const seen = new Map();
+  for (const sha of shas.slice(1)) {
+    let past;
+    try {
+      past = JSON.parse(
+        execFileSync('git', ['show', `${sha}:${file}`], { cwd: root, encoding: 'utf8', maxBuffer: 1e8 }),
+      );
+    } catch {
+      continue;
+    }
+    for (const [from, to] of buildMap(past, now)) {
+      if (!seen.has(from)) seen.set(from, new Set());
+      seen.get(from).add(to);
+    }
+  }
+
+  // Число, которое в разных версиях вело к разным текущим значениям,
+  // отбрасывается: по тексту не определить, какая из версий имелась в виду.
+  const out = new Map();
+  for (const [from, to] of seen) if (to.size === 1) out.set(from, [...to][0]);
+  return out;
+}
+
+const briefNames = readdirSync(resolve(root, 'briefs'))
+  .filter((f) => f.endsWith('.json'))
+  .map((f) => f.replace(/\.json$/, ''));
+
+/** Карта по одному брифу. */
+const mapCache = new Map();
+function mapForBrief(name) {
+  if (!mapCache.has(name)) {
+    mapCache.set(name, historyMap(name));
+  }
+  return mapCache.get(name);
+}
+
+/**
+ * Общая карта для заметок и гайдов: у них своего брифа нет, числа линтер
+ * сверяет со всеми сразу. Пара, которая в разных брифах ведёт к разным
+ * значениям, выбрасывается — по тексту не определить, какая имелась в виду.
+ */
+const GLOBAL_MAP = (() => {
+  const seen = new Map();
+  for (const name of briefNames) {
+    for (const [from, to] of mapForBrief(name)) {
+      if (!seen.has(from)) seen.set(from, new Set());
+      seen.get(from).add(to);
+    }
+  }
+  const out = new Map();
+  for (const [from, to] of seen) if (to.size === 1) out.set(from, [...to][0]);
+  return out;
+})();
+
+function mapFor(file) {
+  const name = file.replace(/^src\/content\/pages\//, '').replace(/\.md$/, '');
+  return file.startsWith('src/content/pages/') && briefNames.includes(name)
+    ? mapForBrief(name)
+    : GLOBAL_MAP;
+}
+
+/**
+ * Счётчики, принадлежащие самой сущности, а не всему снапшоту.
+ *
+ * Если сдвинулся такой счётчик, у страницы изменилась её собственная история,
+ * и правкой одного числа дело не обойдётся. Хуже того, старое значение часто
+ * встречается где-то ещё в брифе, поэтому линтер его не отмечает: страница
+ * остаётся зелёной, утверждая вчерашнюю цифру.
+ *
+ * Именно это и случилось при первой проверке. Бесплатная замена починила
+ * «19 групп» на «20», файл позеленел, перестал доходить до модели, и
+ * «24 заявления» осталось стоять там, где в данных уже 25. Дыра существовала
+ * и раньше, но раньше такой файл хотя бы попадал модели за компанию.
+ */
+const OWN_COUNT_KEYS = [
+  'claims_in_this_sector',
+  'claimed_uae_organisations',
+  'claims_in_this_period',
+  'distinct_groups_active_here',
+  'sectors_targeted',
+];
+
+/** Сдвинулся ли собственный счётчик сущности за окно истории. */
+function ownCountMoved(file) {
+  const name = file.replace(/^src\/content\/pages\//, '').replace(/\.md$/, '');
+  if (!file.startsWith('src/content/pages/') || !briefNames.includes(name)) return false;
+  const facts = JSON.parse(read(`briefs/${name}.json`)).facts ?? {};
+  const map = mapForBrief(name);
+  return OWN_COUNT_KEYS.some((k) => {
+    const v = facts[k];
+    return typeof v === 'number' && [...map.values()].includes(String(v));
+  });
+}
+
+/**
+ * Текущий ранг сущности из её брифа. Нужен, чтобы снять вето с порядкового,
+ * написанного словом: «ranks third of 47» правится только если третьим она
+ * и осталась. У заметок и гайдов своей сущности нет, поэтому и ранга нет, и
+ * такие предложения уходят модели.
+ */
+function rankFor(file) {
+  const name = file.replace(/^src\/content\/pages\//, '').replace(/\.md$/, '');
+  if (!file.startsWith('src/content/pages/') || !briefNames.includes(name)) return null;
+  const facts = JSON.parse(read(`briefs/${name}.json`)).facts ?? {};
+  const raw = facts.rank_among_sectors ?? facts.rank_among_groups;
+  const m = typeof raw === 'string' ? raw.match(/^(\d+)\s+of\s+\d+$/) : null;
+  return m ? Number(m[1]) : null;
+}
+
+/** Числа, которые линтер назвал отсутствующими в данных. */
+function flaggedNumbers(problems) {
+  const out = new Set();
+  for (const p of problems) {
+    const m = p.match(/Числа\s+([\d.]+)\s+нет в брифе/);
+    if (m) out.add(m[1]);
+  }
+  return out;
+}
+
+/**
+ * Прогон бесплатной починки по всем задачам починки.
+ *
+ * Запускается до модели. Файл, который после замены проходит линтер, до
+ * API не доходит вовсе. Файл, в котором замена отказалась хотя бы от одного
+ * предложения, уходит модели целиком: смешивать машинную правку с ручной в
+ * одном файле незачем, модель всё равно увидит актуальные данные.
+ */
+function freeRepairs(repairTasks) {
+  const fixed = [];
+  const notes = [];
+  for (const task of repairTasks) {
+    const flagged = flaggedNumbers(task.problems);
+    if (flagged.size === 0) continue;
+
+    if (ownCountMoved(task.file)) {
+      notes.push(`${task.file}: сдвинулся собственный счётчик сущности`);
+      continue;
+    }
+
+    const before = read(task.file);
+    const { text, applied, refused } = swapFigures(
+      before,
+      flagged,
+      mapFor(task.file),
+      rankFor(task.file),
+    );
+    if (applied.length === 0) {
+      for (const r of refused) notes.push(`${task.file}: ${r.reason}`);
+      continue;
+    }
+
+    writeFileSync(resolve(root, task.file), text);
+    if (lintProblems(task.file).length === 0) {
+      fixed.push(task.file);
+      console.log(`  ₽ ${task.file} (${applied.length} замен, без API)`);
+    } else {
+      // Замена не довела файл до зелёного. Откат: пусть модель видит
+      // исходный текст, а не наполовину исправленный.
+      writeFileSync(resolve(root, task.file), before);
+      for (const r of refused) notes.push(`${task.file}: ${r.reason}`);
+    }
+  }
+  return { fixed, notes };
+}
+
 // ─── Промпты ─────────────────────────────────────────────────────────
 
 function repairPrompt(task) {
@@ -321,10 +527,35 @@ function unfence(text) {
   return (m ? m[1] : t).trim() + '\n';
 }
 
-const done = [];
+/**
+ * Бесплатный проход идёт первым. Платить модели за «8.8 вместо 8.6» не за
+ * что: смысл предложения от этого не меняется, а там, где меняется, замена
+ * сама отказывается и файл уходит модели.
+ */
+const free = freeRepairs(tasks.filter((t) => t.kind === 'repair'));
+
+if (freeOnly) {
+  console.log(`\nБез API починено: ${free.fixed.length} из ${tasks.length}.`);
+  if (free.notes.length > 0) {
+    console.log('Отказы (уйдут модели):');
+    for (const n of [...new Set(free.notes)]) console.log(`  ${n}`);
+  }
+  process.exit(0);
+}
+const remaining = tasks.filter((t) => !free.fixed.includes(t.file));
+
+if (free.fixed.length > 0) {
+  console.log(`\nБез API починено: ${free.fixed.length}. Осталось модели: ${remaining.length}.`);
+}
+
+if (remaining.length === 0) {
+  console.log('\nВызовов API 0, 0.000 USD.');
+}
+
+const done = free.fixed.map((file) => ({ kind: 'repair', file, attempts: 0, free: true }));
 const failed = [];
 
-for (const task of tasks) {
+for (const task of remaining) {
   const before = exists(task.file) ? read(task.file) : null;
   const messages = [
     { role: 'user', content: task.kind === 'repair' ? repairPrompt(task) : newsPrompt(task) },
@@ -418,7 +649,12 @@ if (done.length > 0) {
 const cost = (usage.input / 1e6) * 2 + (usage.output / 1e6) * 10;
 const summary = [
   `Готово: ${done.length} из ${tasks.length}.`,
-  done.length > 0 ? done.map((t) => `  ${t.kind}: ${t.file}`).join('\n') : null,
+  free.fixed.length > 0
+    ? `Без API: ${free.fixed.length} (замена числа, смысл не затронут). Модели ушло ${remaining.length}.`
+    : null,
+  done.length > 0
+    ? done.map((t) => `  ${t.kind}${t.free ? ' (без API)' : ''}: ${t.file}`).join('\n')
+    : null,
   failed.length > 0 ? `Не прошли проверку: ${failed.map((t) => t.file).join(', ')}` : null,
   buildNote,
   `Вызовов API ${usage.calls}, токенов ${usage.input} вход и ${usage.output} выход, ${cost.toFixed(3)} USD.`,
