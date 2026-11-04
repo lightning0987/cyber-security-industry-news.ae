@@ -107,6 +107,15 @@ cannot reach a commit, let alone the site.
 Never relax that loop into a warning. A generator whose output is not verified is a generator
 that publishes whatever it happened to produce.
 
+**`lint:content` is necessary and not sufficient.** It reads one file at a time, so it cannot
+see the rules that live in the post-build guards: title and description uniqueness across the
+site, an H1 identical to its Title, link integrity. A repair pass once rewrote an H1 so that it
+matched the title, all 39 files passed the linter, and the branch still would not build. The
+generator therefore runs a full `npm run build` at the end and puts the result in the summary,
+which carries into the pull request body and the Telegram message. It does not discard the
+work over it: text already written is cheaper to fix by hand than to regenerate, but a branch
+believed green is worse than one known red.
+
 `MAX_NEWS_PER_RUN` is 3. A spike in the data must not become a burst of API calls, and three
 briefs is already more than a day's worth of real news.
 
