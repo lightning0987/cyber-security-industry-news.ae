@@ -114,6 +114,13 @@ briefs is already more than a day's worth of real news.
 to `events`, which is what you want after a run of red builds: the default answers "since last
 night" while the drift may be weeks old.
 
+**Never add a dependency with a bare `npm install` on macOS.** npm resolves optional
+dependencies for the machine it runs on and drops the other platforms' entries from the lock
+file, which leaves `package-lock.json` describing a tree that cannot exist on the Linux runner.
+`npm ci` then refuses with EUSAGE and the whole workflow dies before the salt check. Add the
+dependency, then restore the platform entries the install removed and confirm with a clean
+`npm ci` in a scratch directory before pushing.
+
 Telegram carries the notifications, because the build being red is only useful if someone sees
 it. `scripts/notify-telegram.mjs` exits 0 on every failure path, including an unreachable
 Telegram: a broken notification channel must never turn a healthy run red. Messages carry file
