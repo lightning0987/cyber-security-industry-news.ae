@@ -42,9 +42,21 @@ const usage = { input: 0, output: 0, calls: 0 };
 
 // ─── Что произошло в данных ──────────────────────────────────────────
 
-const events = JSON.parse(
-  execFileSync('node', eventsArgs, { cwd: root, encoding: 'utf8' }),
-);
+/**
+ * События — повод написать заметку, но не единственный повод работать:
+ * список починок приходит от линтера. Поэтому неразобранный вывод events
+ * здесь не фатален, иначе сломанный сайт остался бы несломанным-чинимым
+ * из-за дня, когда данные не менялись.
+ */
+const events = (() => {
+  const raw = execFileSync('node', eventsArgs, { cwd: root, encoding: 'utf8' });
+  try {
+    return JSON.parse(raw);
+  } catch {
+    console.log(`events не отдал JSON, заметок в этом прогоне не будет: ${raw.trim().split('\n')[0]}`);
+    return { added: [], moved_figures: [] };
+  }
+})();
 
 const rules = read('prompts/content-brief.md');
 const snapshotAsOf = events.to.fetched_at.slice(0, 10);

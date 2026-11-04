@@ -104,6 +104,28 @@ const current = JSON.parse(readFileSync(resolve(process.cwd(), SNAPSHOT_PATH), '
 const prev = previousSnapshot(current);
 
 if (!prev || prev.unchanged !== undefined) {
+  // --json обязан отдавать JSON на КАЖДОМ пути выхода. Здесь он печатал
+  // человеческую строку, и всё, что читало его вывод программно, падало на
+  // разборе ровно в тот день, когда данные не менялись.
+  if (asJson) {
+    console.log(
+      JSON.stringify(
+        {
+          from: null,
+          to: { ref: 'working tree', fetched_at: current.fetched_at, attributed: null },
+          added: [],
+          removed: 0,
+          new_groups: [],
+          new_sectors: [],
+          spikes: [],
+          moved_figures: [],
+        },
+        null,
+        2,
+      ),
+    );
+    process.exit(0);
+  }
   console.log(
     prev?.unchanged
       ? `events: снапшот обновлялся, но ни одна запись не изменилась (${current.record_count} записей).\n  Публиковать нечего, править нечего.`
