@@ -88,6 +88,16 @@ only when `events` reports something and `ANTHROPIC_API_KEY` is set, so a quiet 
 **The generator never writes to `main`.** It commits to `content/auto-<date>` and opens a pull
 request. A number is checkable mechanically; whether a sentence is worth publishing is not.
 
+**The repair list comes from the linter, not from `events`.** This was built the other way
+round first and it was wrong. `events` counts claims per sector, group and period, but the
+snapshot's own figures (how many distinct groups, the average per sector, every percentage)
+sit in almost every file and appear in no entity's count. One new group in the data broke all
+eight group pages, every guide and eleven news articles, and `events` named none of them. The
+linter knows each broken file by name and which number stopped coming from the data.
+
+There is deliberately no cap on repairs. A broken file keeps the build red, which keeps the
+whole site on its previous version. Fixing half of them costs money and still ships nothing.
+
 **`lint:content` is the gate, not the prompt.** Every file the model returns is linted
 immediately, and a file carrying a Critical problem is reverted on disk rather than committed.
 Three attempts, each fed the linter's own output. The number check predates the generator and

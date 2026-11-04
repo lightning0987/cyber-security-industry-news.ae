@@ -15,7 +15,7 @@
 
 import Anthropic from '@anthropic-ai/sdk';
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, writeFileSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const MODEL = 'claude-sonnet-5-5';
@@ -66,19 +66,63 @@ function briefByName(name) {
 const tasks = [];
 
 /**
- * Одна страница может нести несколько разошедшихся цифр. Чинить её нужно
- * один раз и целиком: бриф у неё один, и второй вызов переписал бы первый.
+ * Починки берутся у линтера, а не у events.
+ *
+ * events считает заявления по секторам, группам и периодам. Этого мало:
+ * общие цифры снапшота — сколько всего групп, среднее на сектор, доли в
+ * процентах — стоят почти в каждом файле и в его отчёт не попадают. Одна
+ * новая группа в данных ломает все страницы групп сразу, а events назовёт
+ * ноль из них. Линтер же знает про каждый сломанный файл поimени и говорит,
+ * какое именно число перестало приходить из данных.
+ *
+ * Потолка на число починок нет намеренно. Сломанный файл держит сборку
+ * красной, а значит и весь сайт на прошлой версии. Починить половину значит
+ * заплатить и не починить ничего.
  */
-const byFile = new Map();
-for (const m of events.moved_figures) {
-  if (!m.file || !exists(m.file)) continue;
-  if (!byFile.has(m.file)) byFile.set(m.file, []);
-  byFile.get(m.file).push(m);
+const SITE_CONTEXT = (() => {
+  const any = readdirSync(resolve(root, 'briefs')).find((f) => f.endsWith('.json'));
+  if (!any) return '';
+  const brief = JSON.parse(read(`briefs/${any}`));
+  return JSON.stringify({ site_context: brief.site_context }, null, 2);
+})();
+
+/** Брифы сущностей, названных во frontmatter материала. */
+function briefsForEntities(text) {
+  const out = [];
+  for (const kind of ['sectors', 'groups', 'periods']) {
+    const line = text.match(new RegExp(`^\\s*${kind}:\\s*\\[(.*)\\]`, 'm'));
+    if (!line) continue;
+    for (const raw of line[1].split(',')) {
+      const slug = raw.trim().replace(/^["']|["']$/g, '');
+      if (!slug) continue;
+      const prefix = kind === 'sectors' ? 'sector' : kind === 'groups' ? 'group' : 'period';
+      const b = briefByName(`${prefix}-${slug}`);
+      if (b) out.push(b);
+    }
+  }
+  return out;
 }
-for (const [file, moved] of byFile) {
-  const brief = briefFor(file);
-  if (!brief) continue;
-  tasks.push({ kind: 'repair', file, moved, brief });
+
+/**
+ * Чем подкрепить починку. У страницы данных есть свой бриф. У заметки и
+ * гайда своего брифа нет: линтер сверяет их числа со всеми брифами сразу,
+ * поэтому им нужен общий контекст снапшота плюс брифы названных сущностей.
+ */
+function repairContext(file) {
+  const page = briefFor(file);
+  if (page) return page;
+  const text = read(file);
+  const entities = file.startsWith('src/content/news/') ? briefsForEntities(text) : [];
+  return [SITE_CONTEXT, ...entities].join('\n\n');
+}
+
+const DIRS = ['src/content/pages', 'src/content/news', 'src/content/guides'];
+
+for (const [name, problems] of lintByFile()) {
+  const dir = DIRS.find((d) => exists(`${d}/${name}`));
+  if (!dir) continue;
+  const file = `${dir}/${name}`;
+  tasks.push({ kind: 'repair', file, problems, brief: repairContext(file) });
 }
 
 /** Заметки — по новым заявлениям, самые свежие первыми. */
@@ -130,22 +174,25 @@ if (dryRun) {
 // ─── Промпты ─────────────────────────────────────────────────────────
 
 function repairPrompt(task) {
-  const moved = task.moved.map((m) => `  ${m.label}: было ${m.was}, стало ${m.now}`).join('\n');
+  const problems = task.problems.map((p) => `  ${p}`).join('\n');
   return `${rules}
 
 ---
 
-# Задача: починить цифры на существующей странице
+# Задача: починить существующий файл
 
-Снапшот обновился, и текст ниже теперь противоречит данным. Сдвинулось вот что:
+Снапшот обновился, и файл ниже больше не сходится с данными. Проверка
+отклонила его вот за это:
 
-${moved}
+${problems}
 
-Правь минимально. Сохрани структуру, три H2, заголовки и аргумент текста.
-Меняй только то, что перестало быть правдой из-за новых цифр. Если после
-правки предложение стало бессмысленным, перепиши это предложение, а не абзац.
+Каждое названное число устарело. Найди в данных ниже актуальное значение и
+поставь его. Если актуального значения там нет, перепиши предложение так,
+чтобы это число стало не нужно.
 
-Сохрани поле summary во frontmatter. Если цифра есть в нём, поправь и там.
+Правь минимально. Сохрани структуру, заголовки, frontmatter и аргумент
+текста. Меняй только то, что перестало быть правдой. Если после правки
+предложение потеряло смысл, перепиши это предложение, а не абзац.
 
 Верни целиком готовый файл markdown вместе с frontmatter, и ничего больше.
 Без markdown-ограждения вокруг ответа.
@@ -154,7 +201,7 @@ ${moved}
 
 ${read(task.file)}
 
-## Актуальный бриф
+## Актуальные данные
 
 ${task.brief}`;
 }
@@ -218,23 +265,33 @@ ${task.brief}`;
 
 // ─── Проверка: линтер решает, сохранять ли файл ───────────────────────
 
-/** Возвращает Critical-замечания линтера, относящиеся именно к этому файлу. */
-function lintProblems(file) {
+/** Один прогон линтера. Возвращает Critical-замечания, сгруппированные по файлу. */
+function lintByFile() {
   let out = '';
   try {
+    // stderr перехватывается, а не наследуется: иначе вывод линтера печатается
+    // поверх отчёта генератора и читается как его собственная ошибка.
     out = execFileSync('node', ['scripts/lint-content.mjs'], {
       cwd: root,
       encoding: 'utf8',
-      env: { ...process.env },
+      stdio: ['ignore', 'pipe', 'pipe'],
     });
   } catch (err) {
     out = `${err.stdout ?? ''}${err.stderr ?? ''}`;
   }
-  const name = file.split('/').pop();
-  return out
-    .split('\n')
-    .filter((l) => l.includes('✖') && l.includes(name))
-    .map((l) => l.trim());
+  const byName = new Map();
+  for (const raw of out.split('\n')) {
+    const m = raw.match(/✖\s+([^\s:]+\.md):\s*(.+)$/);
+    if (!m) continue;
+    if (!byName.has(m[1])) byName.set(m[1], []);
+    byName.get(m[1]).push(m[2].trim());
+  }
+  return byName;
+}
+
+/** Замечания по одному файлу. */
+function lintProblems(file) {
+  return lintByFile().get(file.split('/').pop()) ?? [];
 }
 
 // ─── Выполнение ──────────────────────────────────────────────────────
