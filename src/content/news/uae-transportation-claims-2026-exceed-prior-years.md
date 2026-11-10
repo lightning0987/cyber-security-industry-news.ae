@@ -35,17 +35,15 @@ Five distinct ransomware groups have claimed a UAE transportation organisation. 
 The Gentlemen each account for 2 of the 7 claims, the only groups to appear twice in this sector.
 Clop, Nova and RansomHub each appear once.
 
-Transportation ranks seventh of 13 sectors on this tracker, below the average of 8.8 claims per
+Transportation ranks seventh of 13 sectors on this tracker, below the average of 8.9 claims per
 active sector. Volume is not what makes the sector notable. Direction is.
 
 ## How this compares
 
-UAE claims peaked in [2025](/uae-ransomware-tracker/2025/), the highest year on record
-with 35 claims overall. Transportation did not follow that pattern. It carried 1 claim that year and 4 in the
+UAE claims reached 35 in [2025](/uae-ransomware-tracker/2025/), a figure the partial year 2026 has already matched. Transportation did not follow that pattern. It carried 1 claim that year and 4 in the
 partial year that followed.
 
-The site total moved the other way. Claims across all sectors stand 2.9% below 2025, though
-2026 is incomplete and that comparison is not like for like.
+The site total tells a different story. Claims across all sectors stand level with 2025 at 35 each. Because 2026 is incomplete, that comparison is not like for like.
 
 ## What to do
 

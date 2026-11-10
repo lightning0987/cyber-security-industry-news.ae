@@ -5,10 +5,10 @@ summary: "Education holds 3 claimed UAE organisations from 3 separate groups, wi
 ## Education ranks twelfth among UAE sectors with 3 claimed organisations
 
 Education sits twelfth of 13 UAE sectors and carries 2.6% of all attributed claims. The count runs
-far below the average of 8.8 claims per active sector. Three data points describe no pattern, and
+far below the average of 8.9 claims per active sector. Three data points describe no pattern, and
 this page exists so the sector breakdown stays complete.
 
-## The Education record spans twelve months
+## The Education record begins in October 2025
 
 Leak-site monitoring recorded the first Education claim against a UAE organisation on 11 October
 2025. The most recent was recorded on 15 October 2026. The sector shows 1 claim in
@@ -18,7 +18,7 @@ Leak-site monitoring recorded the first Education claim against a UAE organisati
 Three distinct groups account for the 3 claims, one each. No operation has returned to the sector.
 
 Education recorded nothing at all across 2020 to 2024. On this tracker the sector is recent rather
-than persistent, and its whole record fits inside twelve months.
+than persistent, and its whole record begins in October 2025.
 
 ## What this means for UAE organisations
 

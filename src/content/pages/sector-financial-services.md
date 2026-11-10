@@ -4,8 +4,8 @@ summary: "Financial Services holds 12 claimed UAE organisations from 9 separate 
 
 ## Financial Services ranks fourth among UAE sectors with 12 claimed organisations
 
-Financial Services sits fourth of 13 UAE sectors and carries 10.4% of all attributed claims. The
-count runs above the average of 8.8 claims per active sector. It also holds the longest record of
+Financial Services sits fourth of 13 UAE sectors and carries 10.3% of all attributed claims. The
+count runs above the average of 8.9 claims per active sector. It also holds the longest record of
 any sector here.
 
 ## The Financial Services record runs longer than any other sector

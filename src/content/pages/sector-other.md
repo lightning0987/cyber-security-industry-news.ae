@@ -4,7 +4,7 @@ summary: "Other holds 4 claimed UAE organisations whose sector the upstream feed
 
 ## Other accounts for 4 claimed UAE organisations
 
-Other ranks eleventh of 13 categories on this tracker, below the average of 8.8 claims per active sector. Four distinct groups appear here, one claim each. The label needs explaining before the figure means anything.
+Other ranks eleventh of 13 categories on this tracker, below the average of 8.9 claims per active sector. Four distinct groups appear here, one claim each. The label needs explaining before the figure means anything.
 
 ## What the Other label actually means
 

@@ -4,8 +4,8 @@ summary: "All 4 claimed UAE hospitality organisations were recorded in 2026, and
 
 ## Hospitality ranks tenth among UAE sectors with 4 claimed organisations
 
-Hospitality sits tenth of 13 UAE sectors and carries 3.5% of all attributed claims. The count runs
-well below the average of 8.8 claims per active sector. The sector is the newest entry on this
+Hospitality sits tenth of 13 UAE sectors and carries 3.4% of all attributed claims. The count runs
+well below the average of 8.9 claims per active sector. The sector is the newest entry on this
 tracker.
 
 ## Every Hospitality claim falls inside 2026
@@ -23,7 +23,7 @@ sector within five months reads as separate opportunities rather than as coordin
 ## What this means for UAE organisations
 
 1. Treat the sector as newly exposed rather than as historically safe, because its entire record
-   is five months old.
+   falls between May and October 2026.
 2. Note that four separate groups reached it, so defending against a named actor would have
    addressed one claim in four.
 3. Map your obligations under the UAE Personal Data Protection Law, which reaches guest records
