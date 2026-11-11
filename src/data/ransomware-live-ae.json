@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-11-10T09:15:43.368Z",
-  "record_count": 196,
+  "fetched_at": "2026-11-11T08:50:36.136Z",
+  "record_count": 197,
   "schema_version": 1,
   "attribution": {
-    "probable": 51,
+    "probable": 52,
     "unverified": 80,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "2dde4da9d28c190f",
+      "victim_hash": "eee3bfa90bfb97ca",
+      "group": "dark project",
+      "group_slug": "dark-project",
+      "group_family": null,
+      "sector": "manufacturing",
+      "sector_label": "Manufacturing",
+      "discovered": "2026-11-10",
+      "published": "2026-11-10",
+      "year": 2026,
+      "month": "2026-11",
+      "ae_confidence": "probable"
+    },
     {
       "id": "e42c311fb8f9d2c0",
       "victim_hash": "a8fbdae69a5fe08e",
