@@ -6,7 +6,7 @@ summary: "The Dubai Electronic Security Center issues the Information Security R
 standard: "DESC ISR v3"
 order: 1
 image: "dubai-skyline"
-updated: "2026-11-04"
+updated: "2026-11-11"
 keyFacts:
   - label: "Issuing body"
     value: "Dubai Electronic Security Center"
@@ -152,8 +152,7 @@ easier to produce, because a narrower scope means fewer artefacts.
 
 ### How much of the UAE record sits inside ISR territory
 
-Five sectors on this tracker map most closely onto the ISR scope. Those five hold 62 of the 115
-attributed UAE claims, which is 53.9% of the published record, based on leak-site monitoring as of 4 November 2026.
+Five sectors on this tracker map most closely onto the ISR scope. Those five hold 62 of the 117 attributed UAE claims, which is 53% of the published record, based on leak-site monitoring as of 11 November 2026.
 
 | Sector usually in ISR scope | Claimed UAE organisations |
 | --- | --- |

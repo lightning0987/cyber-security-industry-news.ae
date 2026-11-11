@@ -4,7 +4,7 @@ summary: "Medusa claimed 5 UAE organisations spread across 5 different sectors, 
 
 ## Medusa has claimed 5 UAE organisations
 
-Medusa ranks seventh of 48 groups on this tracker and appears across 5 distinct sectors, one claim in each. The spread is perfectly even. Medusa is also routinely confused with MedusaLocker, which this site counts as a separate operation.
+Medusa ranks seventh of 49 groups on this tracker and appears across 5 distinct sectors, one claim in each. The spread is perfectly even.
 
 ## Medusa spread evenly and then stopped
 
@@ -16,21 +16,16 @@ Medusa has recorded no UAE claim in 2026. Its activity spanned more than two yea
 concentrating on one sector. Professional Services, Financial Services and Manufacturing each
 carry 1 claim, as do two further sectors.
 
-Medusa and MedusaLocker are counted as separate operations on this site. The names are often confused. Merging them would be an
-editorial claim about actor identity rather than a fact in the source data.
-
 ## What this means for UAE organisations
 
 1. Read the absence in 2026 as an absence of published claims, not as proof the group has
    stopped operating.
 2. Note the even spread across 5 sectors, which offers no sector-specific defence to build
    against.
-3. Do not confuse Medusa with MedusaLocker, which appears separately on this tracker with its
-   own record.
-4. Map your obligations under the UAE Personal Data Protection Law, which applies federally
+3. Map your obligations under the UAE Personal Data Protection Law, which applies federally
    regardless of sector.
-5. Test external access paths on a schedule, since this group accumulated claims across three
+4. Test external access paths on a schedule, since this group accumulated claims across three
    separate years.
-6. Compare this page with Stormous, which also went quiet for a year and then returned.
-7. Treat a quiet period as no evidence of safety, because organisations that pay before
+5. Compare this page with LockBit 3.0, which leads the tracker with 10 claimed organisations.
+6. Treat a quiet period as no evidence of safety, because organisations that pay before
    publication never appear in this data.

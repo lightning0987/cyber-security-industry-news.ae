@@ -4,8 +4,8 @@ summary: "All 4 claimed UAE hospitality organisations were recorded in 2026, and
 
 ## Hospitality ranks tenth among UAE sectors with 4 claimed organisations
 
-Hospitality sits tenth of 13 UAE sectors and carries 3.5% of all attributed claims. The count runs
-well below the average of 8.8 claims per active sector. The sector is the newest entry on this
+Hospitality sits tenth of 13 UAE sectors and carries 3.4% of all attributed claims. The count runs
+well below the average of 9 claims per active sector. The sector is the newest entry on this
 tracker.
 
 ## Every Hospitality claim falls inside 2026

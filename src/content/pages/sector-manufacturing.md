@@ -1,19 +1,19 @@
 ---
-summary: "UAE Manufacturing recorded 8 claimed organisations from 8 different ransomware groups, with no group claiming a second manufacturing target."
+summary: "UAE Manufacturing recorded 9 claimed organisations from 9 different ransomware groups, with no group claiming a second manufacturing target."
 ---
 
-## Manufacturing ranks sixth among UAE sectors with 8 claimed organisations
+## Manufacturing ranks sixth among UAE sectors with 9 claimed organisations
 
-Manufacturing ranks sixth of 13 UAE sectors, just below the average of 8.8 claims per active sector. Eight distinct groups appear here, one claim each. No ransomware group has claimed a second UAE manufacturing organisation in this dataset.
+Manufacturing ranks sixth of 13 UAE sectors, level with the average of 9 claims per active sector. Nine distinct groups appear here, one claim each. No ransomware group has claimed a second UAE manufacturing organisation in this dataset.
 
-## Eight groups account for 8 Manufacturing claims
+## Nine groups account for 9 Manufacturing claims
 
-Manufacturing shows one claim per group across 8 distinct operations. No ransomware group has
+Manufacturing shows one claim per group across 9 distinct operations. No ransomware group has
 claimed a second UAE manufacturing organisation in this dataset. Blacknevas, Cicada3301,
-[DragonForce](/ransomware-groups-targeting-uae/dragonforce/) and INC Ransom each appear once, as do the remaining four.
+[DragonForce](/ransomware-groups-targeting-uae/dragonforce/) and INC Ransom each appear once, as do the remaining groups.
 
 Manufacturing claims cluster late in the record. The sector saw 1 claim in [2023](/uae-ransomware-tracker/2023/) and 1 in 2024,
-then 4 in [2025](/uae-ransomware-tracker/2025/). The partial year 2026 stands at 2. Half the sector's total falls in 2025 alone.
+then 4 in [2025](/uae-ransomware-tracker/2025/). The partial year 2026 stands at 3. The year 2025 holds the largest share of the sector's total.
 
 ## What this means for UAE organisations
 
@@ -27,7 +27,7 @@ then 4 in [2025](/uae-ransomware-tracker/2025/). The partial year 2026 stands at
    question is operational before it is technical.
 5. Confirm that remote maintenance access used by equipment vendors is time limited and
    monitored.
-6. Plan against a generalist attacker rather than a sector specialist, given that 8 groups have
+6. Plan against a generalist attacker rather than a sector specialist, given that 9 groups have
    appeared once each.
 7. Verify that design files and process documentation are backed up apart from the systems that
    normally serve them.

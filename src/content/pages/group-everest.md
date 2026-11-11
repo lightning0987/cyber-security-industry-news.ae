@@ -4,7 +4,7 @@ summary: "Everest claimed 6 UAE organisations in 2025 after appearing for the fi
 
 ## Everest has claimed 9 UAE organisations since May 2025
 
-Everest ranks third of 48 groups on this tracker and appears across 5 distinct sectors. It reached
+Everest ranks third of 49 groups on this tracker and appears across 5 distinct sectors. It reached
 that position from a standing start. The group had no UAE record at all before May 2025.
 
 ## Everest went from absent to third place since its first claim in May 2025

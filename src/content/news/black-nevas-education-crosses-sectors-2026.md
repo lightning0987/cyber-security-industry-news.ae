@@ -42,7 +42,7 @@ and now spans twelve months.
 Black Nevas holds 2 UAE claims and they sit in 2 different sectors. The group did not return to
 Manufacturing.
 
-That pattern appears throughout this dataset, which lists 48 distinct groups. Groups with a short
+That pattern appears throughout this dataset, which lists 49 distinct groups. Groups with a short
 record typically reach a sector once and move on.
 
 The reading for an education institution is uncomfortable but simple. A sector with no history is
