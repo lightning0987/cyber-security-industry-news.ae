@@ -14,7 +14,7 @@ entities:
 sources:
   - label: "Ransomware groups with a short UAE record"
     href: "/ransomware-groups-targeting-uae/short-record/"
-  - label: "UAE ransomware tracker, snapshot of 4 November 2026"
+  - label: "UAE ransomware tracker, snapshot of 12 November 2026"
     href: "/uae-ransomware-tracker/"
   - label: "ransomware.live, leak-site monitoring"
     href: "https://www.ransomware.live/"
@@ -39,8 +39,8 @@ that sector's record.
 
 ## How this compares
 
-APT73 is one of 48 groups on this tracker, with a record of 2 claims. That record says more about the tail of this dataset
-than about the group. APT73 accounts for 2 of the 34 claims in 2026, per leak-site monitoring at the 4 November 2026 snapshot.
+APT73 is one of 49 groups on this tracker, with a record of 2 claims. That record says more about the tail of this dataset
+than about the group. APT73 accounts for 2 of the 34 claims in 2026, per leak-site monitoring at the 12 November 2026 snapshot.
 
 A same-day pair carries less signal than two claims spread across months. It is one event, not
 a pattern.

@@ -4,7 +4,7 @@ summary: "Medusa claimed 5 UAE organisations spread across 5 different sectors, 
 
 ## Medusa has claimed 5 UAE organisations
 
-Medusa ranks seventh of 48 groups on this tracker and appears across 5 distinct sectors, one claim in each. The spread is perfectly even. Medusa is also routinely confused with MedusaLocker, which this site counts as a separate operation.
+Medusa ranks seventh of 49 groups on this tracker and appears across 5 distinct sectors, one claim in each. The spread is perfectly even. Medusa is also routinely confused with MedusaLocker, which this site counts as a separate operation.
 
 ## Medusa spread evenly and then stopped
 
@@ -31,6 +31,6 @@ editorial claim about actor identity rather than a fact in the source data.
    regardless of sector.
 5. Test external access paths on a schedule, since this group accumulated claims across three
    separate years.
-6. Compare this page with Stormous, which also went quiet for a year and then returned.
+6. Compare this page with LockBit 3.0, which has 10 claims and is the most active group on this tracker.
 7. Treat a quiet period as no evidence of safety, because organisations that pay before
    publication never appear in this data.

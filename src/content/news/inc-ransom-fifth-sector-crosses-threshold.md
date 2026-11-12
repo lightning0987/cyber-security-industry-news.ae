@@ -28,7 +28,7 @@ October 2026. It is the group's fifth UAE claim and its fifth distinct sector.
 ## Five claims, five sectors, no repeats
 
 INC Ransom holds 5 claimed UAE organisations and carries 4.3% of all attributed claims. It ranks
-sixth of 48 groups here.
+sixth of 49 groups here.
 
 Those claims sit in Professional Services, Technology, Manufacturing, Other and now Hospitality.
 The group has not returned to any sector it reached.

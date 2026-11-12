@@ -47,7 +47,7 @@ November 2025, and leads 2026.
 The Gentlemen and INC Ransom both match DragonForce at 4 claims in 2026, so the current lead is
 a three-way tie. One of those three groups had no UAE record before November 2025.
 
-Meanwhile LockBit 3.0 still ranks first of 48 groups by accumulated claims. It has published
+Meanwhile LockBit 3.0 still ranks first of 49 groups by accumulated claims. It has published
 nothing against a UAE organisation since 16 February 2024. An all-time ranking and a current
 threat picture are not the same list.
 

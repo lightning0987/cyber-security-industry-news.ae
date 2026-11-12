@@ -1,10 +1,10 @@
 ---
-summary: "Groups below the page threshold hold 52.2% of every attributed UAE claim, and 24 of them were recorded exactly once."
+summary: "Groups below the page threshold hold 52.2% of every attributed UAE claim, and 25 of them were recorded exactly once."
 ---
 
 ## A single claim describes an episode rather than an actor
 
-Of the 40 groups below the threshold, 24 were recorded against a UAE organisation exactly once.
+Of the 41 groups below the threshold, 25 were recorded against a UAE organisation exactly once.
 One claim fixes a date and a sector. It cannot show whether a group returned, changed sector or
 stopped operating.
 

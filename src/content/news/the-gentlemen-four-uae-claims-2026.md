@@ -12,7 +12,7 @@ entities:
   groups: ["thegentlemen"]
   periods: ["2026"]
 sources:
-  - label: "UAE ransomware tracker, snapshot of 4 November 2026"
+  - label: "UAE ransomware tracker, snapshot of 12 November 2026"
     href: "/uae-ransomware-tracker/"
   - label: "Ransomware groups with a short UAE record"
     href: "/ransomware-groups-targeting-uae/short-record/"
@@ -26,7 +26,7 @@ The Gentlemen has claimed 4 organisations in the United Arab Emirates during 202
 had no UAE record in any earlier period on this tracker.
 
 That places The Gentlemen level first for 2026 with DragonForce and INC Ransom, at 4 claims
-each. It reached that position inside a single partial year, among 48 groups tracked overall.
+each. It reached that position inside a single partial year, among 49 groups tracked overall.
 
 ## Who is affected in the UAE
 
