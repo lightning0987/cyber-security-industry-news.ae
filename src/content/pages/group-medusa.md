@@ -4,7 +4,7 @@ summary: "Medusa claimed 5 UAE organisations spread across 5 different sectors, 
 
 ## Medusa has claimed 5 UAE organisations
 
-Medusa ranks seventh of 48 groups on this tracker and appears across 5 distinct sectors, one claim in each. The spread is perfectly even. Medusa is also routinely confused with MedusaLocker, which this site counts as a separate operation.
+Medusa ranks seventh of 49 groups on this tracker and appears across 5 distinct sectors, one claim in each. The spread is perfectly even. Medusa is also routinely confused with MedusaLocker, which this site counts as a separate operation.
 
 ## Medusa spread evenly and then stopped
 

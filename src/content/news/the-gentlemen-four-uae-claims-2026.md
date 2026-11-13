@@ -2,7 +2,7 @@
 title: "The Gentlemen Claims Four UAE Organisations in 2026"
 h1: "The Gentlemen Reaches Four UAE Claims With No Earlier Record"
 description: "The Gentlemen has claimed 4 UAE organisations in 2026, half of them in Transportation, with no UAE record in any earlier period."
-dek: "The Gentlemen is level with DragonForce and INC Ransom at the top of the 2026 table, with 4 claims each and no UAE claim in any earlier period. Half its claims fall in Transportation, an unusual concentration on a tracker where most groups spread thinly."
+dek: "The Gentlemen is level with DragonForce on 4 claims in the 2026 table, one behind INC Ransom on 5, with no UAE claim in any earlier period. Half its claims fall in Transportation, an unusual concentration on a tracker where most groups spread thinly."
 category: "ransomware"
 tier: "T1"
 image: "container-port"
@@ -12,7 +12,7 @@ entities:
   groups: ["thegentlemen"]
   periods: ["2026"]
 sources:
-  - label: "UAE ransomware tracker, snapshot of 4 November 2026"
+  - label: "UAE ransomware tracker, snapshot of 13 November 2026"
     href: "/uae-ransomware-tracker/"
   - label: "Ransomware groups with a short UAE record"
     href: "/ransomware-groups-targeting-uae/short-record/"
@@ -25,8 +25,9 @@ sources:
 The Gentlemen has claimed 4 organisations in the United Arab Emirates during 2026. The group
 had no UAE record in any earlier period on this tracker.
 
-That places The Gentlemen level first for 2026 with DragonForce and INC Ransom, at 4 claims
-each. It reached that position inside a single partial year, among 48 groups tracked overall.
+That places The Gentlemen level second for 2026 with DragonForce, at 4 claims each, behind INC
+Ransom with 5. It reached that position inside a single partial year, among 49 groups tracked
+overall.
 
 ## Who is affected in the UAE
 
