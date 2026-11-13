@@ -4,7 +4,7 @@ summary: "DragonForce claimed 4 of its 5 UAE organisations in 2026, having recor
 
 ## DragonForce has claimed 5 UAE organisations
 
-DragonForce ranks fifth of 48 groups on this tracker and appears across 5 distinct sectors, one claim in each, as of the 4 November 2026 snapshot. The distribution is flat, with a single claim per sector. Its activity sits almost entirely inside the period that is still open.
+DragonForce ranks sixth of 49 groups on this tracker and appears across 5 distinct sectors, one claim in each, as of the 13 November 2026 snapshot. The distribution is flat, with a single claim per sector. Its activity sits almost entirely inside the period that is still open.
 
 ## Four of the five DragonForce claims fall in 2026
 

@@ -6,7 +6,7 @@ summary: "The UAE Information Assurance Standard, version 2, sets 188 controls f
 standard: "UAE IAS v2"
 order: 2
 image: "substation"
-updated: "2026-11-04"
+updated: "2026-11-13"
 keyFacts:
   - label: "Issuing body"
     value: "Signals Intelligence Agency, successor to NESA"
@@ -140,7 +140,7 @@ Risk Management rules and the DIFC data protection regime.
 [Transportation](/uae-ransomware-tracker/transportation/) are the two sectors on this tracker
 most likely to sit inside critical national infrastructure. Neither carries a large count.
 Energy and Utilities holds 4 claimed organisations and Transportation holds 7, against a
-[site total](/uae-ransomware-tracker/) of 115.
+[site total](/uae-ransomware-tracker/) of 116.
 
 Those small numbers are the point. A sector with few claims can still carry the heaviest
 regulatory exposure per incident, because consequence rather than frequency defines critical
@@ -155,7 +155,7 @@ state, not the first.
 ### How much of the UAE record sits inside IAS territory
 
 Three sectors on this tracker correspond to the critical national infrastructure categories that
-IAS most often reaches. Those three hold 24 of the 115 attributed UAE claims, which is 20.9% of
+IAS most often reaches. Those three hold 24 of the 116 attributed UAE claims, which is 20.7% of
 the published record.
 
 | Sector usually in IAS scope | Claimed UAE organisations |

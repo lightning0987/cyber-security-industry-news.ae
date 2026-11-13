@@ -27,7 +27,7 @@ on 13 October 2026. The group had no UAE record before that date.
 
 ## Financial Services now shows 12 claims from 9 groups
 
-The sector holds 12 claimed UAE organisations, which is 10.4% of all attributed claims. Those 12
+The sector holds 12 claimed UAE organisations, which is 10.3% of all attributed claims. Those 12
 claims are spread across 9 distinct groups.
 
 No other sector on this tracker shows that spread. Most sectors concentrate: one or two groups

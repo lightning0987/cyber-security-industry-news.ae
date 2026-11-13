@@ -1,8 +1,8 @@
 ---
 title: "INC Ransom Reaches a Fifth UAE Sector in Five Claims"
 h1: "INC Ransom Reaches a Fifth UAE Sector With Five Claims"
-description: "INC Ransom claimed a UAE hospitality organisation on 7 October 2026. Each of its 5 UAE claims sits in a different sector, and the group now has its own page."
-dek: "A group that reaches five sectors with five claims is selecting by opportunity rather than by industry. This claim also took INC Ransom past the threshold for its own profile on this tracker."
+description: "INC Ransom claimed a UAE hospitality organisation on 7 October 2026. The group now holds 6 UAE claims across 5 sectors, and it has its own page."
+dek: "A group that spreads six claims across five sectors is selecting by opportunity rather than by industry. The 7 October claim also took INC Ransom past the threshold for its own profile on this tracker."
 category: "threat-intel"
 tier: "T1"
 published: "2026-10-21"
@@ -23,17 +23,17 @@ sources:
 ---
 
 Leak-site monitoring recorded a claim by INC Ransom against a UAE hospitality organisation on 7
-October 2026. It is the group's fifth UAE claim and its fifth distinct sector.
+October 2026. It was the group's fifth UAE claim and its fifth distinct sector.
 
-## Five claims, five sectors, no repeats
+## Six claims, five sectors
 
-INC Ransom holds 5 claimed UAE organisations and carries 4.3% of all attributed claims. It ranks
-sixth of 48 groups here.
+INC Ransom holds 6 claimed UAE organisations and carries 5.2% of all attributed claims. It ranks
+fifth of 49 groups here.
 
-Those claims sit in Professional Services, Technology, Manufacturing, Other and now Hospitality.
-The group has not returned to any sector it reached.
+The sector table lists Professional Services, Technology, Manufacturing, Other and Hospitality,
+with one claim in each. The most recent INC Ransom claim is dated 12 November 2026.
 
-Four of the 5 claims fall inside the partial year [2026](/uae-ransomware-tracker/2026/). The
+Five of the 6 claims fall inside the partial year [2026](/uae-ransomware-tracker/2026/). The
 group's UAE record opened on 20 November 2025.
 
 ## The claim crossed a publishing threshold

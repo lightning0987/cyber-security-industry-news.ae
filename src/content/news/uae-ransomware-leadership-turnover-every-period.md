@@ -1,7 +1,7 @@
 ---
 title: "UAE Ransomware Leaders Have Changed in Every Period"
 h1: "UAE Ransomware Leadership Has Turned Over in Every Period Since 2023"
-description: "LockBit 3.0 led 2023, Stormous led 2024, Everest led 2025 and DragonForce leads 2026. No group has led two consecutive periods on this tracker."
+description: "LockBit 3.0 led 2023, Stormous led 2024, Everest led 2025 and INC Ransom leads 2026. No group has led two consecutive periods on this tracker."
 dek: "Four periods, four different leading groups, and none of them led twice. The pattern makes actor-specific defence a poor investment in the United Arab Emirates, because the actor changes faster than a security programme does."
 category: "threat-intel"
 tier: "T2"
@@ -33,21 +33,20 @@ Four consecutive periods on this tracker have four different leading ransomware 
 [2025](/uae-ransomware-tracker/2025/) with 6.
 
 
-[DragonForce](/ransomware-groups-targeting-uae/dragonforce/) leads
-[2026](/uae-ransomware-tracker/2026/) with 4.
+INC Ransom leads
+[2026](/uae-ransomware-tracker/2026/) with 5.
 
 No group has led two consecutive periods.
 
 ## The turnover is faster than it looks
 
 Leading a period is not the same as being present in the one before. Everest had claimed no UAE
-organisation at all before May 2025, and led that year. DragonForce had no UAE record before
-November 2025, and leads 2026.
+organisation at all before May 2025, and led that year. [DragonForce](/ransomware-groups-targeting-uae/dragonforce/) had no UAE record before November 2025, and has 4 claims in 2026.
 
-The Gentlemen and INC Ransom both match DragonForce at 4 claims in 2026, so the current lead is
-a three-way tie. One of those three groups had no UAE record before November 2025.
+The Gentlemen and DragonForce both sit one claim behind INC Ransom in 2026, so the current lead
+is a single claim wide.
 
-Meanwhile LockBit 3.0 still ranks first of 48 groups by accumulated claims. It has published
+Meanwhile LockBit 3.0 still ranks first of 49 groups by accumulated claims. It has published
 nothing against a UAE organisation since 16 February 2024. An all-time ranking and a current
 threat picture are not the same list.
 
@@ -113,6 +112,6 @@ and it is the main reason this site tracks sectors alongside groups rather than 
 ## Summary
 
 Four periods on this tracker have four different leading ransomware groups, and none led twice.
-One of the three groups tied at the top of 2026 had no UAE record before November 2025. Sector
+DragonForce, one claim behind the 2026 leader INC Ransom, had no UAE record before November 2025. Sector
 patterns move over years while attacker populations move within one. That is the argument for
 planning at the control level rather than the actor level.
