@@ -1,12 +1,12 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-11-12T09:17:55.696Z",
-  "record_count": 195,
+  "fetched_at": "2026-11-13T09:04:21.288Z",
+  "record_count": 197,
   "schema_version": 1,
   "attribution": {
-    "probable": 50,
-    "unverified": 80,
+    "probable": 51,
+    "unverified": 81,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
@@ -54,6 +54,20 @@
       "ae_confidence": "probable"
     },
     {
+      "id": "3a0dd149d0b41692",
+      "victim_hash": "728ee697069a1e60",
+      "group": "incransom",
+      "group_slug": "incransom",
+      "group_family": null,
+      "sector": "retail-ecommerce",
+      "sector_label": "Retail and E-Commerce",
+      "discovered": "2026-11-12",
+      "published": "2026-10-29",
+      "year": 2026,
+      "month": "2026-11",
+      "ae_confidence": "unverified"
+    },
+    {
       "id": "e83e2172f7379a7d",
       "victim_hash": "a68b3d7bb6375d53",
       "group": "n0n",
@@ -94,6 +108,20 @@
       "year": 2026,
       "month": "2026-10",
       "ae_confidence": "unverified"
+    },
+    {
+      "id": "13389e4f730c0376",
+      "victim_hash": "d41350f89419d46f",
+      "group": "incransom",
+      "group_slug": "incransom",
+      "group_family": null,
+      "sector": null,
+      "sector_label": null,
+      "discovered": "2026-11-12",
+      "published": "2026-10-07",
+      "year": 2026,
+      "month": "2026-11",
+      "ae_confidence": "probable"
     },
     {
       "id": "313fd2484366cd46",
