@@ -4,7 +4,7 @@ summary: "INC Ransom has claimed 6 UAE organisations across 5 different sectors,
 
 ## INC Ransom has claimed 6 UAE organisations
 
-INC Ransom ranks fifth of 49 groups on this tracker and carries 5.2% of all attributed UAE claims.
+INC Ransom ranks fifth on this tracker by claimed UAE organisations.
 It appears across 5 distinct sectors. The spread is the unusual part, not the count.
 
 ## INC Ransom claims reach 5 different sectors

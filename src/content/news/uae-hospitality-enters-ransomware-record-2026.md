@@ -48,10 +48,13 @@ that a trend has been established.
 ## Where Hospitality sits on the tracker
 
 Hospitality ranks tenth of 13 UAE sectors with 4 claimed organisations, well below the
-average of 8.9 claims per active sector. It carries 3.4% of all attributed UAE claims.
+average for an active sector.
 
 Rank understates the change. Every other sector with claims in 2026 also had claims before it.
 Hospitality is the only sector on this tracker whose entire record falls inside one partial year.
+
+A sector that appears for the first time carries no base rate to compare against. The absence of
+earlier claims is not evidence that the sector was out of reach before.
 
 [Retail and E-Commerce](/uae-ransomware-tracker/retail-ecommerce/) shows the closest comparable
 pattern. That sector ran at 1 claim a year through 2024, then recorded 4 in 2025 and 3 in 2026.

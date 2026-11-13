@@ -28,7 +28,7 @@ Manufacturing.
 
 ## Education now holds 3 claims from 3 separate groups
 
-The sector carries 3 claimed UAE organisations, which is 2.6% of all attributed claims. It ranks
+The sector carries 3 claimed UAE organisations. It ranks
 twelfth of 13 sectors.
 
 Three groups account for those 3 claims, one each. No operation has claimed a UAE education
@@ -42,8 +42,9 @@ and now spans twelve months.
 Black Nevas holds 2 UAE claims and they sit in 2 different sectors. The group did not return to
 Manufacturing.
 
-That pattern appears throughout this dataset, which lists 49 distinct groups. Groups with a short
-record typically reach a sector once and move on.
+That pattern appears throughout this dataset. Groups with a short
+record typically reach a sector once and move on. A second claim in the same sector is the rarer
+event, and it is the one worth watching for.
 
 The reading for an education institution is uncomfortable but simple. A sector with no history is
 not a sector with no exposure. The group that reaches it first may have no history there either.

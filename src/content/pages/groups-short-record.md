@@ -1,5 +1,5 @@
 ---
-summary: "Groups below the page threshold hold 51.7% of every attributed UAE claim, and 25 of them were recorded exactly once."
+summary: "Groups below the page threshold hold more claims between them than the groups with pages, and 25 of them were recorded exactly once."
 ---
 
 ## A single claim describes an episode rather than an actor

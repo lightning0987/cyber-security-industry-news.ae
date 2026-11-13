@@ -4,7 +4,7 @@ summary: "RansomHub claimed 5 UAE organisations between 2 May 2024 and 15 Februa
 
 ## RansomHub has claimed 5 UAE organisations
 
-RansomHub ranks eighth of 49 groups on this tracker and appears across 3 distinct sectors. That is a narrower range than most groups here show. Its whole UAE record fits inside a window that opened on 2 May 2024 and closed in February [2025](/uae-ransomware-tracker/2025/).
+RansomHub ranks eighth on this tracker and appears across 3 distinct sectors. That is a narrower range than most groups here show. Its whole UAE record fits inside a window that opened on 2 May 2024 and closed in February [2025](/uae-ransomware-tracker/2025/).
 
 ## RansomHub concentrated on Professional Services within a short window
 

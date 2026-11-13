@@ -35,7 +35,7 @@ Five distinct ransomware groups have claimed a UAE transportation organisation. 
 The Gentlemen each account for 2 of the 7 claims, the only groups to appear twice in this sector.
 Clop, Nova and RansomHub each appear once.
 
-Transportation ranks seventh of 13 sectors on this tracker, below the average of 8.9 claims per
+Transportation ranks seventh of 13 sectors on this tracker, below the average for an
 active sector. Volume is not what makes the sector notable. Direction is.
 
 ## How this compares

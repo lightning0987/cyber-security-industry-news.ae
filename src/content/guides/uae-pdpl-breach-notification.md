@@ -150,7 +150,7 @@ what an incident costs the data subject rather than the organisation.
 ### How much of the UAE record falls under a notification duty
 
 The PDPL follows personal data rather than industry, so its reach across this tracker is close to
-total. Sectors that process personal data as a matter of course account for 113 of the 116
+total. Sectors that process personal data as a matter of course account for 113
 attributed UAE claims. That is 97.4% of the published record.
 
 | Most claimed sector | Claimed UAE organisations |

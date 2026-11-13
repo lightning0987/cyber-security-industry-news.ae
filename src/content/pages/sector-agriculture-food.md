@@ -4,7 +4,7 @@ summary: "UAE Agriculture and Food Production holds 2 claimed organisations, bot
 
 ## Agriculture and Food Production ranks thirteenth among UAE sectors
 
-Agriculture and Food Production ranks thirteenth of 13 UAE sectors, far below the average of 8.9 claims per active sector. Two distinct groups appear here, one claim each. Food production sits closer to national supply resilience than its claim count suggests.
+Agriculture and Food Production ranks thirteenth of 13 UAE sectors, far below the average for an active sector. Two distinct groups appear here, one claim each. Food production sits closer to national supply resilience than its claim count suggests.
 
 ## Both claims fall inside 2025
 

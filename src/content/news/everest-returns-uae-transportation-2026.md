@@ -28,7 +28,7 @@ October 2026. It is the group's second claim in that sector. The first was recor
 
 ## Everest now holds 9 UAE claims across 5 sectors
 
-The claim takes Everest to 9 claimed UAE organisations and third place of 49 groups on this
+The claim takes Everest to 9 claimed UAE organisations and third place on this
 tracker. The group had no UAE record at all before May 2025.
 
 Transportation is now one of 5 sectors Everest has reached. Government and Defense remains its

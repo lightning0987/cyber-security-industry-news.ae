@@ -39,7 +39,7 @@ that sector's record.
 
 ## How this compares
 
-APT73 is one of 49 groups on this tracker, with a record of 2 claims. That record says more about the tail of this dataset
+APT73 holds a record of 2 claims on this tracker. That record says more about the tail of this dataset
 than about the group. APT73 accounts for 2 of the 35 claims in 2026, per leak-site monitoring at the 13 November 2026 snapshot.
 
 A same-day pair carries less signal than two claims spread across months. It is one event, not

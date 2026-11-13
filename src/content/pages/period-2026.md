@@ -4,7 +4,7 @@ summary: "2026 stands at 35 claimed UAE organisations with the year still runnin
 
 ## 2026 stands at 35 claimed UAE organisations so far
 
-The partial year 2026 carries 30.2% of every attributed UAE claim on this tracker. The comparison
+The partial year 2026 stands at 35 claimed UAE organisations. The comparison
 that matters is with [2025](/uae-ransomware-tracker/2025/), which closed at 35. This year already
 matches that total with the year not yet complete.
 

@@ -26,8 +26,7 @@ The Gentlemen has claimed 4 organisations in the United Arab Emirates during 202
 had no UAE record in any earlier period on this tracker.
 
 That places The Gentlemen level second for 2026 with DragonForce, at 4 claims each, behind INC
-Ransom with 5. It reached that position inside a single partial year, among 49 groups tracked
-overall.
+Ransom with 5. It reached that position inside a single partial year.
 
 ## Who is affected in the UAE
 

@@ -230,6 +230,36 @@ the auditability this project needs.
 
 ---
 
+## 4b. Editorial text never quotes a site-wide figure
+
+The snapshot's own numbers do not belong in editorial prose: the total claim count, the average
+per active sector, the number of distinct groups, the raw and rejected feed counts, and any
+percentage whose denominator is one of them. The page template already renders them straight
+from the snapshot, where they update themselves and cannot drift.
+
+Quoting them in prose bought nothing and cost everything. One new claim moved three of those
+figures at once, which broke 36 of 43 editorial files and sent every one of them to the model.
+After stripping them the same claim breaks one file: `/news/uae-ransomware-country-tagging-unreliable/`,
+whose subject is the raw-versus-verified counts themselves. Measured, not estimated.
+
+Write the entity's own count, its rank, and its dates. For a comparison, name the relation
+without the moving number: "below the average for an active sector", never "below the average
+of 8.9 claims per active sector".
+
+**A comparison that drops its number must become permanently true.** This is the trap in the
+rule. `/uae-ransomware-tracker/2025/` said "joint highest year, level with 2026" next to a
+share percentage. The percentage moved every week, so the linter kept sending the page to the
+model, which kept the comparison honest. Remove the percentage and nothing on that page moves
+any more, so the day 2026 pulls ahead the sentence quietly becomes false and no check fires.
+It now reads "the highest completed year on record", which stays true. Before dropping a
+figure, ask what still asserts a relationship on that page and whether anything left would
+catch it going wrong.
+
+Guides are the exception and must keep their scope figures: part 2 of the specification
+requires each one to quantify how much of the record sits inside its framework's scope.
+
+---
+
 ## 4a. Editorial text on data pages
 
 Data pages carry ~240 words of template prose. Additional editorial context lives in

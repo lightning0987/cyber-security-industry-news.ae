@@ -1,11 +1,11 @@
 ---
-summary: "2025 is the joint highest year on this tracker with 35 claimed UAE organisations, led by two groups that had never appeared before."
+summary: "2025 is the highest completed year on this tracker with 35 claimed UAE organisations, led by two groups that had never appeared before."
 ---
 
-## 2025 is the joint highest year on record with 35 claimed UAE organisations
+## 2025 is the highest completed year on record with 35 claimed UAE organisations
 
-Claims rose 29.6% in 2025 against the 27 recorded in [2024](/uae-ransomware-tracker/2024/). That makes it the joint highest year on
-record, level with 2026, at 30.2% of the whole dataset. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
+Claims rose 29.6% in 2025 against the 27 recorded in [2024](/uae-ransomware-tracker/2024/). That makes it the highest completed year on
+record. The more useful detail is who led it. Neither of the two leading groups had claimed a UAE organisation in any earlier period.
 
 ## The groups leading 2025 were new to the UAE
 

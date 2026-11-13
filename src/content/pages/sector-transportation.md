@@ -4,8 +4,8 @@ summary: "Transportation holds 7 claimed UAE organisations, and 4 of those 7 fal
 
 ## Transportation ranks seventh among UAE sectors with 7 claimed organisations
 
-Transportation sits seventh of 13 UAE sectors and carries 6% of all attributed claims. The count
-runs below the average of 8.9 claims per active sector. The shape of the record matters more here
+Transportation sits seventh of 13 UAE sectors by claimed organisations. The count
+runs below the average for an active sector. The shape of the record matters more here
 than its size.
 
 ## Four of the seven Transportation claims fall in 2026

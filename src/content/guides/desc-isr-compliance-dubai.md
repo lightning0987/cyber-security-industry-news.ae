@@ -152,7 +152,7 @@ easier to produce, because a narrower scope means fewer artefacts.
 
 ### How much of the UAE record sits inside ISR territory
 
-Five sectors on this tracker map most closely onto the ISR scope. Those five hold 62 of the 116
+Five sectors on this tracker map most closely onto the ISR scope. Those five hold 62
 attributed UAE claims, which is 53.4% of the published record, based on leak-site monitoring as of 13 November 2026.
 
 | Sector usually in ISR scope | Claimed UAE organisations |

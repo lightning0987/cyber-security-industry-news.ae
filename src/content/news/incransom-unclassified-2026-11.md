@@ -22,13 +22,13 @@ sources:
 
 Leak-site monitoring recorded a new claim by [INC Ransom](/ransomware-groups-targeting-uae/incransom/) against a UAE organisation on 12 November 2026. The entry is listed under an unclassified sector. Attribution to the UAE is rated probable. All figures below come from the snapshot of 13 November 2026.
 
-## INC Ransom now holds fifth place among 49 groups claiming UAE targets
+## INC Ransom now holds fifth place among groups claiming UAE targets
 
-INC Ransom ranks 5 of 49 groups by UAE claims, while LockBit 3.0 leads with 10. INC Ransom's tally is 6 claimed organisations, or 5.2% of all attributed UAE claims in leak-site monitoring. The first INC Ransom UAE claim is dated 20 November 2025. Five of its 6 claims fall in [2026](/uae-ransomware-tracker/2026/).
+INC Ransom ranks fifth by UAE claims, while LockBit 3.0 leads with 10. INC Ransom's tally is 6 claimed organisations in leak-site monitoring. The first INC Ransom UAE claim is dated 20 November 2025. Five of its 6 claims fall in [2026](/uae-ransomware-tracker/2026/).
 
 ## An unclassified label limits what the claim reveals
 
-The 12 November 2026 INC Ransom claim carries no sector label, so sector comparisons exclude it. The other 5 INC Ransom claims sit in 5 sectors: Professional Services, Technology, Manufacturing, Hospitality and Other, one claim each. Attribution is rated probable, meaning the UAE link rests on a text mention rather than a .ae domain. Across all groups, 51 of 116 attributed claims carry that same probable rating.
+The 12 November 2026 INC Ransom claim carries no sector label, so sector comparisons exclude it. The other 5 INC Ransom claims sit in 5 sectors: Professional Services, Technology, Manufacturing, Hospitality and Other, one claim each. Attribution is rated probable, meaning the UAE link rests on a text mention rather than a .ae domain. Across all groups, 51 attributed claims carry that same probable rating.
 
 ## A missing sector label does not remove regulatory duties
 
