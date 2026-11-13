@@ -93,58 +93,87 @@ jobs:
       - name: Write the text the new data needs
         id: generate
         if: env.ANTHROPIC_API_KEY != ''
+        run: npm run generate
+
+      # Зелёное публикуется сразу в main.
+      #
+      # Сначала текст уходил в pull request и ждал человека. За девять дней
+      # накопилось восемь непрочитанных PR, main всё это время оставался
+      # красным, и каждую ночь генератор заново чинил те же файлы, потому что
+      # починка лежала в ветке, а не в main. Платили за одну и ту же работу
+      # девять раз, и сайт всё равно стоял.
+      #
+      # Доверие здесь не к модели, а к тому, что её уже проверило: линтер
+      # сверил каждое число с брифом, и полная сборка со всеми гардами прошла.
+      # Это ровно тот набор проверок, после которого мы и мёржили руками.
+      - name: Publish when the full build passed
+        id: publish
+        if: steps.generate.outputs.written != '' && steps.generate.outputs.written != '0'
         run: |
           DAY=$(date -u +%Y-%m-%d)
-          BRANCH="content/auto-$DAY-$(date -u +%H%M)"
-          git checkout -b "$BRANCH"
-          npm run generate
           git add src/content
           if git diff --cached --quiet; then
-            echo "Генератор ничего не сохранил, pull request не нужен."
-          else
+            echo "Генератор ничего не сохранил."
+            exit 0
+          fi
+
+          if [ "${{ steps.generate.outputs.build_ok }}" = "true" ]; then
             git commit -m "Editorial text for the $DAY refresh"
+            git push
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "url=${{ github.server_url }}/${{ github.repository }}/commit/$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          else
+            # Сборка не прошла — в main такое не попадает. Ветка и pull
+            # request существуют ровно для этого случая.
+            BRANCH="content/review-$DAY-$(date -u +%H%M)"
+            git checkout -b "$BRANCH"
+            git commit -m "Editorial text for the $DAY refresh (needs review)"
             git push --set-upstream origin "$BRANCH"
             {
-              echo "Сгенерировано автоматически после обновления данных."
+              echo "Полная сборка на этой ветке НЕ проходит. В main не публикуется."
               echo
               cat /tmp/marsad-summary.txt
-              echo
-              echo "Каждый файл прошёл lint:content: все числа сверены с брифом,"
-              echo "собранным из снапшота. Прочитайте текст на смысл и смёржите."
             } > /tmp/marsad-pr-body.txt
-            PR=$(gh pr create \
-              --title "Editorial text for the $DAY refresh" \
-              --body-file /tmp/marsad-pr-body.txt \
-              --base main)
-            echo "pr=$PR" >> "$GITHUB_OUTPUT"
+            PR=$(gh pr create --title "Needs review: $DAY refresh" \
+                 --body-file /tmp/marsad-pr-body.txt --base main)
+            echo "review=$PR" >> "$GITHUB_OUTPUT"
+            git checkout main
           fi
-          # Сборка ниже проверяет main, а не ветку с правками.
-          git checkout main
 
-      - name: Tell Telegram a pull request is waiting
-        if: steps.generate.outputs.pr != ''
+      - name: Tell Telegram the site was updated
+        if: steps.publish.outputs.published == 'true'
         run: |
           {
-            echo "<b>Marsad: текст готов к проверке</b>"
+            echo "<b>Marsad: сайт обновлён</b>"
             echo
-            cat /tmp/marsad-summary.txt
+            # Только итоговые строки. Перечень файлов занимал весь экран и
+            # ничего не сообщал: решение по нему всё равно не принимают.
+            grep -E '^(Готово|Без API|Вызовов|Полная сборка)' /tmp/marsad-summary.txt
             echo
-            echo "${{ steps.generate.outputs.pr }}"
+            echo "${{ steps.publish.outputs.url }}"
           } | node scripts/notify-telegram.mjs
 
-      # Проверка идёт ПОСЛЕ коммита намеренно. Данные — это факт, и они должны
-      # попасть в репозиторий. Если после обновления редакционный текст разошёлся
-      # с цифрами, падает этот шаг, падает деплой, и сайт остаётся на прошлой
-      # версии до тех пор, пока человек не поправит предложение. Починка, скорее
-      # всего, уже лежит в том самом pull request.
+      - name: Tell Telegram a branch needs review
+        if: steps.publish.outputs.review != ''
+        run: |
+          {
+            echo "<b>Marsad: нужна проверка руками</b>"
+            echo "Текст написан, но сборка на ветке не проходит. В main ничего не ушло."
+            echo
+            echo "${{ steps.publish.outputs.review }}"
+          } | node scripts/notify-telegram.mjs
+
+      # Последний гард. Генератор уже собирал сайт, но этот шаг ловит и те
+      # прогоны, где генератор не запускался вовсе: нет ключа, нет задач,
+      # или сломалось что-то помимо текста.
       - name: Verify the site still builds against the new data
         run: npm run build
 
-      - name: Tell Telegram the build is red
+      - name: Tell Telegram the run failed
         if: failure()
         run: |
           {
-            echo "<b>Marsad: сборка красная</b>"
+            echo "<b>Marsad: прогон упал</b>"
             echo "Сайт продолжает отдавать прошлую корректную версию."
             echo "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           } | node scripts/notify-telegram.mjs

@@ -625,6 +625,7 @@ for (const task of remaining) {
  * думают, что она зелёная, хуже ветки, про которую известно, что она нет.
  */
 let buildNote = null;
+let buildOk = false;
 if (done.length > 0) {
   try {
     execFileSync('npm', ['run', 'build'], {
@@ -633,6 +634,7 @@ if (done.length > 0) {
       stdio: ['ignore', 'pipe', 'pipe'],
     });
     buildNote = 'Полная сборка проходит, гарды зелёные.';
+    buildOk = true;
     console.log('\n✓ полная сборка проходит');
   } catch (err) {
     const out = `${err.stdout ?? ''}${err.stderr ?? ''}`;
@@ -675,4 +677,6 @@ if (process.env.GITHUB_OUTPUT) {
   const fs = await import('node:fs');
   fs.appendFileSync(process.env.GITHUB_OUTPUT, `written=${done.length}\n`);
   fs.appendFileSync(process.env.GITHUB_OUTPUT, `cost=${cost.toFixed(3)}\n`);
+  // Машинный признак для workflow: публиковать сразу или звать человека.
+  fs.appendFileSync(process.env.GITHUB_OUTPUT, `build_ok=${buildOk}\n`);
 }

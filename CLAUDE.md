@@ -85,8 +85,18 @@ No paid API is involved. Data refreshes itself; articles are written by hand.
 drifted away from the snapshot, and a T1 brief for a new claim. It runs inside `fetch-data.yml`
 only when `events` reports something and `ANTHROPIC_API_KEY` is set, so a quiet day costs zero.
 
-**The generator never writes to `main`.** It commits to `content/auto-<date>` and opens a pull
-request. A number is checkable mechanically; whether a sentence is worth publishing is not.
+**Green publishes straight to `main`; only a failing build waits for a human.**
+
+This started the other way round, with every run opening a pull request. Nine days later eight
+of them sat unread, `main` stayed red the whole time, the site kept serving a two-week-old
+version, and the generator rebuilt the same repairs every night because the fix lived in a
+branch rather than in `main`. The same work was paid for nine times and shipped zero times.
+A review step nobody performs is not a safety measure, it is an outage with a queue.
+
+What is trusted is not the model but what already checked it: the linter reconciled every
+figure against the brief, and the full build passed with every guard. That is the exact set of
+checks after which a human was merging anyway. When the build does not pass, nothing reaches
+`main`: the run pushes `content/review-<date>`, opens a pull request and says so in Telegram.
 
 **The repair list comes from the linter, not from `events`.** This was built the other way
 round first and it was wrong. `events` counts claims per sector, group and period, but the
