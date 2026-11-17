@@ -1,16 +1,30 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-11-16T08:59:35.600Z",
-  "record_count": 197,
+  "fetched_at": "2026-11-17T10:11:51.711Z",
+  "record_count": 198,
   "schema_version": 1,
   "attribution": {
+    "unverified": 82,
     "probable": 51,
-    "unverified": 81,
     "confirmed": 65
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "627e5ea6c4bd11b6",
+      "victim_hash": "9cc8612b65da6aa9",
+      "group": "qilin",
+      "group_slug": "qilin",
+      "group_family": null,
+      "sector": "transportation",
+      "sector_label": "Transportation",
+      "discovered": "2026-11-16",
+      "published": "2026-11-16",
+      "year": 2026,
+      "month": "2026-11",
+      "ae_confidence": "unverified"
+    },
     {
       "id": "2dde4da9d28c190f",
       "victim_hash": "eee3bfa90bfb97ca",
