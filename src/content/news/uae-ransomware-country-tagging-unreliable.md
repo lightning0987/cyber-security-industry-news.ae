@@ -1,8 +1,8 @@
 ---
 title: "Four in Ten UAE-Tagged Ransomware Claims Fail Verification"
 h1: "Four in Ten Claims Tagged UAE Carry No UAE Evidence"
-description: "Of 198 leak-site claims tagged for the UAE by the upstream feed, 82 carry no verifiable UAE link. That is 41.4% of the feed, discarded before publication."
-dek: "Country tagging in public ransomware feeds is treated as fact across regional reporting. Applying a verification rule to one country's feed discards 82 of 198 records, and the discarded share is large enough to change any headline built on the raw count."
+description: "Of 200 leak-site claims tagged for the UAE by the upstream feed, 82 carry no verifiable UAE link. That is 41% of the feed, discarded before publication."
+dek: "Country tagging in public ransomware feeds is treated as fact across regional reporting. Applying a verification rule to one country's feed discards 82 of 200 records, and the discarded share is large enough to change any headline built on the raw count."
 category: "threat-intel"
 tier: "T2"
 published: "2026-09-18"
@@ -14,7 +14,7 @@ image: "data-centre"
 sources:
   - label: "Marsad Cyber methodology, attribution rules in full"
     href: "/methodology/"
-  - label: "UAE ransomware tracker, snapshot of 17 November 2026"
+  - label: "UAE ransomware tracker, snapshot of 19 November 2026"
     href: "/uae-ransomware-tracker/"
   - label: "Data sources and known limits"
     href: "/data-sources/"
@@ -22,9 +22,9 @@ sources:
     href: "https://www.ransomware.live/"
 ---
 
-The upstream feed behind this tracker returned 198 leak-site claims tagged for the United Arab
-Emirates. Applying a verification rule to those records leaves 116. The other 82 carry no
-verifiable UAE link of any kind, which is 41.4% of the feed.
+The upstream feed behind this tracker returned 200 leak-site claims tagged for the United Arab
+Emirates. Applying a verification rule to those records leaves 118. The other 82 carry no
+verifiable UAE link of any kind, which is 41% of the feed.
 
 That figure is the most consequential number this site holds, and it is not a number about
 ransomware. It is a number about how regional cyber statistics are produced.
@@ -32,10 +32,10 @@ ransomware. It is a number about how regional cyber statistics are produced.
 ## What the verification rule checks
 
 A claim is treated as attributed to the UAE on one of two grounds. The first is a domain in the
-.ae zone, which applies to 65 records. The second is a UAE location named in the text of the
+.ae zone, which applies to 66 records. The second is a UAE location named in the text of the
 record, such as Dubai, Abu Dhabi, Sharjah, DIFC or ADGM.
 
-That second ground applies to a further 51 records. Together the two produce the 116 claims behind
+That second ground applies to a further 52 records. Together the two produce the 118 claims behind
 every figure published here.
 
 The remaining 82 records carry a country tag and nothing else. No emirate, no free zone, no .ae
@@ -49,7 +49,7 @@ rather than declared. One record in this dataset describes a Bangladeshi non-pro
 UAE tag. That is not a flaw in the feed so much as a limit of what a derived field can do.
 
 The practical consequence is that a headline built on the raw count states something the data does
-not support. A figure of 198 attacks on UAE organisations is not a stronger version of 116. It is
+not support. A figure of 200 attacks on UAE organisations is not a stronger version of 118. It is
 a different claim, and the difference is 82 records that nobody has checked.
 
 ## What this changes for anyone citing regional figures
@@ -63,7 +63,7 @@ away.
 3. Ask whether an attacker claim was separated from a confirmed breach anywhere in the method.
 4. Treat any figure without those three answers as an order of magnitude rather than a count.
 
-This site publishes all three, which is why its headline is 116 and not 198. The rejected records
+This site publishes all three, which is why its headline is 118 and not 200. The rejected records
 remain in the dataset and are counted separately, because deleting them would make the rejection
 rate unverifiable.
 

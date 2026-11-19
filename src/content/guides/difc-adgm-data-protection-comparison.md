@@ -155,7 +155,7 @@ to the UAE Data Office, on its own.
 ### How much of the UAE record sits in free zone territory
 
 Financial Services is the sector most associated with both free zones. It holds 12
-attributed UAE claims on this tracker, which is 10.3% of the published record.
+attributed UAE claims on this tracker, which is 10.2% of the published record.
 
 That figure understates free zone exposure rather than measuring it. A DIFC or ADGM registration
 is a legal address, not an industry, and this tracker records sector rather than jurisdiction.
