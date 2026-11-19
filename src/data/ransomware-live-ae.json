@@ -1,16 +1,44 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-11-17T10:11:51.711Z",
-  "record_count": 198,
+  "fetched_at": "2026-11-19T09:52:54.557Z",
+  "record_count": 200,
   "schema_version": 1,
   "attribution": {
-    "unverified": 82,
-    "probable": 51,
-    "confirmed": 65
+    "confirmed": 66,
+    "probable": 52,
+    "unverified": 82
   },
   "unknown_sector_labels": [],
   "records": [
+    {
+      "id": "071737e8f3dba191",
+      "victim_hash": "161ae74a30736c42",
+      "group": "krybit",
+      "group_slug": "krybit",
+      "group_family": null,
+      "sector": "manufacturing",
+      "sector_label": "Manufacturing",
+      "discovered": "2026-11-19",
+      "published": "2026-11-19",
+      "year": 2026,
+      "month": "2026-11",
+      "ae_confidence": "confirmed"
+    },
+    {
+      "id": "8c60e79b6dc18e18",
+      "victim_hash": "9d0392f88f43a644",
+      "group": "braincipher",
+      "group_slug": "braincipher",
+      "group_family": null,
+      "sector": "professional-services",
+      "sector_label": "Professional Services",
+      "discovered": "2026-11-17",
+      "published": "2026-11-17",
+      "year": 2026,
+      "month": "2026-11",
+      "ae_confidence": "probable"
+    },
     {
       "id": "627e5ea6c4bd11b6",
       "victim_hash": "9cc8612b65da6aa9",
