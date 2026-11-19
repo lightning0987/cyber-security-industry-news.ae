@@ -28,7 +28,7 @@ INC Ransom ranks fifth by UAE claims, while LockBit 3.0 leads with 10. INC Ranso
 
 ## An unclassified label limits what the claim reveals
 
-The 12 November 2026 INC Ransom claim carries no sector label, so sector comparisons exclude it. The other 5 INC Ransom claims sit in 5 sectors: Professional Services, Technology, Manufacturing, Hospitality and Other, one claim each. Attribution is rated probable, meaning the UAE link rests on a text mention rather than a .ae domain. Across all groups, 51 attributed claims carry that same probable rating.
+The 12 November 2026 INC Ransom claim carries no sector label, so sector comparisons exclude it. The other 5 INC Ransom claims sit in 5 sectors: Professional Services, Technology, Manufacturing, Hospitality and Other, one claim each. Attribution is rated probable, meaning the UAE link rests on a text mention rather than a .ae domain. Across all groups, 52 attributed claims carry that same probable rating.
 
 ## A missing sector label does not remove regulatory duties
 
