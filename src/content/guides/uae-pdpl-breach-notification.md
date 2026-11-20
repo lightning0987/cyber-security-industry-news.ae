@@ -6,7 +6,7 @@ summary: "Federal Decree-Law No. 45 of 2021 governs personal data across the Uni
 standard: "UAE PDPL"
 order: 3
 image: "abu-dhabi"
-updated: "2026-11-13"
+updated: "2026-11-20"
 keyFacts:
   - label: "Instrument"
     value: "Federal Decree-Law No. 45 of 2021"
@@ -130,7 +130,7 @@ processing that a notification requires.
 
 Personal data exposure is not confined to regulated sectors. On this tracker,
 [Professional Services](/uae-ransomware-tracker/professional-services/) carries the most claimed
-organisations at 25, followed by
+organisations at 26, followed by
 [Government and Defense](/uae-ransomware-tracker/government-defense/) and
 [Technology](/uae-ransomware-tracker/technology/) at 13 each.
 
@@ -150,12 +150,12 @@ what an incident costs the data subject rather than the organisation.
 ### How much of the UAE record falls under a notification duty
 
 The PDPL follows personal data rather than industry, so its reach across this tracker is close to
-total. Sectors that process personal data as a matter of course account for 113
-attributed UAE claims. That is 97.4% of the published record.
+total. Sectors that process personal data as a matter of course account for 115
+attributed UAE claims. That is 97.5% of the published record.
 
 | Most claimed sector | Claimed UAE organisations |
 | --- | --- |
-| Professional Services | 25 |
+| Professional Services | 26 |
 | Government and Defense | 13 |
 | Technology | 13 |
 | Financial Services | 12 |
@@ -168,7 +168,7 @@ That matters for sequencing. A notification assessment cannot start after the te
 finishes, because the assessment needs facts that only the early hours of the response produce.
 Which categories of data sat on the affected systems is a question for hour one, not for week two.
 
-The 97.4% figure counts sectors rather than individual organisations. An organisation holding no
+The 97.5% figure counts sectors rather than individual organisations. An organisation holding no
 personal data sits outside the duty while remaining inside its sector row. Read the share as a
 statement about how often the question arises, not about how often the duty is triggered.
 

@@ -6,7 +6,7 @@ summary: "The UAE Information Assurance Standard, version 2, sets 188 controls f
 standard: "UAE IAS v2"
 order: 2
 image: "substation"
-updated: "2026-11-13"
+updated: "2026-11-20"
 keyFacts:
   - label: "Issuing body"
     value: "Signals Intelligence Agency, successor to NESA"
@@ -155,7 +155,7 @@ state, not the first.
 ### How much of the UAE record sits inside IAS territory
 
 Three sectors on this tracker correspond to the critical national infrastructure categories that
-IAS most often reaches. Those three hold 24 attributed UAE claims, which is 20.7% of
+IAS most often reaches. Those three hold 24 attributed UAE claims, which is 20.3% of
 the published record.
 
 | Sector usually in IAS scope | Claimed UAE organisations |
@@ -170,7 +170,7 @@ it carries 188 controls against a claim record that is thinner than the national
 
 Do not read the smaller number as a smaller risk. Consequence, not frequency, is what put these
 sectors inside the standard. A single successful intrusion against a water utility or an airport
-operator has a national effect that 25 claims against professional services firms do not.
+operator has a national effect that 26 claims against professional services firms do not.
 
 The designating authority decides scope, so treat the table as an indication of where IAS
 obligations cluster rather than as a scoping test.
