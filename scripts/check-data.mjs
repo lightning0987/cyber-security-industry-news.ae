@@ -230,6 +230,40 @@ const RESERVED_NEWS_SLUGS = new Set(['category', 'archive', 'index']);
 /** Слаг группы не имеет права совпасть со статической страницей раздела. */
 const RESERVED_GROUP_SLUGS = new Set(['short-record', 'index']);
 
+/**
+ * Профили групп: разрешённые ключи и отсутствие адресов.
+ *
+ * Третий гейт для второй границы снятия. Загрузчик вырезает `locations` и
+ * `url` в памяти, строгий Zod роняет сборку на неожиданном ключе, а эта
+ * проверка стоит до старта Astro и смотрит на файл целиком, включая конверт.
+ * Один .onion в описании группы нарушает то же правило, что и имя жертвы.
+ */
+function checkGroupProfiles() {
+  const path = resolve(process.cwd(), 'src/data/ransomware-group-profiles.json');
+  if (!existsSync(path)) {
+    notes.push('профилей групп нет, страницы соберутся без врезки «кто это»');
+    return;
+  }
+  const raw = readFileSync(path, 'utf8');
+  const file = JSON.parse(raw);
+
+  const ALLOWED = ['name', 'slug', 'description', 'added_date', 'aliases', 'tools', 'ttps'];
+  for (const rec of file.records) {
+    for (const key of Object.keys(rec)) {
+      if (!ALLOWED.includes(key)) {
+        failures.push(`профиль ${rec.slug}: ключ "${key}" не в списке разрешённых`);
+      }
+    }
+  }
+
+  // Конверт исключается: endpoint — это наш собственный адрес API.
+  const body = JSON.stringify(file.records);
+  if (/\.onion/i.test(body)) failures.push('в профилях групп найден .onion');
+  if (/https?:\/\//i.test(body)) failures.push('в профилях групп найден http-адрес');
+
+  notes.push(`профилей групп: ${file.records.length}`);
+}
+
 function checkGroupSlugsDoNotCollide(snap) {
   for (const slug of new Set(snap.records.map((r) => r.group_slug))) {
     if (RESERVED_GROUP_SLUGS.has(slug)) {
@@ -261,6 +295,7 @@ checkGuidesRegistry();
 checkPrivateIsolation();
 checkBriefsCarryNoVictimData();
 checkNewsSlugsDoNotCollide();
+checkGroupProfiles();
 
 console.log('check:data');
 for (const n of notes) console.log(`  · ${n}`);

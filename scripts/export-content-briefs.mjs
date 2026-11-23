@@ -21,7 +21,7 @@ import {
 } from '../src/lib/aggregate.mjs';
 import { PERIODS, ROUTES } from '../src/lib/routes.mjs';
 import { frameworksForSector, sectorsForFramework, FRAMEWORKS, EXCLUDED_NOTE } from '../src/lib/frameworks.mjs';
-import { MIN_INCIDENTS_FOR_PAGE } from '../src/lib/taxonomy/groups.mjs';
+import { SHORT_RECORD_MAX } from '../src/lib/taxonomy/groups.mjs';
 
 const OUT = resolve(process.cwd(), 'briefs');
 // Каталог пересобирается с нуля. Брифы коммитятся, поэтому бриф удалённой
@@ -230,14 +230,18 @@ for (const g of paged) {
 
 /* ─── Длинный хвост групп ────────────────────────────────────────── */
 /*
- * Собственный бриф у страницы, которая заменила пятнадцать почти одинаковых.
- * Её содержание — не перечисление групп, а соотношение: хвост держит больше
- * заявлений, чем все группы с устойчивым следом вместе взятые.
+ * Собственный бриф у страницы про длинный хвост. Её содержание — не
+ * перечисление групп, а соотношение: хвост держит сопоставимую долю
+ * заявлений с группами, у которых есть устойчивый след.
+ *
+ * Хвост считается по числу заявлений, а не по наличию URL. Страница теперь
+ * есть у каждой группы, а хвост в данных остался.
  */
 {
-  const tail = groupsWithoutPages(inc);
+  const tail = byGroup(inc).filter((g) => g.count <= SHORT_RECORD_MAX);
   const tailClaims = tail.reduce((n, g) => n + g.count, 0);
-  const pagedClaims = paged.reduce((n, g) => n + g.count, 0);
+  const sustained = byGroup(inc).filter((g) => g.count > SHORT_RECORD_MAX);
+  const pagedClaims = sustained.reduce((n, g) => n + g.count, 0);
   const repeat = tail.filter((g) => g.count > 1);
 
   write('groups-short-record', {
@@ -247,15 +251,15 @@ for (const g of paged) {
     existing_h1: 'Ransomware Groups With a Short UAE Record',
     site_context: SITE_CONTEXT,
     facts: {
-      threshold_for_own_page: MIN_INCIDENTS_FOR_PAGE,
+      short_record_max_claims: SHORT_RECORD_MAX,
       groups_total: groups.length,
-      groups_below_threshold: tail.length,
-      groups_with_own_page: paged.length,
+      groups_in_tail: tail.length,
+      groups_with_sustained_record: sustained.length,
       claims_held_by_tail: tailClaims,
-      claims_held_by_paged: pagedClaims,
+      claims_held_by_sustained: pagedClaims,
       tail_share_of_all_claims_pct: Math.round((tailClaims / inc.length) * 1000) / 10,
       groups_seen_exactly_once: tail.filter((g) => g.count === 1).length,
-      groups_with_two_to_four_claims: repeat.length,
+      groups_seen_exactly_twice: repeat.length,
       attributed_claims_total: inc.length,
     },
     by_group: repeat.map((g) => {

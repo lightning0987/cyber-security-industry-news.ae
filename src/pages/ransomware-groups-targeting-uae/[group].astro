@@ -40,7 +40,11 @@ const family = subset[0]?.group_family ?? null;
 const siblings = family
   ? groupsWithPages(all).filter((g) => g.slug !== slug && inGroup(all, g.slug)[0]?.group_family === family)
   : [];
-const neighbours = byGroup(all).filter((g) => g.slug !== slug).slice(0, 8);
+// Полный список, без slice. Обрезка до восьми была незаметна, пока страниц
+// было восемь: ряд всё равно перечислял всех. При пороге в одно заявление
+// она превратилась в ручную курацию, которая оставила хвост с двумя
+// входящими ссылками вместо трёх, и link-graph это уронил.
+const neighbours = byGroup(all).filter((g) => g.slug !== slug);
 const asOf = formatDate(snapshotMeta.fetchedAt);
 
 const title = buildTitle(`${label} in the UAE: ${count} Victims and Target Sectors`);

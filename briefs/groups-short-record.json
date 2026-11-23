@@ -154,32 +154,18 @@
     ]
   },
   "facts": {
-    "threshold_for_own_page": 5,
+    "short_record_max_claims": 2,
     "groups_total": 50,
-    "groups_below_threshold": 42,
-    "groups_with_own_page": 8,
-    "claims_held_by_tail": 62,
-    "claims_held_by_paged": 56,
-    "tail_share_of_all_claims_pct": 52.5,
+    "groups_in_tail": 40,
+    "groups_with_sustained_record": 10,
+    "claims_held_by_tail": 55,
+    "claims_held_by_sustained": 63,
+    "tail_share_of_all_claims_pct": 46.6,
     "groups_seen_exactly_once": 25,
-    "groups_with_two_to_four_claims": 17,
+    "groups_seen_exactly_twice": 15,
     "attributed_claims_total": 118
   },
   "by_group": [
-    {
-      "group": "The Gentlemen",
-      "claims": 4,
-      "sectors": 3,
-      "first_claim": "2026-02-06",
-      "most_recent_claim": "2026-06-20"
-    },
-    {
-      "group": "FunkSec",
-      "claims": 3,
-      "sectors": 2,
-      "first_claim": "2024-12-24",
-      "most_recent_claim": "2025-02-19"
-    },
     {
       "group": "APT73",
       "claims": 2,

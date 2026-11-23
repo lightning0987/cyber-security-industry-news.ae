@@ -10,7 +10,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "fetch:ransomware": "node scripts/fetch-ransomware-live.mjs",
-    "fetch:all": "npm run fetch:ransomware",
+    "fetch:all": "npm run fetch:ransomware && npm run fetch:groups",
     "check:data": "node scripts/check-data.mjs",
     "build:astro": "astro build",
     "verify": "node scripts/verify.mjs",
@@ -25,7 +25,8 @@
     "generate": "node scripts/generate-content.mjs",
     "notify": "node scripts/notify-telegram.mjs",
     "test:swap": "node scripts/test-figure-swap.mjs",
-    "fix:figures": "node scripts/generate-content.mjs --free-only"
+    "fix:figures": "node scripts/generate-content.mjs --free-only",
+    "fetch:groups": "node scripts/fetch-group-profiles.mjs"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.4.0",

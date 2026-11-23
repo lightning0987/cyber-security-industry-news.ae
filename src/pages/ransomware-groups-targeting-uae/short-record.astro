@@ -17,16 +17,18 @@ import SiblingRail from '../../components/SiblingRail.astro';
 import DataProvenance from '../../components/DataProvenance.astro';
 import AlsoRead from '../../components/AlsoRead.astro';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
-import { byGroup, groupsWithPages, groupsWithoutPages, bySector, inGroup } from '../../lib/aggregate.mjs';
-import { MIN_INCIDENTS_FOR_PAGE } from '../../lib/taxonomy/groups.mjs';
+import { byGroup, bySector, inGroup } from '../../lib/aggregate.mjs';
+import { SHORT_RECORD_MAX } from '../../lib/taxonomy/groups.mjs';
 import { ROUTES } from '../../lib/routes.mjs';
 import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, AUTHOR } from '../../lib/seo.mjs';
 import { mostActive, latestActivity } from '../../lib/related.mjs';
 
 const inc = attributedIncidents;
 const groups = byGroup(inc);
-const paged = groupsWithPages(inc);
-const tail = groupsWithoutPages(inc);
+// Хвост определяется числом заявлений, а не наличием URL: страница есть
+// теперь у каждой группы, а длинный хвост в данных никуда не делся.
+const tail = groups.filter((g) => g.count <= SHORT_RECORD_MAX);
+const paged = groups.filter((g) => g.count > SHORT_RECORD_MAX);
 const sectors = bySector(inc);
 
 const tailClaims = tail.reduce((n, g) => n + g.count, 0);
@@ -51,9 +53,9 @@ const rows = tail
   });
 
 const asOf = formatDate(snapshotMeta.fetchedAt);
-const title = buildTitle(`UAE Ransomware Long Tail: ${tail.length} Groups Under ${MIN_INCIDENTS_FOR_PAGE} Claims`);
+const title = buildTitle(`UAE Ransomware Long Tail: ${tail.length} Groups With ${SHORT_RECORD_MAX} Claims or Fewer`);
 const description = buildDescription(
-  `${tail.length} of ${groups.length} ransomware groups have claimed fewer than ${MIN_INCIDENTS_FOR_PAGE} UAE organisations, yet they account for ${tailClaims} of ${inc.length} attributed claims.`,
+  `${tail.length} of ${groups.length} ransomware groups have claimed ${SHORT_RECORD_MAX} UAE organisations or fewer, yet they account for ${tailClaims} of ${inc.length} attributed claims.`,
 );
 
 const schemas = [
@@ -87,8 +89,8 @@ const crumbs = [
     </div>
     <p class="lede">
       <strong class="num">{tail.length}</strong> of the <strong class="num">{groups.length}</strong>{' '}
-      ransomware groups on this tracker have claimed fewer than{' '}
-      <strong class="num">{MIN_INCIDENTS_FOR_PAGE}</strong> organisations in the United Arab
+      ransomware groups on this tracker have claimed{' '}
+      <strong class="num">{SHORT_RECORD_MAX}</strong> organisations or fewer in the United Arab
       Emirates. Together they account for <strong class="num">{tailClaims}</strong> of{' '}
       <strong class="num">{inc.length}</strong> attributed claims, which is more than the{' '}
       <strong class="num">{pagedClaims}</strong> held by the{' '}
@@ -108,14 +110,14 @@ const crumbs = [
 
   <section class="section">
     <div class="section__head">
-      <h2>Why these groups share one page</h2>
+      <h2>Why the tail is counted separately</h2>
     </div>
     <p style="max-width:var(--measure)">
-      A group earns its own page on this site once it has claimed{' '}
-      <span class="num">{MIN_INCIDENTS_FOR_PAGE}</span> or more UAE organisations. Below that
-      threshold the record cannot carry a profile. Two dates and one sector describe an episode,
-      not a pattern, and a page built on them would restate the table row above it in longer
-      sentences.
+      Every group on this tracker has its own page, however short its record. This page asks a
+      different question: how much of the UAE total is held by groups that appeared{' '}
+      <span class="num">{SHORT_RECORD_MAX}</span> times or fewer. One or two dates describe an
+      episode rather than a pattern, and reading those groups one at a time hides how much of
+      the record they carry between them.
     </p>
     <div class="callout" style="max-width:var(--measure)">
       <p class="callout__title">The tail is the finding</p>
@@ -132,12 +134,12 @@ const crumbs = [
 
   <section class="section">
     <div class="section__head">
-      <h2>Groups with two to {MIN_INCIDENTS_FOR_PAGE - 1} claimed UAE organisations</h2>
+      <h2>Groups with exactly {SHORT_RECORD_MAX} claimed UAE organisations</h2>
     </div>
     <div class="table-wrap">
       <table>
         <caption class="visually-hidden">
-          Ransomware groups with between two and {MIN_INCIDENTS_FOR_PAGE - 1} claimed UAE organisations
+          Ransomware groups with exactly {SHORT_RECORD_MAX} claimed UAE organisations
         </caption>
         <thead>
           <tr>
