@@ -1,0 +1,175 @@
+---
+/**
+ * Список отдельных заявлений.
+ *
+ * Остальной трекер показывает агрегаты: сколько в секторе, сколько у группы,
+ * сколько за период. Ни одна из этих страниц не отвечает на вопрос «а что
+ * именно произошло и когда», а он задаётся первым.
+ *
+ * Эмирата в таблице нет и не будет, пока его нет в источнике. Об этом
+ * сказано на странице прямо: читатель, который ждёт разбивку по эмиратам,
+ * должен узнать, что её нет в данных, а не решить, что её здесь забыли.
+ *
+ * Организация не называется ни в одном столбце. Это ограничение закона ОАЭ
+ * № 34 от 2021 года, а не редакторское решение, и снимать его нельзя.
+ */
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StatBar from '../../components/StatBar.astro';
+import DataProvenance from '../../components/DataProvenance.astro';
+import SiblingRail from '../../components/SiblingRail.astro';
+import RecircList from '../../components/RecircList.astro';
+import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import { bySector, byGroup } from '../../lib/aggregate.mjs';
+import { ROUTES } from '../../lib/routes.mjs';
+
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, plural, AUTHOR } from '../../lib/seo.mjs';
+import { mostActive, latestActivity } from '../../lib/related.mjs';
+
+const inc = attributedIncidents;
+const asOf = formatDate(snapshotMeta.fetchedAt);
+
+const CONFIDENCE_LABEL = {
+  confirmed: 'Confirmed, .ae domain',
+  probable: 'Probable, text mention',
+};
+
+const rows = [...inc]
+  .sort((a, b) => String(b.discovered ?? '').localeCompare(String(a.discovered ?? '')))
+  .map((r) => ({
+    discovered: r.discovered,
+    group: r.group_slug,
+    groupLabel: r.group_slug,
+    sector: r.sector,
+    sectorLabel: r.sector_label ?? 'Unclassified',
+    confidence: r.ae_confidence,
+  }));
+
+const confirmed = rows.filter((r) => r.confidence === 'confirmed').length;
+const sectors = bySector(inc);
+const groups = byGroup(inc);
+const GROUP_LABEL = new Map(groups.map((g) => [g.slug, g.label]));
+const unclassified = rows.filter((r) => !r.sector).length;
+
+const title = buildTitle(`UAE Ransomware Incidents: All ${rows.length} Claims Listed`);
+const description = buildDescription(
+  `Every one of the ${rows.length} ransomware claims against UAE organisations, listed by date with group, sector and attribution. Updated daily from leak-site monitoring.`,
+);
+
+const crumbs = [
+  { label: 'Home', href: '/' },
+  { label: 'UAE Ransomware Tracker', href: ROUTES.tracker() },
+  { label: 'Individual claims' },
+];
+
+const schemas = [
+  datasetSchema({
+    site: Astro.site?.href ?? 'http://localhost:4321/',
+    url: ROUTES.incidents(),
+    name: 'Individual ransomware claims against UAE organisations',
+    description,
+    fetchedAt: snapshotMeta.fetchedAt,
+    from: rows.at(-1)?.discovered ?? '2020-01-01',
+    to: rows[0]?.discovered ?? snapshotMeta.fetchedAt.slice(0, 10),
+  }),
+];
+---
+<BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current="tracker">
+  <div class="page-head">
+    <h1>Individual Ransomware Claims Against UAE Organisations</h1>
+
+    <div class="byline">
+      <span class="byline__tag">Tracker</span>
+      <span class="byline__sep">/</span>
+      <a href={ROUTES.tracker()}>UAE Ransomware Tracker</a>
+      <span class="byline__sep">/</span>
+      <span>Data as of <time datetime={snapshotMeta.fetchedAt}>{asOf}</time></span>
+      <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
+    </div>
+
+    <p class="lede">
+      This page lists every one of the <strong class="num">{rows.length}</strong> claims behind the
+      rest of the tracker, one row per claim, most recent first. The other pages aggregate these
+      rows by sector, group and period.
+    </p>
+  </div>
+
+  <div class="section reveal">
+    <StatBar stats={[
+      { value: rows.length, label: 'Attributed claims', accent: true },
+      { value: confirmed, label: 'Confirmed by .ae domain' },
+      { value: groups.length, label: plural(groups.length, 'Group', 'Groups') },
+      { value: sectors.length, label: plural(sectors.length, 'Sector', 'Sectors') },
+    ]} />
+    <DataProvenance note="One row per claim. No row names the organisation." />
+  </div>
+
+  <section class="section">
+    <div class="section__head"><h2>No emirate breakdown exists in the source</h2></div>
+    <p style="max-width:var(--measure)">
+      The upstream feed records a country tag and nothing finer. It carries no emirate, no city and
+      no free zone, so this tracker cannot break claims down by Dubai, Abu Dhabi or any other
+      emirate without inventing the figure.
+    </p>
+    <p style="max-width:var(--measure)">
+      Where an emirate appears in the text of a record it is used as evidence that the claim
+      concerns the United Arab Emirates at all, which is how the probable rating is assigned. It
+      is not reliable enough to count, and a breakdown built on it would read as data while being
+      a by-product of how each attacker wrote their post.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="section__head"><h2>All {rows.length} claims by date</h2></div>
+    <div class="table-wrap">
+      <table data-sortable>
+        <caption class="visually-hidden">
+          Every attributed ransomware claim against a UAE organisation, most recent first
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Date recorded</th>
+            <th scope="col">Group</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Attribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          {rows.map((r) => (
+            <tr>
+              <td>
+                {r.discovered
+                  ? <time datetime={r.discovered}>{formatDayLong(r.discovered)}</time>
+                  : 'Not recorded'}
+              </td>
+              <td><a href={ROUTES.group(r.group)}>{GROUP_LABEL.get(r.group) ?? r.groupLabel}</a></td>
+              <td>
+                {r.sector ? <a href={ROUTES.sector(r.sector)}>{r.sectorLabel}</a> : r.sectorLabel}
+              </td>
+              <td>{CONFIDENCE_LABEL[r.confidence]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="max-width:var(--measure)">
+      Every row comes from leak-site monitoring collected by{' '}
+      <a href="https://www.ransomware.live/">ransomware.live</a>, read on {asOf}. A claim is an
+      assertion published by an attacker, not a confirmed breach. The organisation named in the
+      original post is never reproduced here, under UAE Federal Decree-Law No. 34 of 2021.
+      {unclassified > 0 && (
+        <> {unclassified} {plural(unclassified, 'claim carries', 'claims carry')} no sector label
+        upstream and {plural(unclassified, 'is', 'are')} listed as Unclassified.</>
+      )}
+    </p>
+  </section>
+
+  <RecircList title="Most targeted" items={mostActive(5)} />
+  <RecircList title="Latest activity" items={latestActivity(5)} />
+
+  <SiblingRail
+    title="Browse by sector"
+    items={sectors}
+    currentSlug={null}
+    hrefFor={(s) => ROUTES.sector(s)}
+  />
+</BaseLayout>

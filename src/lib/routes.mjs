@@ -8,6 +8,7 @@
 export const ROUTES = {
   home: () => '/',
   tracker: () => '/uae-ransomware-tracker/',
+  incidents: () => '/uae-ransomware-tracker/incidents/',
   sector: (slug) => `/uae-ransomware-tracker/${slug}/`,
   period: (slug) => `/uae-ransomware-tracker/${slug}/`,
   groupsHub: () => '/ransomware-groups-targeting-uae/',

@@ -67,7 +67,12 @@ export const FOOTER_COLUMNS = [
   [
     {
       heading: { label: 'Ransomware Tracker', href: ROUTES.tracker() },
-      links: sectors.map((s) => ({ label: s.label, href: ROUTES.sector(s.slug) })),
+      links: [
+        // Список отдельных заявлений стоит первым: это единственная страница
+        // трекера, которая не агрегирует, и найти её иначе неоткуда.
+        { label: 'All individual claims', href: ROUTES.incidents() },
+        ...sectors.map((s) => ({ label: s.label, href: ROUTES.sector(s.slug) })),
+      ],
     },
   ],
   [

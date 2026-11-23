@@ -22,9 +22,9 @@ const thisYear = inc.filter((i) => i.year === currentYear).length;
 const topSector = sectors[0];
 const asOf = formatDate(snapshotMeta.fetchedAt);
 
-const title = buildTitle(`UAE Ransomware Tracker ${currentYear}: ${total} Confirmed Attacks`);
+const title = buildTitle(`UAE Ransomware Tracker ${currentYear}: ${total} Attributed Claims`);
 const description = buildDescription(
-  `${total} ransomware attacks on UAE organisations confirmed since 2020, ${thisYear} of them in ${currentYear}. Tracked by sector, group and period, updated daily from leak-site monitoring.`,
+  `${total} ransomware claims against UAE organisations recorded since 2020, ${thisYear} of them in ${currentYear}. Tracked by sector, group and period, updated daily from leak-site monitoring.`,
 );
 
 const schemas = [
@@ -61,8 +61,9 @@ const crumbs = [
     United Arab Emirates since 2020, of which <strong class="num">{thisYear}</strong> were claimed
     in {currentYear}. {topSector.label} is the most targeted sector with{' '}
     <strong class="num">{topSector.count}</strong> claimed organisations, and{' '}
-    <strong class="num">{pagedGroups.length}</strong> distinct groups have claimed two or more
-    UAE organisations. Figures are drawn from leak-site monitoring as of {asOf} and exclude
+    <strong class="num">{groups.length}</strong> distinct groups appear in the UAE record.
+    Every claim behind these figures is listed on{' '}
+    <a href={ROUTES.incidents()}>the individual claims page</a>. Figures are drawn from leak-site monitoring as of {asOf} and exclude
     claims that carry no verifiable link to the UAE.
     </p>
   </div>
