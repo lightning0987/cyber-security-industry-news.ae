@@ -25,6 +25,21 @@ const MAX_ATTEMPTS = 3;
 /** Потолок на прогон. Всплеск в данных не должен превращаться в счёт. */
 const MAX_NEWS_PER_RUN = 3;
 
+/**
+ * Сколько недостающих редакционных блоков писать за прогон.
+ *
+ * При пороге в одно заявление появилось сорок две страницы групп без своего
+ * файла в src/content/pages/. Они рисуются и без него, но без раздела «что
+ * это значит для организаций». Писать все разом — это и счёт одним куском,
+ * и сорок два непрочитанных текста.
+ *
+ * Пока стоит три. Этот тип задачи и его промпт ни разу не работали вживую, а
+ * результат уходит в main сам, когда сборка зелёная. Три страницы за ночь —
+ * это столько, сколько можно прочитать утром целиком. Поднять до десяти,
+ * когда станет видно, что текст получается.
+ */
+const MAX_NEW_PAGES_PER_RUN = 3;
+
 const root = process.cwd();
 const dryRun = process.argv.includes('--dry-run');
 
@@ -142,6 +157,25 @@ for (const [name, problems] of lintByFile()) {
   if (!dir) continue;
   const file = `${dir}/${name}`;
   tasks.push({ kind: 'repair', file, problems, brief: repairContext(file) });
+}
+
+/**
+ * Страницы групп без редакционного блока.
+ *
+ * Это не починка: ломаться тут нечему, файла просто нет. Берутся самые
+ * заметные группы первыми, чтобы пробел закрывался там, где его увидят.
+ */
+const missingPages = readdirSync(resolve(root, 'briefs'))
+  .filter((f) => f.endsWith('.json'))
+  .map((f) => f.replace(/\.json$/, ''))
+  .filter((n) => n.startsWith('group-'))
+  .filter((n) => !exists(`src/content/pages/${n}.md`))
+  .map((n) => ({ name: n, claims: JSON.parse(read(`briefs/${n}.json`)).facts?.claimed_uae_organisations ?? 0 }))
+  .sort((a, b) => b.claims - a.claims)
+  .slice(0, MAX_NEW_PAGES_PER_RUN);
+
+for (const { name } of missingPages) {
+  tasks.push({ kind: 'page', file: `src/content/pages/${name}.md`, brief: read(`briefs/${name}.json`) });
 }
 
 /** Заметки — по новым заявлениям, самые свежие первыми. */
@@ -434,6 +468,57 @@ ${read(task.file)}
 ${task.brief}`;
 }
 
+function pagePrompt(task) {
+  return `${rules}
+
+---
+
+# Задача: редакционный блок для страницы группы
+
+У страницы его нет. Шаблон уже рисует справку о группе, таблицу всех её
+заявлений по ОАЭ, разбивку по секторам и периодам и место в рейтинге. Твой
+текст идёт под ними и обязан добавлять то, чего таблицы не говорят.
+
+Структура ровно такая:
+
+---
+summary: "одно предложение, 15–30 слов, самый полезный неочевидный факт"
+---
+
+## <H2: что это за группа>
+
+<2–4 предложения. Опирайся на source_profile в брифе: чем группа является,
+когда её впервые увидели, под какими именами известна. Описание из брифа НЕ
+копируй дословно, перескажи своими словами. Если source_profile пуст или
+description в нём null, напиши только то, что следует из заявлений.>
+
+## <H2: чем её запись по ОАЭ отличается от остальных>
+
+<2–4 предложения. Сравнение с другими группами: ранг, сколько у неё против
+медианы, один сектор или несколько, разовый эпизод или возвращения.>
+
+## What this means for UAE organisations
+
+<3–5 нумерованных шагов, каждый начинается с глагола. Шаги должны следовать
+из записи именно этой группы, а не подходить любой.>
+
+Объём 250–400 слов, три H2.
+
+Две-три контекстные ссылки прямо в предложениях, якорь — имя сущности:
+/uae-ransomware-tracker/<сектор>/, /uae-ransomware-tracker/<год>/,
+/ransomware-groups-targeting-uae/<другая группа>/. Ссылайся только на то,
+что есть в брифе.
+
+Не пересказывай таблицы и не повторяй числа, которые и так стоят в них
+строкой выше. Каждое число, которое всё же приводишь, обязано быть в брифе.
+
+Верни готовый файл markdown и ничего больше, без ограждения.
+
+## Бриф
+
+${task.brief}`;
+}
+
 function newsPrompt(task) {
   const c = task.claim;
   return `${rules}
@@ -604,7 +689,15 @@ const failed = [];
 for (const task of remaining) {
   const before = exists(task.file) ? read(task.file) : null;
   const messages = [
-    { role: 'user', content: task.kind === 'repair' ? repairPrompt(task) : newsPrompt(task) },
+    {
+      role: 'user',
+      content:
+        task.kind === 'repair'
+          ? repairPrompt(task)
+          : task.kind === 'page'
+            ? pagePrompt(task)
+            : newsPrompt(task),
+    },
   ];
   let saved = false;
 

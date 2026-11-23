@@ -28,6 +28,18 @@ that is what happened with the TDRA link on `/data-sources/`.
 
 Guard 4 is a backstop. Guards 1–3 are the actual protection.
 
+**Group profiles are a second strip boundary with the same four layers.**
+`/v2/groups` returns `locations` and `url`, which are leak-site addresses.
+`scripts/fetch-group-profiles.mjs` removes them in memory before the first write to `src/`,
+`src/lib/group-profiles.mjs` parses strict and refuses any profile whose text contains an
+address, and `check-data` asserts the key allowlist and scans for `.onion` before Astro starts.
+
+That loader also checks every upstream description against the victim fingerprint set and drops
+the whole description on a hit. Four of them contained "business services", which is an n-gram of
+a victim's name. Third-party prose can carry a name by accident, and the guard cannot tell where
+text came from, which is exactly its value. No exception was added; the colliding text was
+removed, as this section requires.
+
 ---
 
 ## 1. Commands
@@ -150,6 +162,11 @@ generator therefore runs a full `npm run build` at the end and puts the result i
 which carries into the pull request body and the Telegram message. It does not discard the
 work over it: text already written is cheaper to fix by hand than to regenerate, but a branch
 believed green is worse than one known red.
+
+The generator writes a third thing now: the editorial block for a group page that has none.
+Forty-two arrived with the threshold change. `MAX_NEW_PAGES_PER_RUN` is deliberately 3 rather
+than 10 while that prompt has never run in production, because a green build publishes itself.
+Raise it once the output has been read.
 
 `MAX_NEWS_PER_RUN` is 3. A spike in the data must not become a burst of API calls, and three
 briefs is already more than a day's worth of real news.
@@ -300,6 +317,53 @@ Regenerate briefs in the same commit as the snapshot. `fetch-data.yml` does this
 
 ---
 
+## 4c. A page for every group
+
+`MIN_INCIDENTS_FOR_PAGE` is 1. It was 2, then 5, now 1, and the history is in the constant's
+own comment because each move had a measured reason and none of them cancels the others.
+
+Five was right while a group page held nothing but counts: twelve pages on two data points
+each overlapped 21–26% on six-word shingles against a site median of 1.9%. One is right now
+that `src/data/ransomware-group-profiles.json` exists, because two single-claim pages differ by
+more than a number.
+
+The operational half matters as much. At a threshold of five, a news brief about a tail group
+linked to a page that did not exist, `link-graph` failed the build, and publishing stopped until
+a human came. That happened on 19 November with BrainCipher and Krybit. A page for every group
+removes the class.
+
+`SHORT_RECORD_MAX` is separate and belongs to `/short-record/`. The threshold answers whether a
+group gets a URL; the tail is a question about the data. One constant for both produced "groups
+with fewer than one claim" the moment the threshold moved.
+
+**Sibling rails take the whole list, with no `slice`.** The group rail carried `slice(0, 8)`,
+invisible while eight pages existed and hand-curation the moment the tail arrived: four groups
+dropped to two inbound links and the build failed. The rail is what makes a new page reachable.
+
+**Plural the counts.** The tail made `plural()` necessary: no page with a sustained record could
+ever render "has claimed 1 organisations", so the defect sat in the template unseen.
+
+---
+
+## 4d. The claims list and the emirate that does not exist
+
+`/uae-ransomware-tracker/incidents/` lists every attributed claim, one row each. Everything else
+in the tracker aggregates, and nothing answered "what happened, and when".
+
+**The feed carries a country tag and nothing finer.** No emirate, no city, no free zone. The page
+says so in a section rather than a footnote: a reader expecting an emirate breakdown must learn
+it does not exist upstream, not conclude this site dropped it. Where an emirate appears in a
+record's text it is evidence that the claim concerns the UAE at all, which is how the probable
+rating is assigned, and it is not reliable enough to count.
+
+The source is named once under the table, not as a column. Every row comes from the same feed,
+so a column would repeat one value a hundred times and emit a hundred identical outbound links.
+
+`check:mobile` samples this page by name. Under the shared tracker pattern the sampler could
+pick a sector page and leave the widest table on the site unchecked.
+
+---
+
 ## 5. Meta rules
 
 - Title: primary key phrase inside the first 60 characters, 45–65 total, number early.
@@ -353,6 +417,21 @@ build both routes without complaining and the last one written would win.
 
 Categories are created only where articles exist. `src/lib/news-registry.mjs` duplicates the
 active categories so `nav.mjs` can stay synchronous.
+
+**An article's claim table is rendered, never written.** The template draws the primary group's
+claims from the snapshot beneath the prose, so the table stays current after the text has aged.
+A table typed into markdown would be wrong at the next claim.
+
+**Headlines carry the group name and none of this project's vocabulary.** "Record", "threshold",
+"tier", "attributed" and "long tail" are precise here and meaningless to a reader arriving from
+search.
+
+**A new article's slug comes from its headline.** It used to be assembled from group, sector and
+month, which produced `incransom-unclassified-2026-11` under a headline about a sixth claim in
+November. A published slug never moves afterwards, so repairs leave the filename alone.
+
+`updated` is optional and set by the generator when it repairs an article. `published` never
+moves: the piece came out when it came out.
 
 T1 briefs run 250–400 words, T2 analyses 600–950, enforced by `lint:content`. Every figure must
 appear in some brief or in `entity-map.json`, because those two files are the whole set of facts
