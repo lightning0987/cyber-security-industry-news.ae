@@ -1,6 +1,6 @@
 ---
-title: "UAE Hospitality Enters the Ransomware Record in 2026"
-h1: "UAE Hospitality Enters the Ransomware Record for the First Time"
+title: "UAE Hospitality Draws Its First Ransomware Claims"
+h1: "Ransomware Groups Reach UAE Hospitality for the First Time"
 description: "Hospitality recorded no ransomware claims in the UAE across 2020 to 2025. Four arrived between May and October 2026, from four separate groups."
 dek: "Hospitality carried an empty record on this tracker for six years. Four claims arrived between May and October 2026, each from a different ransomware group, which makes the arrival harder to read as one campaign."
 category: "threat-intel"

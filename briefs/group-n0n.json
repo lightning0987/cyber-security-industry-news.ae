@@ -2,7 +2,7 @@
   "page_type": "group",
   "url": "/ransomware-groups-targeting-uae/n0n/",
   "entity": "N0n",
-  "existing_h1": "N0n Ransomware Activity in the UAE",
+  "existing_h1": "N0n Ransomware Attacks in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -152,6 +152,15 @@
       "A leak-site claim is an attacker assertion, not a confirmed breach. Word it that way.",
       "ADHICS (Abu Dhabi healthcare) and CBUAE (banking) are deliberately not referenced anywhere on this site pending a scope review. Do not mention them."
     ]
+  },
+  "source_profile": {
+    "name": "N0n",
+    "slug": "n0n",
+    "description": null,
+    "added_date": "2026-09-18",
+    "aliases": [],
+    "tools": [],
+    "ttps": []
   },
   "facts": {
     "claimed_uae_organisations": 2,

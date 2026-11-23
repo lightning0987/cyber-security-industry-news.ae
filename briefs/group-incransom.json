@@ -2,7 +2,7 @@
   "page_type": "group",
   "url": "/ransomware-groups-targeting-uae/incransom/",
   "entity": "INC Ransom",
-  "existing_h1": "INC Ransom Ransomware Activity in the UAE",
+  "existing_h1": "INC Ransom Ransomware Attacks in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -152,6 +152,17 @@
       "A leak-site claim is an attacker assertion, not a confirmed breach. Word it that way.",
       "ADHICS (Abu Dhabi healthcare) and CBUAE (banking) are deliberately not referenced anywhere on this site pending a scope review. Do not mention them."
     ]
+  },
+  "source_profile": {
+    "name": "incransom",
+    "slug": "incransom",
+    "description": "INC Ransom is a prolific ransomware-as-a-service operation active since July 2023 that systematically targets healthcare, government, education, and manufacturing sectors in North America and Europe, having posted over 200 victims in 2025 alone with no sector off-limits.",
+    "added_date": "2023-08-09",
+    "aliases": [
+      "Inc Ransom"
+    ],
+    "tools": [],
+    "ttps": []
   },
   "facts": {
     "claimed_uae_organisations": 6,

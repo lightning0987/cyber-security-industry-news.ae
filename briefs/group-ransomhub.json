@@ -2,7 +2,7 @@
   "page_type": "group",
   "url": "/ransomware-groups-targeting-uae/ransomhub/",
   "entity": "RansomHub",
-  "existing_h1": "RansomHub Ransomware Activity in the UAE",
+  "existing_h1": "RansomHub Ransomware Attacks in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -152,6 +152,15 @@
       "A leak-site claim is an attacker assertion, not a confirmed breach. Word it that way.",
       "ADHICS (Abu Dhabi healthcare) and CBUAE (banking) are deliberately not referenced anywhere on this site pending a scope review. Do not mention them."
     ]
+  },
+  "source_profile": {
+    "name": "ransomhub",
+    "slug": "ransomhub",
+    "description": "The group emerged in mid-February 2024 and has already listed several organizations as alleged victims of their attacks, resulting from extortion through encryption and data leaks.<br> <br> The announcement of the sale of the new Ransomware-as-a-Service (RaaS) by RansomHub was published on one of the Russian-origin forums used by cybercrime to advertise malicious services, known as RAMP4U (or RAMP). A user with the nickname and persona of 'koley' announced the affiliate program on February 2, 2024.<br> <br> In the new RaaS announcement, it was mentioned that the money laundering operation of the paid ransoms is the responsibility of the affiliate. This means that all communication and sending of the decryptor to the victim are done through chat. The split of this RaaS would be 90% of the value for the affiliate and 10% for the developer, who in this case would be the persona of Koley.<br> <br> Furthermore, according to the publication, the ransomware payload is written in Golang language, uses the asymmetric algorithm based on x25519, and encryption algorithms AES256, ChaCha20, and xChaCha20, standing out for its speed. The encryption is obfuscated using AST.<br> <br> The payload w…",
+    "added_date": "2024-02-10",
+    "aliases": [],
+    "tools": [],
+    "ttps": []
   },
   "facts": {
     "claimed_uae_organisations": 5,

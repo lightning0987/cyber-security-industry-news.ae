@@ -60,6 +60,13 @@ const news = defineCollection({
     category: z.enum(['ransomware', 'threat-intel', 'regulation', 'vulnerabilities']),
     tier: z.enum(['T1', 'T2']),
     published: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+    /**
+     * Дата правки. Материал про живые данные переписывается, когда цифры
+     * в нём разошлись со снапшотом, и читателю нужно видеть, что текст
+     * трогали после публикации. Необязательна: у нетронутых материалов
+     * дата правки совпадала бы с датой выхода и несла бы ноль.
+     */
+    updated: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
     /** Сущности материала. Из них строятся связи, как и на страницах данных. */
     entities: z.object({
       sectors: z.array(z.string()).default([]),

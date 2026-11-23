@@ -16,7 +16,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { buildMap, swapFigures } from './lib/figure-swap.mjs';
 import { execFileSync } from 'node:child_process';
-import { existsSync, readFileSync, readdirSync, writeFileSync, unlinkSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync, renameSync, writeFileSync, unlinkSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 const MODEL = 'claude-sonnet-5-5';
@@ -416,6 +416,12 @@ ${problems}
 над собранной страницей, и в замечаниях выше её не будет. Если после правки
 предложение потеряло смысл, перепиши это предложение, а не абзац.
 
+Если файл лежит в src/content/news/, добавь или обнови поле
+updated: "${snapshotAsOf}" сразу после published. published не трогай:
+материал вышел тогда, когда вышел, а читателю нужно видеть, что текст
+правили позже. Имя файла и слаг тоже не трогай: адрес после публикации
+не меняется.
+
 Верни целиком готовый файл markdown вместе с frontmatter, и ничего больше.
 Без markdown-ограждения вокруг ответа.
 
@@ -445,10 +451,23 @@ function newsPrompt(task) {
 
 Это новость, а не страница данных. Формат другой, правила письма те же.
 
-Объём 250–400 слов. Первый абзац без заголовка: что зафиксировано и когда.
+Объём 250–400 слов. Материал отвечает на два вопроса: что произошло и что
+это значит. Второй важнее, потому что первый уже виден из таблицы.
+
+ПЕРВЫЙ АБЗАЦ — РОВНО ДВА ПРЕДЛОЖЕНИЯ, без заголовка над ними. В них должны
+быть: имя группы, сектор, дата, и сколько всего заявлений по ОАЭ у этой
+группы. Больше в первый абзац не кладётся ничего.
+
 Затем три H2, каждый делает утверждение, а не называет тему. Последний абзац
 напоминает, что заявление на сайте утечки это утверждение атакующего, а не
 подтверждённый взлом, и что проект не называет организацию.
+
+ТАБЛИЦУ ЗАЯВЛЕНИЙ ГРУППЫ НЕ ПИШИ. Её рисует шаблон страницы прямо из
+снапшота, под твоим текстом. Таблица в markdown устареет при первом же новом
+заявлении, а шаблонная — нет.
+
+Ссылка на страницу группы обязательна и стоит в тексте, а не только в
+источниках: /ransomware-groups-targeting-uae/<группа>/.
 
 Вставь два или три контекстных внутренних ссылки прямо в предложения.
 Якорь это имя сущности. Пути: /uae-ransomware-tracker/<сектор>/,
@@ -459,7 +478,9 @@ function newsPrompt(task) {
 без markdown-ограждения вокруг ответа:
 
 ---
-title: "от 45 до 65 символов, ключевая фраза в первых 60, число раньше"
+title: "от 45 до 65 символов, ИМЯ ГРУППЫ В НАЧАЛЕ, число раньше.
+  Запрещены внутренние слова проекта: threshold, record, tier, attributed,
+  long tail. Читатель их не знает. Титульный регистр, дату не сокращать"
 h1: "чистая именная группа, не совпадает с title"
 description: "от 80 до 158 символов, в первом предложении число и точка"
 dek: "от 60 до 320 символов, нетривиальный факт, а не пересказ заголовка"
@@ -515,6 +536,31 @@ function lintByFile() {
 function lintProblems(file) {
   return lintByFile().get(file.split('/').pop()) ?? [];
 }
+
+/**
+ * Слаг материала из его заголовка.
+ *
+ * Раньше слаг собирался из группы, сектора и месяца, то есть из полей, а не
+ * из текста. Получалось incransom-unclassified-2026-11 при заголовке про
+ * шестое заявление в ноябре: адрес и заголовок говорили разное, и по ссылке
+ * нельзя было понять, что откроется.
+ *
+ * Слаг материала после публикации не меняется, поэтому переименование
+ * происходит только для только что созданного файла и только если имя
+ * свободно.
+ */
+function slugFromTitle(title) {
+  return String(title)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .split('-')
+    .slice(0, 9)
+    .join('-');
+}
+
+/** Зарезервированные слаги: Astro построил бы обе страницы и оставил последнюю. */
+const RESERVED_NEWS_SLUGS = new Set(['category', 'archive']);
 
 // ─── Выполнение ──────────────────────────────────────────────────────
 
@@ -584,6 +630,25 @@ for (const task of remaining) {
     const problems = lintProblems(task.file);
     if (problems.length === 0) {
       console.log(`  ✓ ${task.file} (попытка ${attempt})`);
+      // Слаг новой заметки приводится к заголовку, пока файл ещё никуда не
+      // опубликован. Починка существующего материала адрес не трогает.
+      if (task.kind === 'news') {
+        const title = read(task.file).match(/^title:\s*"(.+?)"/m)?.[1];
+        const wanted = title ? slugFromTitle(title) : null;
+        const target = wanted ? `src/content/news/${wanted}.md` : null;
+        if (
+          target &&
+          target !== task.file &&
+          wanted.length >= 8 &&
+          !RESERVED_NEWS_SLUGS.has(wanted) &&
+          !exists(target)
+        ) {
+          renameSync(resolve(root, task.file), resolve(root, target));
+          console.log(`    ↳ слаг по заголовку: ${wanted}`);
+          task.file = target;
+        }
+      }
+
       done.push({ ...task, attempts: attempt });
       saved = true;
       break;

@@ -2,7 +2,7 @@
   "page_type": "group",
   "url": "/ransomware-groups-targeting-uae/stormous/",
   "entity": "Stormous",
-  "existing_h1": "Stormous Ransomware Activity in the UAE",
+  "existing_h1": "Stormous Ransomware Attacks in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -152,6 +152,15 @@
       "A leak-site claim is an attacker assertion, not a confirmed breach. Word it that way.",
       "ADHICS (Abu Dhabi healthcare) and CBUAE (banking) are deliberately not referenced anywhere on this site pending a scope review. Do not mention them."
     ]
+  },
+  "source_profile": {
+    "name": "stormous",
+    "slug": "stormous",
+    "description": "Stormous is an Arabic-speaking, pro-Russian ransomware and hacktivist group active since at least 2022, known for politically motivated attacks across 15+ countries, collaborating with GhostSec on the GhostLocker 2.0 RaaS platform and inheriting GhostSec's RaaS operations in mid-2024. On 1st July 2026 the group has annonced the end of their operations & ervices",
+    "added_date": "2022-03-22",
+    "aliases": [],
+    "tools": [],
+    "ttps": []
   },
   "facts": {
     "claimed_uae_organisations": 10,

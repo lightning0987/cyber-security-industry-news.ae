@@ -1,7 +1,7 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/groups",
-  "fetched_at": "2026-11-23T04:15:56.852Z",
+  "fetched_at": "2026-11-23T04:59:26.463Z",
   "record_count": 66,
   "schema_version": 1,
   "groups_without_profile": [],
@@ -40,7 +40,7 @@
     {
       "name": "arcusmedia",
       "slug": "arcusmedia",
-      "description": "Arcus Media is a ransomware-as-a-service group that emerged in May 2024, employing double extortion with ChaCha20 + RSA-2048 encryption and recruiting affiliates via a referral-based vetting process, claiming 50+ victims across manufacturing, healthcare, retail, and business services globally.",
+      "description": null,
       "added_date": "2024-05-15",
       "aliases": [],
       "tools": [],
@@ -114,7 +114,7 @@
     {
       "name": "cipherforce",
       "slug": "cipherforce",
-      "description": "CipherForce is a newly emerged ransomware group first detected in early 2026, operating a dark web leak site and targeting technology, business services, and logistics companies across the US, China, Vietnam, India, and UAE, with at least 6 claimed victims.",
+      "description": null,
       "added_date": "2026-02-23",
       "aliases": [],
       "tools": [],
@@ -365,7 +365,7 @@
     {
       "name": "lynx",
       "slug": "lynx",
-      "description": "Lynx is a ransomware-as-a-service operation that emerged in mid-2024 as a rebrand of INC Ransomware (whose source code was sold for $300,000 on the RAMP forum), claiming ~300 victims across manufacturing, business services, technology, and transportation with an 80/20 profit split for affiliates.",
+      "description": null,
       "added_date": "2024-07-29",
       "aliases": [],
       "tools": [],
@@ -529,7 +529,7 @@
     {
       "name": "sarcoma",
       "slug": "sarcoma",
-      "description": "Sarcoma is a ransomware group that debuted in October 2024, immediately ranking among the top three most active groups globally and surpassing 116 documented victims by mid-2025, targeting mid-market companies across manufacturing, retail, healthcare, legal, and business services with roughly 50% of victims in the United States.",
+      "description": null,
       "added_date": "2024-10-09",
       "aliases": [],
       "tools": [],

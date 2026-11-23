@@ -1,6 +1,6 @@
 ---
-title: "Audit Team Becomes Ninth Group in UAE Finance Record"
-h1: "A Ninth Group Enters the UAE Financial Services Record"
+title: "Audit Team Is the Ninth Group to Claim UAE Finance"
+h1: "Audit Team Claims a UAE Financial Services Organisation"
 description: "Audit Team claimed a UAE financial services organisation on 13 October 2026. The sector now shows 12 claims spread across 9 separate groups."
 dek: "Financial Services carries the widest spread of attacking groups of any UAE sector on this tracker. A ninth group entering it says more about the sector than about the group."
 category: "ransomware"

@@ -1,6 +1,6 @@
 ---
-title: "6th INC Ransom claim against a UAE organisation, 12 Nov"
-h1: "INC Ransom Claim Against an Unclassified UAE Target"
+title: "INC Ransom Claims a Sixth UAE Organisation in November"
+h1: "INC Ransom Reaches Six Claimed UAE Organisations"
 description: "INC Ransom added its 6th UAE claim on 12 November 2026, in a sector leak-site monitoring could not classify. Attribution to the UAE is probable."
 dek: "INC Ransom's first UAE claim is dated 20 November 2025, so the 12 November 2026 entry arrives almost exactly a year later. Five of its 6 UAE claims fall in 2026."
 category: "ransomware"

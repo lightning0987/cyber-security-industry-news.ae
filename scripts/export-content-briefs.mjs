@@ -22,6 +22,7 @@ import {
 import { PERIODS, ROUTES } from '../src/lib/routes.mjs';
 import { frameworksForSector, sectorsForFramework, FRAMEWORKS, EXCLUDED_NOTE } from '../src/lib/frameworks.mjs';
 import { SHORT_RECORD_MAX } from '../src/lib/taxonomy/groups.mjs';
+import { groupProfile } from '../src/lib/group-profiles.mjs';
 
 const OUT = resolve(process.cwd(), 'briefs');
 // Каталог пересобирается с нуля. Брифы коммитятся, поэтому бриф удалённой
@@ -199,8 +200,14 @@ for (const g of paged) {
     page_type: 'group',
     url: ROUTES.group(g.slug),
     entity: g.label,
-    existing_h1: `${g.label} Ransomware Activity in the UAE`,
+    existing_h1: `${g.label} Ransomware Attacks in the UAE`,
     site_context: SITE_CONTEXT,
+    /**
+     * Справка от источника. Нужна, чтобы абзац «что это за группа» опирался
+     * на факт, а не на память модели. Описание в текст дословно не идёт:
+     * чужой абзац на пятидесяти страницах — это дубль в выдаче.
+     */
+    source_profile: groupProfile(g.slug),
     facts: {
       claimed_uae_organisations: g.count,
       share_of_all_uae_claims_pct: pct(g.count),

@@ -2,7 +2,7 @@
   "page_type": "group",
   "url": "/ransomware-groups-targeting-uae/medusalocker/",
   "entity": "MedusaLocker",
-  "existing_h1": "MedusaLocker Ransomware Activity in the UAE",
+  "existing_h1": "MedusaLocker Ransomware Attacks in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -152,6 +152,15 @@
       "A leak-site claim is an attacker assertion, not a confirmed breach. Word it that way.",
       "ADHICS (Abu Dhabi healthcare) and CBUAE (banking) are deliberately not referenced anywhere on this site pending a scope review. Do not mention them."
     ]
+  },
+  "source_profile": {
+    "name": "medusalocker",
+    "slug": "medusalocker",
+    "description": "Medusa is a DDoS bot written in .NET 2.0. In its current incarnation its C&C protocol is based on HTTP, while its predecessor made use of IRC.",
+    "added_date": "2022-11-15",
+    "aliases": [],
+    "tools": [],
+    "ttps": []
   },
   "facts": {
     "claimed_uae_organisations": 2,

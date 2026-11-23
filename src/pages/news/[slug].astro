@@ -17,7 +17,8 @@ import { ROUTES } from '../../lib/routes.mjs';
 import { formatDayLong, AUTHOR } from '../../lib/seo.mjs';
 import { CATEGORIES, relatedNews, sortNews, newsCard } from '../../lib/news.mjs';
 import { mostActive } from '../../lib/related.mjs';
-import { snapshotMeta } from '../../lib/incidents.mjs';
+import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
+import { inGroup, byGroup } from '../../lib/aggregate.mjs';
 
 export async function getStaticPaths() {
   const all = await getCollection('news');
@@ -28,6 +29,31 @@ const { entry, all } = Astro.props;
 const { Content } = await render(entry);
 const d = entry.data;
 const cat = CATEGORIES[d.category];
+
+/**
+ * Заявления группы, о которой материал. Таблица строится из снапшота, а не
+ * из текста: цифра в прозе может разойтись с данными до следующей починки,
+ * цифра в таблице не может.
+ */
+const primaryGroup = d.entities.groups[0] ?? null;
+const groupRows = primaryGroup
+  ? [...inGroup(attributedIncidents, primaryGroup)]
+      .sort((a, b) => String(b.discovered ?? '').localeCompare(String(a.discovered ?? '')))
+      .map((r) => ({
+        discovered: r.discovered,
+        sector: r.sector,
+        sectorLabel: r.sector_label ?? 'Unclassified',
+        confidence: r.ae_confidence,
+      }))
+  : [];
+const groupLabel = primaryGroup
+  ? (byGroup(attributedIncidents).find((g) => g.slug === primaryGroup)?.label ?? primaryGroup)
+  : null;
+
+const CONFIDENCE_LABEL = {
+  confirmed: 'Confirmed, .ae domain',
+  probable: 'Probable, text mention',
+};
 
 const related = relatedNews(entry, all, 5);
 const sameCategory = sortNews(all.filter((x) => x.id !== entry.id && x.data.category === d.category))
@@ -46,7 +72,7 @@ const schemas = [{
   headline: d.h1,
   description: d.description,
   datePublished: d.published,
-  dateModified: d.published,
+  dateModified: d.updated ?? d.published,
   articleSection: cat.label,
   author: { '@type': 'Organization', name: AUTHOR },
   publisher: { '@type': 'Organization', name: 'Marsad Cyber' },
@@ -71,6 +97,12 @@ const schemas = [{
       <time datetime={d.published}>{formatDayLong(d.published)}</time>
     </a>
     <span class="byline__sep">/</span>
+      {d.updated && (
+        <>
+          <span>Updated <time datetime={d.updated}>{formatDayLong(d.updated)}</time></span>
+          <span class="byline__sep">/</span>
+        </>
+      )}
       <span>{d.tier === 'T1' ? 'Brief' : 'Analysis'}</span>
     </div>
     <p class="lede">{d.dek}</p>
@@ -81,6 +113,50 @@ const schemas = [{
   </div>
 
   <div class="prose guide-body"><Content /></div>
+
+  {groupRows.length > 0 && (
+    <section class="section">
+      <div class="section__head">
+        <h2>Every {groupLabel} claim against a UAE organisation</h2>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <caption class="visually-hidden">
+            {groupLabel} claims against UAE organisations, most recent first
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">Date recorded</th>
+              <th scope="col">Sector</th>
+              <th scope="col">Attribution</th>
+            </tr>
+          </thead>
+          <tbody>
+            {groupRows.map((r) => (
+              <tr>
+                <td>
+                  {r.discovered
+                    ? <time datetime={r.discovered}>{formatDayLong(r.discovered)}</time>
+                    : 'Not recorded'}
+                </td>
+                <td>
+                  {r.sector ? <a href={ROUTES.sector(r.sector)}>{r.sectorLabel}</a> : r.sectorLabel}
+                </td>
+                <td>{CONFIDENCE_LABEL[r.confidence]}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="note" style="max-width:var(--measure)">
+        Counts are read from the snapshot dated{' '}
+        <time datetime={snapshotMeta.fetchedAt}>{formatDayLong(snapshotMeta.fetchedAt.slice(0, 10))}</time>,
+        so this table stays current even where the text above was written earlier. The full
+        profile is on the{' '}
+        <a href={ROUTES.group(primaryGroup)}>{groupLabel} group page</a>.
+      </p>
+    </section>
+  )}
 
   <section class="sources">
     <h2 class="recirc__title">Sources</h2>

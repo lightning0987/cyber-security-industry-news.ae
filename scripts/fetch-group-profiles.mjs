@@ -19,6 +19,15 @@
  * Хранятся только группы, у которых есть заявления по ОАЭ. Профиль группы,
  * не встречающейся в нашем наборе, публиковать негде и незачем.
  *
+ * ОТПЕЧАТКИ. Описание пишет третья сторона, и оно может случайно содержать
+ * имя пострадавшей организации или его часть. Так и вышло: в описаниях двух
+ * групп стояло «business services», что совпало с отпечатком. Поэтому каждое
+ * описание проверяется против того же набора отпечатков, что и страницы, и
+ * при совпадении выбрасывается целиком.
+ *
+ * Выбрасывается описание, а не отключается проверка. Гард утечки не знает,
+ * откуда взялся текст, и это его главное свойство.
+ *
  * Запуск: npm run fetch:groups [-- --force]
  */
 
@@ -28,6 +37,7 @@ import { resolve } from 'node:path';
 import { fetchJson } from './lib/http.mjs';
 import { defendAgainstRegression, readSnapshot, writeSnapshot } from './lib/snapshot.mjs';
 import { slugifyGroup } from '../src/lib/taxonomy/groups.mjs';
+import { getSalt, hashValue, ngrams, saltId } from './lib/fingerprint.mjs';
 
 const SOURCE = 'ransomware.live';
 const ENDPOINT = 'https://api.ransomware.live/v2/groups';
@@ -82,8 +92,31 @@ function normaliseProfile(raw) {
   };
 }
 
+/**
+ * Набор отпечатков пострадавших. Отсутствие файла или соли не повод
+ * продолжать молча: без проверки описание уехало бы на сайт непроверенным.
+ */
+function victimFingerprints() {
+  const path = resolve(process.cwd(), 'src/data/ransomware-live-ae.fingerprints.json');
+  const file = JSON.parse(readFileSync(path, 'utf8'));
+  const salt = getSalt();
+  if (saltId(salt) !== file.salt_id) {
+    throw new Error('salt_id отпечатков не совпадает с солью: проверка описаний ничего не нашла бы.');
+  }
+  return { hashes: new Set(file.fingerprints), salt };
+}
+
+function collidesWithVictim(text, { hashes, salt }) {
+  if (!text) return false;
+  for (const gram of ngrams(text, 12)) {
+    if (hashes.has(hashValue(gram, salt))) return gram;
+  }
+  return false;
+}
+
 async function main() {
   const force = process.argv.includes('--force');
+  const fp = victimFingerprints();
 
   const victims = JSON.parse(readFileSync(resolve(process.cwd(), VICTIMS_SNAPSHOT), 'utf8'));
   const wanted = new Set(victims.records.map((r) => r.group_slug));
@@ -98,11 +131,22 @@ async function main() {
 
   const records = [];
   const seen = new Set();
+  const dropped = [];
   for (const raw of data) {
     const profile = normaliseProfile(raw);
     if (!profile.slug || !wanted.has(profile.slug) || seen.has(profile.slug)) continue;
     seen.add(profile.slug);
+
+    const hit = collidesWithVictim(profile.description, fp);
+    if (hit) {
+      profile.description = null;
+      dropped.push(`${profile.slug} ("${hit}")`);
+    }
     records.push(profile);
+  }
+  if (dropped.length > 0) {
+    console.log(`  описаний выброшено из-за совпадения с отпечатком: ${dropped.length}`);
+    for (const d of dropped) console.log(`    ${d}`);
   }
   records.sort((a, b) => a.slug.localeCompare(b.slug));
 

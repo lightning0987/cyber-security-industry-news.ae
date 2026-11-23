@@ -2,7 +2,7 @@
   "page_type": "group",
   "url": "/ransomware-groups-targeting-uae/spacebears/",
   "entity": "Spacebears",
-  "existing_h1": "Spacebears Ransomware Activity in the UAE",
+  "existing_h1": "Spacebears Ransomware Attacks in the UAE",
   "site_context": {
     "brand": "Marsad Cyber",
     "language": "English (UK spelling: organisation, not organization)",
@@ -152,6 +152,15 @@
       "A leak-site claim is an attacker assertion, not a confirmed breach. Word it that way.",
       "ADHICS (Abu Dhabi healthcare) and CBUAE (banking) are deliberately not referenced anywhere on this site pending a scope review. Do not mention them."
     ]
+  },
+  "source_profile": {
+    "name": "spacebears",
+    "slug": "spacebears",
+    "description": "Space Bears is a double-extortion ransomware group that emerged in April 2024, distinguished by a professional \"corporate\" aesthetic on its leak site, leveraging Phobos RaaS infrastructure and targeting small-to-medium organizations in manufacturing, technology, and healthcare across the US and Europe.",
+    "added_date": "2024-04-29",
+    "aliases": [],
+    "tools": [],
+    "ttps": []
   },
   "facts": {
     "claimed_uae_organisations": 1,
