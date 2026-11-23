@@ -1376,3 +1376,47 @@ main { padding-block: var(--s5) var(--s6); }
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
+
+/*
+ * Справка о группе: пары «что — значение» линейками, без карточек.
+ * Левая колонка фиксирована, чтобы значения выстраивались по одной оси,
+ * и ни одна ячейка не прилегает к линейке вплотную.
+ */
+.facts {
+  display: grid;
+  grid-template-columns: minmax(0, 14rem) minmax(0, 1fr);
+  gap: 0;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.facts dt,
+.facts dd {
+  margin: 0;
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--rule);
+}
+
+.facts dt {
+  color: var(--ink-muted);
+  font-size: var(--size-small);
+}
+
+.facts dd {
+  padding-left: var(--s4);
+}
+
+@media (max-width: 40rem) {
+  .facts { grid-template-columns: minmax(0, 1fr); }
+  .facts dt { border-bottom: 0; padding-bottom: 0; }
+}
+
+/*
+ * Сноска под таблицей или блоком справки. Не врезка: врезка останавливает
+ * глаз, а это пояснение, которое читают после таблицы, а не вместо неё.
+ */
+.note {
+  font-size: var(--size-small);
+  color: var(--ink-muted);
+  margin-top: var(--s4);
+}

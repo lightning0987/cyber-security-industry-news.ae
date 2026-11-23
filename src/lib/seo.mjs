@@ -98,4 +98,16 @@ export function breadcrumbSchema(site, crumbs) {
   };
 }
 
+/**
+ * Единственное или множественное по числу.
+ *
+ * Понадобилось, когда у каждой группы появилась страница: в хвосте у многих
+ * ровно одно заявление, и шаблон писал «has claimed 1 organisations» и
+ * «median of 1 claims». На восьми страницах с устойчивым следом такого
+ * числа просто не встречалось, поэтому дефект жил незамеченным.
+ */
+export function plural(count, one, many) {
+  return Number(count) === 1 ? one : many;
+}
+
 export { MAX_TITLE, MAX_DESCRIPTION };

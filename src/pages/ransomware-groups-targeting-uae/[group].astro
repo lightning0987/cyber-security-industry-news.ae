@@ -11,7 +11,8 @@ import { relatedTo, moreOfKind, mostActive } from '../../lib/related.mjs';
 import { attributedIncidents, snapshotMeta } from '../../lib/incidents.mjs';
 import { bySector, byPeriod, groupsWithPages, inGroup, activitySpan, byGroup } from '../../lib/aggregate.mjs';
 import { ROUTES } from '../../lib/routes.mjs';
-import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, AUTHOR } from '../../lib/seo.mjs';
+import { groupProfile } from '../../lib/group-profiles.mjs';
+import { buildTitle, buildDescription, datasetSchema, formatDate, formatDayLong, plural, AUTHOR } from '../../lib/seo.mjs';
 
 export function getStaticPaths() {
   return groupsWithPages(attributedIncidents).map((g) => ({
@@ -47,6 +48,33 @@ const siblings = family
 const neighbours = byGroup(all).filter((g) => g.slug !== slug);
 const asOf = formatDate(snapshotMeta.fetchedAt);
 
+const profile = groupProfile(slug);
+
+/**
+ * Место группы среди всех по числу заявлений. Сравнение с другими группами
+ * требуется от страницы, и без ранга оно сводится к проценту, который
+ * читается хуже.
+ */
+const ranking = byGroup(all);
+const rank = ranking.findIndex((g) => g.slug === slug) + 1;
+const median = ranking.length === 0 ? 0 : ranking[Math.floor(ranking.length / 2)].count;
+
+/** Отдельные заявления этой группы, свежие сверху. */
+const claims = [...subset]
+  .sort((a, b) => String(b.discovered ?? '').localeCompare(String(a.discovered ?? '')))
+  .map((r) => ({
+    discovered: r.discovered,
+    sector: r.sector,
+    sectorLabel: r.sector_label ?? 'Unclassified',
+    confidence: r.ae_confidence,
+  }));
+
+const CONFIDENCE_LABEL = {
+  confirmed: 'Confirmed by .ae domain',
+  probable: 'Probable, text mention',
+  unverified: 'Unverified',
+};
+
 const title = buildTitle(`${label} in the UAE: ${count} Victims and Target Sectors`);
 const description = buildDescription(
   `${label} has claimed ${count} UAE organisations since ${span.first?.slice(0, 4) ?? '2020'}, concentrated in ${topSector?.label ?? 'multiple sectors'}. Sector breakdown and activity timeline.`,
@@ -77,7 +105,7 @@ const active = mostActive(5);
 ---
 <BaseLayout title={title} description={description} crumbs={crumbs} schemas={schemas} current={current}>
   <div class="page-head">
-    <h1>{label} Ransomware Activity in the UAE</h1>
+    <h1>{label} Ransomware Attacks in the UAE</h1>
 
     <div class="byline">
     <span class="byline__tag">Ransomware group</span>
@@ -88,8 +116,8 @@ const active = mostActive(5);
         <span class="byline__by"><span class="byline__monogram" aria-hidden="true">MC</span>By <a href={ROUTES.about()}>{AUTHOR}</a></span>
     </div>
     <p class="lede">
-    {label} has claimed <strong class="num">{count}</strong> organisations in the United Arab
-    Emirates, which is <strong class="num">{share}%</strong> of all attributed UAE claims.
+    {label} has claimed <strong class="num">{count}</strong>{' '}
+    {plural(count, 'organisation', 'organisations')} in the United Arab Emirates, which is <strong class="num">{share}%</strong> of all attributed UAE claims.
     {topSector && <> Its activity concentrates in {topSector.label}, accounting for <strong class="num">{topSector.count}</strong> of those claims.</>}
     {span.first && <> The first {label} claim against a UAE organisation was recorded on <time datetime={span.first}>{formatDayLong(span.first)}</time>, the most recent on <time datetime={span.last}>{formatDayLong(span.last)}</time>.</>}
     </p>
@@ -97,13 +125,91 @@ const active = mostActive(5);
 
   <div class="section reveal">
     <StatBar stats={[
-      { value: count, label: 'Claimed UAE organisations', accent: true },
+      { value: count, label: plural(count, 'Claimed UAE organisation', 'Claimed UAE organisations'), accent: true },
       { value: `${share}%`, label: 'Of all UAE claims' },
-      { value: sectorRows.filter((s) => s.count > 0).length, label: 'Sectors targeted' },
-      { value: periodRows.filter((p) => p.count > 0).length, label: 'Periods active' },
+      {
+        value: sectorRows.filter((s) => s.count > 0).length,
+        label: plural(sectorRows.filter((s) => s.count > 0).length, 'Sector targeted', 'Sectors targeted'),
+      },
+      {
+        value: periodRows.filter((p) => p.count > 0).length,
+        label: plural(periodRows.filter((p) => p.count > 0).length, 'Period active', 'Periods active'),
+      },
     ]} />
     <DataProvenance note={`This page counts ${label} claims only.`} />
   </div>
+
+  {profile && (
+    <section class="section">
+      <div class="section__head"><h2>What {label} is</h2></div>
+      <dl class="facts">
+        {profile.added_date && (
+          <><dt>First listed by the source</dt>
+          <dd><time datetime={profile.added_date}>{formatDayLong(profile.added_date)}</time></dd></>
+        )}
+        {profile.aliases.length > 0 && (
+          <><dt>Also known as</dt><dd>{profile.aliases.join(', ')}</dd></>
+        )}
+        {profile.tools.length > 0 && (
+          <><dt>Tooling recorded by the source</dt><dd>{profile.tools.join(', ')}</dd></>
+        )}
+        {profile.ttps.length > 0 && (
+          <><dt>Techniques recorded by the source</dt><dd>{profile.ttps.join(', ')}</dd></>
+        )}
+        <dt>Rank by UAE claims</dt>
+        <dd>
+          <span class="num">{rank}</span> of <span class="num">{ranking.length}</span> groups
+          on this tracker, against a median of <span class="num">{median}</span>{' '}
+          {plural(median, 'claim', 'claims')} per group.
+        </dd>
+      </dl>
+      <p class="note" style="max-width:var(--measure)">
+        Profile fields come from leak-site monitoring at ransomware.live and describe the group,
+        not any organisation it has named. Claim counts on this page are computed from the
+        snapshot dated {asOf}.
+      </p>
+    </section>
+  )}
+
+  <section class="section">
+    <div class="section__head"><h2>Every {label} claim against a UAE organisation</h2></div>
+    <div class="table-wrap">
+      <table>
+        <caption class="visually-hidden">
+          Individual {label} claims against UAE organisations, most recent first
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Date recorded</th>
+            <th scope="col">Sector</th>
+            <th scope="col">Attribution</th>
+          </tr>
+        </thead>
+        <tbody>
+          {claims.map((c) => (
+            <tr>
+              <td>
+                {c.discovered
+                  ? <time datetime={c.discovered}>{formatDayLong(c.discovered)}</time>
+                  : 'Not recorded'}
+              </td>
+              <td>
+                {c.sector
+                  ? <a href={ROUTES.sector(c.sector)}>{c.sectorLabel}</a>
+                  : c.sectorLabel}
+              </td>
+              <td>{CONFIDENCE_LABEL[c.confidence]}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+    <p class="note" style="max-width:var(--measure)">
+      The organisation named in each claim is never published here, under UAE Federal Decree-Law
+      No. 34 of 2021. The source feed carries no emirate or city, only a country tag, so no
+      emirate breakdown is possible for these claims.
+    </p>
+  </section>
 
   <section class="section">
     <div class="section__head"><h2>Which UAE sectors {label} targets</h2></div>
