@@ -105,6 +105,74 @@ function globalNumbers() {
 
 const GLOBAL_NUMBERS = globalNumbers();
 
+
+/**
+ * Внутренние адреса, которые реально существуют.
+ *
+ * Битую внутреннюю ссылку ловил только link-graph, то есть пост-билд гард, а
+ * он работает над собранным сайтом и ничего не сообщает про отдельный файл.
+ * Генератор проверяет каждый свой файл линтером и повторяет попытку по его
+ * замечаниям, поэтому до гарда дело доходило уже после всех попыток: три
+ * ночи подряд текст писался, сборка падала и ничего не публиковалось.
+ *
+ * Список строится из данных, а не из шаблонов адресов: модель собирала путь
+ * из названия сектора и получала government-and-defense вместо
+ * government-defense.
+ */
+const KNOWN_PATHS = (() => {
+  const out = new Set(['/']);
+  const add = (p) => out.add(p.endsWith('/') ? p : `${p}/`);
+
+  const records = SNAPSHOT.records ?? [];
+  const attributed = records.filter(
+    (r) => r.ae_confidence === 'confirmed' || r.ae_confidence === 'probable',
+  );
+  for (const r of attributed) {
+    if (r.sector) add(`/uae-ransomware-tracker/${r.sector}`);
+    add(`/ransomware-groups-targeting-uae/${r.group_slug}`);
+    if (r.year) add(`/uae-ransomware-tracker/${r.year}`);
+  }
+  add('/uae-ransomware-tracker');
+  add('/uae-ransomware-tracker/incidents');
+  add('/uae-ransomware-tracker/2020-2022');
+  add('/ransomware-groups-targeting-uae');
+  add('/ransomware-groups-targeting-uae/short-record');
+
+  for (const [dir, prefix] of [
+    ['src/content/news', '/news'],
+    ['src/content/guides', '/guides'],
+  ]) {
+    const full = resolve(process.cwd(), dir);
+    if (!existsSync(full)) continue;
+    for (const f of readdirSync(full).filter((x) => x.endsWith('.md'))) {
+      add(`${prefix}/${f.replace(/\.md$/, '')}`);
+    }
+  }
+  for (const p of [
+    '/news', '/guides', '/about', '/methodology', '/contact', '/credits',
+    '/sitemap', '/data-sources', '/privacy', '/terms',
+  ]) add(p);
+
+  // Выгрузки данных отдаются файлом, а не страницей, поэтому слеша в конце
+  // у них нет и список берётся из каталога маршрутов, а не из головы.
+  const dataDir = resolve(process.cwd(), 'src/pages/data');
+  if (existsSync(dataDir)) {
+    for (const f of readdirSync(dataDir)) out.add(`/data/${f.replace(/\.ts$/, '')}`);
+  }
+
+  return out;
+})();
+
+function checkInternalLinks(file, text) {
+  for (const m of text.matchAll(/\]\((\/[^)\s#?]*)[^)]*\)/g)) {
+    const raw = m[1];
+    const href = raw.includes('.') ? raw : raw.endsWith('/') ? raw : `${raw}/`;
+    if (!KNOWN_PATHS.has(href)) {
+      add(file, CRITICAL, `Ссылка на несуществующий адрес ${m[1]}. Бери url из брифа дословно.`);
+    }
+  }
+}
+
 const targets = [];
 for (const set of SETS) {
   const dir = resolve(process.cwd(), set.dir);
@@ -122,6 +190,10 @@ for (const target of targets) {
   const raw = readFileSync(resolve(dir, file), 'utf8');
   const fm = raw.match(/^---\n([\s\S]*?)\n---\n/);
   const body = fm ? raw.slice(fm[0].length) : raw;
+
+  // Ссылки проверяются по сырому файлу: адрес из frontmatter (sources) ведёт
+  // на страницу так же, как адрес из абзаца.
+  checkInternalLinks(file, raw);
   // Синтаксис markdown не должен попадать в подсчёт слов и предложений:
   // [текст](/ссылка) это одно слово для читателя и три для наивного split.
   const prose = body

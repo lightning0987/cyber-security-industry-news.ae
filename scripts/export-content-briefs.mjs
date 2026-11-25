@@ -59,7 +59,7 @@ const REGULATORY_SCOPE = Object.entries(FRAMEWORKS).map(([key, f]) => {
     sectors_usually_in_scope: rows.length,
     claims_in_those_sectors: claims,
     share_of_all_attributed_claims_pct: pct(claims),
-    by_sector: rows.map((s) => ({ sector: s.label, claims: s.count })),
+    by_sector: rows.map((s) => ({ sector: s.label, url: ROUTES.sector(s.slug), claims: s.count })),
     caveat: 'Sector is a proxy. Scope is decided by the designating authority, not by industry label.',
   };
 });
@@ -123,6 +123,7 @@ for (const s of sectors) {
     })),
     by_period: periods.map((p) => ({
       period: p.label,
+      url: ROUTES.period(p.slug),
       claims: subset.filter((i) => i.year >= p.from && i.year <= p.to).length,
     })),
     regulatory_context: frameworksForSector(s.slug),
@@ -169,6 +170,7 @@ periods.forEach((p, i) => {
     },
     by_sector: sectors.map((s) => ({
       sector: s.label,
+      url: ROUTES.sector(s.slug),
       claims: subset.filter((x) => x.sector === s.slug).length,
     })).filter((x) => x.claims > 0),
     top_groups: top(byGroup(subset), 8).map((g) => ({ name: g.label, claims: g.count })),
@@ -184,7 +186,11 @@ for (const g of paged) {
   const span = activitySpan(subset);
   const rank = groups.findIndex((x) => x.slug === g.slug) + 1;
   const sectorRows = sectors
-    .map((s) => ({ sector: s.label, claims: subset.filter((i) => i.sector === s.slug).length }))
+    .map((s) => ({
+      sector: s.label,
+      url: ROUTES.sector(s.slug),
+      claims: subset.filter((i) => i.sector === s.slug).length,
+    }))
     .filter((x) => x.claims > 0)
     .sort((a, b) => b.claims - a.claims);
   const family = subset[0]?.group_family ?? null;
@@ -225,6 +231,7 @@ for (const g of paged) {
     by_sector: sectorRows,
     by_period: periods.map((p) => ({
       period: p.label,
+      url: ROUTES.period(p.slug),
       claims: subset.filter((i) => i.year >= p.from && i.year <= p.to).length,
     })),
     regulatory_context: sectorRows.length > 0

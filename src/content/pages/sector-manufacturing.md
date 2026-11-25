@@ -1,14 +1,14 @@
 ---
-summary: "UAE Manufacturing recorded 9 claimed organisations from 9 different ransomware groups, with no group claiming a second manufacturing target."
+summary: "UAE Manufacturing recorded 10 claimed organisations from 10 different ransomware groups, with no group claiming a second manufacturing target."
 ---
 
-## Manufacturing ranks sixth among UAE sectors with 9 claimed organisations
+## Manufacturing ranks sixth among UAE sectors with 10 claimed organisations
 
-Manufacturing ranks sixth of 13 UAE sectors, just above the average for an active sector. Nine distinct groups appear here, one claim each. No ransomware group has claimed a second UAE manufacturing organisation in this dataset.
+Manufacturing ranks sixth of 13 UAE sectors, just above the average for an active sector. Ten distinct groups appear here, one claim each. No ransomware group has claimed a second UAE manufacturing organisation in this dataset.
 
-## Nine groups account for 9 Manufacturing claims
+## Ten groups account for 10 Manufacturing claims
 
-Manufacturing shows one claim per group across 9 distinct operations. No ransomware group has
+Manufacturing shows one claim per group across 10 distinct operations. No ransomware group has
 claimed a second UAE manufacturing organisation in this dataset. Blacknevas, Cicada3301,
 [DragonForce](/ransomware-groups-targeting-uae/dragonforce/) and INC Ransom each appear once, as do the remaining groups.
 
@@ -27,7 +27,7 @@ then 4 in [2025](/uae-ransomware-tracker/2025/). The partial year 2026 stands at
    question is operational before it is technical.
 5. Confirm that remote maintenance access used by equipment vendors is time limited and
    monitored.
-6. Plan against a generalist attacker rather than a sector specialist, given that 9 groups have
+6. Plan against a generalist attacker rather than a sector specialist, given that 10 groups have
    appeared once each.
 7. Verify that design files and process documentation are backed up apart from the systems that
    normally serve them.

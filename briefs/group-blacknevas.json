@@ -27,22 +27,27 @@
         "by_sector": [
           {
             "sector": "Professional Services",
+            "url": "/uae-ransomware-tracker/professional-services/",
             "claims": 26
           },
           {
             "sector": "Government and Defense",
+            "url": "/uae-ransomware-tracker/government-defense/",
             "claims": 13
           },
           {
             "sector": "Technology",
+            "url": "/uae-ransomware-tracker/technology/",
             "claims": 13
           },
           {
             "sector": "Transportation",
+            "url": "/uae-ransomware-tracker/transportation/",
             "claims": 7
           },
           {
             "sector": "Energy and Utilities",
+            "url": "/uae-ransomware-tracker/energy-utilities/",
             "claims": 4
           }
         ],
@@ -56,14 +61,17 @@
         "by_sector": [
           {
             "sector": "Government and Defense",
+            "url": "/uae-ransomware-tracker/government-defense/",
             "claims": 13
           },
           {
             "sector": "Transportation",
+            "url": "/uae-ransomware-tracker/transportation/",
             "claims": 7
           },
           {
             "sector": "Energy and Utilities",
+            "url": "/uae-ransomware-tracker/energy-utilities/",
             "claims": 4
           }
         ],
@@ -77,54 +85,67 @@
         "by_sector": [
           {
             "sector": "Professional Services",
+            "url": "/uae-ransomware-tracker/professional-services/",
             "claims": 26
           },
           {
             "sector": "Government and Defense",
+            "url": "/uae-ransomware-tracker/government-defense/",
             "claims": 13
           },
           {
             "sector": "Technology",
+            "url": "/uae-ransomware-tracker/technology/",
             "claims": 13
           },
           {
             "sector": "Financial Services",
+            "url": "/uae-ransomware-tracker/financial-services/",
             "claims": 12
           },
           {
             "sector": "Retail and E-Commerce",
+            "url": "/uae-ransomware-tracker/retail-ecommerce/",
             "claims": 11
           },
           {
             "sector": "Manufacturing",
+            "url": "/uae-ransomware-tracker/manufacturing/",
             "claims": 10
           },
           {
             "sector": "Transportation",
+            "url": "/uae-ransomware-tracker/transportation/",
             "claims": 7
           },
           {
             "sector": "Healthcare",
+            "url": "/uae-ransomware-tracker/healthcare/",
             "claims": 6
           },
           {
             "sector": "Energy and Utilities",
+            "url": "/uae-ransomware-tracker/energy-utilities/",
             "claims": 4
           },
           {
             "sector": "Hospitality",
+            "url": "/uae-ransomware-tracker/hospitality/",
             "claims": 4
           },
           {
             "sector": "Other",
+            "url": "/uae-ransomware-tracker/other/",
             "claims": 4
           },
           {
             "sector": "Education",
+            "url": "/uae-ransomware-tracker/education/",
             "claims": 3
           },
           {
             "sector": "Agriculture and Food Production",
+            "url": "/uae-ransomware-tracker/agriculture-food/",
             "claims": 2
           }
         ],
@@ -138,6 +159,7 @@
         "by_sector": [
           {
             "sector": "Financial Services",
+            "url": "/uae-ransomware-tracker/financial-services/",
             "claims": 12
           }
         ],
@@ -182,32 +204,39 @@
   "by_sector": [
     {
       "sector": "Manufacturing",
+      "url": "/uae-ransomware-tracker/manufacturing/",
       "claims": 1
     },
     {
       "sector": "Education",
+      "url": "/uae-ransomware-tracker/education/",
       "claims": 1
     }
   ],
   "by_period": [
     {
       "period": "2020–2022",
+      "url": "/uae-ransomware-tracker/2020-2022/",
       "claims": 0
     },
     {
       "period": "2023",
+      "url": "/uae-ransomware-tracker/2023/",
       "claims": 0
     },
     {
       "period": "2024",
+      "url": "/uae-ransomware-tracker/2024/",
       "claims": 0
     },
     {
       "period": "2025",
+      "url": "/uae-ransomware-tracker/2025/",
       "claims": 1
     },
     {
       "period": "2026",
+      "url": "/uae-ransomware-tracker/2026/",
       "claims": 1
     }
   ],

@@ -22,7 +22,41 @@ const MAX_WORD = 34;
  */
 const ADDRESS = /@|:\/\//;
 
-const ALLOWED = /^(MedusaLocker|RansomHub|DragonForce|LockBit|FunkSec|KillSec|NightSpire|BQTLock|DarkVault|FLocker|BrainCipher|RansomHouse|aeCERT|eCommerce|iOS|macOS|JavaScript|GitHub|YouTube)$/;
+const SPELLINGS = /^(aeCERT|eCommerce|iOS|macOS|JavaScript|GitHub|YouTube)$/;
+
+/**
+ * Имена групп берутся из данных, а не из списка в этом файле.
+ *
+ * Список вёлся руками и работал, пока страниц групп было восемь. С порогом в
+ * одно заявление их стало пятьдесят, и каждое новое имя с заглавной внутри
+ * роняло бы сборку до тех пор, пока человек не допишет сюда строку. Гард,
+ * который требует ручной правки при каждом пополнении данных, рано или
+ * поздно отключают.
+ */
+import profiles from '../../src/data/ransomware-group-profiles.json' with { type: 'json' };
+import { displayGroupName } from '../../src/lib/taxonomy/groups.mjs';
+
+const GROUP_NAMES = new Set(
+  profiles.records
+    .flatMap((p) => [p.name, displayGroupName(p.name), ...p.aliases])
+    .filter(Boolean)
+    // Составное имя даёт ещё и свои слова по отдельности: отображается
+    // «LockBit 3.0», а в прозе встречается просто «LockBit».
+    .flatMap((n) => [n, ...String(n).split(/\s+/)])
+    .filter(Boolean),
+);
+
+/**
+ * Притяжательное окончание отбрасывается перед сверкой. "FunkSec’s" — то же
+ * имя, что и "FunkSec", а схлопывание переноса строки апостроф породить не
+ * может.
+ */
+const POSSESSIVE = /[’'`]s$/;
+
+function spellingIsKnown(word) {
+  const bare = word.replace(POSSESSIVE, '');
+  return SPELLINGS.test(bare) || GROUP_NAMES.has(bare);
+}
 
 function textOf(root) {
   const out = [];
@@ -61,7 +95,7 @@ export function run({ pages }) {
       // строчная, сразу заглавная: "servicesOrganisations".
       // Точка склейку не оправдывает: "project.It" — тот же дефект, просто
       // после конца предложения. Он дожил до подвала на всех страницах.
-      if ((/\p{Ll}\p{Lu}/u.test(w) || /\p{Ll}\.\p{Lu}/u.test(w)) && !ALLOWED.test(w) && !seen.has(w)) {
+      if ((/\p{Ll}\p{Lu}/u.test(w) || /\p{Ll}\.\p{Lu}/u.test(w)) && !spellingIsKnown(w) && !seen.has(w)) {
         seen.add(w);
         failures.push(`${path}: заглавная внутри слова, похоже на склейку — "${w}"`);
       }
