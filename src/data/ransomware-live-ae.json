@@ -1,7 +1,7 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/countryvictims/AE",
-  "fetched_at": "2026-11-26T10:27:45.094Z",
+  "fetched_at": "2026-11-27T10:31:23.931Z",
   "record_count": 200,
   "schema_version": 1,
   "attribution": {
