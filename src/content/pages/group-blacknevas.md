@@ -8,7 +8,7 @@ Blacknevas is a ransomware group first observed in November 2024 and also tracke
 
 ## Blacknevas has a thin, scattered UAE record outside its usual sectors
 
-Blacknevas ranks thirteenth on this tracker with 2 claimed UAE organisations, against 10 for the leader, LockBit 3.0. The claims split evenly between [Manufacturing](/uae-ransomware-tracker/manufacturing/) and [Education](/uae-ransomware-tracker/education/), one each. Education does not appear among the sectors in the group's published profile. The first claim is dated 27 October 2025 and the second 15 October 2026, so Blacknevas shows one gap of almost a year rather than a sustained campaign. These figures come from leak-site monitoring as of the 27 November 2026 snapshot, and each entry is an attacker assertion, not a confirmed breach.
+Blacknevas ranks thirteenth on this tracker with 2 claimed UAE organisations, against 10 for the leader, LockBit 3.0. The claims split evenly between [Manufacturing](/uae-ransomware-tracker/manufacturing/) and [Education](/uae-ransomware-tracker/education/), one each. Education does not appear among the sectors in the group's published profile. The first claim is dated 27 October 2025 and the second 15 October 2026, so Blacknevas shows one gap of almost a year rather than a sustained campaign. These figures come from leak-site monitoring, and each entry is an attacker assertion, not a confirmed breach.
 
 ## What this means for UAE organisations
 

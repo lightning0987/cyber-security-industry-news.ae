@@ -75,6 +75,12 @@ const news = defineCollection({
     }),
     image: z.string(),
     sources: z.array(z.object({ label: z.string(), href: z.string() })).min(1),
+    /**
+     * Линзы подачи, использованные в материале. Пишутся генератором и
+     * читаются проверяющим агентом: по ним видно, не скатились ли заметки
+     * в одно и то же сочетание углов. Каталог в scripts/news/lenses.mjs.
+     */
+    lenses: z.array(z.string()).default([]),
   }),
 });
 
