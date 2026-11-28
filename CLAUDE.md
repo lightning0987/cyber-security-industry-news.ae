@@ -558,7 +558,19 @@ positioning the project depends on.
   The plaintext lives in `private/forbidden-terms.txt` and is never committed: a guard that
   held those strings in cleartext would put into the public repository exactly what it exists
   to keep out. Edit the private file, then run `node scripts/build-forbidden-terms.mjs`.
-- The brief or the specification document itself.
+- The brief or the specification document itself, and any working document of the team:
+  meeting transcripts, notes, call recordings. `check-data` keeps an inventory of the
+  repository root and fails on a file that is not on the expected list, because that is where
+  such a file lands. A meeting transcript naming the agency ninety-one times was swept into a
+  commit by `git add -A` and caught before the push: it would never have reached a page, so
+  `dist-hygiene` could not have seen it, and it would have sat in a public repository for
+  anyone who cloned it.
+
+  The first version of that check hashed every tracked file against the forbidden-term list.
+  It fired on four of the project's own files, because the list also holds banned filler
+  phrases and a linter that bans a phrase has to name it. A guard with false positives on its
+  own source is a guard someone switches off within the week, so the check is an inventory of
+  the root instead: short list, rarely changes, no way to be wrong about it.
 - API keys. Secrets only, via GitHub Actions.
 - Anything under `private/`.
 

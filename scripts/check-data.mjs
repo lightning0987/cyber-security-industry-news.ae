@@ -10,7 +10,7 @@
  */
 
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { execSync } from 'node:child_process';
+import { execSync, execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { getSalt, hashValue, ngrams, saltId } from './lib/fingerprint.mjs';
 
@@ -130,6 +130,58 @@ function checkForbiddenTerms() {
   } else {
     notes.push(`запрещённых терминов: ${f.hashes.length}`);
   }
+}
+
+/**
+ * В корне репозитория лежит только то, чему там положено лежать.
+ *
+ * Поводом была стенограмма встречи: `git add -A` втянул её в коммит, и там
+ * оказалось девяносто одно упоминание агентства. На страницу она бы не
+ * попала, поэтому ни dist-hygiene, ни любой другой гард её бы не увидели, а
+ * в публичном репозитории она лежала бы для всех.
+ *
+ * Сначала здесь стояла сверка всех файлов со списком запрещённых терминов.
+ * Она не годится: список содержит и запрещённые штампы речи, а файлы,
+ * которые эти штампы запрещают, обязаны их называть. Четыре ложных
+ * срабатывания на собственном линтере — это гард, который отключат через
+ * неделю.
+ *
+ * Проверка инвентарная, а не содержательная. Посторонние файлы приземляются
+ * в корень, и список того, что там допустимо, короткий и меняется редко.
+ * Новый файл в корне — это повод, чтобы человек на него посмотрел.
+ */
+const EXPECTED_ROOT_FILES = new Set([
+  '.gitignore',
+  '.nvmrc',
+  'CLAUDE.md',
+  'README.md',
+  'astro.config.mjs',
+  'package-lock.json',
+  'package.json',
+  'screenshot.mjs',
+  'tsconfig.json',
+]);
+
+function checkRepositoryRootIsClean() {
+  let tracked = [];
+  try {
+    tracked = execFileSync('git', ['ls-files', '-z'], { encoding: 'utf8', maxBuffer: 1e8 })
+      .split('\0')
+      .filter(Boolean);
+  } catch {
+    notes.push('git недоступен, корень репозитория не проверен');
+    return;
+  }
+
+  const stray = tracked.filter((f) => !f.includes('/') && !EXPECTED_ROOT_FILES.has(f));
+  for (const f of stray) {
+    fail(
+      `${f}: посторонний файл в корне репозитория. ` +
+        'Рабочие документы в репозиторий не кладутся. Если файл нужен — добавь его в ' +
+        'EXPECTED_ROOT_FILES в scripts/check-data.mjs осознанно.',
+    );
+  }
+  notes.push(`файлов в корне: ${tracked.filter((f) => !f.includes('/')).length}`);
 }
 
 function checkGuidesRegistry() {
@@ -296,6 +348,7 @@ checkPrivateIsolation();
 checkBriefsCarryNoVictimData();
 checkNewsSlugsDoNotCollide();
 checkGroupProfiles();
+checkRepositoryRootIsClean();
 
 console.log('check:data');
 for (const n of notes) console.log(`  · ${n}`);
