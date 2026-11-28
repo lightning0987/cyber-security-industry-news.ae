@@ -1,5 +1,5 @@
 ---
-summary: "BQTLock's two UAE claims both carry the same date, 11 October 2025, and the tracker records none in 2026 up to the 27 November 2026 snapshot."
+summary: "BQTLock's two UAE claims both carry the same date, 11 October 2025, and the tracker records none in 2026 up to the 28 November 2026 snapshot."
 ---
 
 ## BQTLock is a ransomware-as-a-service operation tied to hacktivist networks
@@ -8,7 +8,7 @@ BQTLock runs as a ransomware-as-a-service scheme that the tracker added to its s
 
 ## BQTLock's UAE record is one dated episode, not a sustained campaign
 
-BQTLock ranks 14th on this tracker with two claimed UAE organisations. LockBit 3.0, the most active group, has 10. Leak-site monitoring, as of the 27 November 2026 snapshot, places both BQTLock claims on 11 October 2025. The claims are spread across [Retail and E-Commerce](/uae-ransomware-tracker/retail-ecommerce/) and [Education](/uae-ransomware-tracker/education/), so BQTLock shows no sector concentration. BQTLock has no claims dated 2026, which fits a single wave rather than a group that returns.
+BQTLock ranks 14th on this tracker with two claimed UAE organisations. LockBit 3.0, the most active group, has 10. Leak-site monitoring, as of the 28 November 2026 snapshot, places both BQTLock claims on 11 October 2025. The claims are spread across [Retail and E-Commerce](/uae-ransomware-tracker/retail-ecommerce/) and [Education](/uae-ransomware-tracker/education/), so BQTLock shows no sector concentration. BQTLock has no claims dated 2026, which fits a single wave rather than a group that returns.
 
 ## What this means for UAE organisations
 

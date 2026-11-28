@@ -8,7 +8,7 @@ Arcus Media appears with no description, no aliases and no recorded tools or tec
 
 ## Arcus Media's UAE record is a short episode, not a campaign
 
-Arcus Media ranks twelfth on this tracker with two claimed UAE organisations. LockBit 3.0, the most active group on this tracker, has 10 claims. Arcus Media's claims fall in [Professional Services](/uae-ransomware-tracker/professional-services/) and [Technology](/uae-ransomware-tracker/technology/), one each, so no sector concentration exists. Both claims fall in [2024](/uae-ransomware-tracker/2024/), the most recent dated 21 November 2024. Arcus Media made no further UAE claims in 2025 or 2026, as of the 27 November 2026 snapshot.
+Arcus Media ranks twelfth on this tracker with two claimed UAE organisations. LockBit 3.0, the most active group on this tracker, has 10 claims. Arcus Media's claims fall in [Professional Services](/uae-ransomware-tracker/professional-services/) and [Technology](/uae-ransomware-tracker/technology/), one each, so no sector concentration exists. Both claims fall in [2024](/uae-ransomware-tracker/2024/), the most recent dated 21 November 2024. Arcus Media made no further UAE claims in 2025 or 2026, as of the 28 November 2026 snapshot.
 
 ## What this means for UAE organisations
 
