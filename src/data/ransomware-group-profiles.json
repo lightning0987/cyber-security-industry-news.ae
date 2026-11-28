@@ -1,7 +1,7 @@
 {
   "source": "ransomware.live",
   "endpoint": "https://api.ransomware.live/v2/groups",
-  "fetched_at": "2026-11-27T10:31:25.060Z",
+  "fetched_at": "2026-11-28T09:47:23.545Z",
   "record_count": 66,
   "schema_version": 1,
   "groups_without_profile": [],
